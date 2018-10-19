@@ -38,3 +38,4 @@ blog/bin/
 hs_err_pid*
 
 application.properties
+**/application.properties
