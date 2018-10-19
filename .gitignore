@@ -19,6 +19,10 @@
 *.tar.gz
 *.rar
 
+### Gradle ###
+.gradle
+/build/
+
 #Gradle temporary files
 target/
 
