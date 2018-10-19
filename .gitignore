@@ -27,9 +27,9 @@
 target/
 
 #Eclipse files
+.settings
 **/.project
 **/.classpath
-**/.settings/
 blog/bin/
 **/.tern-project
 
