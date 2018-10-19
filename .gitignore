@@ -21,6 +21,7 @@
 
 ### Gradle ###
 .gradle
+/.gradle/
 /build/
 
 #Gradle temporary files
