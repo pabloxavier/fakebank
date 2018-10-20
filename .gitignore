@@ -29,6 +29,7 @@ target/
 #Eclipse files
 .settings
 .metadata
+bin
 **/.project
 **/.classpath
 blog/bin/
