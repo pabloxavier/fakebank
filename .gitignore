@@ -23,6 +23,9 @@
 target/
 
 #Eclipse files
+.settings
+.metadata
+bin
 **/.project
 **/.classpath
 **/.settings/
@@ -38,6 +41,9 @@ blog/bin/
 
 # Java class files
 *.class
+
+application.properties
+**/application.properties
 
 # generated files
 bin/
@@ -65,3 +71,7 @@ proguard/
 .gradle/
 build/
 bin/
+
+# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
+# gradle/wrapper/gradle-wrapper.properties
+# gradle/wrapper/gradle-wrapper.properties

@@ -1,0 +1,1 @@
+insert into dbo.pessoa values (1, '01136622007', 'F', 'VanGrol', '1991-01-01', null)
