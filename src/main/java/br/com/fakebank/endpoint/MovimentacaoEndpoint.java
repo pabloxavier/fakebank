@@ -19,8 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.fakebank.domain.Agencia;
 import br.com.fakebank.domain.Movimentacao;
 import br.com.fakebank.domain.commands.AgenciaEdicaoCommand;
+import br.com.fakebank.domain.commands.MovimentacaoDepositoCommand;
 import br.com.fakebank.domain.commands.MovimentacaoEdicaoCommand;
 import br.com.fakebank.domain.commands.MovimentacaoInclusaoCommand;
+import br.com.fakebank.domain.commands.MovimentacaoSaqueCommand;
+import br.com.fakebank.domain.commands.MovimentacaoTransferenciaCommand;
 import br.com.fakebank.representations.AgenciaRepresentation;
 import br.com.fakebank.representations.MovimentacaoRepresentation;
 import br.com.fakebank.service.MovimentacaoService;
@@ -30,13 +33,7 @@ import br.com.fakebank.service.MovimentacaoService;
 public class MovimentacaoEndpoint extends FakebankEndpoint {
 
 	@Autowired
-//	private MovimentacaoService service;
-
-//	consultar-movimentacoes
-//	consultar-movimentacao-por-codigo
-//
-//	consultar-movimentacao-por-conta
-//	consultar-movimentacao-por-data
+	private MovimentacaoService service;
 
 	@GetMapping
 	public ResponseEntity<?> Listar() {
@@ -50,29 +47,28 @@ public class MovimentacaoEndpoint extends FakebankEndpoint {
 	}
 
 	@GetMapping(path = "/pesquisa")
-	public ResponseEntity<?> pesquisarMovimentacao(
-				@RequestParam(value="codigo", required=false) Integer codigo, 
-				@RequestParam(value="conta", required=false) Integer conta, 
-				@RequestParam(value="dataInicio", required=false) LocalDate dataInicio,
-				@RequestParam(value="dataFinal", required=false) LocalDate dataFinal) {
+	public ResponseEntity<?> pesquisarMovimentacao(@RequestParam(value = "conta", required = false) Integer conta,
+			@RequestParam(value = "tipoMovimentacao", required = false) String tipoMovimentacao,
+			@RequestParam(value = "dataInicio", required = false) LocalDate dataInicio,
+			@RequestParam(value = "dataFinal", required = false) LocalDate dataFinal) {
 
-		Movimentacao Movimentacao = service.filtrar(codigo, conta, dataInicio, dataFinal);
-		return ok(MovimentacaoRepresentation.from(Movimentacao)); 
+		Movimentacao Movimentacao = service.filtrar(conta, dataInicio, dataFinal);
+		return ok(MovimentacaoRepresentation.from(Movimentacao));
 	}
 
-	@PutMapping(value = "/saque")
+	@PostMapping(value = "/transferencia")
+	public ResponseEntity<?> transferir(@RequestBody MovimentacaoTransferenciaCommand comando) {
+		return service.transferir(comando);
+	}
+
+	@PostMapping(value = "/saque")
 	public ResponseEntity<?> sacar(@RequestBody MovimentacaoSaqueCommand comando) {
 		return service.sacar(comando);
 	}
-	
-	@PutMapping(value = "/deposito")
+
+	@PostMapping(value = "/deposito")
 	public ResponseEntity<?> depositar(@RequestBody MovimentacaoDepositoCommand comando) {
 		return service.depositar(comando);
 	}
-	
-	
-		@DeleteMapping(value = "/{codigo}")
-	public ResponseEntity<?> excluirMovimentacao(@PathVariable("codigo") Integer codigo) {
-		return service.excluir(codigo) ? ok("excluida com sucesso") : notFound("Movimentacao nao encontrada");
-	}
+
 }

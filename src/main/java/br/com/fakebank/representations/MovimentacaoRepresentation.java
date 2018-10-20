@@ -1,49 +1,30 @@
-package br.com.fakebank.domain;
+package br.com.fakebank.representations;
 
 import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import br.com.fakebank.domain.Agencia;
+import br.com.fakebank.domain.Movimentacao;
 
-@Entity
-@Table(name = "movimentacao", schema = "dbo")
-public class Movimentacao {
+public class MovimentacaoRepresentation {
 
-	@Id
-	@NotNull
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "cd_movimentacao")
 	private Integer codigoMovimentacao;
-	
-	@NotNull
-	@Column(name = "cd_conta")
 	private Integer codigoConta;
-
-	@NotNull
-	@Column(name = "dt_movimentacao")
 	private LocalDate dataMovimentacao;
-	
-	@NotNull
-	@Column(name = "vl_movimentacao")
 	private double valorMovimentacao;
-
-	@NotNull
-	@Column(name = "cd_tipo_movimentacao")
 	private Integer codigoTipoMovimentacao;
-	
-	@NotNull
-	@Column(name = "vl_saldo_anterior")
-	private double valorSaldoAnterior;
-	
-	@NotNull
-	@Column(name = "vl_saldo_atual")
 	private double valorSaldoAtual;
-	
+
+	public static MovimentacaoRepresentation from(Movimentacao movimentacao) {
+		MovimentacaoRepresentation model = new MovimentacaoRepresentation();
+		model.setCodigoMovimentacao(movimentacao.getCodigoMovimentacao());
+		model.setCodigoConta(movimentacao.getCodigoConta());
+		model.setDataMovimentacao(movimentacao.getDataMovimentacao());
+		model.setValorMovimentacao(movimentacao.getValorMovimentacao());
+		model.setCodigoTipoMovimentacao(movimentacao.getCodigoTipoMovimentacao());
+		model.setValorSaldoAtual(movimentacao.getValorSaldoAtual());
+		return model;
+	}
+
 	public Integer getCodigoMovimentacao() {
 		return codigoMovimentacao;
 	}
@@ -82,14 +63,6 @@ public class Movimentacao {
 
 	public void setCodigoTipoMovimentacao(Integer codigoTipoMovimentacao) {
 		this.codigoTipoMovimentacao = codigoTipoMovimentacao;
-	}
-
-	public double getValorSaldoAnterior() {
-		return valorSaldoAnterior;
-	}
-
-	public void setValorSaldoAnterior(double valorSaldoAnterior) {
-		this.valorSaldoAnterior = valorSaldoAnterior;
 	}
 
 	public double getValorSaldoAtual() {
