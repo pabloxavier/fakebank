@@ -28,6 +28,7 @@ target/
 
 #Eclipse files
 .settings
+.metadata
 **/.project
 **/.classpath
 blog/bin/
@@ -42,12 +43,7 @@ blog/bin/
 hs_err_pid*
 
 application.properties
-<<<<<<< HEAD
-<<<<<<< HEAD
 **/application.properties
-=======
-=======
->>>>>>> a6acc80711cd4b2550f8a5cc82171d60cea4b2d1
 
 .gradle
 /build/
@@ -62,9 +58,5 @@ gradle-app.setting
 .gradletasknamecache
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
-<<<<<<< HEAD
 # gradle/wrapper/gradle-wrapper.properties
->>>>>>> gitignore
-=======
 # gradle/wrapper/gradle-wrapper.properties
->>>>>>> a6acc80711cd4b2550f8a5cc82171d60cea4b2d1
