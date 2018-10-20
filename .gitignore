@@ -19,13 +19,17 @@
 *.tar.gz
 *.rar
 
+### Gradle ###
+.gradle
+/build/
+
 #Gradle temporary files
 target/
 
 #Eclipse files
+.settings
 **/.project
 **/.classpath
-**/.settings/
 blog/bin/
 **/.tern-project
 
@@ -38,3 +42,4 @@ blog/bin/
 hs_err_pid*
 
 application.properties
+**/application.properties
