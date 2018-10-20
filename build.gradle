@@ -34,6 +34,10 @@ dependencies{
     compile("com.microsoft.sqlserver:mssql-jdbc:7.0.0.jre8")
     compile("org.postgresql:postgresql:9.4.1212")
     compile 'junit:junit:4.12'
+
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.0.4.RELEASE'
+    testCompile 'com.h2database:h2:1.4.196'
+    testCompile "org.flywaydb.flyway-test-extensions:flyway-spring-test:5.0.0"
 }
 
 task tarefaPersonalizada{
