@@ -3,8 +3,8 @@
 Documentação de apoio ao estudo e construção da API do FakeBank.
 
 * [O FakeBank](#fakebank)
-* [Etapa 1 - Banco de Dados](#etapa-1-banco-de-dados)
-* [Etapa 2 - Tabela: Agência](#etapa-2-tabela-agencia)
+* [Etapa 1 : Criando o Banco de Dados](#etapa-1-:-criando-o-banco-de-dados)
+* [Etapa 2 : Criando a Tabela: Agência](#etapa-2-:-criando-a-tabela-agencia)
 
 ## Fakebank
 
@@ -12,7 +12,7 @@ O FakeBank é um projeto de Estudos, em que se objetiva aprender a criar estrutu
 
 Também é nosso objeto aprender técnicas de programação orientada a objetos, como DDD (Domain Driven Design), alguns Design Patterns, SOLID e construção de testes unitários.
 
-## Etapa 1 - Banco de Dados
+## Etapa 1 : Criando o Banco de Dados
 
 O Banco de Dados usado para suportar as tabelas que utilizaremos será o **Microsoft SQL Server**.
 
@@ -35,7 +35,7 @@ USE DB_FAKE_BANK
 GO
 ```
 
-## Etapa 2 - Tabela AGENCIA
+## Etapa 2 : Criando a Tabela AGENCIA
 
 A primeira tabela de criaremos será a tabela ```DBO.AGENCIA```
 
