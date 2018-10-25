@@ -3,7 +3,7 @@
 Documentação de apoio ao estudo e construção da API do FakeBank.
 
 * [O FakeBank](#fakebank)
-* [Banco de Dados)(#banco-de-dados)
+* [Banco de Dados](#banco-de-dados)
 
 ## Fakebank
 
