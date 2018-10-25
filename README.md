@@ -19,7 +19,17 @@ Optamos por criar o banco de dados antes da Modelagem Conceitual, para expor pro
 
 Sendo assim, não teremos Migrations de estrururas definidas no Framework de ORM para o Banco de Dados diretamente.
 
+O nome dado para o Banco de Dados será DB_FAKE_BANK.
+
+Como o objetivo de estudo principal não é o SQL Server, não serão observadas grandes informações acerca da criação do Banco de Dados, como Filegroups, Collations, etc...
 
 ```sql
-SELECT * FROM TB_CLIENTE
+USE MASTER
+GO
+
+CREATE DATABASE DB_FAKE_BANK
+GO
+
+USE DB_FAKE_BANK
+GO
 ```
