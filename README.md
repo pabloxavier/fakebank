@@ -4,6 +4,7 @@ Documentação de apoio ao estudo e construção da API do FakeBank.
 
 * [O FakeBank](#fakebank)
 * [Banco de Dados](#banco-de-dados)
+* [Tabela: Agência](#tabela-agencia)
 
 ## Fakebank
 
@@ -31,5 +32,35 @@ CREATE DATABASE DB_FAKE_BANK
 GO
 
 USE DB_FAKE_BANK
+GO
+```
+
+## Tabela AGENCIA
+
+A primeira tabela de criaremos será a tabela ```DBO.AGENCIA```
+
+Nesta tabela, teremos um campo AUTO-NUMERÁVEL conmo Chave Primária da Relação.
+
+```sql
+USE DB_FAKE_BANK
+GO
+
+CREATE TABLE DBO.AGENCIA
+(
+    CD_AGENCIA   INT         IDENTITY(1,1) NOT NULL,
+    NR_AGENCIA   INT                       NOT NULL,
+    NM_AGENCIA   VARCHAR(80)               NOT NULL,
+    NR_CNPJ      CHAR(14)                  NOT NULL
+)
+GO
+
+ALTER TABLE DBO.AGENCIA
+ADD CONSTRAINT PK_AGENCIA
+PRIMARY KEY (CD_AGENCIA)
+GO
+
+ALTER TABLE DBO.AGENCIA
+ADD CONSTRAINT UK_AGENCIA_CNPJ
+UNIQUE (NR_CNPJ)
 GO
 ```
