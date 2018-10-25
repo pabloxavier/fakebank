@@ -13,9 +13,9 @@ Também é nosso objeto aprender técnicas de programação orientada a objetos,
 
 ## Banco de Dados
 
-O Banco de Dados usado para suportar as tabelas que utilizaremos será o Microsoft SQL Server.
+O Banco de Dados usado para suportar as tabelas que utilizaremos será o **Microsoft SQL Server**.
 
-Optamos por criar o banco de dados antes d Modelagem Conceitual, para expor problemas reais de bancos de dados com algumas modelagens não muito aderentes às práticas de normalização.
+Optamos por criar o banco de dados antes da Modelagem Conceitual, para expor problemas reais de bancos de dados com algumas modelagens não muito aderentes às práticas de normalização.
 
 Sendo assim, não teremos Migrations de estrururas definidas no Framework de ORM para o Banco de Dados diretamente.
 
