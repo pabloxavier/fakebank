@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import br.com.fakebank.domain.Cliente;
 import br.com.fakebank.domain.Gerente;
+import br.com.fakebank.domain.commands.ClienteEdicaoCommand;
 import br.com.fakebank.domain.commands.ClienteInclusaoCommand;
+import br.com.fakebank.domain.commands.GerenteEdicaoCommand;
 import br.com.fakebank.domain.commands.GerenteInclusaoCommand;
 import br.com.fakebank.domain.specifications.GerenteSpecifications;
 import br.com.fakebank.repository.GerenteRepository;
@@ -27,9 +29,23 @@ public class GerenteService {
 		return repository.findById(codigo).orElse(null);
 	}
 	
-	public List<Gerente> filtrar(String endereco, boolean isAtivo){
-		Specification<Gerente> criterio = Specification.where(GerenteSpecifications.porParteEndereco(endereco)
-				                                       .and(GerenteSpecifications.porSituacao(isAtivo)));
+	public List<Gerente> filtrar(boolean isAtivo){
+		Specification<Gerente> criterio = Specification.where(GerenteSpecifications.porSituacao(isAtivo));
 		return repository.findAll(criterio);	
+	}
+	
+	public Gerente salvar(GerenteInclusaoCommand comando){
+		Gerente gerente = Gerente.criar(comando);
+		return repository.save(gerente);
+	}
+	
+	public Gerente salvar(Integer codigo, GerenteEdicaoCommand comando){
+		Gerente gerente = getGerenteById(codigo);
+		
+		if (gerente == null) 
+			return gerente;
+		
+		gerente.editar(comando);
+		return repository.save(gerente);
 	}
 }
