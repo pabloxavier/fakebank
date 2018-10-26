@@ -10,25 +10,25 @@ import java.util.Objects;
 public class ClienteTelefoneId implements Serializable {
 
     @Column(name = "cd_cliente")
-    private Integer cdCliente;
+    private Integer codigoCliente;
 
     @Column(name = "cd_telefone")
-    private Short codigo;
+    private Short codigoTelefone;
 
     public ClienteTelefoneId() {
     }
 
-    public ClienteTelefoneId(Integer cdCliente, Short codigo) {
-        this.cdCliente = cdCliente;
-        this.codigo = codigo;
+    public ClienteTelefoneId(Integer codigoCliente, Short codigoTelefone) {
+        this.codigoCliente = codigoCliente;
+        this.codigoTelefone = codigoTelefone;
     }
 
-    public Integer getCdCliente() {
-        return cdCliente;
+    public Integer getCodigoCliente() {
+        return codigoCliente;
     }
 
-    public Short getCodigo() {
-        return codigo;
+    public Short getCodigoTelefone() {
+        return codigoTelefone;
     }
 
     @Override
@@ -36,12 +36,12 @@ public class ClienteTelefoneId implements Serializable {
         if (this == o) return true;
         if (!(o instanceof ClienteTelefoneId)) return false;
         ClienteTelefoneId that = (ClienteTelefoneId) o;
-        return Objects.equals(getCdCliente(), that.getCdCliente()) &&
-                Objects.equals(getCodigo(), that.getCodigo());
+        return Objects.equals(getCodigoCliente(), that.getCodigoCliente()) &&
+                Objects.equals(getCodigoTelefone(), that.getCodigoTelefone());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCdCliente(), getCodigo());
+        return Objects.hash(getCodigoCliente(), getCodigoTelefone());
     }
 }

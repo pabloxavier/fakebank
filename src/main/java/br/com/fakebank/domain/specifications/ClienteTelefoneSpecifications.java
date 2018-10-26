@@ -7,7 +7,7 @@ public class ClienteTelefoneSpecifications {
 
 	public static Specification<ClienteTelefone> porCodigoCliente(Integer codigo){
 		return (root, criteriaQuery, criteriaBuilder) -> 
-			criteriaBuilder.equal(root.get("clienteTelefoneId").get("cdCliente"), codigo);
+			criteriaBuilder.equal(root.get("clienteTelefoneId").get("codigoCliente"), codigo);
 	}
 	
 }
