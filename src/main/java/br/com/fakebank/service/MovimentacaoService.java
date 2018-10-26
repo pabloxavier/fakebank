@@ -15,6 +15,7 @@ import br.com.fakebank.domain.commands.MovimentacaoTransferenciaCommand;
 import br.com.fakebank.domain.specifications.MovimentacaoSpecifications;
 import br.com.fakebank.exceptions.NaoEncontradoException;
 import br.com.fakebank.repository.MovimentacaoRepository;
+import br.com.fakebank.representations.MovimentacaoRepresentation;
 
 @Service
 public class MovimentacaoService {
@@ -46,19 +47,19 @@ public class MovimentacaoService {
 		return repository.findAll(criterio);
 	}
 
-	public ResponseEntity<?> transferir(MovimentacaoTransferenciaCommand comando) {
-		//TODO
-		return null;
+	public Movimentacao transferir(MovimentacaoTransferenciaCommand comando) {
+		Movimentacao movimentacao = Movimentacao.criar(comando);
+		return repository.save(movimentacao);
 	}
 
-	public ResponseEntity<?> sacar(MovimentacaoSaqueCommand comando) {
-		//TODO
-		return null;
+	public Movimentacao sacar(MovimentacaoSaqueCommand comando) {
+		Movimentacao movimentacao = Movimentacao.criar(comando);
+		return repository.save(movimentacao);
 	}
 
-	public ResponseEntity<?> depositar(MovimentacaoDepositoCommand comando) {
-		//TODO
-		return null;
+	public Movimentacao depositar(MovimentacaoDepositoCommand comando) {
+		Movimentacao movimentacao = Movimentacao.criar(comando);
+		return repository.save(movimentacao);
 	}
 
 }
