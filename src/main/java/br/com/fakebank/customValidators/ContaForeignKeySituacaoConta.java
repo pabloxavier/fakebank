@@ -10,10 +10,10 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface ContaForeignKeySituacaoConta {
-	public String message() default "Situação da conta não encontrada!";
-	
-	Class<?>[] groups() default {};
+    public String message() default "Situação da conta não encontrada!";
     
-	Class<? extends Payload>[] payload() default {};
+    Class<?>[] groups() default {};
+    
+    Class<? extends Payload>[] payload() default {};
 
 }

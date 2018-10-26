@@ -18,18 +18,18 @@ import br.com.fakebank.service.TipoContaService;
 @RequestMapping("motivo-encerramento")
 public class MotivoEncerramentoEndpoint extends FakebankEndpoint{
 
-	@Autowired
-	MotivoEncerramentoService service;
-	
-	@GetMapping
-	public ResponseEntity<?> listarTipoConta(){
-		
-		return ok(service.listar());
-	}
-	
-	@GetMapping(value="/{codigo}")
-	public ResponseEntity<?> cosultaTipoContaPorCodigo(@PathVariable("codigo") Integer codigo ){
-		MotivoEncerramento motivo = service.consultaPorCodigo(codigo);
-		return ok(motivo);
-	}
+    @Autowired
+    MotivoEncerramentoService service;
+    
+    @GetMapping
+    public ResponseEntity<?> listarTipoConta(){
+        
+        return ok(service.listar());
+    }
+    
+    @GetMapping(value="/{codigo}")
+    public ResponseEntity<?> cosultaTipoContaPorCodigo(@PathVariable("codigo") Integer codigo ){
+        MotivoEncerramento motivo = service.consultaPorCodigo(codigo);
+        return ok(motivo);
+    }
 }

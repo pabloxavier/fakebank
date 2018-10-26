@@ -24,45 +24,45 @@ import br.com.fakebank.service.MovimentacaoService;
 @RequestMapping("movimentacoes")
 public class MovimentacaoEndpoint extends FakebankEndpoint {
 
-	@Autowired
-	private MovimentacaoService service;
+    @Autowired
+    private MovimentacaoService service;
 
-	@GetMapping
-	public ResponseEntity<?> listar() {
-		return ok(service.listar());
-	}
+    @GetMapping
+    public ResponseEntity<?> listar() {
+        return ok(service.listar());
+    }
 
-	@GetMapping(value = "/{codigo}")
-	public ResponseEntity<?> getMovimentacaoById(@PathVariable("codigo") final Integer codigo) {
-		Movimentacao Movimentacao = service.consultarPorCodigo(codigo);
-		return ok(MovimentacaoRepresentation.from(Movimentacao));
-	}
+    @GetMapping(value = "/{codigo}")
+    public ResponseEntity<?> getMovimentacaoById(@PathVariable("codigo") final Integer codigo) {
+        Movimentacao Movimentacao = service.consultarPorCodigo(codigo);
+        return ok(MovimentacaoRepresentation.from(Movimentacao));
+    }
 
-	@GetMapping(path = "/pesquisa")
-	public ResponseEntity<?> pesquisarMovimentacao(
-			@RequestParam(value = "conta", required = true) Integer conta,
-			@RequestParam(value = "valorMovimentacao", required = false) double valorMovimentacao,
-			@RequestParam(value = "tipoMovimentacao", required = false) Integer tipoMovimentacao,
-			@RequestParam(value = "dataInicio", required = false) LocalDate dataInicio,
-			@RequestParam(value = "dataFinal", required = false) LocalDate dataFinal) {
+    @GetMapping(path = "/pesquisa")
+    public ResponseEntity<?> pesquisarMovimentacao(
+            @RequestParam(value = "conta", required = true) Integer conta,
+            @RequestParam(value = "valorMovimentacao", required = false) double valorMovimentacao,
+            @RequestParam(value = "tipoMovimentacao", required = false) Integer tipoMovimentacao,
+            @RequestParam(value = "dataInicio", required = false) LocalDate dataInicio,
+            @RequestParam(value = "dataFinal", required = false) LocalDate dataFinal) {
 
-		List<Movimentacao> movimentacao = service.filtrar(conta, valorMovimentacao, tipoMovimentacao, dataInicio, dataFinal);
-		return ok(MovimentacaoRepresentation.from(movimentacao));
-	}
+        List<Movimentacao> movimentacao = service.filtrar(conta, valorMovimentacao, tipoMovimentacao, dataInicio, dataFinal);
+        return ok(MovimentacaoRepresentation.from(movimentacao));
+    }
 
-	@PostMapping(value = "/transferencia")
-	public ResponseEntity<?> transferir(@RequestBody MovimentacaoTransferenciaCommand comando) {
-		return ok(service.transferir(comando));
-	}
+    @PostMapping(value = "/transferencia")
+    public ResponseEntity<?> transferir(@RequestBody MovimentacaoTransferenciaCommand comando) {
+        return ok(service.transferir(comando));
+    }
 
-	@PostMapping(value = "/saque")
-	public ResponseEntity<?> sacar(@RequestBody MovimentacaoSaqueCommand comando) {
-		return ok(service.sacar(comando));
-	}
+    @PostMapping(value = "/saque")
+    public ResponseEntity<?> sacar(@RequestBody MovimentacaoSaqueCommand comando) {
+        return ok(service.sacar(comando));
+    }
 
-	@PostMapping(value = "/deposito")
-	public ResponseEntity<?> depositar(@RequestBody MovimentacaoDepositoCommand comando) {
-		return ok(service.depositar(comando));
-	}
+    @PostMapping(value = "/deposito")
+    public ResponseEntity<?> depositar(@RequestBody MovimentacaoDepositoCommand comando) {
+        return ok(service.depositar(comando));
+    }
 
 }

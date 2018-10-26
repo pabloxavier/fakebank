@@ -14,21 +14,21 @@ import br.com.fakebank.repository.TipoContaRepository;
 @Service
 public class MotivoEncerramentoService {
 
-	@Autowired
-	MotivoEncerramentoRepository repository;
-	
-	public MotivoEncerramentoService() {
-		
-	}
-	
-	public List<MotivoEncerramento> listar() {
-		
-		return repository.findAll();
-	}
-	
-	public MotivoEncerramento consultaPorCodigo(Integer codigo) {
-		
-		return repository.findById(codigo).orElseThrow(() -> new NaoEncontradoException());
-	}
-	
+    @Autowired
+    MotivoEncerramentoRepository repository;
+    
+    public MotivoEncerramentoService() {
+        
+    }
+    
+    public List<MotivoEncerramento> listar() {
+        
+        return repository.findAll();
+    }
+    
+    public MotivoEncerramento consultaPorCodigo(Integer codigo) {
+        
+        return repository.findById(codigo).orElseThrow(() -> new NaoEncontradoException());
+    }
+    
 }

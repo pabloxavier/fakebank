@@ -18,38 +18,38 @@ import br.com.fakebank.repository.TipoContaRepository;
 @Service
 public class SituacaoContaService {
 
-	@Autowired
-	SituacaoContaRepository repository;
-	
-	public SituacaoContaService() {
-		
-	}
-	
-	public List<SituacaoConta> listar() {
-		
-		return repository.findAll();
-	}
-	
-	public SituacaoConta consultaPorCodigo(Integer codigo) {
-		
-		return repository.findById(codigo).orElseThrow(() -> new NaoEncontradoException());
-	}
+    @Autowired
+    SituacaoContaRepository repository;
+    
+    public SituacaoContaService() {
+        
+    }
+    
+    public List<SituacaoConta> listar() {
+        
+        return repository.findAll();
+    }
+    
+    public SituacaoConta consultaPorCodigo(Integer codigo) {
+        
+        return repository.findById(codigo).orElseThrow(() -> new NaoEncontradoException());
+    }
 
-	public SituacaoConta salvar(DominioCriacaoCommand comando){
-		SituacaoConta situacaoConta = SituacaoConta.criar(comando);
-		return repository.save(situacaoConta);
-	}
-	
+    public SituacaoConta salvar(DominioCriacaoCommand comando){
+        SituacaoConta situacaoConta = SituacaoConta.criar(comando);
+        return repository.save(situacaoConta);
+    }
+    
 
-	public SituacaoConta salvar(Integer codigo, DominioEdicaoCommand comando){
-		SituacaoConta situacaoConta = consultaPorCodigo(codigo);
-		
-		if (situacaoConta == null) {
-			return situacaoConta;
-		}
-		
-		situacaoConta.editar(comando);
-		return repository.save(situacaoConta);
-		
-	}
+    public SituacaoConta salvar(Integer codigo, DominioEdicaoCommand comando){
+        SituacaoConta situacaoConta = consultaPorCodigo(codigo);
+        
+        if (situacaoConta == null) {
+            return situacaoConta;
+        }
+        
+        situacaoConta.editar(comando);
+        return repository.save(situacaoConta);
+        
+    }
 }

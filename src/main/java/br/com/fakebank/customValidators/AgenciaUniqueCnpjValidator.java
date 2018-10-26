@@ -15,17 +15,15 @@ public class AgenciaUniqueCnpjValidator implements ConstraintValidator<AgenciaUn
     private ApplicationContext applicationContext;
 
     private AgenciaService service;
-	
+    
     @Override
     public void initialize(AgenciaUniqueCnpj unique) {
         this.service = ApplicationContextProvider.getBean(AgenciaService.class);
     }
     
-	@Override
-	public boolean isValid(String cnpj, ConstraintValidatorContext context) {
-		return !service.cnpjJaExiste(cnpj);
-	}
+    @Override
+    public boolean isValid(String cnpj, ConstraintValidatorContext context) {
+        return !service.cnpjJaExiste(cnpj);
+    }
 
-
-	
 }

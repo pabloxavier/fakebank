@@ -6,9 +6,9 @@ import br.com.fakebank.domain.Gerente;
 
 public class GerenteSpecifications {
 
-	public static Specification<Gerente> porSituacao(boolean isAtivo){
-		return (root, criteriaQuery, criteriaBuilder) ->
-			criteriaBuilder.equal(root.get("isAtivo"), isAtivo);
-	}
+    public static Specification<Gerente> porSituacao(boolean isAtivo){
+        return (root, criteriaQuery, criteriaBuilder) ->
+            criteriaBuilder.equal(root.get("isAtivo"), isAtivo);
+    }
 
 }

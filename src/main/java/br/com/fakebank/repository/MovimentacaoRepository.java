@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import br.com.fakebank.domain.Movimentacao;
 
 public interface MovimentacaoRepository extends JpaRepository<Movimentacao, Integer>, 
-												JpaSpecificationExecutor<Movimentacao>{
+                                                JpaSpecificationExecutor<Movimentacao>{
 
 }

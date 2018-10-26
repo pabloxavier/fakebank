@@ -19,51 +19,51 @@ import br.com.fakebank.domain.commands.DominioCriacaoCommand;
 @DiscriminatorColumn(name = "tp_dominio", length = 10, discriminatorType = DiscriminatorType.STRING)
 public abstract class Dominio {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "cd_dominio")
-	private Integer codigo;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cd_dominio")
+    private Integer codigo;
 
-	@Column(name = "tp_dominio",insertable =false, updatable = false)
-	private String tipo;
+    @Column(name = "tp_dominio",insertable =false, updatable = false)
+    private String tipo;
 
-	@Column(name = "vl_dominio")
-	private String valor;
+    @Column(name = "vl_dominio")
+    private String valor;
 
-	@Column(name = "ds_dominio")
-	private String descricao;
+    @Column(name = "ds_dominio")
+    private String descricao;
 
 
-	public Integer getCodigo() {
-		return codigo;
-	}
+    public Integer getCodigo() {
+        return codigo;
+    }
 
-	public String getTipo() {
-		return tipo;
-	}
+    public String getTipo() {
+        return tipo;
+    }
 
-	public String getValor() {
-		return valor;
-	}
+    public String getValor() {
+        return valor;
+    }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
 
-	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
-	}
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
-	public void setValor(String valor) {
-		this.valor = valor;
-	}
+    public void setValor(String valor) {
+        this.valor = valor;
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
 }

@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.com.fakebank.service.ContaService;
 
 public class ContaForeignKeySituacaoContaValidator  implements ConstraintValidator<ContaForeignKeySituacaoConta, Integer>{
-	@Autowired
-	private ContaService service; 
+    @Autowired
+    private ContaService service; 
 
-	@Override
-	public boolean isValid(Integer codigoSituacaoConta, ConstraintValidatorContext context) {
-	//	return !service.cnpjJaExiste(cnpj);
-		return true;
-	}
+    @Override
+    public boolean isValid(Integer codigoSituacaoConta, ConstraintValidatorContext context) {
+    //    return !service.cnpjJaExiste(cnpj);
+        return true;
+    }
 
 }
