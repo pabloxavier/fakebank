@@ -37,42 +37,20 @@ public class ClienteTelefone {
 		return cliente;
 	}
 
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
-
 	public Short getCodigo() {
 		return codigo;
-	}
-
-	public void setCodigo(Short codigo) {
-		this.codigo = codigo;
 	}
 
 	public Short getPrefixo() {
 		return prefixo;
 	}
 
-	public void setPrefixo(Short prefixo) {
-		this.prefixo = prefixo;
-	}
-
 	public Integer getNumero() {
 		return numero;
 	}
 
-	public void setNumero(Integer numero) {
-		this.numero = numero;
-	}
-
 	public TipoTelefone getTipoTelefone() {
 		return tipoTelefone;
-	}
-
-	public void setTipoTelefone(TipoTelefone tipoTelefone) {
-		this.tipoTelefone = tipoTelefone;
 	}
 
 }
