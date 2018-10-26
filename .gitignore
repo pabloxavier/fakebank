@@ -40,9 +40,7 @@ blog/bin/
 
 # Java class files
 *.class
-
 application.properties
-**/application.properties
 
 # generated files
 bin/
