@@ -11,6 +11,7 @@ import javax.persistence.Table;
 
 import br.com.fakebank.domain.commands.ClienteEdicaoCommand;
 import br.com.fakebank.domain.commands.ClienteInclusaoCommand;
+import br.com.fakebank.domain.commands.GerenteEdicaoCommand;
 import br.com.fakebank.domain.commands.GerenteInclusaoCommand;
 
 @Entity
@@ -51,7 +52,7 @@ public class Gerente {
 		return new Gerente(comando);
 	}
 	
-	public void editar(ClienteEdicaoCommand comando){
+	public void editar(GerenteEdicaoCommand comando){
 		this.isAtivo = comando.isAtivo();
 	}
 
