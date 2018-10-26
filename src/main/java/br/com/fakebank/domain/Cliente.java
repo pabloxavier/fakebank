@@ -12,6 +12,8 @@ import javax.persistence.Table;
 
 import br.com.fakebank.domain.commands.ClienteEdicaoCommand;
 import br.com.fakebank.domain.commands.ClienteInclusaoCommand;
+import br.com.fakebank.domain.commands.ClientePessoaFisicaInclusaoCommand;
+import br.com.fakebank.domain.commands.ClientePessoaJuridicaInclusaoCommand;
 
 @Entity
 @Table(name = "cliente", schema = "dbo")
@@ -36,20 +38,48 @@ public class Cliente {
 	}
 	
 	private Cliente(ClienteInclusaoCommand comando){
-		this.isAtivo = comando.isAtivo();
+        this.isAtivo = comando.isAtivo();
+        this.endereco = comando.getEndereco();
+        this.pessoa = comando.getPessoa();
+    }
+    
+    public static Cliente criar(ClienteInclusaoCommand comando){
+        return new Cliente(comando);
+    }
+    
+    public void editar(ClienteEdicaoCommand comando){
 		this.endereco = comando.getEndereco();
-		this.pessoa = comando.getPessoa();
+		this.isAtivo = comando.isAtivo();
+	}
+    
+	private Cliente(ClientePessoaFisicaInclusaoCommand command) {
+		this.pessoa = new Pessoa();
+		this.pessoa.setNumeroDocumento(command.getCpf());
+		this.pessoa.setNome(command.getNome());
+		this.pessoa.setDataNascimento(command.getDataNascimento());
+		this.pessoa.setTipoPessoa(TipoPessoa.FISICA);
+		this.endereco = command.getEnderecoCompleto();
+		this.isAtivo = Boolean.TRUE;		
 	}
 	
-	public static Cliente criar(ClienteInclusaoCommand comando){
-		return new Cliente(comando);
-	}
-	
-	public void editar(ClienteEdicaoCommand comando){
-		this.endereco = comando.getEndereco();
-		this.isAtivo = comando.isAtivo();
+	public static Cliente criarClientePessoaFisica(ClientePessoaFisicaInclusaoCommand command) {
+		return new Cliente(command);
 	}
 
+	private Cliente(ClientePessoaJuridicaInclusaoCommand command) {
+		this.pessoa = new Pessoa();
+		this.pessoa.setNumeroDocumento(command.getCnpj());
+		this.pessoa.setNome(command.getNome());
+		this.pessoa.setDataAbertura(command.getDataAbertura());
+		this.pessoa.setTipoPessoa(TipoPessoa.JURIDICA);
+		this.endereco = command.getEnderecoCompleto();
+		this.isAtivo = Boolean.TRUE;
+	}
+	
+	public static Cliente criarClientePessoaJuridicaInclusaoCommand(ClientePessoaJuridicaInclusaoCommand command) {
+		return new Cliente(command);
+	}	
+	
 	public Integer getCodigo() {
 		return codigo;
 	}
