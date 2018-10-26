@@ -38,14 +38,4 @@ public class GerenteService {
 		Gerente gerente = Gerente.criar(comando);
 		return repository.save(gerente);
 	}
-	
-	public Gerente salvar(Integer codigo, GerenteEdicaoCommand comando){
-		Gerente gerente = getGerenteById(codigo);
-		
-		if (gerente == null) 
-			return gerente;
-		
-		gerente.editar(comando);
-		return repository.save(gerente);
-	}
 }
