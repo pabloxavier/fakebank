@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -21,26 +22,32 @@ public class Movimentacao {
 	private Integer codigoMovimentacao;
 	
 	@NotNull
+	@NotBlank
 	@Column(name = "cd_conta")
 	private Integer codigoConta;
 
 	@NotNull
+	@NotBlank
 	@Column(name = "dt_movimentacao")
 	private LocalDate dataMovimentacao;
 	
 	@NotNull
+	@NotBlank
 	@Column(name = "vl_movimentacao")
 	private double valorMovimentacao;
 
 	@NotNull
+	@NotBlank
 	@Column(name = "cd_tipo_movimentacao")
 	private Integer codigoTipoMovimentacao;
 	
 	@NotNull
+	@NotBlank
 	@Column(name = "vl_saldo_anterior")
 	private double valorSaldoAnterior;
 	
 	@NotNull
+	@NotBlank
 	@Column(name = "vl_saldo_atual")
 	private double valorSaldoAtual;
 	
