@@ -1,6 +1,7 @@
 package br.com.fakebank.endpoint;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -41,12 +42,12 @@ public class MovimentacaoEndpoint extends FakebankEndpoint {
 	public ResponseEntity<?> pesquisarMovimentacao(
 			@RequestParam(value = "conta", required = true) Integer conta,
 			@RequestParam(value = "valorMovimentacao", required = false) double valorMovimentacao,
-			@RequestParam(value = "tipoMovimentacao", required = false) String tipoMovimentacao,
+			@RequestParam(value = "tipoMovimentacao", required = false) Integer tipoMovimentacao,
 			@RequestParam(value = "dataInicio", required = false) LocalDate dataInicio,
 			@RequestParam(value = "dataFinal", required = false) LocalDate dataFinal) {
 
-		Movimentacao Movimentacao = service.filtrar(conta, valorMovimentacao, tipoMovimentacao, dataInicio, dataFinal);
-		return ok(MovimentacaoRepresentation.from(Movimentacao));
+		List<Movimentacao> movimentacao = service.filtrar(conta, valorMovimentacao, tipoMovimentacao, dataInicio, dataFinal);
+		return ok(MovimentacaoRepresentation.from(movimentacao));
 	}
 
 	@PostMapping(value = "/transferencia")
