@@ -16,6 +16,9 @@ Documentação de apoio ao estudo e construção da API do FakeBank.
     - [Criando a Tabela DBO.CLIENTE_CONTA](#criando-a-tabela-cliente_conta)
     - [Criando a Tabela DBO.TIPO_MOVIMENTACAO](#criando-a-tabela-tipo_movimentacao)
     - [Criando a Tabela DBO.MOVIMENTACAO](#criando-a-tabela-movimentacao)
+* [Etapa 2 Configurando o Gradle](#etapa-2-configurando-o-gradle)
+* [Etapa 3 Criando o Projeto no Eclipse](#etapa-3-criando-o-projeto-no-eclipse)
+* [Etapa 4 Resolvendo as Dependências com Gradle](#etapa-4-resolvendo-as-dependências-com-gradle)
 
 ## Fakebank
 
@@ -486,3 +489,16 @@ FOREIGN KEY (CD_TIPO_MOVIMENTACAO)
 REFERENCES DBO.TIPO_MOVIMENTACAO (CD_TIPO_MOVIMENTACAO)
 GO
 ```
+
+## Etapa 2 Configurando o Gradle
+
+Seção destinada a descrever como configurar o Gradle.
+
+## Etapa 3 Criando o Projeto no Eclipse
+
+Seção destinada a descrever como criar o projeto no eclipse.
+
+## Etapa 4 Resolvendo as Dependências com Gradle
+
+Seção destinada a descrever como adicionar as dependências no build.gradle.
+
