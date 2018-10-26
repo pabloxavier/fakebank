@@ -48,7 +48,7 @@ public class AgenciaEndpoint extends FakebankEndpoint{
 	}
 		
 	@PostMapping
-	public ResponseEntity<?> incluirAgencia(@RequestBody @Valid AgenciaInclusaoCommand comando){
+	public ResponseEntity<?> incluirAgencia(@RequestBody AgenciaInclusaoCommand comando){
 		Agencia agenciaIncluida = service.salvar(comando);
 		AgenciaRepresentation model = AgenciaRepresentation.from(agenciaIncluida);
 		return created(model, agenciaIncluida.getCodigo());
