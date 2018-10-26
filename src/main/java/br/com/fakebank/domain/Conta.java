@@ -11,8 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import br.com.fakebank.domain.commands.ContaCorrenteEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaCorrenteInclusaoCommand;
+import br.com.fakebank.domain.commands.ContaPoupancaEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaPoupancaInclusaoCommand;
+import br.com.fakebank.domain.commands.ContaSalarioEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaSalarioInclusaoCommand;
 import br.com.fakebank.util.DateUtil;
 
@@ -66,6 +69,13 @@ public class Conta {
 		this.valorSaldo = 0.00;
 	}
 	
+	private void editar (ContaCorrenteEdicaoCommand command) {
+		this.codigoGerente = command.getCodigoGerente();		
+		this.codigoSituacaoConta = command.getCodigoSituacaoConta();		
+		this.valorSaldo = command.getValorSaldo();		
+	}	
+	
+	
 	public static Conta criarContaPoupanca(ContaPoupancaInclusaoCommand command) {
 		return new Conta(command);
 	}
@@ -81,6 +91,15 @@ public class Conta {
 		
 	}	
 	
+	
+	private void Conta (ContaPoupancaEdicaoCommand command) {
+		this.codigoGerente = command.getCodigoGerente();		
+		this.codigoSituacaoConta = command.getCodigoSituacaoConta();		
+		this.valorSaldo = command.getValorSaldo();			
+		this.diaAniversarioPoupanca = command.getDiaAniversarioPoupanca();		
+	}
+		
+	
 	public static Conta criarContaSalario(ContaSalarioInclusaoCommand command) {
 		return new Conta(command);
 	}
@@ -95,6 +114,14 @@ public class Conta {
 		this.numeroCnpjContratoSalario = command.getNumeroCnpjContratoSalario();
 		
 	}
+	
+	private void Conta (ContaSalarioEdicaoCommand command) {
+		this.codigoGerente = command.getCodigoGerente();		
+		this.codigoSituacaoConta = command.getCodigoSituacaoConta();		
+		this.valorSaldo = command.getValorSaldo();			
+		this.numeroCnpjContratoSalario = command.getNumeroCnpjContratoSalario();		
+	}	
+	
 			
 	public String getCodigoConta() {
 		return codigoConta;
