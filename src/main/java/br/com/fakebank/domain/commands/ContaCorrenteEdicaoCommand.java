@@ -10,8 +10,6 @@ public class ContaCorrenteEdicaoCommand {
 	
 	private Integer codigoSituacaoConta;
 	
-	private Double valorSaldo;
-	
 	public ContaCorrenteEdicaoCommand(){
 		
 	}
@@ -32,13 +30,5 @@ public class ContaCorrenteEdicaoCommand {
 		this.codigoSituacaoConta = codigoSituacaoConta;
 	}
 
-	public Double getValorSaldo() {
-		return valorSaldo;
-	}
-
-	public void setValorSaldo(Double valorSaldo) {
-		this.valorSaldo = valorSaldo;
-	}
-	
 	
 }
