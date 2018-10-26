@@ -14,7 +14,6 @@ import br.com.fakebank.domain.commands.MovimentacaoTransferenciaCommand;
 import br.com.fakebank.domain.specifications.MovimentacaoSpecifications;
 import br.com.fakebank.exceptions.NaoEncontradoException;
 import br.com.fakebank.repository.MovimentacaoRepository;
-import br.com.fakebank.representations.MovimentacaoRepresentation;
 
 @Service
 public class MovimentacaoService {
