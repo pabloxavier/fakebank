@@ -30,16 +30,16 @@ public class ClienteTelefone {
 		
 	}
 
-	public static ClienteTelefone criar(Integer codigoCliente, ClienteTelefoneInclusaoCommand comando) {
+	public static ClienteTelefone criar(
+	        Integer codigoCliente,
+            ClienteTelefoneInclusaoCommand comando,
+            Short codigoTelefone) {
 
 		ClienteTelefone telefone = new ClienteTelefone();
 		telefone.tipoTelefone = comando.getTipoTelefone();
 		telefone.prefixo = comando.getNrPrefixo();
 		telefone.numero = comando.getNrTelefone();
-
-//		Short codigoTelefone = telefone.clienteTelefoneRepository.getUltimoCodigoTelefoneFromCliente(codigoCliente);
-
-		telefone.clienteTelefoneId = new ClienteTelefoneId(codigoCliente, (short) 1);
+		telefone.clienteTelefoneId = new ClienteTelefoneId(codigoCliente, codigoTelefone);
 
 		return telefone;
 	}
