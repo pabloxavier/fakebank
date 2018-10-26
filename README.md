@@ -19,6 +19,7 @@ Documentação de apoio ao estudo e construção da API do FakeBank.
 * [Etapa 2 Configurando o Gradle](#etapa-2-configurando-o-gradle)
 * [Etapa 3 Criando o Projeto no Eclipse](#etapa-3-criando-o-projeto-no-eclipse)
 * [Etapa 4 Resolvendo as Dependências com Gradle](#etapa-4-resolvendo-as-dependências-com-gradle)
+* [Etapa 5 Estabelecendo os Endpoints](#etapa-5-estabelecendo-os-endpoints)
 
 ## Fakebank
 
@@ -501,4 +502,35 @@ Seção destinada a descrever como criar o projeto no eclipse.
 ## Etapa 4 Resolvendo as Dependências com Gradle
 
 Seção destinada a descrever como adicionar as dependências no build.gradle.
+
+## Etapa 5 Estabelecendo os Endpoints
+
+### Endpoints de Agência
+
+Definição dos endpoints a serem construídos para tratamentos de agências.
+
+#### Listagem
+
+Listar todas as agências cadastradas.
+
+Resource: ```api.fakebank.com.br/agencias```
+
+Method: ```GET```
+
+```javascript
+[
+    {
+        codigo: 123,
+        numero: 1234,
+        nome: "Caxias",
+        cnpj: "12.345.678-0001/11"
+    },
+    {
+        codigo: 456,
+        numero: 4567,
+        nome: "Gramado",
+        cnpj: "12.345.678-0002/22"
+    }
+]
+```
 
