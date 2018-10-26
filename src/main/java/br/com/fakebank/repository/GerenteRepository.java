@@ -5,8 +5,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import br.com.fakebank.domain.Gerente;
 
-public interface GerenteRepository extends JpaRepository<Gerente, Integer>, 
-											JpaSpecificationExecutor<Gerente> {
+public interface GerenteRepository extends JpaRepository<Gerente, Integer>, JpaSpecificationExecutor<Gerente> {
 
 
 }
