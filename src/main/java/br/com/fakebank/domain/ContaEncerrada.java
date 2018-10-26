@@ -1,5 +1,6 @@
 package br.com.fakebank.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "conta_encerrada", schema = "dbo")
-public class ContaEncerrada {
+public class ContaEncerrada implements Serializable{
 
 	@Id
 	@OneToOne
