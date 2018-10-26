@@ -19,7 +19,7 @@ public class ContaService {
 		return repository.findAll();
 	}
 	
-	public Conta consultarPorCodigo(Integer codigo) {
+	public Conta consultarPorCodigo(String codigo) {
 		return repository.findById(codigo).orElseThrow(() -> new NaoEncontradoException());
 	}
 }
