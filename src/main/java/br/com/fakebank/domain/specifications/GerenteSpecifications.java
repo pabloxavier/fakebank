@@ -15,5 +15,4 @@ public class GerenteSpecifications {
 		return (root, criteriaQuery, criteriaBuilder) ->
 			criteriaBuilder.equal(root.get("isAtivo"), isAtivo);
 	}
-	
 }

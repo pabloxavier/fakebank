@@ -1,0 +1,35 @@
+package br.com.fakebank.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
+
+import br.com.fakebank.domain.Cliente;
+import br.com.fakebank.domain.Gerente;
+import br.com.fakebank.domain.commands.ClienteInclusaoCommand;
+import br.com.fakebank.domain.commands.GerenteInclusaoCommand;
+import br.com.fakebank.domain.specifications.GerenteSpecifications;
+import br.com.fakebank.repository.GerenteRepository;
+
+@Service
+public class GerenteService {
+	
+	@Autowired
+	private GerenteRepository repository;
+
+	public List<Gerente> listar() {
+		return repository.findAll();
+	}
+	
+	public Gerente getGerenteById(Integer codigo) {
+		return repository.findById(codigo).orElse(null);
+	}
+	
+	public List<Gerente> filtrar(String endereco, boolean isAtivo){
+		Specification<Gerente> criterio = Specification.where(GerenteSpecifications.porParteEndereco(endereco)
+				                                       .and(GerenteSpecifications.porSituacao(isAtivo)));
+		return repository.findAll(criterio);	
+	}
+}
