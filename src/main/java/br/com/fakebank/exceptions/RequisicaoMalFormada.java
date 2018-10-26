@@ -7,7 +7,7 @@ public class RequisicaoMalFormada extends RuntimeException {
     private List<MessageErrorDetail> errors;
     
     public RequisicaoMalFormada(List<MessageErrorDetail> errors) {
-        super("Erros de validação.");
+        super("Erros de validaÃ§Ã£o.");
         this.errors = errors;
     }
 

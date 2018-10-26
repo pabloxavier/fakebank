@@ -17,43 +17,43 @@ import br.com.fakebank.domain.commands.GerenteInclusaoCommand;
 @Entity
 @Table(name = "GERENTE", schema = "dbo")
 public class Gerente {
- 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "CD_GERENTE")
-	private Integer CodGerente;
-	
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "CD_GERENTE")
+    private Integer CodGerente;
+    
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "CD_PESSOA")
-	private Pessoa pessoa;
-	
-	@Column(name = "IS_ATIVO")
-	private boolean isAtivo;
-	
- 	public Integer getCodGerente() {
-		return CodGerente;
-	}
- 	public Pessoa getPessoa() {
-		return pessoa;
-	}
- 	public boolean isAtivo() {
-		return isAtivo;
-	}
+    private Pessoa pessoa;
+    
+    @Column(name = "IS_ATIVO")
+    private boolean isAtivo;
+    
+    public Integer getCodGerente() {
+        return CodGerente;
+    }
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+    public boolean isAtivo() {
+        return isAtivo;
+    }
 
-	protected Gerente(){
-		
-	}
-	
-	private Gerente (GerenteInclusaoCommand comando){
-		this.isAtivo  = comando.isAtivo();
-		this.pessoa   = comando.getPessoa();
-	}
-	
-	public static Gerente criar(GerenteInclusaoCommand comando){
-		return new Gerente(comando);
-	}
-	
-	public void editar(GerenteEdicaoCommand comando){
-		this.isAtivo = comando.isAtivo();
-	}
+    protected Gerente(){
+        
+    }
+    
+    private Gerente (GerenteInclusaoCommand comando){
+        this.isAtivo  = comando.isAtivo();
+        this.pessoa   = comando.getPessoa();
+    }
+    
+    public static Gerente criar(GerenteInclusaoCommand comando){
+        return new Gerente(comando);
+    }
+    
+    public void editar(GerenteEdicaoCommand comando){
+        this.isAtivo = comando.isAtivo();
+    }
 
 }

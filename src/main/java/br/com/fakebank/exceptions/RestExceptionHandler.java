@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class RestExceptionHandler {
 
-	@ExceptionHandler(NaoEncontradoException.class)
-	public ResponseEntity<?> handleNaoEncontradoException(NaoEncontradoException exception){
-		String message = exception.getMessage();
-		return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-	}
-	
+    @ExceptionHandler(NaoEncontradoException.class)
+    public ResponseEntity<?> handleNaoEncontradoException(NaoEncontradoException exception){
+        String message = exception.getMessage();
+        return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+    }
+    
     @ExceptionHandler(RequisicaoMalFormada.class)
     public ResponseEntity<?> handleResourceBadRequestException(RequisicaoMalFormada exception) {
         

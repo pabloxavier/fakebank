@@ -15,72 +15,68 @@ import br.com.fakebank.domain.converters.TipoPessoaConverter;
 @Table(name = "PESSOA", schema = "DBO")
 public class Pessoa {
 
-	@Id
-	@Column(name = "CD_PESSOA")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer codigo;
-	
-	@Column(name = "NM_PESSOA")
-	private String nome;
-	
-	@Column(name = "TP_PESSOA")
-	@Convert(converter = TipoPessoaConverter.class)
-	private TipoPessoa tipoPessoa;
-	
-	@Column(name = "NR_DOCUMENTO")
-	private String numeroDocumento;
-	
-	@Column(name = "DT_NASCIMENTO")
-	private Date dataNascimento;
-	
-	@Column(name = "DT_ABERTURA")
-	private Date dataAbertura;
-	
-	public Pessoa() {
-		
-	}
+    @Id
+    @Column(name = "CD_PESSOA")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer codigo;
+    
+    @Column(name = "NM_PESSOA")
+    private String nome;
+    
+    @Column(name = "TP_PESSOA")
+    @Convert(converter = TipoPessoaConverter.class)
+    private TipoPessoa tipoPessoa;
+    
+    @Column(name = "NR_DOCUMENTO")
+    private String numeroDocumento;
+    
+    @Column(name = "DT_NASCIMENTO")
+    private Date dataNascimento;
+    
+    @Column(name = "DT_ABERTURA")
+    private Date dataAbertura;
+    
+    public Pessoa() {
+        
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public TipoPessoa getTipoPessoa() {
-		return tipoPessoa;
-	}
+    public TipoPessoa getTipoPessoa() {
+        return tipoPessoa;
+    }
 
-	public void setTipoPessoa(TipoPessoa tipoPessoa) {
-		this.tipoPessoa = tipoPessoa;
-	}
+    public void setTipoPessoa(TipoPessoa tipoPessoa) {
+        this.tipoPessoa = tipoPessoa;
+    }
 
-	public String getNumeroDocumento() {
-		return numeroDocumento;
-	}
+    public String getNumeroDocumento() {
+        return numeroDocumento;
+    }
 
-	public void setNumeroDocumento(String numeroDocumento) {
-		this.numeroDocumento = numeroDocumento;
-	}
+    public void setNumeroDocumento(String numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
+    }
 
-	public Date getDataNascimento() {
-		return dataNascimento;
-	}
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
 
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
 
-	public Date getDataAbertura() {
-		return dataAbertura;
-	}
+    public Date getDataAbertura() {
+        return dataAbertura;
+    }
 
-	public void setDataAbertura(Date dataAbertura) {
-		this.dataAbertura = dataAbertura;
-	}
-	
-
-	
-	
+    public void setDataAbertura(Date dataAbertura) {
+        this.dataAbertura = dataAbertura;
+    }
 }

@@ -17,36 +17,34 @@ import br.com.fakebank.repository.ContaRepository;
 @Service
 public class ContaService {
 
-	@Autowired
-	private ContaRepository repository;
-	
-	public List<Conta> listar(){
-		return repository.findAll();
-	}
-	
-	public Conta consultarPorCodigo(String codigo) {
-		return repository.findById(codigo).orElseThrow(() -> new NaoEncontradoException());
-	}
-	
-	public List<Conta> filtrarPorTipo(Integer tipoConta){
-		Specification<Conta> criteria = Specification.where(ContaSpecifications.porTipoConta(tipoConta));
-		return repository.findAll(criteria);
-	}
-	
-	public Conta salvarContaCorrente(ContaCorrenteInclusaoCommand command) {
-		Conta contaCorrente = Conta.criarContaCorrente(command);
-		return repository.save(contaCorrente);
-	}
-	
-	public Conta salvarContaPoupanca(ContaPoupancaInclusaoCommand command) {
-		Conta contaPoupanca = Conta.criarContaPoupanca(command);
-		return repository.save(contaPoupanca);
-	}
-	
-	public Conta salvarContaSalario(ContaSalarioInclusaoCommand command) {
-		Conta contaSalario = Conta.criarContaSalario(command);
-		return repository.save(contaSalario);
-	}
-	
-	
+    @Autowired
+    private ContaRepository repository;
+    
+    public List<Conta> listar(){
+        return repository.findAll();
+    }
+    
+    public Conta consultarPorCodigo(String codigo) {
+        return repository.findById(codigo).orElseThrow(() -> new NaoEncontradoException());
+    }
+    
+    public List<Conta> filtrarPorTipo(Integer tipoConta){
+        Specification<Conta> criteria = Specification.where(ContaSpecifications.porTipoConta(tipoConta));
+        return repository.findAll(criteria);
+    }
+    
+    public Conta salvarContaCorrente(ContaCorrenteInclusaoCommand command) {
+        Conta contaCorrente = Conta.criarContaCorrente(command);
+        return repository.save(contaCorrente);
+    }
+    
+    public Conta salvarContaPoupanca(ContaPoupancaInclusaoCommand command) {
+        Conta contaPoupanca = Conta.criarContaPoupanca(command);
+        return repository.save(contaPoupanca);
+    }
+    
+    public Conta salvarContaSalario(ContaSalarioInclusaoCommand command) {
+        Conta contaSalario = Conta.criarContaSalario(command);
+        return repository.save(contaSalario);
+    }
 }

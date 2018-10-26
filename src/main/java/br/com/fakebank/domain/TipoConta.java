@@ -10,27 +10,27 @@ import br.com.fakebank.domain.commands.DominioEdicaoCommand;
 @DiscriminatorValue("tipo_conta")
 public class TipoConta extends Dominio{
 
-	
-	public TipoConta() {
-		
-	}
-	
-	private TipoConta(DominioCriacaoCommand comando) {
+    
+    public TipoConta() {
+        
+    }
+    
+    private TipoConta(DominioCriacaoCommand comando) {
 
-		this.setTipo(DominioEnum.TIPO_CONTA.toString());
-		this.setValor(comando.getValor());
-		this.setDescricao(comando.getDescricao());
+        this.setTipo(DominioEnum.TIPO_CONTA.toString());
+        this.setValor(comando.getValor());
+        this.setDescricao(comando.getDescricao());
 
-	}
+    }
 
-	public static TipoConta criar(DominioCriacaoCommand comando) {
+    public static TipoConta criar(DominioCriacaoCommand comando) {
 
-		return new TipoConta(comando);
+        return new TipoConta(comando);
 
-	}
+    }
 
-	public void editar(DominioEdicaoCommand comando) {
-		this.setDescricao(comando.getDescricao());
-	}
+    public void editar(DominioEdicaoCommand comando) {
+        this.setDescricao(comando.getDescricao());
+    }
 
 }
