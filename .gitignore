@@ -24,8 +24,7 @@ target/
 
 #Eclipse files
 .settings
-.metadata
-bin
+.metadata/
 **/.project
 **/.classpath
 **/.settings/
@@ -70,7 +69,6 @@ proguard/
 .gradletasknamecache
 .gradle/
 build/
-bin/
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
