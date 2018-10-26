@@ -13,8 +13,7 @@ public class ContaForeignKeySituacaoContaValidator  implements ConstraintValidat
 
 	@Override
 	public boolean isValid(Integer codigoSituacaoConta, ConstraintValidatorContext context) {
-	//	return !service.cnpjJaExiste(cnpj);
-		return true;
+		return service.isSituacaoContaPresent(codigoSituacaoConta);
 	}
 
 }

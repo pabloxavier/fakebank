@@ -13,8 +13,7 @@ public class ContaForeignKeyGerenteValidator implements ConstraintValidator<Cont
 
 	@Override
 	public boolean isValid(Integer codigoGerente, ConstraintValidatorContext context) {
-	//	return !service.cnpjJaExiste(cnpj);
-		return true;
+		return service.isGerentePresent(codigoGerente);
 	}
 
 }

@@ -16,6 +16,11 @@ public class ContaSpecifications {
 			criteriaBuilder.equal(root.get("tipoConta"), tipoConta);
 	}
 	
+	public static Specification<Conta> porCodigoClientePrincipal(Integer codigo){
+		return (root, criteriaQuery, criteriaBuilder) ->
+			criteriaBuilder.equal(root.get("cliente").get("codigo"), codigo);
+	}
+	
 	public static Specification<Conta> porCodigo(String codigo){
 		return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.get("codigo"), codigo);
 	}

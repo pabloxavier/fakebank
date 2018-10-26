@@ -14,7 +14,6 @@ public class ContaForeignKeyClientePrincipalValidator implements ConstraintValid
 
 	@Override
 	public boolean isValid(Integer cliente, ConstraintValidatorContext context) {
-	//	return !service.cnpjJaExiste(cnpj);
-		return true;
+		return service.isClientePrincipalPresent(cliente);
 	}
 }
