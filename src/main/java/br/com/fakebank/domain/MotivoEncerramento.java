@@ -15,7 +15,6 @@ public class MotivoEncerramento extends Dominio{
 
 	private MotivoEncerramento(DominioCriacaoCommand comando) {
 
-		this.setTipo(comando.getTipo());
 		this.setValor(comando.getValor());
 		this.setDescricao(comando.getDescricao());
 

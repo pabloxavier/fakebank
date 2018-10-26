@@ -82,7 +82,7 @@ public class Conta {
 	public static Conta criarContaPoupanca(Cliente cliente, ContaPoupancaInclusaoCommand command) {
 		return new Conta(cliente, command);
 	}
-	
+		
 	private Conta (Cliente cliente, ContaPoupancaInclusaoCommand command) {
 		this.codigoConta = this.gerarCodigoConta();
 		this.cliente = cliente;
@@ -94,7 +94,7 @@ public class Conta {
 		this.diaAniversarioPoupanca = command.getDiaAniversarioPoupanca();
 		
 	}	
-	
+			
 	public static Conta criarContaSalario(Cliente cliente, ContaSalarioInclusaoCommand command) {
 		return new Conta(cliente, command);
 	}
@@ -141,20 +141,20 @@ public class Conta {
 		return null;
 	} 
 	
-	private void editarConta (ContaCorrenteEdicaoCommand command) {
+	private void editarConta(ContaCorrenteEdicaoCommand command) {
 		this.codigoGerente = command.getCodigoGerente();		
 		this.codigoSituacaoConta = command.getCodigoSituacaoConta();						
 	}	
 
-	private void editarConta (ContaPoupancaEdicaoCommand command) {
+	private void editarConta(ContaPoupancaEdicaoCommand command) {
 		this.codigoGerente = command.getCodigoGerente();		
 		this.codigoSituacaoConta = command.getCodigoSituacaoConta();							
 		this.diaAniversarioPoupanca = command.getDiaAniversarioPoupanca();		
 	}
 		
-	private void editarConta (ContaSalarioEdicaoCommand command) {
+	private void editarConta(ContaSalarioEdicaoCommand command) {
 		this.codigoGerente = command.getCodigoGerente();		
-		this.codigoSituacaoConta = command.getCodigoSituacaoConta();						
+		this.codigoSituacaoConta = command.getCodigoSituacaoConta();							
 		this.numeroCnpjContratoSalario = command.getNumeroCnpjContratoSalario();		
 	}		
 		
