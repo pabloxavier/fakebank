@@ -27,7 +27,6 @@ public class AgenciaEndpoint extends FakebankEndpoint{
 	@Autowired
 	private AgenciaService service;
 
-	//@RequestMapping(path = "agencias", method = RequestMethod.GET)
 	@GetMapping
 	public ResponseEntity<?> listarAgencias(){
 		return ok(service.listar()); 
@@ -50,8 +49,9 @@ public class AgenciaEndpoint extends FakebankEndpoint{
 		
 	@PostMapping
 	public ResponseEntity<?> incluirAgencia(@RequestBody @Valid AgenciaInclusaoCommand comando){
-		service.salvar(comando);
-		return created("incluido com sucesso");
+		Agencia agenciaIncluida = service.salvar(comando);
+		AgenciaRepresentation model = AgenciaRepresentation.from(agenciaIncluida);
+		return created(model, agenciaIncluida.getCodigo());
 	}
 	
 	@PutMapping(value = "/{codigo}")

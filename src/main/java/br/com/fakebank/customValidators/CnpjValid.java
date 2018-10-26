@@ -12,11 +12,11 @@ import javax.validation.Payload;
 @Target(ElementType.FIELD)
 @Constraint(validatedBy = CnpjValidValidator.class)
 public @interface CnpjValid {
-	
-	String message() default "CNPJ n„o È valido.";
-    
+
+	String message() default "CNPJ n√£o √© valido.";
+
 	Class<?>[] groups() default {};
-    
+
 	Class<? extends Payload>[] payload() default {};
 
 }
