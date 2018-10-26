@@ -2,10 +2,17 @@ package br.com.fakebank.domain.commands;
 
 import br.com.fakebank.domain.TipoTelefone;
 
+import javax.validation.constraints.NotNull;
+
 public class ClienteTelefoneInclusaoCommand {
 
+    @NotNull
     private Short nrPrefixo;
+
+    @NotNull
     private Integer nrTelefone;
+
+    @NotNull
     private TipoTelefone tipoTelefone;
 
     public ClienteTelefoneInclusaoCommand() {
