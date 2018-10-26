@@ -2,19 +2,9 @@ package br.com.fakebank.domain.commands;
 
 public class DominioCriacaoCommand {
 
-	private String tipo;
-
 	private String valor;
 
 	private String descricao;
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
 
 	public String getValor() {
 		return valor;
