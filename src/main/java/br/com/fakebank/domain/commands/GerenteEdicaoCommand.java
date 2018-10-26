@@ -1,11 +1,12 @@
 package br.com.fakebank.domain.commands;
 
 public class GerenteEdicaoCommand {
-	
+
 	private boolean isAtivo;
 	private String pessoa;
-	
-	protected GerenteEdicaoCommand() {}
+
+	protected GerenteEdicaoCommand() {
+	}
 
 	public boolean isAtivo() {
 		return isAtivo;
