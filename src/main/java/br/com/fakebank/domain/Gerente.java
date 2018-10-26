@@ -11,6 +11,7 @@ import javax.persistence.Table;
 
 import br.com.fakebank.domain.commands.ClienteEdicaoCommand;
 import br.com.fakebank.domain.commands.ClienteInclusaoCommand;
+import br.com.fakebank.domain.commands.GerenteEdicaoCommand;
 import br.com.fakebank.domain.commands.GerenteInclusaoCommand;
 
 @Entity
