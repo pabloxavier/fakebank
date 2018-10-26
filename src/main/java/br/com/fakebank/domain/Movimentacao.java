@@ -11,6 +11,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import br.com.fakebank.domain.commands.MovimentacaoDepositoCommand;
+import br.com.fakebank.domain.commands.MovimentacaoSaqueCommand;
+import br.com.fakebank.domain.commands.MovimentacaoTransferenciaCommand;
+
 @Entity
 @Table(name = "movimentacao", schema = "dbo")
 public class Movimentacao {
@@ -50,6 +54,34 @@ public class Movimentacao {
 	@NotBlank
 	@Column(name = "vl_saldo_atual")
 	private double valorSaldoAtual;
+	
+	protected Movimentacao(MovimentacaoTransferenciaCommand comando) {
+		comando.getContaOrigem();
+		comando.getContaDestino();
+		comando.getValor();
+	}
+	
+	protected Movimentacao(MovimentacaoDepositoCommand comando) {
+		comando.getConta();
+		comando.getValor();
+	}
+	
+	protected Movimentacao(MovimentacaoSaqueCommand comando) {
+		comando.getConta();
+		comando.getValor();
+	}
+	
+	public static Movimentacao criar(MovimentacaoTransferenciaCommand comando) {
+		return new Movimentacao(comando);
+	}
+	
+	public static Movimentacao criar(MovimentacaoDepositoCommand comando) {
+		return new Movimentacao(comando);
+	}
+	
+	public static Movimentacao criar(MovimentacaoSaqueCommand comando) {
+		return new Movimentacao(comando);
+	}
 	
 	public Integer getCodigoMovimentacao() {
 		return codigoMovimentacao;

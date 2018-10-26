@@ -9,8 +9,6 @@ public class ContaSalarioEdicaoCommand {
 	
 	private Integer codigoSituacaoConta;
 	
-	private Double valorSaldo;
-	
 	private String numeroCnpjContratoSalario;
 	
 	public ContaSalarioEdicaoCommand(){
@@ -31,14 +29,6 @@ public class ContaSalarioEdicaoCommand {
 
 	public void setCodigoSituacaoConta(Integer codigoSituacaoConta) {
 		this.codigoSituacaoConta = codigoSituacaoConta;
-	}
-
-	public Double getValorSaldo() {
-		return valorSaldo;
-	}
-
-	public void setValorSaldo(Double valorSaldo) {
-		this.valorSaldo = valorSaldo;
 	}
 
 	public String getNumeroCnpjContratoSalario() {

@@ -1,25 +1,20 @@
 package br.com.fakebank.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import java.io.Serializable;
+import br.com.fakebank.domain.commands.ClienteTelefoneInclusaoCommand;
+import br.com.fakebank.infrastructure.converters.TipoTelefoneConverter;
+import br.com.fakebank.repository.ClienteTelefoneRepository;
+import org.springframework.beans.factory.annotation.Autowire;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name= "cliente_telefone", schema= "dbo")
-public class ClienteTelefone implements Serializable {
-	
-	@Id
-	@ManyToOne
-	@JoinColumn(name = "cd_cliente")
-	private Cliente cliente;
-	
-	@Id
-	@Column(name= "cd_telefone")
-	private Short codigo;
+public class ClienteTelefone {
+
+	@EmbeddedId
+	private ClienteTelefoneId clienteTelefoneId;
 	
 	@Column(name= "nr_prefixo")
 	private Short prefixo;
@@ -28,18 +23,29 @@ public class ClienteTelefone implements Serializable {
 	private Integer numero;
 	
 	@Column(name = "cd_tipo_telefone")
+	@Convert(converter = TipoTelefoneConverter.class)
 	private TipoTelefone tipoTelefone;
-	
+
 	public ClienteTelefone() {
 		
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public static ClienteTelefone criar(
+	        Integer codigoCliente,
+            ClienteTelefoneInclusaoCommand comando,
+            Short codigoTelefone) {
+
+		ClienteTelefone telefone = new ClienteTelefone();
+		telefone.tipoTelefone = comando.getTipoTelefone();
+		telefone.prefixo = comando.getNrPrefixo();
+		telefone.numero = comando.getNrTelefone();
+		telefone.clienteTelefoneId = new ClienteTelefoneId(codigoCliente, codigoTelefone);
+
+		return telefone;
 	}
 
-	public Short getCodigo() {
-		return codigo;
+	public ClienteTelefoneId getClienteTelefoneId() {
+		return clienteTelefoneId;
 	}
 
 	public Short getPrefixo() {
