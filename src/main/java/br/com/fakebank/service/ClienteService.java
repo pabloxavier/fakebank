@@ -3,6 +3,7 @@ package br.com.fakebank.service;
 import java.util.List;
 
 import br.com.fakebank.domain.ClienteTelefone;
+import br.com.fakebank.domain.ClienteTelefoneId;
 import br.com.fakebank.domain.commands.ClienteTelefoneInclusaoCommand;
 import br.com.fakebank.repository.ClienteTelefoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,4 +70,22 @@ public class ClienteService {
 		ClienteTelefone telefone = ClienteTelefone.criar(codigoCliente, comando);
 		return telefoneRepository.save(telefone);
 	}
+	
+	private ClienteTelefone getTelefoneById(ClienteTelefoneId clienteTelefoneId) {
+		return telefoneRepository.findById(clienteTelefoneId).orElse(null);
+	}
+	
+	public boolean excluirTelefone(Integer codigoCliente, Short codigoTelefone) {
+		ClienteTelefone telefone = getTelefoneById(new ClienteTelefoneId(codigoCliente, codigoTelefone));
+		
+		if(telefone == null)
+			return false;
+		
+		telefoneRepository.delete(telefone);
+		return true;
+
+		
+		
+	}
+
 }

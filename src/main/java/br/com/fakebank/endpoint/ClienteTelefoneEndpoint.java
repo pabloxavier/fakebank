@@ -31,8 +31,8 @@ public class ClienteTelefoneEndpoint extends FakebankEndpoint{
 	@DeleteMapping(value = "/{codigoCliente}/telefones/{codigoTelefone}")
 	public ResponseEntity<?> excluirTelefone(
 			@PathVariable("codigoCliente") Integer codigoCliente,
-			@PathVariable("codigoTelefone") Integer codigoTelefone){
-		return ok("ok");
+			@PathVariable("codigoTelefone") Short codigoTelefone){
+		return service.excluirTelefone(codigoCliente, codigoTelefone) ? ok("excluido com sucesso") : notFound("telefone não encontrado");
 	}
 	
 }
