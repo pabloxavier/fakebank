@@ -4,7 +4,7 @@ public class MovimentacaoDepositoCommand {
 
 	private double valor;
 	
-	private Integer conta;
+	private String conta;
 	
 	public MovimentacaoDepositoCommand() {
 		
@@ -18,11 +18,11 @@ public class MovimentacaoDepositoCommand {
 		this.valor = valor;
 	}
 
-	public Integer getConta() {
+	public String getConta() {
 		return conta;
 	}
 
-	public void setConta(Integer conta) {
+	public void setConta(String conta) {
 		this.conta = conta;
 	}
 }

@@ -4,7 +4,7 @@ public class MovimentacaoSaqueCommand {
 
 	private double valor;
 
-	private Integer conta;
+	private String conta;
 
 	public MovimentacaoSaqueCommand() {
 	}
@@ -17,11 +17,11 @@ public class MovimentacaoSaqueCommand {
 		this.valor = valor;
 	}
 
-	public Integer getConta() {
+	public String getConta() {
 		return conta;
 	}
 
-	public void setConta(Integer conta) {
+	public void setConta(String conta) {
 		this.conta = conta;
 	}
 }

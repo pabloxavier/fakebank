@@ -4,7 +4,7 @@ public class MovimentacaoTransferenciaCommand {
 
 	private double valor;
 
-	private Integer contaOrigem;
+	private String contaOrigem;
 
 	private Integer contaDestino;
 
@@ -19,11 +19,11 @@ public class MovimentacaoTransferenciaCommand {
 		this.valor = valor;
 	}
 
-	public Integer getContaOrigem() {
+	public String getContaOrigem() {
 		return contaOrigem;
 	}
 
-	public void setContaOrigem(Integer contaOrigem) {
+	public void setContaOrigem(String contaOrigem) {
 		this.contaOrigem = contaOrigem;
 	}
 
