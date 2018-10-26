@@ -1,24 +1,16 @@
 package br.com.fakebank.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import br.com.fakebank.domain.commands.ClienteTelefoneInclusaoCommand;
+import br.com.fakebank.infrastructure.converters.TipoTelefoneConverter;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name= "cliente_telefone", schema= "dbo")
 public class ClienteTelefone {
-	
-	@Id
-	@ManyToOne
-	@JoinColumn(name = "cd_cliente")
-	private Cliente cliente;
-	
-	@Id
-	@Column(name= "cd_telefone")
-	private Short codigo;
+
+	@EmbeddedId
+	private ClienteTelefoneId clienteTelefoneId;
 	
 	@Column(name= "nr_prefixo")
 	private Short prefixo;
@@ -27,18 +19,25 @@ public class ClienteTelefone {
 	private Integer numero;
 	
 	@Column(name = "cd_tipo_telefone")
+	@Convert(converter = TipoTelefoneConverter.class)
 	private TipoTelefone tipoTelefone;
 	
 	public ClienteTelefone() {
 		
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public static ClienteTelefone criar(Integer codigoCliente, ClienteTelefoneInclusaoCommand comando) {
+		ClienteTelefone telefone = new ClienteTelefone();
+		telefone.tipoTelefone = comando.getTipoTelefone();
+		telefone.prefixo = comando.getNrPrefixo();
+		telefone.numero = comando.getNrTelefone();
+		telefone.clienteTelefoneId = new ClienteTelefoneId(codigoCliente, (short) 1);
+
+		return telefone;
 	}
 
-	public Short getCodigo() {
-		return codigo;
+	public ClienteTelefoneId getClienteTelefoneId() {
+		return clienteTelefoneId;
 	}
 
 	public Short getPrefixo() {
