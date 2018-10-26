@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.fakebank.domain.Movimentacao;
@@ -31,11 +30,6 @@ public class MovimentacaoService {
 		return repository.findById(codigo)
 						 .orElseThrow(() -> new NaoEncontradoException());
 	}
-	/*
-	public Movimentacao filtrar(Integer conta, double valorMovimentacao, String tipoMovimentacao, LocalDate dataInicio, LocalDate dataFinal) {
-		return null;
-	}
-	*/
 	
 	public List<Movimentacao> filtrar (Integer conta, double valorMovimentacao, Integer tipoMovimentacao, LocalDate dataInicio, LocalDate dataFinal) {
 		Specification<Movimentacao> criterio = Specification
