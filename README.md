@@ -505,6 +505,43 @@ Seção destinada a descrever como adicionar as dependências no build.gradle.
 
 ## Etapa 5 Estabelecendo os Endpoints
 
+### Convenções de REST
+
+Para requisições GET
+
+| Status Codes |
+| ------------- |
+| 200 - OK |
+| 404 - Not Found |
+| 500 - Internal Server Error |
+
+Para requisições POST
+
+| Status Codes |
+| ------------- |
+| 201 - Created |
+| 400 - Bad Request |
+| 500 - Internal Server Error |
+
+Para requisições PUT
+
+| Status Codes |
+| ------------- |
+| 200 - Ok |
+| 400 - Bad Request |
+| 404 - Not Found |
+| 500 - Internal Server Error |
+
+Para requisições DELETE
+
+| Status Codes |
+| ------------- |
+| 200 - Ok |
+| 400 - Bad Request |
+| 404 - Not Found |
+| 500 - Internal Server Error |
+
+
 ### Endpoints de Agência
 
 Definição dos endpoints a serem construídos para tratamentos de agências.
@@ -516,9 +553,6 @@ Listar todas as agências cadastradas.
 Resource: `api.fakebank.com.br/agencias`
 
 Method: `GET`
-
-Status Codes:
-- 200
 
 Response Body: 
 ```javascript
