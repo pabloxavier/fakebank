@@ -11,7 +11,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import br.com.fakebank.domain.commands.ContaInclusaoCommand;
+import br.com.fakebank.domain.commands.ContaCorrenteEdicaoCommand;
+import br.com.fakebank.domain.commands.ContaCorrenteInclusaoCommand;
+import br.com.fakebank.domain.commands.ContaPoupancaEdicaoCommand;
+import br.com.fakebank.domain.commands.ContaPoupancaInclusaoCommand;
+import br.com.fakebank.domain.commands.ContaSalarioEdicaoCommand;
+import br.com.fakebank.domain.commands.ContaSalarioInclusaoCommand;
+import br.com.fakebank.util.DateUtil;
 
 @Entity
 @Table(name = "CONTA", schema = "dbo")
@@ -50,17 +56,73 @@ public class Conta {
 		
 	}
 	
-	public static Conta criar(ContaInclusaoCommand command) {
+	public static Conta criarContaCorrente(ContaCorrenteInclusaoCommand command) {
 		return new Conta(command);
 	}
 	
-	private Conta (ContaInclusaoCommand command) {
+	private Conta (ContaCorrenteInclusaoCommand command) {
 		this.codigoConta = command.getCodigoConta();
 		this.codigoGerente = command.getCodigoGerente();
 		this.codigoSituacaoConta = 10;
-		this.numeroCnpjContratoSalario = command.getNumeroCnpjContratoSalario();
+		this.dataAbertura = (Date) DateUtil.getDateNow();
+		this.tipoConta = 1;
+		this.valorSaldo = 0.00;
+	}
+	
+	private void editar (ContaCorrenteEdicaoCommand command) {
+		this.codigoGerente = command.getCodigoGerente();		
+		this.codigoSituacaoConta = command.getCodigoSituacaoConta();		
+		this.valorSaldo = command.getValorSaldo();		
+	}	
+	
+	
+	public static Conta criarContaPoupanca(ContaPoupancaInclusaoCommand command) {
+		return new Conta(command);
+	}
+	
+	private Conta (ContaPoupancaInclusaoCommand command) {
+		this.codigoConta = command.getCodigoConta();
+		this.codigoGerente = command.getCodigoGerente();
+		this.codigoSituacaoConta = 10;	
+		this.dataAbertura = (Date) DateUtil.getDateNow();
+		this.valorSaldo = 0.00;		
+		this.tipoConta = 2;
+		this.diaAniversarioPoupanca = command.getDiaAniversarioPoupanca();
+		
+	}	
+	
+	
+	private void Conta (ContaPoupancaEdicaoCommand command) {
+		this.codigoGerente = command.getCodigoGerente();		
+		this.codigoSituacaoConta = command.getCodigoSituacaoConta();		
+		this.valorSaldo = command.getValorSaldo();			
+		this.diaAniversarioPoupanca = command.getDiaAniversarioPoupanca();		
 	}
 		
+	
+	public static Conta criarContaSalario(ContaSalarioInclusaoCommand command) {
+		return new Conta(command);
+	}
+
+	private Conta (ContaSalarioInclusaoCommand command) {
+		this.codigoConta = command.getCodigoConta();
+		this.codigoGerente = command.getCodigoGerente();
+		this.codigoSituacaoConta = 10;	
+		this.dataAbertura = (Date) DateUtil.getDateNow();
+		this.valorSaldo = 0.00;		
+		this.tipoConta = 3;
+		this.numeroCnpjContratoSalario = command.getNumeroCnpjContratoSalario();
+		
+	}
+	
+	private void Conta (ContaSalarioEdicaoCommand command) {
+		this.codigoGerente = command.getCodigoGerente();		
+		this.codigoSituacaoConta = command.getCodigoSituacaoConta();		
+		this.valorSaldo = command.getValorSaldo();			
+		this.numeroCnpjContratoSalario = command.getNumeroCnpjContratoSalario();		
+	}	
+	
+			
 	public String getCodigoConta() {
 		return codigoConta;
 	}
