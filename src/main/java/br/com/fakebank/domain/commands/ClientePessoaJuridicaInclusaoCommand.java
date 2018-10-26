@@ -56,7 +56,5 @@ public class ClientePessoaJuridicaInclusaoCommand {
 	public void setEnderecoCompleto(String enderecoCompleto) {
 		this.enderecoCompleto = enderecoCompleto;
 	}
-	
-	
 
 }

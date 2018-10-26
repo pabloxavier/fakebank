@@ -13,16 +13,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "GERNETE", schema = "dbo")
 public class Gerente {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CD_GERENTE")
 	private Integer CodGerente;
-	
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "CD_PESSOA")
+
+	@OneToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "CD_PESSOA")
 	private Pessoa pessoa;
-	
+
 	@Column(name = "IS_ATIVO")
 	private boolean isAtivo;
 
@@ -37,5 +36,5 @@ public class Gerente {
 	public boolean isAtivo() {
 		return isAtivo;
 	}
-	
+
 }
