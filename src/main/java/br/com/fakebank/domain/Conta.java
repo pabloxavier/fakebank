@@ -16,8 +16,11 @@ import br.com.fakebank.customValidators.ContaForeignKeyClientePrincipal;
 import br.com.fakebank.customValidators.ContaForeignKeyGerente;
 import br.com.fakebank.customValidators.ContaForeignKeySituacaoConta;
 import br.com.fakebank.customValidators.ContaForeignKeyTipoConta;
+import br.com.fakebank.domain.commands.ContaCorrenteEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaCorrenteInclusaoCommand;
+import br.com.fakebank.domain.commands.ContaPoupancaEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaPoupancaInclusaoCommand;
+import br.com.fakebank.domain.commands.ContaSalarioEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaSalarioInclusaoCommand;
 import br.com.fakebank.util.DateUtil;
 
@@ -75,6 +78,13 @@ public class Conta {
 		this.valorSaldo = 0.00;
 	}
 	
+	private void editarConta (ContaCorrenteEdicaoCommand command) {
+		this.codigoGerente = command.getCodigoGerente();		
+		this.codigoSituacaoConta = command.getCodigoSituacaoConta();		
+		this.valorSaldo = command.getValorSaldo();		
+	}	
+	
+	
 	public static Conta criarContaPoupanca(ContaPoupancaInclusaoCommand command) {
 		return new Conta(command);
 	}
@@ -89,6 +99,14 @@ public class Conta {
 		this.diaAniversarioPoupanca = command.getDiaAniversarioPoupanca();
 		
 	}	
+		
+	private void editarConta (ContaPoupancaEdicaoCommand command) {
+		this.codigoGerente = command.getCodigoGerente();		
+		this.codigoSituacaoConta = command.getCodigoSituacaoConta();		
+		this.valorSaldo = command.getValorSaldo();			
+		this.diaAniversarioPoupanca = command.getDiaAniversarioPoupanca();		
+	}
+		
 	
 	public static Conta criarContaSalario(ContaSalarioInclusaoCommand command) {
 		return new Conta(command);
@@ -109,7 +127,14 @@ public class Conta {
 		Random random = new Random();
 		return Integer.toString(random.nextInt(1000));		
 	}
-			
+	
+	private void editarConta (ContaSalarioEdicaoCommand command) {
+		this.codigoGerente = command.getCodigoGerente();		
+		this.codigoSituacaoConta = command.getCodigoSituacaoConta();		
+		this.valorSaldo = command.getValorSaldo();			
+		this.numeroCnpjContratoSalario = command.getNumeroCnpjContratoSalario();		
+	}	
+				
 	public String getCodigoConta() {
 		return codigoConta;
 	}

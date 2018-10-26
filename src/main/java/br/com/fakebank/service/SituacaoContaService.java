@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import br.com.fakebank.domain.MotivoEncerramento;
 import br.com.fakebank.domain.SituacaoConta;
 import br.com.fakebank.domain.TipoConta;
+import br.com.fakebank.domain.commands.DominioCriacaoCommand;
+import br.com.fakebank.domain.commands.DominioEdicaoCommand;
 import br.com.fakebank.exceptions.NaoEncontradoException;
 import br.com.fakebank.repository.MotivoEncerramentoRepository;
 import br.com.fakebank.repository.SituacaoContaRepository;
@@ -32,5 +34,22 @@ public class SituacaoContaService {
 		
 		return repository.findById(codigo).orElseThrow(() -> new NaoEncontradoException());
 	}
+
+	public SituacaoConta salvar(DominioCriacaoCommand comando){
+		SituacaoConta situacaoConta = SituacaoConta.criar(comando);
+		return repository.save(situacaoConta);
+	}
 	
+
+	public SituacaoConta salvar(Integer codigo, DominioEdicaoCommand comando){
+		SituacaoConta situacaoConta = consultaPorCodigo(codigo);
+		
+		if (situacaoConta == null) {
+			return situacaoConta;
+		}
+		
+		situacaoConta.editar(comando);
+		return repository.save(situacaoConta);
+		
+	}
 }

@@ -12,12 +12,12 @@ import javax.validation.Payload;
 @Target(ElementType.FIELD)
 @Constraint(validatedBy = AgenciaUniqueCnpjValidator.class)
 public @interface AgenciaUniqueCnpj {
-	
-	public String message() default "CNPJ j· cadastrado";
-	
+
+	public String message() default "CNPJ j√° cadastrado";
+
 	Class<?>[] groups() default {};
-    
+
 	Class<? extends Payload>[] payload() default {};
-	
-	
+
+
 }

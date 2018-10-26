@@ -20,6 +20,16 @@ Documentação de apoio ao estudo e construção da API do FakeBank.
 * [Etapa 3 Criando o Projeto no Eclipse](#etapa-3-criando-o-projeto-no-eclipse)
 * [Etapa 4 Resolvendo as Dependências com Gradle](#etapa-4-resolvendo-as-dependências-com-gradle)
 * [Etapa 5 Estabelecendo os Endpoints](#etapa-5-estabelecendo-os-endpoints)
+    - [Endpoints de Agência](#endpoints-de-agência)
+    - [Endpoints de Cliente Pessoa Física](#endpoints-de-cliente-pessoa-física)
+    - [Endpoints de Cliente Pessoa Jurídica](#endpoints-de-cliente-pessoa-jurídica)
+    - [Endpoints de Gerente](#endpoints-de-gerente)
+    - [Endpoints de Tipo de Conta](#endpoints-de-tipo-de-conta)
+    - [Endpoints de Situação de Conta](#endpoints-de-situação-de-conta)
+    - [Endpoints de Motivo de Encerramento](#endpoints-de-motivo-de-encerramento)
+    - [Endpoints de Conta](#endpoints-de-conta)
+    - [Endpoints de Tipo de Movimentação](#endpoints-de-tipo-de-movimentação)
+    - [Endpoints de Movimentação](#endpoints-de-movimentação)
 
 ## Fakebank
 
@@ -505,6 +515,43 @@ Seção destinada a descrever como adicionar as dependências no build.gradle.
 
 ## Etapa 5 Estabelecendo os Endpoints
 
+### Convenções de REST
+
+Para requisições GET
+
+| Status Codes |
+| ------------- |
+| 200 - OK |
+| 404 - Not Found |
+| 500 - Internal Server Error |
+
+Para requisições POST
+
+| Status Codes |
+| ------------- |
+| 201 - Created |
+| 400 - Bad Request |
+| 500 - Internal Server Error |
+
+Para requisições PUT
+
+| Status Codes |
+| ------------- |
+| 200 - Ok |
+| 400 - Bad Request |
+| 404 - Not Found |
+| 500 - Internal Server Error |
+
+Para requisições DELETE
+
+| Status Codes |
+| ------------- |
+| 200 - Ok |
+| 400 - Bad Request |
+| 404 - Not Found |
+| 500 - Internal Server Error |
+
+
 ### Endpoints de Agência
 
 Definição dos endpoints a serem construídos para tratamentos de agências.
@@ -513,10 +560,11 @@ Definição dos endpoints a serem construídos para tratamentos de agências.
 
 Listar todas as agências cadastradas.
 
-Resource: ```api.fakebank.com.br/agencias```
+Resource: `api.fakebank.com.br/agencias`
 
-Method: ```GET```
+Method: `GET`
 
+Response Body: 
 ```javascript
 [
     {
@@ -533,4 +581,127 @@ Method: ```GET```
     }
 ]
 ```
+
+#### Consulta
+
+Consultar uma única agência pelo Código.
+
+Resource: `api.fakebank.com.br/agencias/{codigo}`
+
+Method: `GET`
+
+Response Body: 
+```javascript
+{
+    codigo: 123,
+    numero: 1234,
+    nome: "Caxias",
+    cnpj: "12.345.678-0001/11"
+}
+```
+
+#### Inclusão
+
+Incluir uma nova agência.
+
+Ao incluir uma agência, retornar uma variável no Header chamada **location**
+
+Por exemplo, considerando que fora inserida uma nova agência de código 555:
+
+**location = api.fakebank.com.br/agencias/555**
+
+
+Resource: `api.fakebank.com.br/agencias`
+
+Method: `POST`
+
+Request Body: 
+```javascript
+{
+    numero: 1234,
+    nome: "Caxias",
+    cnpj: "12.345.678-0001/11"
+}
+```
+
+Response Body: 
+```javascript
+{
+    codigo: 123,
+    numero: 1234,
+    nome: "Caxias",
+    cnpj: "12.345.678-0001/11"
+}
+```
+
+#### Edição
+
+Alterar uma agência existente.
+
+Resource: `api.fakebank.com.br/agencias/{codigo}`
+
+Method: `PUT`
+
+Request Body: 
+```javascript
+{
+    numero: 1234,
+    nome: "Caxias",
+    cnpj: "12.345.678-0001/11"
+}
+```
+
+Response Body: 
+```javascript
+{
+    codigo: 123,
+    numero: 1234,
+    nome: "Caxias",
+    cnpj: "12.345.678-0001/11"
+}
+```
+
+#### Exclusão
+
+Excluir uma agência cadastrada.
+
+Resource: `api.fakebank.com.br/agencias/{codigo}`
+
+Method: `DELETE`
+
+### Endpoints de Cliente Pessoa Física
+
+Definição dos endpoints a serem construídos para tratamentos de clientes pessoa física.
+
+### Endpoints de Cliente Pessoa Jurídica
+
+Definição dos endpoints a serem construídos para tratamentos de clientes pessoa jurídica.
+
+### Endpoints de Gerente
+
+Definição dos endpoints a serem construídos para tratamentos de gerentes.
+
+### Endpoints de Tipo de Conta
+
+Definição dos endpoints a serem construídos para tratamentos de tipos de conta.
+
+### Endpoints de Situação de Conta
+
+Definição dos endpoints a serem construídos para tratamentos de situações de conta.
+
+### Endpoints de Motivo de Encerramento
+
+Definição dos endpoints a serem construídos para tratamentos de motivos de encerramento de conta.
+
+### Endpoints de Conta
+
+Definição dos endpoints a serem construídos para tratamentos de contas.
+
+### Endpoints de Tipo de Movimentação
+
+Definição dos endpoints a serem construídos para tratamentos de tipos de movimentação.
+
+### Endpoints de Movimentação
+
+Definição dos endpoints a serem construídos para tratamentos de movimentações.
 
