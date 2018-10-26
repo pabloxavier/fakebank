@@ -16,7 +16,7 @@ public class SituacaoConta extends Dominio{
 
 	private SituacaoConta(DominioCriacaoCommand comando) {
 
-		this.setTipo(DominioEnum.SIT_CONTA.toString());
+		this.setTipo(DominioEnum.SIT_CONTA.toString()); 
 		this.setValor(comando.getValor());
 		this.setDescricao(comando.getDescricao());
 
