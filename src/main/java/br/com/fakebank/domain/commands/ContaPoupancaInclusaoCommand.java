@@ -4,8 +4,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class ContaPoupancaInclusaoCommand {
-	@NotNull @NotBlank	
-	private String codigoConta;	
+
 	@NotNull
 	private Integer codigoGerente;
 	
@@ -14,14 +13,6 @@ public class ContaPoupancaInclusaoCommand {
 	public ContaPoupancaInclusaoCommand () {
 		
 	}	
-
-	public String getCodigoConta() {
-		return codigoConta;
-	}
-
-	public void setCodigoConta(String codigoConta) {
-		this.codigoConta = codigoConta;
-	}
 
 	public Integer getCodigoGerente() {
 		return codigoGerente;

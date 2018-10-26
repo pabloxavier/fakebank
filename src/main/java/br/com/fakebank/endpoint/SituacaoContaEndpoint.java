@@ -6,11 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fakebank.domain.SituacaoConta;
 import br.com.fakebank.domain.TipoConta;
+import br.com.fakebank.domain.commands.DominioCriacaoCommand;
+import br.com.fakebank.domain.commands.DominioEdicaoCommand;
 import br.com.fakebank.service.SituacaoContaService;
 import br.com.fakebank.service.TipoContaService;
 
@@ -32,4 +37,24 @@ public class SituacaoContaEndpoint extends FakebankEndpoint{
 		SituacaoConta situacao = service.consultaPorCodigo(codigo);
 		return ok(situacao);
 	}
+	
+	@PostMapping
+	public ResponseEntity<?> criar(@RequestBody DominioCriacaoCommand comando){
+		SituacaoConta situacaoConta= service.salvar(comando);
+		if (situacaoConta != null)
+			return created("situacao conta criada com sucesso");
+		else
+			return notFound("situacao conta nao encontrada");
+	}
+	
+	@PutMapping(value = "/{codigo}")
+	public ResponseEntity<?> editar(@PathVariable("codigo") Integer codigo, @RequestBody DominioEdicaoCommand comando){
+		SituacaoConta situacaoConta = service.salvar(codigo, comando);
+		
+		if (situacaoConta != null)
+			return created("situacao conta editada com sucesso");
+		else
+			return notFound("situacao conta nao encontrada");
+			
+	}	
 }
