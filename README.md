@@ -19,6 +19,7 @@ Documentação de apoio ao estudo e construção da API do FakeBank.
 * [Etapa 2 Configurando o Gradle](#etapa-2-configurando-o-gradle)
 * [Etapa 3 Criando o Projeto no Eclipse](#etapa-3-criando-o-projeto-no-eclipse)
 * [Etapa 4 Resolvendo as Dependências com Gradle](#etapa-4-resolvendo-as-dependências-com-gradle)
+* [Etapa 5 Estabelecendo os Endpoints](#etapa-5-estabelecendo-os-endpoints)
 
 ## Fakebank
 
@@ -501,4 +502,160 @@ Seção destinada a descrever como criar o projeto no eclipse.
 ## Etapa 4 Resolvendo as Dependências com Gradle
 
 Seção destinada a descrever como adicionar as dependências no build.gradle.
+
+## Etapa 5 Estabelecendo os Endpoints
+
+### Convenções de REST
+
+Para requisições GET
+
+| Status Codes |
+| ------------- |
+| 200 - OK |
+| 404 - Not Found |
+| 500 - Internal Server Error |
+
+Para requisições POST
+
+| Status Codes |
+| ------------- |
+| 201 - Created |
+| 400 - Bad Request |
+| 500 - Internal Server Error |
+
+Para requisições PUT
+
+| Status Codes |
+| ------------- |
+| 200 - Ok |
+| 400 - Bad Request |
+| 404 - Not Found |
+| 500 - Internal Server Error |
+
+Para requisições DELETE
+
+| Status Codes |
+| ------------- |
+| 200 - Ok |
+| 400 - Bad Request |
+| 404 - Not Found |
+| 500 - Internal Server Error |
+
+
+### Endpoints de Agência
+
+Definição dos endpoints a serem construídos para tratamentos de agências.
+
+#### Listagem
+
+Listar todas as agências cadastradas.
+
+Resource: `api.fakebank.com.br/agencias`
+
+Method: `GET`
+
+Response Body: 
+```javascript
+[
+    {
+        codigo: 123,
+        numero: 1234,
+        nome: "Caxias",
+        cnpj: "12.345.678-0001/11"
+    },
+    {
+        codigo: 456,
+        numero: 4567,
+        nome: "Gramado",
+        cnpj: "12.345.678-0002/22"
+    }
+]
+```
+
+#### Consulta
+
+Consultar uma única agência pelo Código.
+
+Resource: `api.fakebank.com.br/agencias/{codigo}`
+
+Method: `GET`
+
+Response Body: 
+```javascript
+{
+    codigo: 123,
+    numero: 1234,
+    nome: "Caxias",
+    cnpj: "12.345.678-0001/11"
+}
+```
+
+#### Inclusão
+
+Incluir uma nova agência.
+
+Ao incluir uma agência, retornar uma variável no Header chamada **location**
+
+Por exemplo, considerando que fora inserida uma nova agência de código 555:
+
+**location = api.fakebank.com.br/agencias/555**
+
+
+Resource: `api.fakebank.com.br/agencias`
+
+Method: `POST`
+
+Request Body: 
+```javascript
+{
+    numero: 1234,
+    nome: "Caxias",
+    cnpj: "12.345.678-0001/11"
+}
+```
+
+Response Body: 
+```javascript
+{
+    codigo: 123,
+    numero: 1234,
+    nome: "Caxias",
+    cnpj: "12.345.678-0001/11"
+}
+```
+
+#### Edição
+
+Alterar uma agência existente.
+
+Resource: `api.fakebank.com.br/agencias/{codigo}`
+
+Method: `PUT`
+
+Request Body: 
+```javascript
+{
+    numero: 1234,
+    nome: "Caxias",
+    cnpj: "12.345.678-0001/11"
+}
+```
+
+Response Body: 
+```javascript
+{
+    codigo: 123,
+    numero: 1234,
+    nome: "Caxias",
+    cnpj: "12.345.678-0001/11"
+}
+```
+
+#### Exclusão
+
+Excluir uma agência cadastrada.
+
+Resource: `api.fakebank.com.br/agencias/{codigo}`
+
+Method: `DELETE`
 
