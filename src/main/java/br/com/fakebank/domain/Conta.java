@@ -81,7 +81,6 @@ public class Conta {
 	private void editarConta (ContaCorrenteEdicaoCommand command) {
 		this.codigoGerente = command.getCodigoGerente();		
 		this.codigoSituacaoConta = command.getCodigoSituacaoConta();		
-		this.valorSaldo = command.getValorSaldo();		
 	}	
 	
 	
@@ -103,7 +102,6 @@ public class Conta {
 	private void editarConta (ContaPoupancaEdicaoCommand command) {
 		this.codigoGerente = command.getCodigoGerente();		
 		this.codigoSituacaoConta = command.getCodigoSituacaoConta();		
-		this.valorSaldo = command.getValorSaldo();			
 		this.diaAniversarioPoupanca = command.getDiaAniversarioPoupanca();		
 	}
 		
@@ -131,7 +129,6 @@ public class Conta {
 	private void editarConta (ContaSalarioEdicaoCommand command) {
 		this.codigoGerente = command.getCodigoGerente();		
 		this.codigoSituacaoConta = command.getCodigoSituacaoConta();		
-		this.valorSaldo = command.getValorSaldo();			
 		this.numeroCnpjContratoSalario = command.getNumeroCnpjContratoSalario();		
 	}	
 				
