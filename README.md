@@ -513,10 +513,14 @@ Definição dos endpoints a serem construídos para tratamentos de agências.
 
 Listar todas as agências cadastradas.
 
-Resource: ```api.fakebank.com.br/agencias```
+Resource: `api.fakebank.com.br/agencias`
 
-Method: ```GET```
+Method: `GET`
 
+Status Codes:
+- 200
+
+Response Body: 
 ```javascript
 [
     {
@@ -533,4 +537,91 @@ Method: ```GET```
     }
 ]
 ```
+
+#### Consulta
+
+Consultar uma única agência pelo Código.
+
+Resource: `api.fakebank.com.br/agencias/{codigo}`
+
+Method: `GET`
+
+Response Body: 
+```javascript
+{
+    codigo: 123,
+    numero: 1234,
+    nome: "Caxias",
+    cnpj: "12.345.678-0001/11"
+}
+```
+
+#### Inclusão
+
+Incluir uma nova agência.
+
+Ao incluir uma agência, retornar uma variável no Header chamada **location**
+
+Por exemplo, considerando que fora inserida uma nova agência de código 555:
+
+**location = api.fakebank.com.br/agencias/555**
+
+
+Resource: `api.fakebank.com.br/agencias`
+
+Method: `POST`
+
+Request Body: 
+```javascript
+{
+    numero: 1234,
+    nome: "Caxias",
+    cnpj: "12.345.678-0001/11"
+}
+```
+
+Response Body: 
+```javascript
+{
+    codigo: 123,
+    numero: 1234,
+    nome: "Caxias",
+    cnpj: "12.345.678-0001/11"
+}
+```
+
+#### Edição
+
+Alterar uma agência existente.
+
+Resource: `api.fakebank.com.br/agencias/{codigo}`
+
+Method: `PUT`
+
+Request Body: 
+```javascript
+{
+    numero: 1234,
+    nome: "Caxias",
+    cnpj: "12.345.678-0001/11"
+}
+```
+
+Response Body: 
+```javascript
+{
+    codigo: 123,
+    numero: 1234,
+    nome: "Caxias",
+    cnpj: "12.345.678-0001/11"
+}
+```
+
+#### Exclusão
+
+Excluir uma agência cadastrada.
+
+Resource: `api.fakebank.com.br/agencias/{codigo}`
+
+Method: `DELETE`
 
