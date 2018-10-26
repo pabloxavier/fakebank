@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import br.com.fakebank.domain.Cliente;
 import br.com.fakebank.domain.Gerente;
-import br.com.fakebank.domain.commands.ClienteEdicaoCommand;
-import br.com.fakebank.domain.commands.ClienteInclusaoCommand;
 import br.com.fakebank.domain.commands.GerenteEdicaoCommand;
 import br.com.fakebank.domain.commands.GerenteInclusaoCommand;
 import br.com.fakebank.domain.specifications.GerenteSpecifications;
@@ -34,8 +31,28 @@ public class GerenteService {
 		return repository.findAll(criterio);	
 	}
 	
-	public Gerente salvar(GerenteInclusaoCommand comando){
+	public Gerente salvar(GerenteInclusaoCommand comando) {
 		Gerente gerente = Gerente.criar(comando);
 		return repository.save(gerente);
+	}
+	
+	public Gerente salvar(Integer codigo, GerenteEdicaoCommand comando) {
+		Gerente gerente = getGerenteById(codigo);
+		
+		if (gerente == null) 
+			return gerente ;
+		
+		gerente.editar(comando);
+		return repository.save(gerente);
+	}
+	
+	public boolean excluir(Integer codigo) {
+		Gerente gerente = getGerenteById(codigo);
+		
+		if (gerente == null)
+			return false;
+		
+		repository.deleteById(codigo);
+		return true;
 	}
 }
