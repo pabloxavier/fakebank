@@ -28,7 +28,7 @@ public class MovimentacaoEndpoint extends FakebankEndpoint {
 	private MovimentacaoService service;
 
 	@GetMapping
-	public ResponseEntity<?> Listar() {
+	public ResponseEntity<?> listar() {
 		return ok(service.listar());
 	}
 

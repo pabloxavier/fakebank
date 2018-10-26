@@ -28,7 +28,7 @@ public class Movimentacao {
 	@NotNull
 	@NotBlank
 	@Column(name = "cd_conta")
-	private Integer codigoConta;
+	private String codigoConta;
 
 	@NotNull
 	@NotBlank
@@ -55,20 +55,22 @@ public class Movimentacao {
 	@Column(name = "vl_saldo_atual")
 	private double valorSaldoAtual;
 	
+	private Movimentacao() {}
+	
 	protected Movimentacao(MovimentacaoTransferenciaCommand comando) {
-		comando.getContaOrigem();
+		this.codigoConta = comando.getContaOrigem();
 		comando.getContaDestino();
-		comando.getValor();
+		this.valorMovimentacao = comando.getValor();
 	}
 	
 	protected Movimentacao(MovimentacaoDepositoCommand comando) {
-		comando.getConta();
-		comando.getValor();
+		this.codigoConta = comando.getConta();
+		this.valorMovimentacao = comando.getValor();
 	}
 	
 	protected Movimentacao(MovimentacaoSaqueCommand comando) {
-		comando.getConta();
-		comando.getValor();
+		this.codigoConta = comando.getConta();
+		this.valorMovimentacao = comando.getValor();
 	}
 	
 	public static Movimentacao criar(MovimentacaoTransferenciaCommand comando) {
@@ -91,11 +93,11 @@ public class Movimentacao {
 		this.codigoMovimentacao = codigoMovimentacao;
 	}
 
-	public Integer getCodigoConta() {
+	public String getCodigoConta() {
 		return codigoConta;
 	}
 
-	public void setCodigoConta(Integer codigoConta) {
+	public void setCodigoConta(String codigoConta) {
 		this.codigoConta = codigoConta;
 	}
 

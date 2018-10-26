@@ -4,13 +4,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.fakebank.domain.Agencia;
 import br.com.fakebank.domain.Movimentacao;
 
 public class MovimentacaoRepresentation {
 
 	private Integer codigoMovimentacao;
-	private Integer codigoConta;
+	private String codigoConta;
 	private LocalDate dataMovimentacao;
 	private double valorMovimentacao;
 	private Integer codigoTipoMovimentacao;
@@ -50,11 +49,11 @@ public class MovimentacaoRepresentation {
 		this.codigoMovimentacao = codigoMovimentacao;
 	}
 
-	public Integer getCodigoConta() {
+	public String getCodigoConta() {
 		return codigoConta;
 	}
 
-	public void setCodigoConta(Integer codigoConta) {
+	public void setCodigoConta(String codigoConta) {
 		this.codigoConta = codigoConta;
 	}
 
