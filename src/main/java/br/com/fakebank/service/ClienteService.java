@@ -2,6 +2,9 @@ package br.com.fakebank.service;
 
 import java.util.List;
 
+import br.com.fakebank.domain.ClienteTelefone;
+import br.com.fakebank.domain.commands.ClienteTelefoneInclusaoCommand;
+import br.com.fakebank.repository.ClienteTelefoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,9 @@ public class ClienteService {
 
 	@Autowired
 	private ClienteRepository repository;
+
+	@Autowired
+	private ClienteTelefoneRepository telefoneRepository;
 	
 	public List<Cliente> listar(){
 		return repository.findAll();
@@ -57,5 +63,10 @@ public class ClienteService {
 		
 		repository.deleteById(codigo);
 		return true;
+	}
+
+	public Object salvarTelefone(Integer codigoCliente, ClienteTelefoneInclusaoCommand comando) {
+		ClienteTelefone telefone = ClienteTelefone.criar(codigoCliente, comando);
+		return telefoneRepository.save(telefone);
 	}
 }
