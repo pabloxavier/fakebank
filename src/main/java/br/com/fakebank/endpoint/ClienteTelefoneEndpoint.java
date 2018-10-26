@@ -18,7 +18,7 @@ public class ClienteTelefoneEndpoint extends FakebankEndpoint{
 
 	@GetMapping(value = "/{codigoCliente}/telefones")
 	public ResponseEntity<?> getTelefonesByClienteId(@PathVariable("codigoCliente") Integer codigoCliente){
-		return ok("ok");
+		return ok(service.listarTelefonesFromCliente(codigoCliente));
 	}
 
 	@PostMapping(value = "/{codigoCliente}/telefones")
@@ -32,7 +32,7 @@ public class ClienteTelefoneEndpoint extends FakebankEndpoint{
 	public ResponseEntity<?> excluirTelefone(
 			@PathVariable("codigoCliente") Integer codigoCliente,
 			@PathVariable("codigoTelefone") Short codigoTelefone){
-		return service.excluirTelefone(codigoCliente, codigoTelefone) ? ok("excluido com sucesso") : notFound("telefone não encontrado");
+		return service.excluirTelefone(codigoCliente, codigoTelefone) ? ok("excluido com sucesso") : notFound("telefone nï¿½o encontrado");
 	}
 	
 }
