@@ -102,11 +102,11 @@ GO
 CREATE TABLE DBO.PESSOA
 (
     CD_PESSOA     INT         IDENTITY(1,1) NOT NULL,
-	NR_DOCUMENTO  VARCHAR(20)               NOT NULL,
-	TP_PESSOA     CHAR(1)                   NOT NULL,
-	NM_PESSOA     VARCHAR(80)               NOT NULL,
-	DT_NASCIMENTO DATE                      NULL,
-	DT_ABERTURA   DATE                      NULL
+    NR_DOCUMENTO  VARCHAR(20)               NOT NULL,
+    TP_PESSOA     CHAR(1)                   NOT NULL,
+    NM_PESSOA     VARCHAR(80)               NOT NULL,
+    DT_NASCIMENTO DATE                      NULL,
+    DT_ABERTURA   DATE                      NULL
 )
 GO
 
@@ -139,9 +139,9 @@ GO
 CREATE TABLE DBO.CLIENTE
 (
     CD_CLIENTE           INT          IDENTITY(1,1) NOT NULL,
-	CD_PESSOA            INT                        NOT NULL,
-	IS_ATIVO             BIT                        NOT NULL,
-	DS_ENDERECO_COMPLETO VARCHAR(200)               NULL
+    CD_PESSOA            INT                        NOT NULL,
+    IS_ATIVO             BIT                        NOT NULL,
+    DS_ENDERECO_COMPLETO VARCHAR(200)               NULL
 )
 GO
 
@@ -170,10 +170,10 @@ GO
 CREATE TABLE DBO.CLIENTE_TELEFONE
 (
     CD_CLIENTE       INT       NOT NULL,
-	CD_TELEFONE      SMALLINT  NOT NULL,
+    CD_TELEFONE      SMALLINT  NOT NULL,
     NR_PREFIXO       SMALLINT  NOT NULL,
-	NR_TELEFONE      INT       NOT NULL,
-	CD_TIPO_TELEFONE CHAR(1)   NOT NULL
+    NR_TELEFONE      INT       NOT NULL,
+    CD_TIPO_TELEFONE CHAR(1)   NOT NULL
 )
 GO
 
@@ -207,8 +207,8 @@ GO
 CREATE TABLE DBO.GERENTE
 (
     CD_GERENTE   INT   IDENTITY(1,1) NOT NULL,
-	CD_PESSOA    INT                 NOT NULL,
-	IS_ATIVO     CHAR(1)             NOT NULL
+    CD_PESSOA    INT                 NOT NULL,
+    IS_ATIVO     CHAR(1)             NOT NULL
 )
 GO
 
@@ -240,7 +240,7 @@ GO
 CREATE TABLE DBO.GERENTE_AGENCIA
 (
     CD_GERENTE   INT   NOT NULL,
-	CD_AGENCIA   INT   NOT NULL
+    CD_AGENCIA   INT   NOT NULL
 )
 GO
 
@@ -277,9 +277,9 @@ GO
 CREATE TABLE DBO.DOMINIO
 (
     CD_DOMINIO    INT         IDENTITY(1,1) NOT NULL,   
-	TP_DOMINIO    VARCHAR(10)               NOT NULL,
-	VL_DOMINIO    VARCHAR(10)               NOT NULL,
-	DS_DOMINIO    VARCHAR(200)              NOT NULL
+    TP_DOMINIO    VARCHAR(10)               NOT NULL,
+    VL_DOMINIO    VARCHAR(10)               NOT NULL,
+    DS_DOMINIO    VARCHAR(200)              NOT NULL
 )
 GO
 
@@ -305,14 +305,14 @@ GO
 CREATE TABLE DBO.CONTA
 (
     CD_CONTA                  VARCHAR(10)    NOT NULL,
-	CD_CLIENTE_PRINCIPAL      INT            NOT NULL,
-	DT_ABERTURA               DATE           NOT NULL,
-	TP_CONTA                  INT            NOT NULL,
-	VL_SALDO                  NUMERIC(10,2)  NOT NULL,
-	NR_CNPJ_CONTRATO_SALARIO  CHAR(14)       NULL,
-	DD_ANIVERSARIO_POUPANCA   TINYINT        NULL,
-	CD_GERENTE                INT            NOT NULL,
-	CD_SITUACAO_CONTA         INT            NOT NULL
+    CD_CLIENTE_PRINCIPAL      INT            NOT NULL,
+    DT_ABERTURA               DATE           NOT NULL,
+    TP_CONTA                  INT            NOT NULL,
+    VL_SALDO                  NUMERIC(10,2)  NOT NULL,
+    NR_CNPJ_CONTRATO_SALARIO  CHAR(14)       NULL,
+    DD_ANIVERSARIO_POUPANCA   TINYINT        NULL,
+    CD_GERENTE                INT            NOT NULL,
+    CD_SITUACAO_CONTA         INT            NOT NULL
 )
 GO
 
@@ -357,10 +357,10 @@ GO
 CREATE TABLE DBO.CONTA_ENCERRADA
 (
     CD_CONTA                VARCHAR(10)   NOT NULL,
-	DT_ENCERRAMENTO         DATETIME2     NOT NULL,
-	CD_MOTIVO_ENCERRAMENTO  INT           NOT NULL,
-	CD_CLIENTE_SOLICITANTE  INT           NOT NULL,
-	DS_OBSERVACOES          VARCHAR(2000) NULL
+    DT_ENCERRAMENTO         DATETIME2     NOT NULL,
+    CD_MOTIVO_ENCERRAMENTO  INT           NOT NULL,
+    CD_CLIENTE_SOLICITANTE  INT           NOT NULL,
+    DS_OBSERVACOES          VARCHAR(2000) NULL
 )
 GO
 
@@ -401,9 +401,9 @@ GO
 CREATE TABLE DBO.CLIENTE_CONTA
 (
     CD_CLIENTE   INT         NOT NULL,
-	CD_CONTA     VARCHAR(10) NOT NULL,
-	DT_REGISTRO  DATE        NOT NULL,
-	IS_TITULAR   BIT         NOT NULL
+    CD_CONTA     VARCHAR(10) NOT NULL,
+    DT_REGISTRO  DATE        NOT NULL,
+    IS_TITULAR   BIT         NOT NULL
 )
 GO
 
@@ -436,8 +436,8 @@ GO
 CREATE TABLE DBO.TIPO_MOVIMENTACAO
 (
     CD_TIPO_MOVIMENTACAO   SMALLINT    NOT NULL,
-	DS_TIPO_MOVIMENTACAO   VARCHAR(80) NOT NULL,
-	TP_OPERACAO            CHAR(1)     NOT NULL
+    DS_TIPO_MOVIMENTACAO   VARCHAR(80) NOT NULL,
+    TP_OPERACAO            CHAR(1)     NOT NULL
 )
 GO
 
@@ -463,12 +463,12 @@ GO
 CREATE TABLE DBO.MOVIMENTACAO
 (
     CD_MOVIMENTACAO       INT          IDENTITY(1,1) NOT NULL,
-	CD_CONTA              VARCHAR(10)                NOT NULL,
-	DT_MOVIMENTACAO       DATETIME2                  NOT NULL,
-	VL_MOVIMENTACAO       NUMERIC(10,2)              NOT NULL,
-	CD_TIPO_MOVIMENTACAO  SMALLINT                   NOT NULL,
-	VL_SALDO_ANTERIOR     NUMERIC(10,2)              NOT NULL,
-	VL_SALDO_ATUAL        NUMERIC(10,2)              NOT NULL
+    CD_CONTA              VARCHAR(10)                NOT NULL,
+    DT_MOVIMENTACAO       DATETIME2                  NOT NULL,
+    VL_MOVIMENTACAO       NUMERIC(10,2)              NOT NULL,
+    CD_TIPO_MOVIMENTACAO  SMALLINT                   NOT NULL,
+    VL_SALDO_ANTERIOR     NUMERIC(10,2)              NOT NULL,
+    VL_SALDO_ATUAL        NUMERIC(10,2)              NOT NULL
 )
 GO
 
