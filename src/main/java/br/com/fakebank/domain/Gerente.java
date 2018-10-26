@@ -8,7 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
- @Entity
+
+import br.com.fakebank.domain.commands.ClienteEdicaoCommand;
+import br.com.fakebank.domain.commands.ClienteInclusaoCommand;
+import br.com.fakebank.domain.commands.GerenteInclusaoCommand;
+
+@Entity
 @Table(name = "GERENTE", schema = "dbo")
 public class Gerente {
  	@Id
@@ -22,6 +27,7 @@ public class Gerente {
 	
 	@Column(name = "IS_ATIVO")
 	private boolean isAtivo;
+	
  	public Integer getCodGerente() {
 		return CodGerente;
 	}
@@ -31,5 +37,22 @@ public class Gerente {
  	public boolean isAtivo() {
 		return isAtivo;
 	}
+
+	protected Gerente(){
+		
+	}
 	
+	private Gerente (GerenteInclusaoCommand comando){
+		this.isAtivo  = comando.isAtivo();
+		this.pessoa   = comando.getPessoa();
+	}
+	
+	public static Gerente criar(GerenteInclusaoCommand comando){
+		return new Gerente(comando);
+	}
+	
+	public void editar(GerenteEdicaoCommand comando){
+		this.isAtivo = comando.isAtivo();
+	}
+
 }

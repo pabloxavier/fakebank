@@ -25,8 +25,7 @@ public class ContaService {
 	}
 	
 	public Conta consultarPorCodigo(String codigo) {
-		Specification<Conta> criteria = Specification.where(ContaSpecifications.porCodigo(codigo));
-		return repository.findOne(criteria).orElseThrow(() -> new NaoEncontradoException());
+		return repository.findById(codigo).orElseThrow(() -> new NaoEncontradoException());
 	}
 	
 	public List<Conta> filtrarPorTipo(Integer tipoConta){
