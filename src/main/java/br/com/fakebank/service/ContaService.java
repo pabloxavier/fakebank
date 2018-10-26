@@ -7,15 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import br.com.fakebank.domain.Agencia;
 import br.com.fakebank.domain.Cliente;
 import br.com.fakebank.domain.Conta;
 import br.com.fakebank.domain.Gerente;
 import br.com.fakebank.domain.SituacaoConta;
 import br.com.fakebank.domain.TipoConta;
-import br.com.fakebank.domain.commands.AgenciaEdicaoCommand;
+import br.com.fakebank.domain.commands.ContaCorrenteEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaCorrenteInclusaoCommand;
+import br.com.fakebank.domain.commands.ContaPoupancaEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaPoupancaInclusaoCommand;
+import br.com.fakebank.domain.commands.ContaSalarioEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaSalarioInclusaoCommand;
 import br.com.fakebank.domain.specifications.ContaSpecifications;
 import br.com.fakebank.exceptions.NaoEncontradoException;
@@ -53,21 +54,64 @@ public class ContaService {
 		return repository.findAll(criteria);
 	}
 	
-	public Conta salvarContaCorrente(ContaCorrenteInclusaoCommand command) {
-		Conta contaCorrente = Conta.criarContaCorrente(command);
-		return repository.save(contaCorrente);
+	public Conta salvarContaCorrente(Integer codigoCliente, ContaCorrenteInclusaoCommand command) {
+		if (isClientePrincipalPresent(codigoCliente)) {
+			Optional<Cliente> cliente = clienteRepository.findById(codigoCliente);
+			Conta contaCorrente = Conta.criarContaCorrente(command); // passar o codigo do cliente tb
+			return repository.save(contaCorrente);
+		}
+		return null;
 	}
 	
-	public Conta salvarContaPoupanca(ContaPoupancaInclusaoCommand command) {
-		Conta contaPoupanca = Conta.criarContaPoupanca(command);
-		return repository.save(contaPoupanca);
+	public Conta salvarContaPoupanca(Integer codigoCliente, ContaPoupancaInclusaoCommand command) {
+		
+		if (isClientePrincipalPresent(codigoCliente)) {
+			Optional<Cliente> cliente = clienteRepository.findById(codigoCliente);
+			Conta contaPoupanca = Conta.criarContaPoupanca(command); // passar o codigo do cliente tb
+			return repository.save(contaPoupanca);
+		}
+		return null;
 	}
 	
-	public Conta salvarContaSalario(ContaSalarioInclusaoCommand command) {
-		Conta contaSalario = Conta.criarContaSalario(command);
-		return repository.save(contaSalario);
+	public Conta salvarContaSalario(Integer codigoCliente, ContaSalarioInclusaoCommand command) {
+		if (isClientePrincipalPresent(codigoCliente)) {
+			Optional<Cliente> cliente = clienteRepository.findById(codigoCliente);
+			Conta contaSalario = Conta.criarContaSalario(command); // passar o codigo do cliente tb
+			return repository.save(contaSalario);
+		}
+		return null;
 	}
 	
+	public Conta alterarContaCorrente(String codigo, ContaCorrenteEdicaoCommand command) {
+		Conta conta = consultarPorCodigo(codigo);
+		
+		if (conta == null) {
+			return conta;
+		}
+		conta.editarContaCorrente(command);
+		return repository.save(conta);
+		
+	}
+	
+	public Conta alterarContaPoupanca(String codigo, ContaPoupancaEdicaoCommand command) {
+		Conta conta = consultarPorCodigo(codigo);
+		
+		if (conta == null) {
+			return conta;
+		}
+		conta.editarContaPoupanca(command);
+		return repository.save(conta);
+	}
+	
+	public Conta alterarContaSalario(String codigo, ContaSalarioEdicaoCommand command) {
+		Conta conta = consultarPorCodigo(codigo);
+		
+		if (conta == null) {
+			return conta;
+		}
+		conta.editarContaPoupanca(command);
+		return repository.save(conta);
+	}
 	public boolean excluir(String codigo){
 		Conta conta = consultarPorCodigo(codigo);
 		
@@ -97,6 +141,5 @@ public class ContaService {
 		Optional<SituacaoConta> situacaoConta = situacaoContaRepository.findById(codigo);
 		return situacaoConta.isPresent();
 	}
-	
 	
 }
