@@ -47,12 +47,14 @@ public class MovimentacaoEndpoint extends FakebankEndpoint {
 	}
 
 	@GetMapping(path = "/pesquisa")
-	public ResponseEntity<?> pesquisarMovimentacao(@RequestParam(value = "conta", required = false) Integer conta,
+	public ResponseEntity<?> pesquisarMovimentacao(
+			@RequestParam(value = "conta", required = true) Integer conta,
+			@RequestParam(value = "valorMovimentacao", required = false) double valorMovimentacao,
 			@RequestParam(value = "tipoMovimentacao", required = false) String tipoMovimentacao,
 			@RequestParam(value = "dataInicio", required = false) LocalDate dataInicio,
 			@RequestParam(value = "dataFinal", required = false) LocalDate dataFinal) {
 
-		Movimentacao Movimentacao = service.filtrar(conta, dataInicio, dataFinal);
+		Movimentacao Movimentacao = service.filtrar(conta, valorMovimentacao, tipoMovimentacao, dataInicio, dataFinal);
 		return ok(MovimentacaoRepresentation.from(Movimentacao));
 	}
 
