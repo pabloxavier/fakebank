@@ -1,6 +1,8 @@
 package br.com.fakebank.representations;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.fakebank.domain.Agencia;
 import br.com.fakebank.domain.Movimentacao;
@@ -23,6 +25,21 @@ public class MovimentacaoRepresentation {
 		model.setCodigoTipoMovimentacao(movimentacao.getCodigoTipoMovimentacao());
 		model.setValorSaldoAtual(movimentacao.getValorSaldoAtual());
 		return model;
+	}
+	
+	public static List<MovimentacaoRepresentation> from(List<Movimentacao> movimentacao) {
+		List<MovimentacaoRepresentation> list = new ArrayList<>();
+		for(Movimentacao e : movimentacao) {
+			MovimentacaoRepresentation model = new MovimentacaoRepresentation();
+			model.setCodigoMovimentacao(e.getCodigoMovimentacao());
+			model.setCodigoConta(e.getCodigoConta());
+			model.setDataMovimentacao(e.getDataMovimentacao());
+			model.setValorMovimentacao(e.getValorMovimentacao());
+			model.setCodigoTipoMovimentacao(e.getCodigoTipoMovimentacao());
+			model.setValorSaldoAtual(e.getValorSaldoAtual());
+			list.add(model);
+		}
+		return list;
 	}
 
 	public Integer getCodigoMovimentacao() {
