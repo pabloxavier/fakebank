@@ -51,7 +51,7 @@ public class Gerente {
 		return new Gerente(comando);
 	}
 	
-	public void editar(ClienteEdicaoCommand comando){
+	public void editar(GerenteEdicaoCommand comando){
 		this.isAtivo = comando.isAtivo();
 	}
 
