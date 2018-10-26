@@ -15,4 +15,10 @@ public class GerenteSpecifications {
 		return (root, criteriaQuery, criteriaBuilder) ->
 			criteriaBuilder.equal(root.get("isAtivo"), isAtivo);
 	}
+
+	public static Specification<Gerente> porParteNome(String nome){
+		return (root, criteriaQuery, criteriaBuilder) -> 
+			criteriaBuilder.like(root.get("nome"), "%" + nome + "%");
+	}
+
 }
