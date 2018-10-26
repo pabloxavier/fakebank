@@ -39,7 +39,7 @@ public class Agencia {
 	
 	public static Agencia criar(AgenciaInclusaoCommand comando){
 		
-		//validate()
+		comando.validate();
 		
 		return new Agencia(comando);
 	}

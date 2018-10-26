@@ -23,7 +23,8 @@ public class AgenciaInclusaoValidator extends AbstractValidator {
         ValidatorFactory factory =
         		Validation.buildDefaultValidatorFactory();
         
-        Validator validator = factory.getValidator();
+        Validator validator =
+        		factory.getValidator();
 
         Set<ConstraintViolation<AgenciaInclusaoCommand>>
         	errosEncontrados =

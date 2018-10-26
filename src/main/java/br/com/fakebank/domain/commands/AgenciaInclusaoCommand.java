@@ -1,19 +1,20 @@
 package br.com.fakebank.domain.commands;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Range;
-import org.hibernate.validator.constraints.br.CNPJ;
 
 import br.com.fakebank.customValidators.AgenciaUniqueCnpj;
 import br.com.fakebank.customValidators.CnpjValid;
+import br.com.fakebank.domain.validators.AgenciaInclusaoValidator;
+import br.com.fakebank.exceptions.FieldName;
 
 public class AgenciaInclusaoCommand {
 
 	@NotNull
 	@Range(min = 1, max = 9999)
+    @FieldName("Número")
 	private Integer numero;
 	
 	@NotNull(message = "{agencia.nome.nao.nulo}")
@@ -54,5 +55,8 @@ public class AgenciaInclusaoCommand {
 		this.cnpj = cnpj;
 	}
 	
-	
+	public void validate() {
+		AgenciaInclusaoValidator validator = new AgenciaInclusaoValidator();
+		validator.validate(this);
+	}
 }
