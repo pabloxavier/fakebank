@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.fakebank.domain.Movimentacao;
@@ -15,6 +14,7 @@ import br.com.fakebank.domain.commands.MovimentacaoTransferenciaCommand;
 import br.com.fakebank.domain.specifications.MovimentacaoSpecifications;
 import br.com.fakebank.exceptions.NaoEncontradoException;
 import br.com.fakebank.repository.MovimentacaoRepository;
+import br.com.fakebank.representations.MovimentacaoRepresentation;
 
 @Service
 public class MovimentacaoService {
@@ -30,11 +30,6 @@ public class MovimentacaoService {
 		return repository.findById(codigo)
 						 .orElseThrow(() -> new NaoEncontradoException());
 	}
-	/*
-	public Movimentacao filtrar(Integer conta, double valorMovimentacao, String tipoMovimentacao, LocalDate dataInicio, LocalDate dataFinal) {
-		return null;
-	}
-	*/
 	
 	public List<Movimentacao> filtrar (Integer conta, double valorMovimentacao, Integer tipoMovimentacao, LocalDate dataInicio, LocalDate dataFinal) {
 		Specification<Movimentacao> criterio = Specification
@@ -46,19 +41,19 @@ public class MovimentacaoService {
 		return repository.findAll(criterio);
 	}
 
-	public ResponseEntity<?> transferir(MovimentacaoTransferenciaCommand comando) {
-		//TODO
-		return null;
+	public Movimentacao transferir(MovimentacaoTransferenciaCommand comando) {
+		Movimentacao movimentacao = Movimentacao.criar(comando);
+		return repository.save(movimentacao);
 	}
 
-	public ResponseEntity<?> sacar(MovimentacaoSaqueCommand comando) {
-		//TODO
-		return null;
+	public Movimentacao sacar(MovimentacaoSaqueCommand comando) {
+		Movimentacao movimentacao = Movimentacao.criar(comando);
+		return repository.save(movimentacao);
 	}
 
-	public ResponseEntity<?> depositar(MovimentacaoDepositoCommand comando) {
-		//TODO
-		return null;
+	public Movimentacao depositar(MovimentacaoDepositoCommand comando) {
+		Movimentacao movimentacao = Movimentacao.criar(comando);
+		return repository.save(movimentacao);
 	}
 
 }

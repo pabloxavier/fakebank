@@ -28,7 +28,7 @@ public class MovimentacaoEndpoint extends FakebankEndpoint {
 	private MovimentacaoService service;
 
 	@GetMapping
-	public ResponseEntity<?> Listar() {
+	public ResponseEntity<?> listar() {
 		return ok(service.listar());
 	}
 
@@ -52,17 +52,17 @@ public class MovimentacaoEndpoint extends FakebankEndpoint {
 
 	@PostMapping(value = "/transferencia")
 	public ResponseEntity<?> transferir(@RequestBody MovimentacaoTransferenciaCommand comando) {
-		return service.transferir(comando);
+		return ok(service.transferir(comando));
 	}
 
 	@PostMapping(value = "/saque")
 	public ResponseEntity<?> sacar(@RequestBody MovimentacaoSaqueCommand comando) {
-		return service.sacar(comando);
+		return ok(service.sacar(comando));
 	}
 
 	@PostMapping(value = "/deposito")
 	public ResponseEntity<?> depositar(@RequestBody MovimentacaoDepositoCommand comando) {
-		return service.depositar(comando);
+		return ok(service.depositar(comando));
 	}
 
 }

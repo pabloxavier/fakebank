@@ -11,6 +11,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import br.com.fakebank.domain.commands.MovimentacaoDepositoCommand;
+import br.com.fakebank.domain.commands.MovimentacaoSaqueCommand;
+import br.com.fakebank.domain.commands.MovimentacaoTransferenciaCommand;
+
 @Entity
 @Table(name = "movimentacao", schema = "dbo")
 public class Movimentacao {
@@ -24,7 +28,7 @@ public class Movimentacao {
 	@NotNull
 	@NotBlank
 	@Column(name = "cd_conta")
-	private Integer codigoConta;
+	private String codigoConta;
 
 	@NotNull
 	@NotBlank
@@ -51,6 +55,36 @@ public class Movimentacao {
 	@Column(name = "vl_saldo_atual")
 	private double valorSaldoAtual;
 	
+	private Movimentacao() {}
+	
+	protected Movimentacao(MovimentacaoTransferenciaCommand comando) {
+		this.codigoConta = comando.getContaOrigem();
+		comando.getContaDestino();
+		this.valorMovimentacao = comando.getValor();
+	}
+	
+	protected Movimentacao(MovimentacaoDepositoCommand comando) {
+		this.codigoConta = comando.getConta();
+		this.valorMovimentacao = comando.getValor();
+	}
+	
+	protected Movimentacao(MovimentacaoSaqueCommand comando) {
+		this.codigoConta = comando.getConta();
+		this.valorMovimentacao = comando.getValor();
+	}
+	
+	public static Movimentacao criar(MovimentacaoTransferenciaCommand comando) {
+		return new Movimentacao(comando);
+	}
+	
+	public static Movimentacao criar(MovimentacaoDepositoCommand comando) {
+		return new Movimentacao(comando);
+	}
+	
+	public static Movimentacao criar(MovimentacaoSaqueCommand comando) {
+		return new Movimentacao(comando);
+	}
+	
 	public Integer getCodigoMovimentacao() {
 		return codigoMovimentacao;
 	}
@@ -59,11 +93,11 @@ public class Movimentacao {
 		this.codigoMovimentacao = codigoMovimentacao;
 	}
 
-	public Integer getCodigoConta() {
+	public String getCodigoConta() {
 		return codigoConta;
 	}
 
-	public void setCodigoConta(Integer codigoConta) {
+	public void setCodigoConta(String codigoConta) {
 		this.codigoConta = codigoConta;
 	}
 

@@ -1,75 +1,86 @@
 package br.com.fakebank.domain;
 
-import java.time.LocalDate;
-
+import java.util.Date;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import br.com.fakebank.domain.converters.TipoPessoaConverter;
+
 
 @Entity
-@Table(name = "pessoa", schema = "dbo")
+@Table(name = "PESSOA", schema = "DBO")
 public class Pessoa {
 
 	@Id
+	@Column(name = "CD_PESSOA")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "cd_pessoa")
 	private Integer codigo;
-
-	@Column(name = "nr_documento")
-	private String documento;
 	
-	@Column(name = "tp_pessoa")
-	private String tipoPessoa;
-	
-	@Column(name = "nm_pessoa")
+	@Column(name = "NM_PESSOA")
 	private String nome;
 	
-	@Column(name = "dt_nascimento")
-	private LocalDate dataNascimento;
+	@Column(name = "TP_PESSOA")
+	@Convert(converter = TipoPessoaConverter.class)
+	private TipoPessoa tipoPessoa;
 	
-	@Column(name = "dt_abertura")
-	private LocalDate dataAbertura;
-
-	protected Pessoa(){
+	@Column(name = "NR_DOCUMENTO")
+	private String numeroDocumento;
+	
+	@Column(name = "DT_NASCIMENTO")
+	private Date dataNascimento;
+	
+	@Column(name = "DT_ABERTURA")
+	private Date dataAbertura;
+	
+	public Pessoa() {
 		
-	}
-	
-	private Pessoa(Integer codigo, String documento, String tipoPessoa, String nome, LocalDate dataNascimento,
-			LocalDate dataAbertura) {
-		this.codigo = codigo;
-		this.documento = documento;
-		this.tipoPessoa = tipoPessoa;
-		this.nome = nome;
-		this.dataNascimento = dataNascimento;
-		this.dataAbertura = dataAbertura;
-	}
-
-	public Integer getCodigo() {
-		return codigo;
-	}
-
-	public String getDocumento() {
-		return documento;
-	}
-
-	public String getTipoPessoa() {
-		return tipoPessoa;
 	}
 
 	public String getNome() {
 		return nome;
 	}
 
-	public LocalDate getDataNascimento() {
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public TipoPessoa getTipoPessoa() {
+		return tipoPessoa;
+	}
+
+	public void setTipoPessoa(TipoPessoa tipoPessoa) {
+		this.tipoPessoa = tipoPessoa;
+	}
+
+	public String getNumeroDocumento() {
+		return numeroDocumento;
+	}
+
+	public void setNumeroDocumento(String numeroDocumento) {
+		this.numeroDocumento = numeroDocumento;
+	}
+
+	public Date getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public LocalDate getDataAbertura() {
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public Date getDataAbertura() {
 		return dataAbertura;
 	}
+
+	public void setDataAbertura(Date dataAbertura) {
+		this.dataAbertura = dataAbertura;
+	}
+	
+
 	
 	
 }
