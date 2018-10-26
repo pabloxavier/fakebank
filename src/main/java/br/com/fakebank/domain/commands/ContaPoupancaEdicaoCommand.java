@@ -9,8 +9,6 @@ public class ContaPoupancaEdicaoCommand {
 	
 	private Integer codigoSituacaoConta;
 	
-	private Double valorSaldo;
-	
 	private Integer diaAniversarioPoupanca;
 	
 	public ContaPoupancaEdicaoCommand(){
@@ -31,14 +29,6 @@ public class ContaPoupancaEdicaoCommand {
 
 	public void setCodigoSituacaoConta(Integer codigoSituacaoConta) {
 		this.codigoSituacaoConta = codigoSituacaoConta;
-	}
-
-	public Double getValorSaldo() {
-		return valorSaldo;
-	}
-
-	public void setValorSaldo(Double valorSaldo) {
-		this.valorSaldo = valorSaldo;
 	}
 
 	public Integer getDiaAniversarioPoupanca() {
