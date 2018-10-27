@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.Range;
 
 import br.com.fakebank.customValidators.AgenciaUniqueCnpj;
 import br.com.fakebank.customValidators.CnpjValid;
-import br.com.fakebank.domain.validators.AgenciaInclusaoValidator;
+import br.com.fakebank.domain.validators.CommandValidator;
 import br.com.fakebank.exceptions.FieldName;
 
 public class AgenciaInclusaoCommand {
@@ -56,7 +56,10 @@ public class AgenciaInclusaoCommand {
     }
     
     public void validate() {
-        AgenciaInclusaoValidator validator = new AgenciaInclusaoValidator();
+        
+    	CommandValidator<AgenciaInclusaoCommand> validator =
+        		new CommandValidator<AgenciaInclusaoCommand>();
+        
         validator.validate(this);
     }
 }
