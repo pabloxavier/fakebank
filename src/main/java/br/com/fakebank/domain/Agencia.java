@@ -1,10 +1,15 @@
 package br.com.fakebank.domain;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import br.com.fakebank.domain.commands.AgenciaEdicaoCommand;
@@ -26,6 +31,13 @@ public class Agencia {
     
     @Column(name = "nr_cnpj")
     private String cnpj;
+    
+    @ManyToMany
+    @JoinTable(name = "GERENTE_AGENCIA",
+               schema = "DBO",
+               joinColumns = {@JoinColumn(name = "CD_AGENCIA")},
+               inverseJoinColumns = {@JoinColumn(name = "CD_GERENTE")})
+    private List<Gerente> gerentes;
     
     protected Agencia(){
         
