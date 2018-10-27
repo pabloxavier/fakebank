@@ -1,14 +1,17 @@
 package br.com.fakebank.endpoint;
 
 import br.com.fakebank.domain.Conta;
-import br.com.fakebank.domain.commands.ContaCorrenteInclusaoCommand;
-import br.com.fakebank.domain.commands.ContaPoupancaInclusaoCommand;
-import br.com.fakebank.domain.commands.ContaSalarioInclusaoCommand;
+import br.com.fakebank.domain.commands.*;
+import br.com.fakebank.representations.ContaCorrenteRepresentation;
+import br.com.fakebank.representations.ContaPoupancaRepresentation;
 import br.com.fakebank.representations.ContaRepresentation;
+import br.com.fakebank.representations.ContaSalarioRepresentation;
 import br.com.fakebank.service.ContaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+
 
 @RestController
 @RequestMapping("conta")
@@ -22,21 +25,51 @@ public class ContaEndPoint extends FakebankEndpoint {
         return ok(ContaRepresentation.from(conta));
     }
 
-    @PostMapping
-    public ResponseEntity<?> incluirContaCorrente(ContaCorrenteInclusaoCommand comando) {
-        contaService.salvarContaCorrente(comando);
-        return created("Conta Corrente incluida com sucesso");
+    @PostMapping(path = "/incluirContaCorrente/{codigoCliente}")
+    public ResponseEntity<?> incluirContaCorrente(
+            @PathVariable(value="codigoCliente", required=true) Integer cdCliente,
+            @RequestBody ContaCorrenteInclusaoCommand comando) {
+        Conta conta = contaService.salvarContaCorrente(comando);
+        ContaCorrenteRepresentation model = ContaCorrenteRepresentation.from(conta);
+        return created(model, conta.getCodigoConta());
     }
-    @PostMapping
-    public ResponseEntity<?> incluirContaSalario(ContaSalarioInclusaoCommand comando) {
-        contaService.salvarContaSalario(comando);
-        return created("Conta Salario incluida com sucesso");
+    @PostMapping(path = "/incluirContaSalario/{codigoCliente}")
+    public ResponseEntity<?> incluirContaSalario(
+            @PathVariable(value="codigoCliente", required=true) Integer cdCliente,
+            @RequestBody ContaSalarioInclusaoCommand comando) {
+        Conta conta = contaService.salvarContaSalario(comando);
+        ContaSalarioRepresentation model = ContaSalarioRepresentation.from(conta);
+        return created(model, conta.getCodigoConta());
     }
 
-    @PostMapping
-    public ResponseEntity<?> incluirContaPoupanca(ContaPoupancaInclusaoCommand comando) {
-        contaService.salvarContaPoupanca(comando);
-        return created("Conta Poupanca incluida com sucesso");
+    @PostMapping(path = "/incluirContaPoupanca/{codigoCliente}")
+    public ResponseEntity<?> incluirContaPoupanca(
+            @PathVariable(value="codigoCliente", required=true) Integer cdCliente,
+            @RequestBody ContaPoupancaInclusaoCommand comando) {
+        Conta conta = contaService.salvarContaPoupanca(comando);
+        ContaPoupancaRepresentation model = ContaPoupancaRepresentation.from(conta);
+        return created(model, conta.getCodigoConta());
     }
 
+    @PutMapping(value = "/alterarContaCorrente/{codigoConta}")
+    public ResponseEntity<?> alterarContaCorrente(
+            @PathVariable(value="codigoConta", required=true) Integer cdConta,
+            @RequestBody ContaCorrenteEdicaoCommand comando){
+
+        return contaService.alterarContaCorrente(cdConta, comando) != null ? ok("editado com sucesso") : notFound("conta nao encontrada");
+    }
+    @PutMapping(value = "/alterarContaPoupanca/{codigoConta}")
+    public ResponseEntity<?> alterarContaPoupanca(
+            @PathVariable(value="codigoConta", required=true) Integer cdConta,
+            @RequestBody ContaPoupancaEdicaoCommand omando){
+
+        return contaService.alterarContaPoupanca(cdConta, comando) != null ? ok("editado com sucesso") : notFound("conta nao encontrada");
+    }
+    @PutMapping(value = "/alterarContaSalario/{codigoConta}")
+    public ResponseEntity<?> alterarContaSalario(
+            @PathVariable(value="codigoConta", required=true) Integer cdConta,
+            @RequestBody ContaSalarioEdicaoCommand comando){
+
+        return contaService.alterarContaSalario(cdConta, comando) != null ? ok("editado com sucesso") : notFound("conta nao encontrada");
+    }
 }
