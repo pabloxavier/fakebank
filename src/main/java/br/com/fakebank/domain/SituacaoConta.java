@@ -23,12 +23,13 @@ public class SituacaoConta extends Dominio{
     }
 
     public static SituacaoConta criar(DominioCriacaoCommand comando) {
-
+    	comando.validate();
         return new SituacaoConta(comando);
 
     }
     
     public void editar(DominioEdicaoCommand comando) {
+    	comando.validate();
         this.setDescricao(comando.getDescricao());
     }
     
