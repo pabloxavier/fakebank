@@ -72,7 +72,7 @@ public class ClienteService {
         return codigoTelefone == null ? (short) 1 : (short) (codigoTelefone + 1);
     }
 
-    public Object salvarTelefone(Integer codigoCliente, ClienteTelefoneInclusaoCommand comando) {
+    public ClienteTelefone salvarTelefone(Integer codigoCliente, ClienteTelefoneInclusaoCommand comando) {
         ClienteTelefone telefone = ClienteTelefone.criar(codigoCliente, comando, getProximoCodigoTelefoneFromCliente(codigoCliente));
         return telefoneRepository.save(telefone);
     }
