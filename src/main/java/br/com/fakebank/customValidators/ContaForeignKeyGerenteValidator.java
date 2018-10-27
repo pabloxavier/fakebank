@@ -11,17 +11,9 @@ public class ContaForeignKeyGerenteValidator implements ConstraintValidator<Cont
     @Autowired
     private ContaService service; 
 
-<<<<<<< HEAD
 	@Override
 	public boolean isValid(Integer codigoGerente, ConstraintValidatorContext context) {
 		return service.isGerentePresent(codigoGerente);
 	}
-=======
-    @Override
-    public boolean isValid(Integer codigoGerente, ConstraintValidatorContext context) {
-    //    return !service.cnpjJaExiste(cnpj);
-        return true;
-    }
->>>>>>> 4ed0effe734043d395a8bb3569dd9566152f4372
 
 }

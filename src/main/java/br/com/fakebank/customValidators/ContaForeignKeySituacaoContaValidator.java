@@ -11,17 +11,8 @@ public class ContaForeignKeySituacaoContaValidator  implements ConstraintValidat
     @Autowired
     private ContaService service; 
 
-<<<<<<< HEAD
 	@Override
 	public boolean isValid(Integer codigoSituacaoConta, ConstraintValidatorContext context) {
 		return service.isSituacaoContaPresent(codigoSituacaoConta);
 	}
-=======
-    @Override
-    public boolean isValid(Integer codigoSituacaoConta, ConstraintValidatorContext context) {
-    //    return !service.cnpjJaExiste(cnpj);
-        return true;
-    }
->>>>>>> 4ed0effe734043d395a8bb3569dd9566152f4372
-
 }
