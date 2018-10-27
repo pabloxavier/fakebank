@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.fakebank.domain.MotivoEncerramento;
 import br.com.fakebank.domain.TipoConta;
+import br.com.fakebank.domain.commands.DominioCriacaoCommand;
+import br.com.fakebank.domain.commands.DominioEdicaoCommand;
 import br.com.fakebank.exceptions.NaoEncontradoException;
 import br.com.fakebank.repository.MotivoEncerramentoRepository;
 import br.com.fakebank.repository.TipoContaRepository;
@@ -30,5 +32,18 @@ public class MotivoEncerramentoService {
         
         return repository.findById(codigo).orElseThrow(() -> new NaoEncontradoException());
     }
+    
+    public MotivoEncerramento incluir(DominioCriacaoCommand comando) {
+		MotivoEncerramento motivo = MotivoEncerramento.criar(comando);
+		return repository.save(motivo);
+	}
+	
+	public MotivoEncerramento editar(DominioEdicaoCommand comando, Integer codigo) {
+		MotivoEncerramento motivo = consultaPorCodigo(codigo);
+		if(motivo==null)
+			return motivo;
+		motivo.editar(comando);		
+		return repository.save(motivo);
+	}
     
 }
