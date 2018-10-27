@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import br.com.fakebank.domain.Cliente;
 
 public interface ClienteRepository extends JpaRepository<Cliente, Integer>,
-										   JpaSpecificationExecutor<Cliente>{
+                                           JpaSpecificationExecutor<Cliente>{
 
 }

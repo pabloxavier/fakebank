@@ -9,22 +9,22 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.HandlerMapping;
 
 public abstract class FakebankEndpoint {
-	
-	public ResponseEntity<?> ok(){
-		return ResponseEntity.ok()
-				             .build();
-	}
-	
-	public <T> ResponseEntity<T> ok(T body){
-		return  ResponseEntity.ok(body);
-	}
+    
+    public ResponseEntity<?> ok(){
+        return ResponseEntity.ok()
+                             .build();
+    }
+    
+    public <T> ResponseEntity<T> ok(T body){
+        return  ResponseEntity.ok(body);
+    }
 
-	/***
-	 * Montar uma resposta REST HTTP para status 201 - Created
-	 * @param body Corpo de resposta para retorno
-	 * @param ids CÛdigos que ser„o retornados no 'location' do Header
-	 * @return
-	 */
+    /***
+     * Montar uma resposta REST HTTP para status 201 - Created
+     * @param body Corpo de resposta para retorno
+     * @param ids C√≥digos que ser√£o retornados no 'location' do Header
+     * @return
+     */
     public<T> ResponseEntity<T> created(T body, Object... ids) {
         String pathIds = "";
         for (Object id : ids) {
@@ -41,8 +41,8 @@ public abstract class FakebankEndpoint {
         
         return ResponseEntity.created(location).body(body);
     }
-	
-	public <T> ResponseEntity<T> notFound(T body){ 
-		return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);	
-	}
+    
+    public <T> ResponseEntity<T> notFound(T body){ 
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
 }

@@ -10,10 +10,10 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface ContaForeignKeyGerente {
-	
-	public String message() default "Código do gerente não encontrado!";
-	
-	Class<?>[] groups() default {};
     
-	Class<? extends Payload>[] payload() default {};
+    public String message() default "Código do gerente não encontrado!";
+    
+    Class<?>[] groups() default {};
+    
+    Class<? extends Payload>[] payload() default {};
 }

@@ -14,45 +14,45 @@ import br.com.fakebank.repository.GerenteRepository;
 
 @Service
 public class GerenteService {
-	
-	@Autowired
-	private GerenteRepository repository;
+    
+    @Autowired
+    private GerenteRepository repository;
 
-	public List<Gerente> listar() {
-		return repository.findAll();
-	}
-	
-	public Gerente getGerenteById(Integer codigo) {
-		return repository.findById(codigo).orElse(null);
-	}
-	
-	public List<Gerente> filtrar(boolean isAtivo){
-		Specification<Gerente> criterio = Specification.where(GerenteSpecifications.porSituacao(isAtivo));
-		return repository.findAll(criterio);	
-	}
-	
-	public Gerente salvar(GerenteInclusaoCommand comando) {
-		Gerente gerente = Gerente.criar(comando);
-		return repository.save(gerente);
-	}
-	
-	public Gerente salvar(Integer codigo, GerenteEdicaoCommand comando) {
-		Gerente gerente = getGerenteById(codigo);
-		
-		if (gerente == null) 
-			return gerente ;
-		
-		gerente.editar(comando);
-		return repository.save(gerente);
-	}
-	
-	public boolean excluir(Integer codigo) {
-		Gerente gerente = getGerenteById(codigo);
-		
-		if (gerente == null)
-			return false;
-		
-		repository.deleteById(codigo);
-		return true;
-	}
+    public List<Gerente> listar() {
+        return repository.findAll();
+    }
+    
+    public Gerente getGerenteById(Integer codigo) {
+        return repository.findById(codigo).orElse(null);
+    }
+    
+    public List<Gerente> filtrar(boolean isAtivo){
+        Specification<Gerente> criterio = Specification.where(GerenteSpecifications.porSituacao(isAtivo));
+        return repository.findAll(criterio);
+    }
+    
+    public Gerente salvar(GerenteInclusaoCommand comando) {
+        Gerente gerente = Gerente.criar(comando);
+        return repository.save(gerente);
+    }
+    
+    public Gerente salvar(Integer codigo, GerenteEdicaoCommand comando) {
+        Gerente gerente = getGerenteById(codigo);
+        
+        if (gerente == null) 
+            return gerente ;
+        
+        gerente.editar(comando);
+        return repository.save(gerente);
+    }
+    
+    public boolean excluir(Integer codigo) {
+        Gerente gerente = getGerenteById(codigo);
+        
+        if (gerente == null)
+            return false;
+        
+        repository.deleteById(codigo);
+        return true;
+    }
 }

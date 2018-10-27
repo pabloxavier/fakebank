@@ -4,25 +4,25 @@ import br.com.fakebank.domain.Pessoa;
 
 public class GerenteEdicaoCommand {
 
-	private boolean isAtivo;
-	private Pessoa pessoa;
+    private boolean isAtivo;
+    private Pessoa pessoa;
 
-	protected GerenteEdicaoCommand() {
-	}
+    protected GerenteEdicaoCommand() {
+    }
 
-	public boolean isAtivo() {
-		return isAtivo;
-	}
+    public boolean isAtivo() {
+        return isAtivo;
+    }
 
-	public void setAtivo(boolean isAtivo) {
-		this.isAtivo = isAtivo;
-	}
+    public void setAtivo(boolean isAtivo) {
+        this.isAtivo = isAtivo;
+    }
 
-	public Pessoa getPessoa() {
-		return pessoa;
-	}
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
 
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
 }

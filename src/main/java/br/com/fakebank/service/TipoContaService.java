@@ -14,40 +14,39 @@ import br.com.fakebank.repository.TipoContaRepository;
 @Service
 public class TipoContaService {
 
-	@Autowired
-	TipoContaRepository repository;
-	
-	public TipoContaService() {
-		
-	}
-	
-	public List<TipoConta> listar() {
-		
-		return repository.findAll();
-	}
-	
-	public TipoConta consultaPorCodigo(Integer codigo) {
-		
-		return repository.findById(codigo).orElseThrow(() -> new NaoEncontradoException());
-	}
-	
-	public TipoConta salvar(DominioCriacaoCommand comando){
-		TipoConta tipoConta = TipoConta.criar(comando);
-		return repository.save(tipoConta);
-	}
-	
+    @Autowired
+    TipoContaRepository repository;
+    
+    public TipoContaService() {
+        
+    }
+    
+    public List<TipoConta> listar() {
+        
+        return repository.findAll();
+    }
+    
+    public TipoConta consultaPorCodigo(Integer codigo) {
+        
+        return repository.findById(codigo).orElseThrow(() -> new NaoEncontradoException());
+    }
+    
+    public TipoConta salvar(DominioCriacaoCommand comando){
+        TipoConta tipoConta = TipoConta.criar(comando);
+        return repository.save(tipoConta);
+    }
+    
 
-	public TipoConta salvar(Integer codigo, DominioEdicaoCommand comando){
-		TipoConta tipoConta = consultaPorCodigo(codigo);
-		
-		if (tipoConta == null) {
-			return tipoConta;
-		}
-		
-		tipoConta.editar(comando);
-		return repository.save(tipoConta);
-		
-	}
-	
-	
+    public TipoConta salvar(Integer codigo, DominioEdicaoCommand comando){
+        TipoConta tipoConta = consultaPorCodigo(codigo);
+        
+        if (tipoConta == null) {
+            return tipoConta;
+        }
+        
+        tipoConta.editar(comando);
+        return repository.save(tipoConta);
+        
+    }
+
 }

@@ -10,11 +10,11 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface ContaForeignKeyClientePrincipal {
-	
-	public String message() default "Código do cliente não encontrado!";
-	
-	Class<?>[] groups() default {};
     
-	Class<? extends Payload>[] payload() default {};	
+    public String message() default "Código do cliente não encontrado!";
+    
+    Class<?>[] groups() default {};
+    
+    Class<? extends Payload>[] payload() default {};
 
 }

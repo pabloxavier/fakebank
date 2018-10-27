@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ApplicationStart {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ApplicationStart.class, args);
-		System.out.println("------------------------------");
-		System.out.println("Aplicacao disponivel");
-	}
-	
+    public static void main(String[] args) {
+        SpringApplication.run(ApplicationStart.class, args);
+        System.out.println("------------------------------");
+        System.out.println("Aplicacao disponivel");
+    }
+
 }

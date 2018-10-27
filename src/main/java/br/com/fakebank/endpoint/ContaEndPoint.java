@@ -53,21 +53,21 @@ public class ContaEndPoint extends FakebankEndpoint {
 
     @PutMapping(value = "/alterarContaCorrente/{codigoConta}")
     public ResponseEntity<?> alterarContaCorrente(
-            @PathVariable(value="codigoConta", required=true) Integer cdConta,
+            @PathVariable(value="codigoConta", required=true) String cdConta,
             @RequestBody ContaCorrenteEdicaoCommand comando){
 
         return contaService.alterarContaCorrente(cdConta, comando) != null ? ok("editado com sucesso") : notFound("conta nao encontrada");
     }
     @PutMapping(value = "/alterarContaPoupanca/{codigoConta}")
     public ResponseEntity<?> alterarContaPoupanca(
-            @PathVariable(value="codigoConta", required=true) Integer cdConta,
-            @RequestBody ContaPoupancaEdicaoCommand omando){
+            @PathVariable(value="codigoConta", required=true) String cdConta,
+            @RequestBody ContaPoupancaEdicaoCommand comando){
 
         return contaService.alterarContaPoupanca(cdConta, comando) != null ? ok("editado com sucesso") : notFound("conta nao encontrada");
     }
     @PutMapping(value = "/alterarContaSalario/{codigoConta}")
     public ResponseEntity<?> alterarContaSalario(
-            @PathVariable(value="codigoConta", required=true) Integer cdConta,
+            @PathVariable(value="codigoConta", required=true) String cdConta,
             @RequestBody ContaSalarioEdicaoCommand comando){
 
         return contaService.alterarContaSalario(cdConta, comando) != null ? ok("editado com sucesso") : notFound("conta nao encontrada");

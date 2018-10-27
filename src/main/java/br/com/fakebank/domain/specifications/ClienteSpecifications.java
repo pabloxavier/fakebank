@@ -16,4 +16,9 @@ public class ClienteSpecifications {
 			criteriaBuilder.equal(root.get("isAtivo"), isAtivo);
 	}
 	
+	public static Specification<Cliente> porCodigoCliente(Integer codigo){
+		return (root, criteriaQuery, criteriaBuilder) -> 
+			criteriaBuilder.equal(root.get("codigo"), codigo);
+	}
+
 }
