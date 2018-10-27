@@ -11,10 +11,9 @@ public class ContaForeignKeyTipoContaValidator implements ConstraintValidator<Co
     @Autowired
     private ContaService service; 
 
-    @Override
-    public boolean isValid(Integer tipoConta, ConstraintValidatorContext context) {
-    //    return !service.cnpjJaExiste(cnpj);
-        return true;
-    }
+	@Override
+	public boolean isValid(Integer tipoConta, ConstraintValidatorContext context) {
+		return service.isTipoContaPresent(tipoConta);
+	}
 
 }
