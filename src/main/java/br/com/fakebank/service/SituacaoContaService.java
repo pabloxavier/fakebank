@@ -5,18 +5,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.fakebank.domain.DominioEnum;
 import br.com.fakebank.domain.MotivoEncerramento;
 import br.com.fakebank.domain.SituacaoConta;
 import br.com.fakebank.domain.TipoConta;
 import br.com.fakebank.domain.commands.DominioCriacaoCommand;
 import br.com.fakebank.domain.commands.DominioEdicaoCommand;
+import br.com.fakebank.exceptions.DominioUniqueException;
 import br.com.fakebank.exceptions.NaoEncontradoException;
 import br.com.fakebank.repository.MotivoEncerramentoRepository;
 import br.com.fakebank.repository.SituacaoContaRepository;
 import br.com.fakebank.repository.TipoContaRepository;
 
 @Service
-public class SituacaoContaService {
+public class SituacaoContaService extends DominioService{
 
     @Autowired
     SituacaoContaRepository repository;
@@ -36,6 +38,9 @@ public class SituacaoContaService {
     }
 
     public SituacaoConta salvar(DominioCriacaoCommand comando){
+        if (dominioExiste(comando.getValor())) {
+			throw new DominioUniqueException();
+		}
         SituacaoConta situacaoConta = SituacaoConta.criar(comando);
         return repository.save(situacaoConta);
     }
@@ -51,5 +56,9 @@ public class SituacaoContaService {
         situacaoConta.editar(comando);
         return repository.save(situacaoConta);
         
+    }
+    
+    private boolean dominioExiste(String valor){
+    	return dominioExiste(valor, DominioEnum.SIT_CONTA.toString());
     }
 }

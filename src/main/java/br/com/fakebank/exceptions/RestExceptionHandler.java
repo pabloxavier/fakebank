@@ -27,5 +27,17 @@ public class RestExceptionHandler {
         
         return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }
+    
+    @ExceptionHandler(DominioUniqueException.class)
+    public ResponseEntity<?> handleResourceBadRequestExceptionDominio(DominioUniqueException exception) {
+        
+        MessageErrorResponse message = new MessageErrorResponse();
+        
+        message.setTitulo("Dados incorretos");
+        
+        message.setMessage(exception.getMessage());
+        
+        return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+    }
 
 }

@@ -24,12 +24,13 @@ public class TipoConta extends Dominio{
     }
 
     public static TipoConta criar(DominioCriacaoCommand comando) {
-
+    	comando.validate();
         return new TipoConta(comando);
 
     }
 
     public void editar(DominioEdicaoCommand comando) {
+    	comando.validate();
         this.setDescricao(comando.getDescricao());
     }
 
