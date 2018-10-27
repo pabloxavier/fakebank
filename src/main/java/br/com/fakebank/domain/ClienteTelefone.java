@@ -27,15 +27,17 @@ public class ClienteTelefone {
     }
 
     public static ClienteTelefone criar(
-            Integer codigoCliente,
+            Cliente cliente,
             ClienteTelefoneInclusaoCommand comando,
             Short codigoTelefone) {
+
+        comando.validate();
 
         ClienteTelefone telefone = new ClienteTelefone();
         telefone.tipoTelefone = comando.getTipoTelefone();
         telefone.prefixo = comando.getPrefixo();
         telefone.numero = comando.getTelefone();
-        telefone.clienteTelefoneId = new ClienteTelefoneId(codigoCliente, codigoTelefone);
+        telefone.clienteTelefoneId = new ClienteTelefoneId(cliente.getCodigo(), codigoTelefone);
 
         return telefone;
     }
