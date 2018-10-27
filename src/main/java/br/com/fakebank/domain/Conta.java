@@ -110,53 +110,23 @@ public class Conta {
 		this.numeroCnpjContratoSalario = command.getNumeroCnpjContratoSalario();
 		
 	}
-
-	public static Conta editarContaCorrente(ContaCorrenteEdicaoCommand command) {
-		Conta conta = new Conta();
-		
-		if (command!= null) {
-			conta.editarConta(command);
-			return conta;
-		}
-		return null;
-	}
 	
-	public static Conta editarContaPoupanca(ContaPoupancaEdicaoCommand command) {
-		Conta conta = new Conta();
-		
-		if (command!= null) {
-			conta.editarConta(command);
-			return conta;
-		}
-		return null;
-	}
-	
-	public static Conta editarContaSalario(ContaSalarioEdicaoCommand command) {
-		Conta conta = new Conta();
-		
-		if (command!= null) {
-			conta.editarConta(command);
-			return conta;
-		}
-		return null;
+	public void editarContaSalario(ContaSalarioEdicaoCommand command) {
+		this.codigoGerente = command.getCodigoGerente();		
+		this.codigoSituacaoConta = command.getCodigoSituacaoConta();							
+		this.numeroCnpjContratoSalario = command.getNumeroCnpjContratoSalario();
 	} 
 	
-	private void editarConta(ContaCorrenteEdicaoCommand command) {
+	public void editarContaCorrente(ContaCorrenteEdicaoCommand command) {
 		this.codigoGerente = command.getCodigoGerente();		
 		this.codigoSituacaoConta = command.getCodigoSituacaoConta();						
 	}	
 
-	private void editarConta(ContaPoupancaEdicaoCommand command) {
+	public void editarContaPoupanca(ContaPoupancaEdicaoCommand command) {
 		this.codigoGerente = command.getCodigoGerente();		
 		this.codigoSituacaoConta = command.getCodigoSituacaoConta();							
 		this.diaAniversarioPoupanca = command.getDiaAniversarioPoupanca();		
-	}
-		
-	private void editarConta(ContaSalarioEdicaoCommand command) {
-		this.codigoGerente = command.getCodigoGerente();		
-		this.codigoSituacaoConta = command.getCodigoSituacaoConta();							
-		this.numeroCnpjContratoSalario = command.getNumeroCnpjContratoSalario();		
-	}		
+	}	
 		
 	private String gerarCodigoConta() {
 		Random random = new Random();

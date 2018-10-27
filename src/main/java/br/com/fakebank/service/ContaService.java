@@ -56,8 +56,8 @@ public class ContaService {
 	
 	public Conta salvarContaCorrente(Integer codigoCliente, ContaCorrenteInclusaoCommand command) {
 		if (isClientePrincipalPresent(codigoCliente)) {
-			Optional<Cliente> cliente = clienteRepository.findById(codigoCliente);
-			Conta contaCorrente = Conta.criarContaCorrente(command); // passar o codigo do cliente tb
+			Cliente cliente = clienteRepository.findById(codigoCliente).orElse(null);
+			Conta contaCorrente = Conta.criarContaCorrente(cliente, command); 
 			return repository.save(contaCorrente);
 		}
 		return null;
@@ -66,8 +66,8 @@ public class ContaService {
 	public Conta salvarContaPoupanca(Integer codigoCliente, ContaPoupancaInclusaoCommand command) {
 		
 		if (isClientePrincipalPresent(codigoCliente)) {
-			Optional<Cliente> cliente = clienteRepository.findById(codigoCliente);
-			Conta contaPoupanca = Conta.criarContaPoupanca(command); // passar o codigo do cliente tb
+			Cliente cliente = clienteRepository.findById(codigoCliente).orElse(null);
+			Conta contaPoupanca = Conta.criarContaPoupanca(cliente, command); 
 			return repository.save(contaPoupanca);
 		}
 		return null;
@@ -75,8 +75,8 @@ public class ContaService {
 	
 	public Conta salvarContaSalario(Integer codigoCliente, ContaSalarioInclusaoCommand command) {
 		if (isClientePrincipalPresent(codigoCliente)) {
-			Optional<Cliente> cliente = clienteRepository.findById(codigoCliente);
-			Conta contaSalario = Conta.criarContaSalario(command); // passar o codigo do cliente tb
+			Cliente cliente = clienteRepository.findById(codigoCliente).orElse(null);
+			Conta contaSalario = Conta.criarContaSalario(cliente, command); 
 			return repository.save(contaSalario);
 		}
 		return null;
@@ -109,9 +109,10 @@ public class ContaService {
 		if (conta == null) {
 			return conta;
 		}
-		conta.editarContaPoupanca(command);
+		conta.editarContaSalario(command);
 		return repository.save(conta);
 	}
+	
 	public boolean excluir(String codigo){
 		Conta conta = consultarPorCodigo(codigo);
 		
