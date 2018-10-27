@@ -11,7 +11,7 @@ import br.com.fakebank.domain.TipoConta;
 import br.com.fakebank.domain.commands.DominioCriacaoCommand;
 import br.com.fakebank.domain.commands.DominioEdicaoCommand;
 import br.com.fakebank.exceptions.DominioUniqueException;
-import br.com.fakebank.exceptions.NaoEncontradoException;
+import br.com.fakebank.exceptions.NotFoundException;
 import br.com.fakebank.repository.TipoContaRepository;
 
 @Service
@@ -31,7 +31,7 @@ public class TipoContaService extends DominioService{
     
     public TipoConta consultaPorCodigo(Integer codigo) {
         
-        return repository.findById(codigo).orElseThrow(() -> new NaoEncontradoException());
+        return repository.findById(codigo).orElseThrow(() -> new NotFoundException());
     }
     
     public TipoConta salvar(DominioCriacaoCommand comando){

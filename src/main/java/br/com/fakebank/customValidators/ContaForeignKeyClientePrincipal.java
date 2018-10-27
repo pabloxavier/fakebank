@@ -11,7 +11,7 @@ import javax.validation.Payload;
 @Target(ElementType.FIELD)
 public @interface ContaForeignKeyClientePrincipal {
     
-    public String message() default "CÛdigo do cliente n„o encontrado!";
+    public String message() default "C√≥digo do cliente n√£o encontrado!";
     
     Class<?>[] groups() default {};
     

@@ -10,7 +10,7 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface ContaForeignKeySituacaoConta {
-    public String message() default "SituaÁ„o da conta n„o encontrada!";
+    public String message() default "Situa√ß√£o da conta n√£o encontrada!";
     
     Class<?>[] groups() default {};
     
