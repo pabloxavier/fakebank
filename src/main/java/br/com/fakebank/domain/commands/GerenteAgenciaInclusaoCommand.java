@@ -1,7 +1,6 @@
 package br.com.fakebank.domain.commands;
 
 import br.com.fakebank.domain.Pessoa;
-import br.com.fakebank.domain.validators.CommandValidator;
 import br.com.fakebank.exceptions.FieldName;
 
 import javax.validation.constraints.NotNull;
