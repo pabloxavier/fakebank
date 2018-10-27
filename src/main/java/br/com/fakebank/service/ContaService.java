@@ -19,7 +19,7 @@ import br.com.fakebank.domain.commands.ContaPoupancaInclusaoCommand;
 import br.com.fakebank.domain.commands.ContaSalarioEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaSalarioInclusaoCommand;
 import br.com.fakebank.domain.specifications.ContaSpecifications;
-import br.com.fakebank.exceptions.NaoEncontradoException;
+import br.com.fakebank.exceptions.NotFoundException;
 import br.com.fakebank.repository.ClienteRepository;
 import br.com.fakebank.repository.ContaRepository;
 import br.com.fakebank.repository.GerenteRepository;
@@ -46,7 +46,7 @@ public class ContaService {
 	}
 	
 	public Conta consultarPorCodigo(String codigo) {
-		return repository.findById(codigo).orElseThrow(() -> new NaoEncontradoException());
+		return repository.findById(codigo).orElseThrow(() -> new NotFoundException());
 	}
 	
 	public List<Conta> filtrarPorTipo(Integer tipoConta){

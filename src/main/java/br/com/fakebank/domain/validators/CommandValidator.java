@@ -11,7 +11,7 @@ import javax.validation.ValidatorFactory;
 
 import br.com.fakebank.domain.commands.AgenciaInclusaoCommand;
 import br.com.fakebank.exceptions.MessageErrorDetail;
-import br.com.fakebank.exceptions.RequisicaoMalFormada;
+import br.com.fakebank.exceptions.BadRequestException;
 
 public class CommandValidator<T> extends AbstractValidator {
 
@@ -41,7 +41,7 @@ public class CommandValidator<T> extends AbstractValidator {
         }
 
         if (!violacoes.isEmpty()) {
-            throw new RequisicaoMalFormada(violacoes);
+            throw new BadRequestException(violacoes);
         }
     }
 }

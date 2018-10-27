@@ -3,7 +3,7 @@ package br.com.fakebank.service;
 import br.com.fakebank.domain.Agencia;
 import br.com.fakebank.domain.Conta;
 import br.com.fakebank.domain.commands.AgenciaInclusaoCommand;
-import br.com.fakebank.exceptions.NaoEncontradoException;
+import br.com.fakebank.exceptions.NotFoundException;
 
 public class EncerramentoService {
     

@@ -11,7 +11,7 @@ import javax.validation.Payload;
 @Target(ElementType.FIELD)
 public @interface ContaForeignKeyGerente {
     
-    public String message() default "CÛdigo do gerente n„o encontrado!";
+    public String message() default "C√≥digo do gerente n√£o encontrado!";
     
     Class<?>[] groups() default {};
     
