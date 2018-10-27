@@ -7,5 +7,4 @@ import br.com.fakebank.domain.Conta;
 
 public interface ContaRepository extends JpaRepository<Conta, String>, JpaSpecificationExecutor<Conta>{
 
-	
 }

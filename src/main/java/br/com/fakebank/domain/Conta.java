@@ -27,7 +27,7 @@ import br.com.fakebank.util.DateUtil;
 @Entity
 @Table(name = "CONTA", schema = "dbo")
 public class Conta {
-	
+
 	@Id @GeneratedValue
 	@Column(name = "CD_CONTA")
 	private String codigoConta;
@@ -137,36 +137,45 @@ public class Conta {
 		return codigoConta;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
-	}
+    public Cliente getCliente() {
+        return cliente;
+    }
 
-	public Date getDataAbertura() {
-		return dataAbertura;
-	}
+    public Date getDataAbertura() {
+        return dataAbertura;
+    }
 
-	public Integer getTipoConta() {
-		return tipoConta;
-	}
+    public Integer getTipoConta() {
+        return tipoConta;
+    }
 
-	public Integer getCodigoGerente() {
-		return codigoGerente;
-	}
+    public Integer getCodigoGerente() {
+        return codigoGerente;
+    }
 
-	public Integer getCodigoSituacaoConta() {
-		return codigoSituacaoConta;
-	}
+    public Integer getCodigoSituacaoConta() {
+        return codigoSituacaoConta;
+    }
 
-	public Double getValorSaldo() {
-		return valorSaldo;
-	}
+    public Double getValorSaldo() {
+        return valorSaldo;
+    }
 
-	public String getNumeroCnpjContratoSalario() {
-		return numeroCnpjContratoSalario;
-	}
+    public String getNumeroCnpjContratoSalario() {
+        return numeroCnpjContratoSalario;
+    }
 
-	public Integer getDiaAniversarioPoupanca() {
-		return diaAniversarioPoupanca;
+    public Integer getDiaAniversarioPoupanca() {
+        return diaAniversarioPoupanca;
+    }
+
+	@Override
+	public String toString() {
+		return "Conta [codigoConta=" + codigoConta + ", cliente=" + cliente + ", dataAbertura=" + dataAbertura
+				+ ", tipoConta=" + tipoConta + ", codigoGerente=" + codigoGerente + ", codigoSituacaoConta="
+				+ codigoSituacaoConta + ", valorSaldo=" + valorSaldo + ", numeroCnpjContratoSalario="
+				+ numeroCnpjContratoSalario + ", diaAniversarioPoupanca=" + diaAniversarioPoupanca + "]";
 	}
-	
+    
+
 }

@@ -2,26 +2,26 @@ package br.com.fakebank.domain.commands;
 
 public class MovimentacaoSaqueCommand {
 
-	private double valor;
+    private double valor;
 
-	private String conta;
+    private String conta;
 
-	public MovimentacaoSaqueCommand() {
-	}
+    public MovimentacaoSaqueCommand() {
+    }
 
-	public double getValor() {
-		return valor;
-	}
+    public double getValor() {
+        return valor;
+    }
 
-	public void setValor(double valor) {
-		this.valor = valor;
-	}
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
 
-	public String getConta() {
-		return conta;
-	}
+    public String getConta() {
+        return conta;
+    }
 
-	public void setConta(String conta) {
-		this.conta = conta;
-	}
+    public void setConta(String conta) {
+        this.conta = conta;
+    }
 }

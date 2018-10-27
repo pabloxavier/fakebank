@@ -11,8 +11,8 @@ import br.com.fakebank.exceptions.FieldName;
 
 public abstract class AbstractValidator {
     
-	//A classe ConstraintViolation È a classe respons·vel por
-	//permitir que possamos acessar as regras dos Beans Validations
+    //A classe ConstraintViolation √© a classe respons√°vel por
+    //permitir que possamos acessar as regras dos Beans Validations
     private ConstraintViolation<?> rule;
     
     //Aqui, estamos expondo o Set para o ConstraintViolation
@@ -20,7 +20,7 @@ public abstract class AbstractValidator {
         this.rule = rule;
     }
     
-    //Para obter a mensagem de erro de validaÁ„o
+    //Para obter a mensagem de erro de valida√ß√£o
     protected String getMessageError() {
         return this.rule.getMessage();
     }
@@ -28,9 +28,9 @@ public abstract class AbstractValidator {
     //Para obter o o campo em que o erro ocorreu 
     protected String getFieldError() {
         
-    	//Obtemos dois valores do ConstraintViolation
-    	//Path (que È o caminho atÈ a propriedade)
-    	//Object (que È a propriedade em si)
+        //Obtemos dois valores do ConstraintViolation
+        //Path (que √© o caminho at√© a propriedade)
+        //Object (que √© a propriedade em si)
         Path path = this.rule.getPropertyPath();
         Object obj = this.rule.getLeafBean();
         
@@ -50,12 +50,12 @@ public abstract class AbstractValidator {
             }
         }
 
-        //Caso, encontrado o FieldName, este ser· retornado
-        //Caso contr·rio, ser· retornado NULO
+        //Caso, encontrado o FieldName, este ser√° retornado
+        //Caso contr√°rio, ser√° retornado NULO
         return annotation != null ? annotation.value() : null;
     }
 
-    //MÈtodo privado para procurar o FieldName de forma recursiva
+    //M√©todo privado para procurar o FieldName de forma recursiva
     private Field getField(Class<?> type, String fieldName) {
         while (type != null) {
             try {

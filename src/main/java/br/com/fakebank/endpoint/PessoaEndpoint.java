@@ -15,25 +15,23 @@ import br.com.fakebank.service.PessoaService;
 @RequestMapping("pessoas")
 public class PessoaEndpoint extends FakebankEndpoint{
 
-	@Autowired
-	PessoaService service;
-	
-	@GetMapping
-	public ResponseEntity<?> listarPessoas(){
-		return ok(service.listar());
-	}
-	
-	@GetMapping(value = "/{codigo}")
-	public ResponseEntity<?> getPessoaById(@PathVariable("codigo") Integer codigo){
-		return ok(service.getPessoaById(codigo));
-	}
-	
-	@GetMapping(path = "/pesquisa")
-	public ResponseEntity<?> filtrarPessoa(@RequestParam(name = "documento", required = false) String documento, 
-										   @RequestParam(name = "tipoPessoa", required = false) String tipo, 
-										   @RequestParam(name = "nome", required = false) String nome){
-		return ok(service.filtrar(documento, tipo, nome));
-	}
-	
-	
+    @Autowired
+    PessoaService service;
+    
+    @GetMapping
+    public ResponseEntity<?> listarPessoas(){
+        return ok(service.listar());
+    }
+    
+    @GetMapping(value = "/{codigo}")
+    public ResponseEntity<?> getPessoaById(@PathVariable("codigo") Integer codigo){
+        return ok(service.getPessoaById(codigo));
+    }
+    
+    @GetMapping(path = "/pesquisa")
+    public ResponseEntity<?> filtrarPessoa(@RequestParam(name = "documento", required = false) String documento, 
+                                           @RequestParam(name = "tipoPessoa", required = false) String tipo, 
+                                           @RequestParam(name = "nome", required = false) String nome){
+        return ok(service.filtrar(documento, tipo, nome));
+    }
 }

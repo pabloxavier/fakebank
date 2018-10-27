@@ -12,26 +12,26 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 @Configuration
 public class CustomMessageConfiguration {
-	
-	@Bean
-	public MessageSource messageSource(){
-		ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
-		source.setBasename("classpath:messages");
-		return source;
-	}
-	
-	@Bean
-	public LocalValidatorFactoryBean getValidator(){
-		LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
-		validator.setValidationMessageSource(messageSource());
-		return validator;
-	}
-	
-	@Bean
-	public LocaleResolver localeResolver(){
-		SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
-		//sessionLocaleResolver.setDefaultLocale(new Locale("en", "US"));
-		sessionLocaleResolver.setDefaultLocale(new Locale("pt", "BR"));
-		return sessionLocaleResolver;
-	}
+    
+    @Bean
+    public MessageSource messageSource(){
+        ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
+        source.setBasename("classpath:messages");
+        return source;
+    }
+    
+    @Bean
+    public LocalValidatorFactoryBean getValidator(){
+        LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
+        validator.setValidationMessageSource(messageSource());
+        return validator;
+    }
+    
+    @Bean
+    public LocaleResolver localeResolver(){
+        SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
+        //sessionLocaleResolver.setDefaultLocale(new Locale("en", "US"));
+        sessionLocaleResolver.setDefaultLocale(new Locale("pt", "BR"));
+        return sessionLocaleResolver;
+    }
 }

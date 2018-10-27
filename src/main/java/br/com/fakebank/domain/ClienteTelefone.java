@@ -13,51 +13,51 @@ import javax.persistence.*;
 @Table(name= "cliente_telefone", schema= "dbo")
 public class ClienteTelefone {
 
-	@EmbeddedId
-	private ClienteTelefoneId clienteTelefoneId;
-	
-	@Column(name= "nr_prefixo")
-	private Short prefixo;
-	
-	@Column(name= "nr_telefone")
-	private Integer numero;
-	
-	@Column(name = "cd_tipo_telefone")
-	@Convert(converter = TipoTelefoneConverter.class)
-	private TipoTelefone tipoTelefone;
+    @EmbeddedId
+    private ClienteTelefoneId clienteTelefoneId;
+    
+    @Column(name= "nr_prefixo")
+    private Short prefixo;
+    
+    @Column(name= "nr_telefone")
+    private Integer numero;
+    
+    @Column(name = "cd_tipo_telefone")
+    @Convert(converter = TipoTelefoneConverter.class)
+    private TipoTelefone tipoTelefone;
 
-	public ClienteTelefone() {
-		
-	}
+    public ClienteTelefone() {
+        
+    }
 
-	public static ClienteTelefone criar(
-	        Integer codigoCliente,
+    public static ClienteTelefone criar(
+            Integer codigoCliente,
             ClienteTelefoneInclusaoCommand comando,
             Short codigoTelefone) {
 
-		ClienteTelefone telefone = new ClienteTelefone();
-		telefone.tipoTelefone = comando.getTipoTelefone();
-		telefone.prefixo = comando.getNrPrefixo();
-		telefone.numero = comando.getNrTelefone();
-		telefone.clienteTelefoneId = new ClienteTelefoneId(codigoCliente, codigoTelefone);
+        ClienteTelefone telefone = new ClienteTelefone();
+        telefone.tipoTelefone = comando.getTipoTelefone();
+        telefone.prefixo = comando.getNrPrefixo();
+        telefone.numero = comando.getNrTelefone();
+        telefone.clienteTelefoneId = new ClienteTelefoneId(codigoCliente, codigoTelefone);
 
-		return telefone;
-	}
+        return telefone;
+    }
 
-	public ClienteTelefoneId getClienteTelefoneId() {
-		return clienteTelefoneId;
-	}
+    public ClienteTelefoneId getClienteTelefoneId() {
+        return clienteTelefoneId;
+    }
 
-	public Short getPrefixo() {
-		return prefixo;
-	}
+    public Short getPrefixo() {
+        return prefixo;
+    }
 
-	public Integer getNumero() {
-		return numero;
-	}
+    public Integer getNumero() {
+        return numero;
+    }
 
-	public TipoTelefone getTipoTelefone() {
-		return tipoTelefone;
-	}
+    public TipoTelefone getTipoTelefone() {
+        return tipoTelefone;
+    }
 
 }

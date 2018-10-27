@@ -23,46 +23,46 @@ import br.com.fakebank.service.ClienteService;
 @RequestMapping("clientes")
 public class ClienteEndpoint extends FakebankEndpoint{
 
-	@Autowired
-	ClienteService service;
-	
-	@GetMapping
-	public ResponseEntity<?> listarClientes(){
-		return ok(service.listar());
-	}
-	
-	@GetMapping(value = "/{codigo}")
-	public ResponseEntity<?> getClienteById(@PathVariable("codigo") Integer codigo){
-		return ok(service.getClienteById(codigo));
-	}
-	
-	@GetMapping(path = "/pesquisa")
-	public ResponseEntity<?> filtrar(@RequestParam(name = "endereco") String endereco,
-			                         @RequestParam(name = "isAtivo") boolean isAtivo){
-		return ok(service.filtrar(endereco, isAtivo));
-	}
-	
-	@PostMapping
-	public ResponseEntity<?> criar(@RequestBody ClienteInclusaoCommand comando){
-		Cliente cliente = service.salvar(comando);
-		if (cliente != null)
-			return created("cliente incluido com sucesso");
-		else
-			return notFound("erro ao incluir");
-	}
-	
-	@PutMapping(value = "/{codigo}")
-	public ResponseEntity<?> editar(@PathVariable("codigo") Integer codigo, @RequestBody ClienteEdicaoCommand comando){
-		Cliente cliente = service.salvar(codigo, comando);
-		if (cliente != null)
-			return created("editado com sucesso");
-		else
-			return notFound("agencia nao encontrada");
-	}
-	
-	@DeleteMapping(value = "/{codigo}")
-	public ResponseEntity<?> excluirCliente(@PathVariable("codigo") Integer codigo){
-		return service.excluir(codigo) ? ok("excluido com sucesso") : notFound("cliente nao encontrado");		
-	}
-	
+    @Autowired
+    ClienteService service;
+    
+    @GetMapping
+    public ResponseEntity<?> listarClientes(){
+        return ok(service.listar());
+    }
+    
+    @GetMapping(value = "/{codigo}")
+    public ResponseEntity<?> getClienteById(@PathVariable("codigo") Integer codigo){
+        return ok(service.getClienteById(codigo));
+    }
+    
+    @GetMapping(path = "/pesquisa")
+    public ResponseEntity<?> filtrar(@RequestParam(name = "endereco") String endereco,
+                                     @RequestParam(name = "isAtivo") boolean isAtivo){
+        return ok(service.filtrar(endereco, isAtivo));
+    }
+    
+    @PostMapping
+    public ResponseEntity<?> criar(@RequestBody ClienteInclusaoCommand comando){
+        Cliente cliente = service.salvar(comando);
+        if (cliente != null)
+            return created("cliente incluido com sucesso");
+        else
+            return notFound("erro ao incluir");
+    }
+    
+    @PutMapping(value = "/{codigo}")
+    public ResponseEntity<?> editar(@PathVariable("codigo") Integer codigo, @RequestBody ClienteEdicaoCommand comando){
+        Cliente cliente = service.salvar(codigo, comando);
+        if (cliente != null)
+            return created("editado com sucesso");
+        else
+            return notFound("agencia nao encontrada");
+    }
+    
+    @DeleteMapping(value = "/{codigo}")
+    public ResponseEntity<?> excluirCliente(@PathVariable("codigo") Integer codigo){
+        return service.excluir(codigo) ? ok("excluido com sucesso") : notFound("cliente nao encontrado");
+    }
+    
 }

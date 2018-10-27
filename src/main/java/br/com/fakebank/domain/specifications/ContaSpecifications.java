@@ -24,4 +24,5 @@ public class ContaSpecifications {
 	public static Specification<Conta> porCodigo(String codigo){
 		return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.get("codigo"), codigo);
 	}
+
 }

@@ -20,4 +20,5 @@ public class ClienteSpecifications {
 		return (root, criteriaQuery, criteriaBuilder) -> 
 			criteriaBuilder.equal(root.get("codigo"), codigo);
 	}
+
 }

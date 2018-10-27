@@ -5,29 +5,29 @@ import javax.validation.constraints.NotNull;
 
 public class ContaPoupancaInclusaoCommand {
 
-	@NotNull
-	private Integer codigoGerente;
-	
-	private Integer diaAniversarioPoupanca;	
-	
-	public ContaPoupancaInclusaoCommand () {
-		
-	}	
+    @NotNull
+    private Integer codigoGerente;
+    
+    private Integer diaAniversarioPoupanca;
+    
+    public ContaPoupancaInclusaoCommand () {
+        
+    }
 
-	public Integer getCodigoGerente() {
-		return codigoGerente;
-	}
+    public Integer getCodigoGerente() {
+        return codigoGerente;
+    }
 
-	public void setCodigoGerente(Integer codigoGerente) {
-		this.codigoGerente = codigoGerente;
-	}
+    public void setCodigoGerente(Integer codigoGerente) {
+        this.codigoGerente = codigoGerente;
+    }
 
-	public Integer getDiaAniversarioPoupanca() {
-		return diaAniversarioPoupanca;
-	}
+    public Integer getDiaAniversarioPoupanca() {
+        return diaAniversarioPoupanca;
+    }
 
-	public void setDiaAniversarioPoupanca(Integer diaAniversarioPoupanca) {
-		this.diaAniversarioPoupanca = diaAniversarioPoupanca;
-	}
+    public void setDiaAniversarioPoupanca(Integer diaAniversarioPoupanca) {
+        this.diaAniversarioPoupanca = diaAniversarioPoupanca;
+    }
 
 }

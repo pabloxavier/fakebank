@@ -13,26 +13,26 @@ import javax.validation.Valid;
 @RequestMapping("clientes")
 public class ClienteTelefoneEndpoint extends FakebankEndpoint{
 
-	@Autowired
-	ClienteService service;
+    @Autowired
+    ClienteService service;
 
-	@GetMapping(value = "/{codigoCliente}/telefones")
-	public ResponseEntity<?> getTelefonesByClienteId(@PathVariable("codigoCliente") Integer codigoCliente){
-		return ok(service.listarTelefonesFromCliente(codigoCliente));
-	}
+    @GetMapping(value = "/{codigoCliente}/telefones")
+    public ResponseEntity<?> getTelefonesByClienteId(@PathVariable("codigoCliente") Integer codigoCliente){
+        return ok(service.listarTelefonesFromCliente(codigoCliente));
+    }
 
-	@PostMapping(value = "/{codigoCliente}/telefones")
-	public ResponseEntity<?> incluirTelefone(
-			@PathVariable("codigoCliente") Integer codigoCliente,
-			@Valid @RequestBody ClienteTelefoneInclusaoCommand comando){
-		return ok(service.salvarTelefone(codigoCliente, comando));
-	}
+    @PostMapping(value = "/{codigoCliente}/telefones")
+    public ResponseEntity<?> incluirTelefone(
+            @PathVariable("codigoCliente") Integer codigoCliente,
+            @Valid @RequestBody ClienteTelefoneInclusaoCommand comando){
+        return ok(service.salvarTelefone(codigoCliente, comando));
+    }
 
-	@DeleteMapping(value = "/{codigoCliente}/telefones/{codigoTelefone}")
-	public ResponseEntity<?> excluirTelefone(
-			@PathVariable("codigoCliente") Integer codigoCliente,
-			@PathVariable("codigoTelefone") Short codigoTelefone){
-		return service.excluirTelefone(codigoCliente, codigoTelefone) ? ok("excluido com sucesso") : notFound("telefone n�o encontrado");
-	}
-	
+    @DeleteMapping(value = "/{codigoCliente}/telefones/{codigoTelefone}")
+    public ResponseEntity<?> excluirTelefone(
+            @PathVariable("codigoCliente") Integer codigoCliente,
+            @PathVariable("codigoTelefone") Short codigoTelefone){
+        return service.excluirTelefone(codigoCliente, codigoTelefone) ? ok("excluido com sucesso") : notFound("telefone n�o encontrado");
+    }
+    
 }

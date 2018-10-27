@@ -20,38 +20,38 @@ import br.com.fakebank.service.TipoContaService;
 @RequestMapping("tipo-conta")
 public class TipoContaEndpoint extends FakebankEndpoint{
 
-	@Autowired
-	TipoContaService service;
-	
-	@GetMapping
-	public ResponseEntity<?> listarTipoConta(){
-		
-		return ok(service.listar());
-	}
-	
-	@GetMapping(value="/{codigo}")
-	public ResponseEntity<?> cosultaTipoContaPorCodigo(@PathVariable("codigo") Integer codigo ){
-		TipoConta tipo = service.consultaPorCodigo(codigo);
-		return ok(tipo);
-	}
-	
-	@PostMapping
-	public ResponseEntity<?> criar(@RequestBody DominioCriacaoCommand comando){
-		TipoConta tipoConta= service.salvar(comando);
-		if (tipoConta != null)
-			return created("tipo conta criado com sucesso");
-		else
-			return notFound("tipo conta nao encontrado");
-	}
-	
-	@PutMapping(value = "/{codigo}")
-	public ResponseEntity<?> editar(@PathVariable("codigo") Integer codigo, @RequestBody DominioEdicaoCommand comando){
-		TipoConta tipoConta = service.salvar(codigo, comando);
-		
-		if (tipoConta != null)
-			return created("tipo conta editado com sucesso");
-		else
-			return notFound("tipo conta nao encontrado");
-			
-	}
+    @Autowired
+    TipoContaService service;
+    
+    @GetMapping
+    public ResponseEntity<?> listarTipoConta(){
+        
+        return ok(service.listar());
+    }
+    
+    @GetMapping(value="/{codigo}")
+    public ResponseEntity<?> cosultaTipoContaPorCodigo(@PathVariable("codigo") Integer codigo ){
+        TipoConta tipo = service.consultaPorCodigo(codigo);
+        return ok(tipo);
+    }
+    
+    @PostMapping
+    public ResponseEntity<?> criar(@RequestBody DominioCriacaoCommand comando){
+        TipoConta tipoConta= service.salvar(comando);
+        if (tipoConta != null)
+            return created("tipo conta criado com sucesso");
+        else
+            return notFound("tipo conta nao encontrado");
+    }
+    
+    @PutMapping(value = "/{codigo}")
+    public ResponseEntity<?> editar(@PathVariable("codigo") Integer codigo, @RequestBody DominioEdicaoCommand comando){
+        TipoConta tipoConta = service.salvar(codigo, comando);
+        
+        if (tipoConta != null)
+            return created("tipo conta editado com sucesso");
+        else
+            return notFound("tipo conta nao encontrado");
+            
+    }
 }

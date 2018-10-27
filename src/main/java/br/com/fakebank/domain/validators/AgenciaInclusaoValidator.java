@@ -16,26 +16,26 @@ import br.com.fakebank.exceptions.RequisicaoMalFormada;
 public class AgenciaInclusaoValidator extends AbstractValidator {
 
     public void validate(AgenciaInclusaoCommand command) {
-    	
+    
         List<MessageErrorDetail> violacoes =
-        		new ArrayList<MessageErrorDetail>();
+                new ArrayList<MessageErrorDetail>();
 
         ValidatorFactory factory =
-        		Validation.buildDefaultValidatorFactory();
+                Validation.buildDefaultValidatorFactory();
         
         Validator validator =
-        		factory.getValidator();
+                factory.getValidator();
 
         Set<ConstraintViolation<AgenciaInclusaoCommand>>
-        	errosEncontrados =
+            errosEncontrados =
                 validator.validate(command);
         
         for (ConstraintViolation<AgenciaInclusaoCommand> error : errosEncontrados) {
             setRule(error);
             violacoes.add(
-            		new MessageErrorDetail(
-            				getFieldError(),
-            				getMessageError()));
+                    new MessageErrorDetail(
+                            getFieldError(),
+                            getMessageError()));
         }
 
         if (!violacoes.isEmpty()) {

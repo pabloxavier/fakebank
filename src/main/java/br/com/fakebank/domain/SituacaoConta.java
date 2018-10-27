@@ -9,27 +9,27 @@ import br.com.fakebank.domain.commands.DominioEdicaoCommand;
 @Entity
 @DiscriminatorValue("sit_conta")
 public class SituacaoConta extends Dominio{
-	
-	public SituacaoConta() {
-		
-	}
+    
+    public SituacaoConta() {
+        
+    }
 
-	private SituacaoConta(DominioCriacaoCommand comando) {
+    private SituacaoConta(DominioCriacaoCommand comando) {
 
-		this.setTipo(DominioEnum.SIT_CONTA.toString());
-		this.setValor(comando.getValor());
-		this.setDescricao(comando.getDescricao());
+        this.setTipo(DominioEnum.SIT_CONTA.toString());
+        this.setValor(comando.getValor());
+        this.setDescricao(comando.getDescricao());
 
-	}
+    }
 
-	public static SituacaoConta criar(DominioCriacaoCommand comando) {
+    public static SituacaoConta criar(DominioCriacaoCommand comando) {
 
-		return new SituacaoConta(comando);
+        return new SituacaoConta(comando);
 
-	}
-	
-	public void editar(DominioEdicaoCommand comando) {
-		this.setDescricao(comando.getDescricao());
-	}
-	
+    }
+    
+    public void editar(DominioEdicaoCommand comando) {
+        this.setDescricao(comando.getDescricao());
+    }
+    
 }
