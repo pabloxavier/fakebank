@@ -12,11 +12,14 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import br.com.fakebank.domain.commands.AgenciaEdicaoCommand;
 import br.com.fakebank.domain.commands.AgenciaInclusaoCommand;
 
 @Entity
 @Table(name = "agencia", schema = "dbo")
+@DynamicUpdate(true)
 public class Agencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
