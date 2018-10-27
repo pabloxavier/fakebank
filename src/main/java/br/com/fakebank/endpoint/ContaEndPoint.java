@@ -29,7 +29,7 @@ public class ContaEndPoint extends FakebankEndpoint {
     public ResponseEntity<?> incluirContaCorrente(
             @PathVariable(value="codigoCliente", required=true) Integer cdCliente,
             @RequestBody ContaCorrenteInclusaoCommand comando) {
-        Conta conta = contaService.salvarContaCorrente(comando);
+        Conta conta = contaService.salvarContaCorrente(cdCliente, comando);
         ContaCorrenteRepresentation model = ContaCorrenteRepresentation.from(conta);
         return created(model, conta.getCodigoConta());
     }
@@ -37,7 +37,7 @@ public class ContaEndPoint extends FakebankEndpoint {
     public ResponseEntity<?> incluirContaSalario(
             @PathVariable(value="codigoCliente", required=true) Integer cdCliente,
             @RequestBody ContaSalarioInclusaoCommand comando) {
-        Conta conta = contaService.salvarContaSalario(comando);
+        Conta conta = contaService.salvarContaSalario(cdCliente, comando);
         ContaSalarioRepresentation model = ContaSalarioRepresentation.from(conta);
         return created(model, conta.getCodigoConta());
     }
@@ -46,7 +46,7 @@ public class ContaEndPoint extends FakebankEndpoint {
     public ResponseEntity<?> incluirContaPoupanca(
             @PathVariable(value="codigoCliente", required=true) Integer cdCliente,
             @RequestBody ContaPoupancaInclusaoCommand comando) {
-        Conta conta = contaService.salvarContaPoupanca(comando);
+        Conta conta = contaService.salvarContaPoupanca(cdCliente, comando);
         ContaPoupancaRepresentation model = ContaPoupancaRepresentation.from(conta);
         return created(model, conta.getCodigoConta());
     }

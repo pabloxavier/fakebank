@@ -2,13 +2,14 @@ package br.com.fakebank.representations;
 
 import br.com.fakebank.domain.Conta;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class ContaSalarioRepresentation {
 
     private String codigoConta;
     private String nomeCliente;
-    private Date dataAbertura;
+    private LocalDate dataAbertura;
     private Integer codigoGerente;
     private Integer codigoSituacaoConta;
     private Double valorSaldo;
@@ -42,11 +43,11 @@ public class ContaSalarioRepresentation {
         this.nomeCliente = nomeCliente;
     }
 
-    public Date getDataAbertura() {
+    public LocalDate getDataAbertura() {
         return dataAbertura;
     }
 
-    public void setDataAbertura(Date dataAbertura) {
+    public void setDataAbertura(LocalDate dataAbertura) {
         this.dataAbertura = dataAbertura;
     }
 
