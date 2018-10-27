@@ -65,7 +65,8 @@ public class AgenciaEndpoint extends FakebankEndpoint{
     
     @DeleteMapping(value = "/{codigo}")
     public ResponseEntity<?> excluirAgencia(@PathVariable("codigo") Integer codigo){
-        return service.excluir(codigo) ? ok("excluida com sucesso") : notFound("agencia nao encontrada");
+    	service.excluir(codigo);
+        return ok("excluida com sucesso");
     }
 
 }

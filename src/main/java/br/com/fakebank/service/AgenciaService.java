@@ -21,21 +21,31 @@ public class AgenciaService {
     private AgenciaRepository repository;
     
     public List<Agencia> listar(){
-        return repository.findAll();
+    	List<Agencia> agencias = repository.findAll();
+    	
+    	if (agencias.isEmpty()) throw new NotFoundException();
+    	
+        return agencias;
     }
     
     public Agencia consultarPorCodigo(Integer codigo){
-        return repository.findById(codigo)
-                       //.orElse(null);
-                         .orElseThrow(() -> new NotFoundException());
+        return repository
+        		.findById(codigo)
+                .orElseThrow(() -> new NotFoundException());
     }
     
     public List<Agencia> filtrar(String nome, String cnpj, Integer numero){
-        Specification<Agencia> criterio = Specification
-                                            .where(AgenciaSpecifications.agenciaPorParteNome(nome)
-                                            .and(AgenciaSpecifications.agenciaPorNumero(numero))
-                                            .and(AgenciaSpecifications.agenciaPorParteCnpj(cnpj)));
-        return repository.findAll(criterio);
+        Specification<Agencia> criterio =
+        		Specification
+                	.where(AgenciaSpecifications.agenciaPorParteNome(nome)
+                    .and(AgenciaSpecifications.agenciaPorNumero(numero))
+                    .and(AgenciaSpecifications.agenciaPorParteCnpj(cnpj)));
+        
+        List<Agencia> agencias = repository.findAll(criterio);
+        
+    	if (agencias.isEmpty()) throw new NotFoundException();
+    	
+        return agencias;
     }
     
     public Agencia salvar(AgenciaInclusaoCommand comando){
@@ -45,22 +55,13 @@ public class AgenciaService {
     
     public Agencia salvar(Integer codigo, AgenciaEdicaoCommand comando){
         Agencia agencia = consultarPorCodigo(codigo);
-        
-        if (agencia == null)
-            return agencia;
-        
         agencia.editar(comando);
         return repository.save(agencia);
     }
     
-    public boolean excluir(Integer codigo){
+    public void excluir(Integer codigo){
         Agencia agencia = consultarPorCodigo(codigo);
-        
-        if (agencia == null)
-            return false;
-        
-        repository.deleteById(codigo);
-        return true;
+        repository.deleteById(agencia.getCodigo());
     }
 
     public boolean cnpjJaExiste(String cnpj){
@@ -68,6 +69,5 @@ public class AgenciaService {
         Optional<Agencia> agencia = repository.findOne(criterio);
         
         return agencia.isPresent();
-            
     }
 }
