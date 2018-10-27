@@ -1,6 +1,9 @@
 package br.com.fakebank.domain;
 
+
+
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Random;
 
 import javax.persistence.CascadeType;
@@ -28,17 +31,17 @@ import br.com.fakebank.util.DateUtil;
 @Table(name = "CONTA", schema = "dbo")
 public class Conta {
 
-	@Id @GeneratedValue
+	@Id
 	@Column(name = "CD_CONTA")
 	private String codigoConta;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne()
 	@JoinColumn(name = "CD_CLIENTE_PRINCIPAL")
 	@ContaForeignKeyClientePrincipal
 	private Cliente cliente;
 	
 	@Column(name = "DT_ABERTURA")
-	private Date dataAbertura;
+	private LocalDate dataAbertura;
 	
 	@Column(name = "TP_CONTA")
 	@ContaForeignKeyTipoConta
@@ -74,7 +77,7 @@ public class Conta {
 		this.cliente = cliente;		
 		this.codigoGerente = command.getCodigoGerente();
 		this.codigoSituacaoConta = 10;
-		this.dataAbertura = (Date) DateUtil.getDateNow();
+		this.dataAbertura = LocalDate.now();
 		this.tipoConta = 1;
 		this.valorSaldo = 0.00;
 	}
@@ -88,7 +91,7 @@ public class Conta {
 		this.cliente = cliente;
 		this.codigoGerente = command.getCodigoGerente();
 		this.codigoSituacaoConta = 10;	
-		this.dataAbertura = (Date) DateUtil.getDateNow();
+	//	this.dataAbertura = (Date) DateUtil.getDateNowFormatted();
 		this.valorSaldo = 0.00;		
 		this.tipoConta = 2;
 		this.diaAniversarioPoupanca = command.getDiaAniversarioPoupanca();
@@ -104,7 +107,7 @@ public class Conta {
 		this.cliente = cliente;
 		this.codigoGerente = command.getCodigoGerente();
 		this.codigoSituacaoConta = 10;	
-		this.dataAbertura = (Date) DateUtil.getDateNow();
+	//	this.dataAbertura = (Date) DateUtil.getDateNow();
 		this.valorSaldo = 0.00;		
 		this.tipoConta = 3;
 		this.numeroCnpjContratoSalario = command.getNumeroCnpjContratoSalario();
@@ -141,7 +144,7 @@ public class Conta {
         return cliente;
     }
 
-    public Date getDataAbertura() {
+    public LocalDate getDataAbertura() {
         return dataAbertura;
     }
 

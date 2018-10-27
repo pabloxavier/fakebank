@@ -11,7 +11,7 @@ import br.com.fakebank.domain.Agencia;
 import br.com.fakebank.domain.commands.AgenciaEdicaoCommand;
 import br.com.fakebank.domain.commands.AgenciaInclusaoCommand;
 import br.com.fakebank.domain.specifications.AgenciaSpecifications;
-import br.com.fakebank.exceptions.NaoEncontradoException;
+import br.com.fakebank.exceptions.NotFoundException;
 import br.com.fakebank.repository.AgenciaRepository;
 
 @Service
@@ -27,7 +27,7 @@ public class AgenciaService {
     public Agencia consultarPorCodigo(Integer codigo){
         return repository.findById(codigo)
                        //.orElse(null);
-                         .orElseThrow(() -> new NaoEncontradoException());
+                         .orElseThrow(() -> new NotFoundException());
     }
     
     public List<Agencia> filtrar(String nome, String cnpj, Integer numero){

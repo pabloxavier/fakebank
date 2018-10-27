@@ -1,17 +1,22 @@
 package br.com.fakebank.domain.commands;
 
 import br.com.fakebank.domain.TipoTelefone;
+import br.com.fakebank.domain.validators.CommandValidator;
+import br.com.fakebank.exceptions.FieldName;
 
 import javax.validation.constraints.NotNull;
 
 public class ClienteTelefoneInclusaoCommand {
 
+    @FieldName("prefixo")
     @NotNull
-    private Short nrPrefixo;
+    private Short prefixo;
 
+    @FieldName("telefone")
     @NotNull
-    private Integer nrTelefone;
+    private Integer telefone;
 
+    @FieldName("tipoTelefone")
     @NotNull
     private TipoTelefone tipoTelefone;
 
@@ -19,20 +24,20 @@ public class ClienteTelefoneInclusaoCommand {
 
     }
 
-    public Short getNrPrefixo() {
-        return nrPrefixo;
+    public Short getPrefixo() {
+        return prefixo;
     }
 
-    public void setNrPrefixo(Short nrPrefixo) {
-        this.nrPrefixo = nrPrefixo;
+    public void setPrefixo(Short prefixo) {
+        this.prefixo = prefixo;
     }
 
-    public Integer getNrTelefone() {
-        return nrTelefone;
+    public Integer getTelefone() {
+        return telefone;
     }
 
-    public void setNrTelefone(Integer nrTelefone) {
-        this.nrTelefone = nrTelefone;
+    public void setTelefone(Integer telefone) {
+        this.telefone = telefone;
     }
 
     public TipoTelefone getTipoTelefone() {
@@ -41,5 +46,13 @@ public class ClienteTelefoneInclusaoCommand {
 
     public void setTipoTelefone(TipoTelefone tipoTelefone) {
         this.tipoTelefone = tipoTelefone;
+    }
+
+    public void validate() {
+
+        CommandValidator<ClienteTelefoneInclusaoCommand> validator =
+                new CommandValidator<>();
+
+        validator.validate(this);
     }
 }

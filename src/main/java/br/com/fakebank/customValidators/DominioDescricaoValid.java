@@ -5,15 +5,18 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import javax.validation.Constraint;
 import javax.validation.Payload;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface ContaForeignKeySituacaoConta {
-    public String message() default "Situação da conta não encontrada!";
-    
+@Constraint(validatedBy = DominioDescricaoValidator.class)
+public @interface DominioDescricaoValid {
+
+    String message() default "Descrição do Domínio não é válida.";
+
     Class<?>[] groups() default {};
-    
+
     Class<? extends Payload>[] payload() default {};
 
 }

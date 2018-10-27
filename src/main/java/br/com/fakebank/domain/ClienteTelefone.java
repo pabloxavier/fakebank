@@ -2,10 +2,6 @@ package br.com.fakebank.domain;
 
 import br.com.fakebank.domain.commands.ClienteTelefoneInclusaoCommand;
 import br.com.fakebank.infrastructure.converters.TipoTelefoneConverter;
-import br.com.fakebank.repository.ClienteTelefoneRepository;
-import org.springframework.beans.factory.annotation.Autowire;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 
 import javax.persistence.*;
 
@@ -31,15 +27,17 @@ public class ClienteTelefone {
     }
 
     public static ClienteTelefone criar(
-            Integer codigoCliente,
+            Cliente cliente,
             ClienteTelefoneInclusaoCommand comando,
             Short codigoTelefone) {
 
+        comando.validate();
+
         ClienteTelefone telefone = new ClienteTelefone();
         telefone.tipoTelefone = comando.getTipoTelefone();
-        telefone.prefixo = comando.getNrPrefixo();
-        telefone.numero = comando.getNrTelefone();
-        telefone.clienteTelefoneId = new ClienteTelefoneId(codigoCliente, codigoTelefone);
+        telefone.prefixo = comando.getPrefixo();
+        telefone.numero = comando.getTelefone();
+        telefone.clienteTelefoneId = new ClienteTelefoneId(cliente.getCodigo(), codigoTelefone);
 
         return telefone;
     }

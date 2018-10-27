@@ -11,7 +11,7 @@ import javax.validation.Payload;
 @Target(ElementType.FIELD)
 public @interface ContaForeignKeyTipoConta {
     
-    public String message() default "Tipo de conta n„o encontrado!";
+    public String message() default "Tipo de conta n√£o encontrado!";
     
     Class<?>[] groups() default {};
     
