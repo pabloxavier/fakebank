@@ -1,6 +1,6 @@
 package br.com.fakebank.endpoint;
 
-import javax.validation.Valid;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +29,9 @@ public class AgenciaEndpoint extends FakebankEndpoint{
 
     @GetMapping
     public ResponseEntity<?> listarAgencias(){
-        return ok(service.listar()); 
+    	List<Agencia> agencias = service.listar();
+    	List<AgenciaRepresentation> model = AgenciaRepresentation.from(agencias);
+        return ok(model); 
     }
     
     @GetMapping(value = "/{codigo}")

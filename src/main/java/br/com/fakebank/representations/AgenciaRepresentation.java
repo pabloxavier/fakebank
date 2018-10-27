@@ -1,5 +1,8 @@
 package br.com.fakebank.representations;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import br.com.fakebank.domain.Agencia;
 
 public class AgenciaRepresentation {
@@ -14,6 +17,14 @@ public class AgenciaRepresentation {
         model.setNomeCompleto(agencia.getNome());
         model.setCnpj(agencia.getCnpj());
         return model;
+    }
+    
+    public static List<AgenciaRepresentation> from(List<Agencia> agencias){
+    	return
+    		agencias
+    			.stream()
+    			.map(item -> from(item))
+    			.collect(Collectors.toList());
     }
     
     public Integer getCodigoDaAgencia() {
