@@ -58,7 +58,7 @@ public class Agencia {
     
     public void editar(AgenciaEdicaoCommand comando){
         
-        //validacao()
+        comando.validate();
         
         this.numero = comando.getNumero();
         this.nome = comando.getNome();
