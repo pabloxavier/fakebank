@@ -85,7 +85,7 @@ public class Conta {
         
     private Conta (ContaPoupancaInclusaoCommand command) {
         this.codigoConta = this.gerarCodigoConta();
-        //this.cliente = cliente;
+        this.cliente = cliente;
         this.codigoGerente = command.getCodigoGerente();
         this.codigoSituacaoConta = 10;
         this.dataAbertura = (Date) DateUtil.getDateNow();
