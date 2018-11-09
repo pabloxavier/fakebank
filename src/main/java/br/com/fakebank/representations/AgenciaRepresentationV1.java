@@ -3,6 +3,8 @@ package br.com.fakebank.representations;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+
 import br.com.fakebank.domain.Agencia;
 
 public class AgenciaRepresentationV1 {
@@ -22,6 +24,14 @@ public class AgenciaRepresentationV1 {
     }
     
     public static List<AgenciaRepresentationV1> from(List<Agencia> agencias){
+    	return
+    		agencias
+    			.stream()
+    			.map(item -> from(item))
+    			.collect(Collectors.toList());
+    }
+    
+    public static List<AgenciaRepresentationV1> from(Page<Agencia> agencias){
     	return
     		agencias
     			.stream()

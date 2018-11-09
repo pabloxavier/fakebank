@@ -3,6 +3,8 @@ package br.com.fakebank.endpoint;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,10 +30,10 @@ public class AgenciaEndpointV1 extends FakebankEndpoint{
     private AgenciaService service;
 
     @GetMapping
-    public ResponseEntity<?> listarAgencias(){
-    	List<Agencia> agencias = service.listar();
+    public ResponseEntity<?> listarAgencias(Pageable pageable){
+    	Page<Agencia> agencias = service.listar(pageable);
     	List<AgenciaRepresentationV1> model = AgenciaRepresentationV1.from(agencias);
-        return ok(model); 
+        return ok(agencias); 
     }
     
     @GetMapping(value = "/{codigo}")
