@@ -4,7 +4,9 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import br.com.fakebank.domain.ContaEncerrada;
 
-public interface ContaEncerradaRepository extends JpaRepository<ContaEncerrada, Integer>, 
+
+
+public interface ContaEncerradaRepository extends JpaRepository<ContaEncerrada, String>, 
 										  JpaSpecificationExecutor<ContaEncerrada>{
 
 }
