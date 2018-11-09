@@ -3,6 +3,7 @@ package br.com.fakebank.endpoint;
 import br.com.fakebank.domain.Cliente;
 import br.com.fakebank.domain.ClienteTelefone;
 import br.com.fakebank.domain.commands.AgenciaEdicaoCommand;
+import br.com.fakebank.domain.commands.ClienteTelefoneEdicaoCommand;
 import br.com.fakebank.domain.commands.ClienteTelefoneInclusaoCommand;
 import br.com.fakebank.representations.ClienteTelefoneRepresentation;
 import br.com.fakebank.service.ClienteService;
@@ -49,4 +50,20 @@ public class ClienteTelefoneEndpoint extends FakebankEndpoint {
         return service.excluirTelefone(codigoCliente, codigoTelefone) ? ok("excluido com sucesso") : notFound("telefone n�o encontrado");
         }
 
+    
+    @PutMapping(value = "/{codigoCliente}/telefones/{codigoTelefone}")
+    public ResponseEntity<?> editarTelefone(
+    		@PathVariable("codigoCliente") Integer codigoCliente, 
+    		@PathVariable("codigoTelefone") Short codigoTelefone, 
+    		@RequestBody ClienteTelefoneEdicaoCommand comando){
+    	
+    	ClienteTelefone telefone = service.salvarTelefone(codigoCliente, codigoTelefone, comando);
+    	
+    	return created ("editado com sucesso");
+    	
+    }
+    		
+    
+
+    
 }

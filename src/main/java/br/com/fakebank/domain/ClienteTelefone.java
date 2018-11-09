@@ -1,5 +1,7 @@
 package br.com.fakebank.domain;
 
+import br.com.fakebank.domain.commands.AgenciaEdicaoCommand;
+import br.com.fakebank.domain.commands.ClienteTelefoneEdicaoCommand;
 import br.com.fakebank.domain.commands.ClienteTelefoneInclusaoCommand;
 import br.com.fakebank.infrastructure.converters.TipoTelefoneConverter;
 
@@ -42,6 +44,17 @@ public class ClienteTelefone {
         return telefone;
     }
 
+    
+    public void editar(ClienteTelefoneEdicaoCommand comando){
+        
+        //validacao()
+    	
+    	this.prefixo = comando.getPrefixo();
+    	this.numero = comando.getTelefone();
+    	this.tipoTelefone = comando.getTipoTelefone();
+  }
+    
+    
     public ClienteTelefoneId getClienteTelefoneId() {
         return clienteTelefoneId;
     }

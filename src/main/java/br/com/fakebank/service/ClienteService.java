@@ -12,10 +12,16 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import br.com.fakebank.domain.Cliente;
+import br.com.fakebank.domain.ClienteTelefone;
+import br.com.fakebank.domain.ClienteTelefoneId;
 import br.com.fakebank.domain.commands.ClienteEdicaoCommand;
 import br.com.fakebank.domain.commands.ClienteInclusaoCommand;
+import br.com.fakebank.domain.commands.ClienteTelefoneEdicaoCommand;
+import br.com.fakebank.domain.commands.ClienteTelefoneInclusaoCommand;
 import br.com.fakebank.domain.specifications.ClienteSpecifications;
+import br.com.fakebank.domain.specifications.ClienteTelefoneSpecifications;
 import br.com.fakebank.repository.ClienteRepository;
+import br.com.fakebank.repository.ClienteTelefoneRepository;
 
 @Service
 public class ClienteService {
@@ -97,4 +103,16 @@ public class ClienteService {
         telefoneRepository.delete(telefone);
         return true;
     }
+
+
+    public ClienteTelefone salvarTelefone(Integer codigoCliente, Short codigoTelefone, ClienteTelefoneEdicaoCommand comando) {
+    	ClienteTelefone telefone = getTelefoneById(new ClienteTelefoneId(codigoCliente, codigoTelefone));
+    	
+    	if(telefone == null)
+    		return telefone;
+    	
+    	telefone.editar(comando);
+    		return telefoneRepository.save(telefone);
+    }
+    
 }
