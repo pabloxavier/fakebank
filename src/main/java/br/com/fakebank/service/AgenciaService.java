@@ -1,10 +1,16 @@
 package br.com.fakebank.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import br.com.fakebank.domain.Agencia;
@@ -15,6 +21,7 @@ import br.com.fakebank.exceptions.NotFoundException;
 import br.com.fakebank.repository.AgenciaRepository;
 
 @Service
+@CacheConfig(cacheNames = "agencias")
 public class AgenciaService {
 
     @Autowired
@@ -28,6 +35,7 @@ public class AgenciaService {
         return agencias;
     }
     
+    @Cacheable(key = "#codigo")
     public Agencia consultarPorCodigo(Integer codigo){
         return repository
         		.findById(codigo)
@@ -48,17 +56,20 @@ public class AgenciaService {
         return agencias;
     }
     
+    @CachePut
     public Agencia salvar(AgenciaInclusaoCommand comando){
         Agencia agencia = Agencia.criar(comando);
         return repository.save(agencia);
     }
     
+    @CachePut(key = "#codigo")
     public Agencia salvar(Integer codigo, AgenciaEdicaoCommand comando){
         Agencia agencia = consultarPorCodigo(codigo);
         agencia.editar(comando);
         return repository.save(agencia);
     }
     
+    @CacheEvict(key = "#codigo")
     public void excluir(Integer codigo){
         Agencia agencia = consultarPorCodigo(codigo);
         repository.deleteById(agencia.getCodigo());
@@ -69,5 +80,11 @@ public class AgenciaService {
         Optional<Agencia> agencia = repository.findOne(criterio);
         
         return agencia.isPresent();
+    }
+    
+    @CacheEvict(allEntries = true, cacheNames = "agencias")
+    @Scheduled(fixedDelay = 120000)
+    public void cacheEvict() {
+        System.out.println("Liberação de cache de agências: " + new Date());
     }
 }
