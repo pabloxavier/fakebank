@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import br.com.fakebank.domain.commands.GerenteAgenciaInclusaoCommand;
+import br.com.fakebank.domain.commands.GerenteInclusaoCommand;
+
 @Entity
 @Table(name = "GERENTE_AGENCIA", schema = "dbo")
 public class GerenteAgencia {
