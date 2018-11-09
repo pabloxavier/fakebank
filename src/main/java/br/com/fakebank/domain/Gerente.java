@@ -1,4 +1,6 @@
 package br.com.fakebank.domain;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,11 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import br.com.fakebank.domain.commands.ClienteEdicaoCommand;
-import br.com.fakebank.domain.commands.ClienteInclusaoCommand;
 import br.com.fakebank.domain.commands.GerenteEdicaoCommand;
 import br.com.fakebank.domain.commands.GerenteInclusaoCommand;
 
@@ -28,6 +30,13 @@ public class Gerente {
     
     @Column(name = "IS_ATIVO")
     private boolean isAtivo;
+    
+    @ManyToMany
+    @JoinTable(name = "GERENTE_AGENCIA",
+               schema = "DBO",
+               joinColumns = {@JoinColumn(name = "CD_GERENTE")},
+               inverseJoinColumns = {@JoinColumn(name = "CD_AGENCIA")})
+    private List<Agencia> agenciasGerenciadas;
     
     public Integer getCodGerente() {
         return CodGerente;

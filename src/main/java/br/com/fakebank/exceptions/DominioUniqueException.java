@@ -3,7 +3,7 @@ package br.com.fakebank.exceptions;
 public class DominioUniqueException extends RuntimeException{
 
     public DominioUniqueException(){
-        super("DomÌnio j· existe");
+        super("Dom√≠nio j√° existe");
     }
 
     public DominioUniqueException(String message){

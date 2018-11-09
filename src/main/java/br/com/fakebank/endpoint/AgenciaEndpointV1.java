@@ -1,6 +1,6 @@
 package br.com.fakebank.endpoint;
 
-import javax.validation.Valid;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,25 +17,30 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.fakebank.domain.Agencia;
 import br.com.fakebank.domain.commands.AgenciaEdicaoCommand;
 import br.com.fakebank.domain.commands.AgenciaInclusaoCommand;
-import br.com.fakebank.representations.AgenciaRepresentation;
+import br.com.fakebank.representations.AgenciaRepresentationV1;
 import br.com.fakebank.service.AgenciaService;
 
 @RestController
-@RequestMapping("agencias")
-public class AgenciaEndpoint extends FakebankEndpoint{
+@RequestMapping({"v1/agencias", "agencias"})
+public class AgenciaEndpointV1 extends FakebankEndpoint{
     
     @Autowired
     private AgenciaService service;
 
     @GetMapping
     public ResponseEntity<?> listarAgencias(){
-        return ok(service.listar()); 
+    	List<Agencia> agencias = service.listar();
+    	List<AgenciaRepresentationV1> model = AgenciaRepresentationV1.from(agencias);
+        return ok(model); 
     }
     
     @GetMapping(value = "/{codigo}")
-    public ResponseEntity<?> getAgenciaById(@PathVariable("codigo") final Integer codigo){
+    public ResponseEntity<?> getAgenciaById(
+    		@PathVariable("codigo") final Integer codigo){
+    	
         Agencia agencia = service.consultarPorCodigo(codigo);
-        return ok(AgenciaRepresentation.from(agencia)); 
+        AgenciaRepresentationV1 model = AgenciaRepresentationV1.from(agencia);
+        return ok(model); 
     }
     
     @GetMapping(path = "/pesquisa")
@@ -44,26 +49,36 @@ public class AgenciaEndpoint extends FakebankEndpoint{
                 @RequestParam(value="nome", required=false) String nome, 
                 @RequestParam(value="cnpj", required=false) String cnpj){
         
-        return ok(service.filtrar(nome, cnpj, numero));
+    	List<Agencia> agencias = service.filtrar(nome, cnpj, numero);
+    	List<AgenciaRepresentationV1> model = AgenciaRepresentationV1.from(agencias);
+        return ok(model);
     }
         
     @PostMapping
-    public ResponseEntity<?> incluirAgencia(@RequestBody AgenciaInclusaoCommand comando){
+    public ResponseEntity<?> incluirAgencia(
+    		@RequestBody AgenciaInclusaoCommand comando){
+    	
         Agencia agenciaIncluida = service.salvar(comando);
-        AgenciaRepresentation model = AgenciaRepresentation.from(agenciaIncluida);
+        AgenciaRepresentationV1 model = AgenciaRepresentationV1.from(agenciaIncluida);
         return created(model, agenciaIncluida.getCodigo());
     }
     
     @PutMapping(value = "/{codigo}")
-    public ResponseEntity<?> editarAgencia(@PathVariable("codigo") Integer codigo,
-                                           @RequestBody AgenciaEdicaoCommand comando){
+    public ResponseEntity<?> editarAgencia(
+    		@PathVariable("codigo") Integer codigo,
+            @RequestBody AgenciaEdicaoCommand comando){
         
-        return service.salvar(codigo, comando) != null ? ok("editado com sucesso") : notFound("agencia nao encontrada");
+        Agencia agenciaEditada = service.salvar(codigo, comando);
+        AgenciaRepresentationV1 model = AgenciaRepresentationV1.from(agenciaEditada);
+        return ok(model);
     }
     
     @DeleteMapping(value = "/{codigo}")
-    public ResponseEntity<?> excluirAgencia(@PathVariable("codigo") Integer codigo){
-        return service.excluir(codigo) ? ok("excluida com sucesso") : notFound("agencia nao encontrada");
+    public ResponseEntity<?> excluirAgencia(
+    		@PathVariable("codigo") Integer codigo){
+    	
+    	service.excluir(codigo);
+        return ok();
     }
 
 }

@@ -13,7 +13,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy = DominioDescricaoValidator.class)
 public @interface DominioDescricaoValid {
 
-    String message() default "DescriÁ„o do DomÌnio n„o È v·lida.";
+    String message() default "Descri√ß√£o do Dom√≠nio n√£o √© v√°lida.";
 
     Class<?>[] groups() default {};
 
