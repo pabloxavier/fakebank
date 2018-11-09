@@ -84,7 +84,7 @@ public class AgenciaService {
     
     @CacheEvict(allEntries = true, cacheNames = "agencias")
     @Scheduled(fixedDelay = 120000)
-    public void cacheEvict() {
+    public void liberarCache() {
         System.out.println("Liberação de cache de agências: " + new Date());
     }
 }
