@@ -9,6 +9,8 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -27,10 +29,10 @@ public class AgenciaService {
     @Autowired
     private AgenciaRepository repository;
     
-    public List<Agencia> listar(){
-    	List<Agencia> agencias = repository.findAll();
+    public Page<Agencia> listar(Pageable pageable){
+    	Page<Agencia> agencias = repository.findAll(pageable);
     	
-    	if (agencias.isEmpty()) throw new NotFoundException();
+    	if (agencias.getSize() == 0) throw new NotFoundException();
     	
         return agencias;
     }
