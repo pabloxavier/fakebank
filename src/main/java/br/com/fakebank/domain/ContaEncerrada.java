@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,9 +15,9 @@ import javax.persistence.Table;
 public class ContaEncerrada implements Serializable{
 
     @Id
-    @OneToOne
-    @JoinColumn(name = "cd_conta")
-    private Conta conta;
+    //@OneToOne
+    @Column(name = "cd_conta")
+    private String conta;
     
     @Column(name = "dt_encerramento")
     private Date dataEncerramento;
@@ -38,11 +37,11 @@ public class ContaEncerrada implements Serializable{
         
     }
 
-    public Conta getConta() {
+    public String getConta() {
         return conta;
     }
 
-    public void setConta(Conta conta) {
+    public void setConta(String conta) {
         this.conta = conta;
     }
 
