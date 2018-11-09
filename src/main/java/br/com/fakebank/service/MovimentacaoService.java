@@ -12,7 +12,7 @@ import br.com.fakebank.domain.commands.MovimentacaoDepositoCommand;
 import br.com.fakebank.domain.commands.MovimentacaoSaqueCommand;
 import br.com.fakebank.domain.commands.MovimentacaoTransferenciaCommand;
 import br.com.fakebank.domain.specifications.MovimentacaoSpecifications;
-import br.com.fakebank.exceptions.NaoEncontradoException;
+import br.com.fakebank.exceptions.NotFoundException;
 import br.com.fakebank.repository.MovimentacaoRepository;
 
 @Service
@@ -27,7 +27,7 @@ public class MovimentacaoService {
 
     public Movimentacao consultarPorCodigo(Integer codigo) {
         return repository.findById(codigo)
-                         .orElseThrow(() -> new NaoEncontradoException());
+                         .orElseThrow(() -> new NotFoundException());
     }
     
     public List<Movimentacao> filtrar (Integer conta, double valorMovimentacao, Integer tipoMovimentacao, LocalDate dataInicio, LocalDate dataFinal) {

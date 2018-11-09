@@ -9,7 +9,7 @@ import br.com.fakebank.domain.MotivoEncerramento;
 import br.com.fakebank.domain.TipoConta;
 import br.com.fakebank.domain.commands.DominioCriacaoCommand;
 import br.com.fakebank.domain.commands.DominioEdicaoCommand;
-import br.com.fakebank.exceptions.NaoEncontradoException;
+import br.com.fakebank.exceptions.NotFoundException;
 import br.com.fakebank.repository.MotivoEncerramentoRepository;
 import br.com.fakebank.repository.TipoContaRepository;
 
@@ -30,7 +30,7 @@ public class MotivoEncerramentoService {
     
     public MotivoEncerramento consultaPorCodigo(Integer codigo) {
         
-        return repository.findById(codigo).orElseThrow(() -> new NaoEncontradoException());
+        return repository.findById(codigo).orElseThrow(() -> new NotFoundException());
     }
     
     public MotivoEncerramento incluir(DominioCriacaoCommand comando) {

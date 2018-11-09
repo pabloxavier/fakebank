@@ -55,12 +55,12 @@ public class GerenteEndpoint extends FakebankEndpoint{
         if (gerente != null)
             return created("Dados Gerente salvo com sucesso");
         else
-            return notFound("Gerente n„o existe!");
+            return notFound("Gerente n√£o existe!");
     }
     
     @DeleteMapping(value = "/{codigo}")
     public ResponseEntity<?> excluirGerente(@PathVariable("codigo") Integer codigo){
-        return service.excluir(codigo) ? ok("Gerente excluÌdo!") : notFound("Gerente inv·lido!");
+        return service.excluir(codigo) ? ok("Gerente exclu√≠do!") : notFound("Gerente inv√°lido!");
     }
     
 }
