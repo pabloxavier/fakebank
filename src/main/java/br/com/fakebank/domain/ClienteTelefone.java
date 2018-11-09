@@ -1,57 +1,61 @@
 package br.com.fakebank.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import java.io.Serializable;
+import br.com.fakebank.domain.commands.ClienteTelefoneInclusaoCommand;
+import br.com.fakebank.infrastructure.converters.TipoTelefoneConverter;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name= "cliente_telefone", schema= "dbo")
-public class ClienteTelefone implements Serializable {
-	
-	@Id
-	@ManyToOne
-	@JoinColumn(name = "cd_cliente")
-	private Cliente cliente;
-	
-	@Id
-	@Column(name= "cd_telefone")
-	private Short codigo;
-	
-	@Column(name= "nr_prefixo")
-	private Short prefixo;
-	
-	@Column(name= "nr_telefone")
-	private Integer numero;
-	
-	@Column(name = "cd_tipo_telefone")
-	private TipoTelefone tipoTelefone;
-	
-	public ClienteTelefone() {
-		
-	}
+public class ClienteTelefone {
 
-	public Cliente getCliente() {
-		return cliente;
-	}
+    @EmbeddedId
+    private ClienteTelefoneId clienteTelefoneId;
+    
+    @Column(name= "nr_prefixo")
+    private Short prefixo;
+    
+    @Column(name= "nr_telefone")
+    private Integer numero;
+    
+    @Column(name = "cd_tipo_telefone")
+    @Convert(converter = TipoTelefoneConverter.class)
+    private TipoTelefone tipoTelefone;
 
-	public Short getCodigo() {
-		return codigo;
-	}
+    public ClienteTelefone() {
+        
+    }
 
-	public Short getPrefixo() {
-		return prefixo;
-	}
+    public static ClienteTelefone criar(
+            Cliente cliente,
+            ClienteTelefoneInclusaoCommand comando,
+            Short codigoTelefone) {
 
-	public Integer getNumero() {
-		return numero;
-	}
+        comando.validate();
 
-	public TipoTelefone getTipoTelefone() {
-		return tipoTelefone;
-	}
+        ClienteTelefone telefone = new ClienteTelefone();
+        telefone.tipoTelefone = comando.getTipoTelefone();
+        telefone.prefixo = comando.getPrefixo();
+        telefone.numero = comando.getTelefone();
+        telefone.clienteTelefoneId = new ClienteTelefoneId(cliente.getCodigo(), codigoTelefone);
+
+        return telefone;
+    }
+
+    public ClienteTelefoneId getClienteTelefoneId() {
+        return clienteTelefoneId;
+    }
+
+    public Short getPrefixo() {
+        return prefixo;
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public TipoTelefone getTipoTelefone() {
+        return tipoTelefone;
+    }
 
 }

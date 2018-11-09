@@ -13,10 +13,10 @@ import javax.validation.Payload;
 @Constraint(validatedBy = CnpjValidValidator.class)
 public @interface CnpjValid {
 
-	String message() default "CNPJ não é valido.";
+    String message() default "CNPJ não é valido.";
 
-	Class<?>[] groups() default {};
+    Class<?>[] groups() default {};
 
-	Class<? extends Payload>[] payload() default {};
+    Class<? extends Payload>[] payload() default {};
 
 }

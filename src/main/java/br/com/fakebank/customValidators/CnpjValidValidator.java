@@ -7,21 +7,21 @@ import javax.validation.ConstraintValidatorContext;
 
 public class CnpjValidValidator implements ConstraintValidator<CnpjValid, String>{
 
-	@Override
-	public boolean isValid(String value, ConstraintValidatorContext context) {
+    @Override
+    public boolean isValid(String value, ConstraintValidatorContext context) {
 
-		if (value == null) {
-			return true;
-		}
-		
-		if (value.trim().isEmpty()) {
-			return true;
-		}
-		
-		return cnpjIsValid(value);
-	}
+        if (value == null) {
+            return true;
+        }
+        
+        if (value.trim().isEmpty()) {
+            return true;
+        }
+        
+        return cnpjIsValid(value);
+    }
 
-	private boolean cnpjIsValid(String numero) {
+    private boolean cnpjIsValid(String numero) {
 
         if (numero.equals("00000000000000") || numero.equals("11111111111111") || numero.equals("22222222222222")
                 || numero.equals("33333333333333") || numero.equals("44444444444444") || numero.equals("55555555555555")
@@ -75,6 +75,4 @@ public class CnpjValidValidator implements ConstraintValidator<CnpjValid, String
             return (false);
         }
     }
-	
-	
 }

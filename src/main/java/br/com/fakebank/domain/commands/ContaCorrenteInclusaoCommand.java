@@ -5,19 +5,19 @@ import javax.validation.constraints.NotNull;
 
 public class ContaCorrenteInclusaoCommand {
 
-	@NotNull
-	private Integer codigoGerente;
-	
-	public ContaCorrenteInclusaoCommand () {
-		
-	}	
+    @NotNull
+    private Integer codigoGerente;
+    
+    public ContaCorrenteInclusaoCommand () {
+        
+    }
 
-	public Integer getCodigoGerente() {
-		return codigoGerente;
-	}
+    public Integer getCodigoGerente() {
+        return codigoGerente;
+    }
 
-	public void setCodigoGerente(Integer codigoGerente) {
-		this.codigoGerente = codigoGerente;
-	}
+    public void setCodigoGerente(Integer codigoGerente) {
+        this.codigoGerente = codigoGerente;
+    }
 
 }

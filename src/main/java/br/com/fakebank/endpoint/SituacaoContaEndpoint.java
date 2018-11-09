@@ -23,38 +23,38 @@ import br.com.fakebank.service.TipoContaService;
 @RequestMapping("situacao-conta")
 public class SituacaoContaEndpoint extends FakebankEndpoint{
 
-	@Autowired
-	SituacaoContaService service;
-	
-	@GetMapping
-	public ResponseEntity<?> listarTipoConta(){
-		
-		return ok(service.listar());
-	}
-	
-	@GetMapping(value="/{codigo}")
-	public ResponseEntity<?> cosultaTipoContaPorCodigo(@PathVariable("codigo") Integer codigo ){
-		SituacaoConta situacao = service.consultaPorCodigo(codigo);
-		return ok(situacao);
-	}
-	
-	@PostMapping
-	public ResponseEntity<?> criar(@RequestBody DominioCriacaoCommand comando){
-		SituacaoConta situacaoConta= service.salvar(comando);
-		if (situacaoConta != null)
-			return created("situacao conta criada com sucesso");
-		else
-			return notFound("situacao conta nao encontrada");
-	}
-	
-	@PutMapping(value = "/{codigo}")
-	public ResponseEntity<?> editar(@PathVariable("codigo") Integer codigo, @RequestBody DominioEdicaoCommand comando){
-		SituacaoConta situacaoConta = service.salvar(codigo, comando);
-		
-		if (situacaoConta != null)
-			return created("situacao conta editada com sucesso");
-		else
-			return notFound("situacao conta nao encontrada");
-			
-	}	
+    @Autowired
+    SituacaoContaService service;
+    
+    @GetMapping
+    public ResponseEntity<?> listarTipoConta(){
+        
+        return ok(service.listar());
+    }
+    
+    @GetMapping(value="/{codigo}")
+    public ResponseEntity<?> cosultaTipoContaPorCodigo(@PathVariable("codigo") Integer codigo ){
+        SituacaoConta situacao = service.consultaPorCodigo(codigo);
+        return ok(situacao);
+    }
+    
+    @PostMapping
+    public ResponseEntity<?> criar(@RequestBody DominioCriacaoCommand comando){
+        SituacaoConta situacaoConta= service.salvar(comando);
+        if (situacaoConta != null)
+            return created("situacao conta criada com sucesso");
+        else
+            return notFound("situacao conta nao encontrada");
+    }
+    
+    @PutMapping(value = "/{codigo}")
+    public ResponseEntity<?> editar(@PathVariable("codigo") Integer codigo, @RequestBody DominioEdicaoCommand comando){
+        SituacaoConta situacaoConta = service.salvar(codigo, comando);
+        
+        if (situacaoConta != null)
+            return created("situacao conta editada com sucesso");
+        else
+            return notFound("situacao conta nao encontrada");
+            
+    }
 }

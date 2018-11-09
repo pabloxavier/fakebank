@@ -1,6 +1,9 @@
 package br.com.fakebank.domain;
 
+
+
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Random;
 
 import javax.persistence.CascadeType;
@@ -27,18 +30,18 @@ import br.com.fakebank.util.DateUtil;
 @Entity
 @Table(name = "CONTA", schema = "dbo")
 public class Conta {
-	
-	@Id @GeneratedValue
+
+	@Id
 	@Column(name = "CD_CONTA")
 	private String codigoConta;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne()
 	@JoinColumn(name = "CD_CLIENTE_PRINCIPAL")
 	@ContaForeignKeyClientePrincipal
 	private Cliente cliente;
 	
 	@Column(name = "DT_ABERTURA")
-	private Date dataAbertura;
+	private LocalDate dataAbertura;
 	
 	@Column(name = "TP_CONTA")
 	@ContaForeignKeyTipoConta
@@ -65,110 +68,117 @@ public class Conta {
 		
 	}
 	
-	public static Conta criarContaCorrente(ContaCorrenteInclusaoCommand command) {
-		return new Conta(command);
+	public static Conta criarContaCorrente(Cliente cliente, ContaCorrenteInclusaoCommand command) {
+		return new Conta(cliente, command);
 	}
 	
-	private Conta (ContaCorrenteInclusaoCommand command) {
+	private Conta (Cliente cliente, ContaCorrenteInclusaoCommand command) {
 		this.codigoConta = this.gerarCodigoConta();
+		this.cliente = cliente;		
 		this.codigoGerente = command.getCodigoGerente();
 		this.codigoSituacaoConta = 10;
-		this.dataAbertura = (Date) DateUtil.getDateNow();
+		this.dataAbertura = LocalDate.now();
 		this.tipoConta = 1;
 		this.valorSaldo = 0.00;
 	}
-	
-	private void editarConta (ContaCorrenteEdicaoCommand command) {
-		this.codigoGerente = command.getCodigoGerente();		
-		this.codigoSituacaoConta = command.getCodigoSituacaoConta();		
-		this.valorSaldo = command.getValorSaldo();		
-	}	
-	
-	
-	public static Conta criarContaPoupanca(ContaPoupancaInclusaoCommand command) {
-		return new Conta(command);
+			
+	public static Conta criarContaPoupanca(Cliente cliente, ContaPoupancaInclusaoCommand command) {
+		return new Conta(cliente, command);
 	}
-	
-	private Conta (ContaPoupancaInclusaoCommand command) {
+		
+	private Conta (Cliente cliente, ContaPoupancaInclusaoCommand command) {
 		this.codigoConta = this.gerarCodigoConta();
+		this.cliente = cliente;
 		this.codigoGerente = command.getCodigoGerente();
 		this.codigoSituacaoConta = 10;	
-		this.dataAbertura = (Date) DateUtil.getDateNow();
+	//	this.dataAbertura = (Date) DateUtil.getDateNowFormatted();
 		this.valorSaldo = 0.00;		
 		this.tipoConta = 2;
 		this.diaAniversarioPoupanca = command.getDiaAniversarioPoupanca();
 		
 	}	
-		
-	private void editarConta (ContaPoupancaEdicaoCommand command) {
-		this.codigoGerente = command.getCodigoGerente();		
-		this.codigoSituacaoConta = command.getCodigoSituacaoConta();		
-		this.valorSaldo = command.getValorSaldo();			
-		this.diaAniversarioPoupanca = command.getDiaAniversarioPoupanca();		
+			
+	public static Conta criarContaSalario(Cliente cliente, ContaSalarioInclusaoCommand command) {
+		return new Conta(cliente, command);
 	}
-		
 	
-	public static Conta criarContaSalario(ContaSalarioInclusaoCommand command) {
-		return new Conta(command);
-	}
-
-	private Conta (ContaSalarioInclusaoCommand command) {
+	private Conta (Cliente cliente, ContaSalarioInclusaoCommand command) {
 		this.codigoConta = this.gerarCodigoConta();
+		this.cliente = cliente;
 		this.codigoGerente = command.getCodigoGerente();
 		this.codigoSituacaoConta = 10;	
-		this.dataAbertura = (Date) DateUtil.getDateNow();
+	//	this.dataAbertura = (Date) DateUtil.getDateNow();
 		this.valorSaldo = 0.00;		
 		this.tipoConta = 3;
 		this.numeroCnpjContratoSalario = command.getNumeroCnpjContratoSalario();
 		
 	}
 	
+	public void editarContaSalario(ContaSalarioEdicaoCommand command) {
+		this.codigoGerente = command.getCodigoGerente();		
+		this.codigoSituacaoConta = command.getCodigoSituacaoConta();							
+		this.numeroCnpjContratoSalario = command.getNumeroCnpjContratoSalario();
+	} 
+	
+	public void editarContaCorrente(ContaCorrenteEdicaoCommand command) {
+		this.codigoGerente = command.getCodigoGerente();		
+		this.codigoSituacaoConta = command.getCodigoSituacaoConta();						
+	}	
+
+	public void editarContaPoupanca(ContaPoupancaEdicaoCommand command) {
+		this.codigoGerente = command.getCodigoGerente();		
+		this.codigoSituacaoConta = command.getCodigoSituacaoConta();							
+		this.diaAniversarioPoupanca = command.getDiaAniversarioPoupanca();		
+	}	
+		
 	private String gerarCodigoConta() {
 		Random random = new Random();
 		return Integer.toString(random.nextInt(1000));		
-	}
-	
-	private void editarConta (ContaSalarioEdicaoCommand command) {
-		this.codigoGerente = command.getCodigoGerente();		
-		this.codigoSituacaoConta = command.getCodigoSituacaoConta();		
-		this.valorSaldo = command.getValorSaldo();			
-		this.numeroCnpjContratoSalario = command.getNumeroCnpjContratoSalario();		
 	}	
 				
 	public String getCodigoConta() {
 		return codigoConta;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
-	}
+    public Cliente getCliente() {
+        return cliente;
+    }
 
-	public Date getDataAbertura() {
-		return dataAbertura;
-	}
+    public LocalDate getDataAbertura() {
+        return dataAbertura;
+    }
 
-	public Integer getTipoConta() {
-		return tipoConta;
-	}
+    public Integer getTipoConta() {
+        return tipoConta;
+    }
 
-	public Integer getCodigoGerente() {
-		return codigoGerente;
-	}
+    public Integer getCodigoGerente() {
+        return codigoGerente;
+    }
 
-	public Integer getCodigoSituacaoConta() {
-		return codigoSituacaoConta;
-	}
+    public Integer getCodigoSituacaoConta() {
+        return codigoSituacaoConta;
+    }
 
-	public Double getValorSaldo() {
-		return valorSaldo;
-	}
+    public Double getValorSaldo() {
+        return valorSaldo;
+    }
 
-	public String getNumeroCnpjContratoSalario() {
-		return numeroCnpjContratoSalario;
-	}
+    public String getNumeroCnpjContratoSalario() {
+        return numeroCnpjContratoSalario;
+    }
 
-	public Integer getDiaAniversarioPoupanca() {
-		return diaAniversarioPoupanca;
+    public Integer getDiaAniversarioPoupanca() {
+        return diaAniversarioPoupanca;
+    }
+
+	@Override
+	public String toString() {
+		return "Conta [codigoConta=" + codigoConta + ", cliente=" + cliente + ", dataAbertura=" + dataAbertura
+				+ ", tipoConta=" + tipoConta + ", codigoGerente=" + codigoGerente + ", codigoSituacaoConta="
+				+ codigoSituacaoConta + ", valorSaldo=" + valorSaldo + ", numeroCnpjContratoSalario="
+				+ numeroCnpjContratoSalario + ", diaAniversarioPoupanca=" + diaAniversarioPoupanca + "]";
 	}
-	
+    
+
 }

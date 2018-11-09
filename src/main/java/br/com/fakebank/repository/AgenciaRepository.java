@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import br.com.fakebank.domain.Agencia;
 
 public interface AgenciaRepository extends JpaRepository<Agencia, Integer>, 
-										   JpaSpecificationExecutor<Agencia>{
-	
-	//Agencia findByNumero(Integer numero);
-	
+                                           JpaSpecificationExecutor<Agencia>{
+    
+    //Agencia findByNumero(Integer numero);
+    
 }

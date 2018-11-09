@@ -3,6 +3,7 @@
 Documentação de apoio ao estudo e construção da API do FakeBank.
 
 * [O FakeBank](#fakebank)
+* [Principais Comandos Git](#principais-comandos-git)
 * [Etapa 1 Criando o Banco de Dados](#etapa-1-criando-o-banco-de-dados)
     - [Criando a Tabela DBO.AGENCIA](#criando-a-tabela-agencia)
     - [Criando a Tabela DBO.PESSOA](#criando-a-tabela-pessoa)
@@ -36,6 +37,103 @@ Documentação de apoio ao estudo e construção da API do FakeBank.
 O FakeBank é um projeto de Estudos, em que se objetiva aprender a criar estruturas de serviços REST usando tecnologias como Java, Hibernate, JUnit, Spring Boot e Spring Data.
 
 Também é nosso objeto aprender técnicas de programação orientada a objetos, como DDD (Domain Driven Design), alguns Design Patterns, SOLID e construção de testes unitários.
+
+## Principais Comandos Git
+
+Antes de qualquer coisa, vamos criar um diretório para ser o nosso Repositório Local.
+
+`cd\`
+`mkdir GitHubRepositorios`
+`cd GitHubRepositorios`
+
+Para fazer um CLONE do Repositório REMOTO para o Repositório LOCAL.
+
+`git clone https://github.com/pabloxavier/fakebank.git`
+
+Acesse o diretório do projeto.
+
+`cd fakebank`
+
+Para criar um novo Branch e já posicionar o Git nesta Branch Local.
+
+`git checkout -b feature-estrutura-inicial`
+
+Para adicionar TODOS os arquivos novos ao branch.
+
+`git add .`
+
+Para efetivar as alterações na branch local.
+
+`git commit -a -m "Primeira alteração de código-fonte"`
+OU
+`git commit -am "Primeira alteração de código-fonte"`
+
+Para promover as alterações de branch local para um branch remoto.
+
+`git push origin feature-estrutura-inicial`
+
+Visualizando o status atual do repositório LOCAL.
+
+`git status`
+
+Visualizando as últimas iterações no repositório (na branch posicionada).
+
+`git log`
+
+Para atualizar o seu branch local com a master. (PROCESSO 1)
+
+Provavelmente você já estará posicionado no seu branch.
+
+Se por acaso não estiver.
+
+`git checkout SEU_BRANCH`
+
+Já estando posicionado.
+
+`git rebase origin/master`
+
+Para atualizar o seu branch local com a master. (PROCESSO 2)
+
+Provavelmente você já estará posicionado no seu branch.
+
+Se por acaso não estiver.
+
+`git checkout SEU_BRANCH`
+
+Já estando posicionado.
+
+`git merge origin/master`
+
+`git push origin SEU_BRANCH`
+
+Para atualizar o seu branch local com a master. (PROCESSO 3)
+
+Provavelmente você já estará posicionado no seu branch.
+
+Se por acaso não estiver.
+
+`git checkout SEU_BRANCH`
+
+Já estando posicionado.
+
+`git pull origin master`
+
+`git push origin SEU_BRANCH`
+
+**Importante: Havendo conflitos, será necessário resolvê-los, e então realizar um commit para o seu branch.
+
+Reposicionar na master ou em outra branch.
+
+`git checkout master`
+
+Para zerar possíveis problemas de cache no git.
+
+```
+git rm --cached -r .
+git reset --hard
+git gc
+```
+
 
 ## Etapa 1 Criando o Banco de Dados
 
