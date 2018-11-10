@@ -2,6 +2,8 @@ package br.com.fakebank.domain.commands;
 
 import javax.validation.constraints.NotNull;
 
+import br.com.fakebank.domain.validators.CommandValidator;
+
 public class ContaSalarioEdicaoCommand {
     
     @NotNull
@@ -39,5 +41,10 @@ public class ContaSalarioEdicaoCommand {
         this.numeroCnpjContratoSalario = numeroCnpjContratoSalario;
     }
 
+    public void validate() {
+    	CommandValidator<ContaSalarioEdicaoCommand> validator =
+        		new CommandValidator<ContaSalarioEdicaoCommand>();
+        validator.validate(this);
+    }
 
 }
