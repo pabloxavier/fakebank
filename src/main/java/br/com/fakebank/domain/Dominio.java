@@ -11,8 +11,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-import br.com.fakebank.domain.commands.DominioCriacaoCommand;
-
 @Entity
 @Table(name = "dominio", schema = "dbo")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
