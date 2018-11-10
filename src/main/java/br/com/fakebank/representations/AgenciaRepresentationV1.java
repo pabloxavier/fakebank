@@ -1,5 +1,8 @@
 package br.com.fakebank.representations;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -7,11 +10,16 @@ import org.springframework.data.domain.Page;
 
 import br.com.fakebank.domain.Agencia;
 
+@ApiModel(description = "Classe de modelo (representação de agência).")
 public class AgenciaRepresentationV1 {
 
+	@ApiModelProperty(notes = "Código da agência (autonumerável).")
     private Integer codigo;
+	@ApiModelProperty(notes = "Número de identificação da agência.")
     private Integer numero;
+	@ApiModelProperty(notes = "Nome fantasia.")
     private String nome;
+	@ApiModelProperty(notes = "CNPJ da agência.")
     private String cnpj;
     
     public static AgenciaRepresentationV1 from(Agencia agencia){
