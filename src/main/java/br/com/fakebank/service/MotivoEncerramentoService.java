@@ -7,13 +7,11 @@ import org.springframework.stereotype.Service;
 
 import br.com.fakebank.domain.DominioEnum;
 import br.com.fakebank.domain.MotivoEncerramento;
-import br.com.fakebank.domain.TipoConta;
 import br.com.fakebank.domain.commands.DominioCriacaoCommand;
 import br.com.fakebank.domain.commands.DominioEdicaoCommand;
 import br.com.fakebank.exceptions.DominioUniqueException;
 import br.com.fakebank.exceptions.NotFoundException;
 import br.com.fakebank.repository.MotivoEncerramentoRepository;
-import br.com.fakebank.repository.TipoContaRepository;
 
 @Service
 public class MotivoEncerramentoService extends DominioService{
