@@ -1,35 +1,35 @@
 package br.com.fakebank.domain.commands;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import br.com.fakebank.customValidators.ContaForeignKeyGerente;
 import br.com.fakebank.domain.validators.CommandValidator;
+import br.com.fakebank.exceptions.FieldName;
 
-public abstract class ContaCorrenteInclusaoCommand {
+public class ContaCorrenteInclusaoCommand extends ContaInclusaoCommand{
 
-    @NotNull
-    @ContaForeignKeyGerente
-    private Integer codigoGerente;
-    
-    public ContaCorrenteInclusaoCommand () {
-        
-    }
+	    @NotNull
+	    @ContaForeignKeyGerente
+	    @FieldName("Gerente")
+	    private Integer codigoGerente;
+	    
+	    public ContaCorrenteInclusaoCommand () {
+	    		        
+	    }
 
+	    public Integer getCodigoGerente() {
+	        return codigoGerente;
+	    }
 
-    public Integer getCodigoGerente() {
-        return codigoGerente;
-    }
+	    public void setCodigoGerente(Integer codigoGerente) {
+	        this.codigoGerente = codigoGerente;
+	    }
+	    
+	    public void validate() {
+	    	CommandValidator<ContaInclusaoCommand> validator =
+	        		new CommandValidator<ContaInclusaoCommand>();
+	        validator.validate(this);
+	    }
+	    
 
-    public void setCodigoGerente(Integer codigoGerente) {
-        this.codigoGerente = codigoGerente;
-    }
-    
-    public void validate() {
-    	CommandValidator<ContaCorrenteInclusaoCommand> validator =
-        		new CommandValidator<ContaCorrenteInclusaoCommand>();
-        validator.validate(this);
-    }
-    
-
-}
+	}	
