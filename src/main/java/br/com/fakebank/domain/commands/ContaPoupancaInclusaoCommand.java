@@ -7,13 +7,17 @@ import org.hibernate.validator.constraints.Range;
 
 import br.com.fakebank.customValidators.ContaForeignKeyGerente;
 import br.com.fakebank.domain.validators.CommandValidator;
+import br.com.fakebank.exceptions.FieldName;
 
-public class ContaPoupancaInclusaoCommand extends ContaCorrenteInclusaoCommand {
-   
+public class ContaPoupancaInclusaoCommand extends ContaInclusaoCommand {
+    
+	@NotNull
+	@Range(min = 1, max = 31)
+	@FieldName("Dia Aniversário")
     private Integer diaAniversarioPoupanca;
     
     public ContaPoupancaInclusaoCommand () {
-        
+    	super();        
     }
 
     public Integer getDiaAniversarioPoupanca() {

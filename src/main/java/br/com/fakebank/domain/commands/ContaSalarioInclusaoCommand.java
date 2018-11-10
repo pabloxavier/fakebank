@@ -6,10 +6,13 @@ import javax.validation.constraints.NotNull;
 import br.com.fakebank.customValidators.CnpjValid;
 import br.com.fakebank.customValidators.ContaForeignKeyGerente;
 import br.com.fakebank.domain.validators.CommandValidator;
+import br.com.fakebank.exceptions.FieldName;
 
-public class ContaSalarioInclusaoCommand extends ContaCorrenteInclusaoCommand{
+public class ContaSalarioInclusaoCommand extends ContaInclusaoCommand{
 	
 	@CnpjValid
+	@NotNull
+	@FieldName("Cnpj")
     private String numeroCnpjContratoSalario;
     
     public ContaSalarioInclusaoCommand () {

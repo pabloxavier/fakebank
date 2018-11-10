@@ -21,6 +21,7 @@ import br.com.fakebank.customValidators.ContaForeignKeySituacaoConta;
 import br.com.fakebank.customValidators.ContaForeignKeyTipoConta;
 import br.com.fakebank.domain.commands.ContaCorrenteEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaCorrenteInclusaoCommand;
+import br.com.fakebank.domain.commands.ContaInclusaoCommand;
 import br.com.fakebank.domain.commands.ContaPoupancaEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaPoupancaInclusaoCommand;
 import br.com.fakebank.domain.commands.ContaSalarioEdicaoCommand;
@@ -38,8 +39,7 @@ public class Conta {
 	@ManyToOne()
 	@JoinColumn(name = "CD_CLIENTE_PRINCIPAL")
 	@ContaForeignKeyClientePrincipal
-	private Cliente cliente;
-	
+	private Cliente cliente;	
 	
 	@Column(name = "DT_ABERTURA")
 	private LocalDate dataAbertura;
@@ -48,8 +48,9 @@ public class Conta {
 	@ContaForeignKeyTipoConta
 	private Integer tipoConta;
 	
+	@ManyToOne()
+	@JoinColumn(name = "CD_GERENTE")
 	@Column(name = "CD_GERENTE")
-	@ContaForeignKeyGerente
 	private Integer codigoGerente;
 	
 	@Column(name = "CD_SITUACAO_CONTA")

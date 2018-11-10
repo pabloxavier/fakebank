@@ -14,6 +14,7 @@ import br.com.fakebank.domain.SituacaoConta;
 import br.com.fakebank.domain.TipoConta;
 import br.com.fakebank.domain.commands.ContaCorrenteEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaCorrenteInclusaoCommand;
+import br.com.fakebank.domain.commands.ContaInclusaoCommand;
 import br.com.fakebank.domain.commands.ContaPoupancaEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaPoupancaInclusaoCommand;
 import br.com.fakebank.domain.commands.ContaSalarioEdicaoCommand;
@@ -60,7 +61,7 @@ public class ContaService {
 			Conta contaCorrente = Conta.criarContaCorrente(cliente, command); 
 			return repository.save(contaCorrente);
 		}
-		return null;
+		throw new NotFoundException("Cliente não encontrado.");
 	}
 	
 	public Conta salvarContaPoupanca(Integer codigoCliente, ContaPoupancaInclusaoCommand command) {
@@ -70,7 +71,7 @@ public class ContaService {
 			Conta contaPoupanca = Conta.criarContaPoupanca(cliente, command); 
 			return repository.save(contaPoupanca);
 		}
-		return null;
+		throw new NotFoundException("Cliente não encontrado.");
 	}
 	
 	public Conta salvarContaSalario(Integer codigoCliente, ContaSalarioInclusaoCommand command) {
@@ -79,7 +80,7 @@ public class ContaService {
 			Conta contaSalario = Conta.criarContaSalario(cliente, command); 
 			return repository.save(contaSalario);
 		}
-		return null;
+		throw new NotFoundException("Cliente não encontrado.");
 	}
 	
 	public Conta alterarContaCorrente(String codigo, ContaCorrenteEdicaoCommand command) {
