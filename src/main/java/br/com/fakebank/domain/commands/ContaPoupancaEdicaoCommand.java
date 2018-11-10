@@ -2,6 +2,8 @@ package br.com.fakebank.domain.commands;
 
 import javax.validation.constraints.NotNull;
 
+import br.com.fakebank.domain.validators.CommandValidator;
+
 public class ContaPoupancaEdicaoCommand {
     
     @NotNull
@@ -37,6 +39,12 @@ public class ContaPoupancaEdicaoCommand {
 
     public void setDiaAniversarioPoupanca(Integer diaAniversarioPoupanca) {
         this.diaAniversarioPoupanca = diaAniversarioPoupanca;
+    }
+    
+    public void validate() {
+    	CommandValidator<ContaPoupancaEdicaoCommand> validator =
+        		new CommandValidator<ContaPoupancaEdicaoCommand>();
+        validator.validate(this);
     }
 
 }

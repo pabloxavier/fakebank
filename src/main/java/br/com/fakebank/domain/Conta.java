@@ -21,6 +21,7 @@ import br.com.fakebank.customValidators.ContaForeignKeySituacaoConta;
 import br.com.fakebank.customValidators.ContaForeignKeyTipoConta;
 import br.com.fakebank.domain.commands.ContaCorrenteEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaCorrenteInclusaoCommand;
+import br.com.fakebank.domain.commands.ContaInclusaoCommand;
 import br.com.fakebank.domain.commands.ContaPoupancaEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaPoupancaInclusaoCommand;
 import br.com.fakebank.domain.commands.ContaSalarioEdicaoCommand;
@@ -38,7 +39,7 @@ public class Conta {
 	@ManyToOne()
 	@JoinColumn(name = "CD_CLIENTE_PRINCIPAL")
 	@ContaForeignKeyClientePrincipal
-	private Cliente cliente;
+	private Cliente cliente;	
 	
 	@Column(name = "DT_ABERTURA")
 	private LocalDate dataAbertura;
@@ -47,8 +48,9 @@ public class Conta {
 	@ContaForeignKeyTipoConta
 	private Integer tipoConta;
 	
+	@ManyToOne()
+	@JoinColumn(name = "CD_GERENTE")
 	@Column(name = "CD_GERENTE")
-	@ContaForeignKeyGerente
 	private Integer codigoGerente;
 	
 	@Column(name = "CD_SITUACAO_CONTA")
@@ -69,6 +71,9 @@ public class Conta {
 	}
 	
 	public static Conta criarContaCorrente(Cliente cliente, ContaCorrenteInclusaoCommand command) {
+		
+		command.validate();
+		
 		return new Conta(cliente, command);
 	}
 	
@@ -76,13 +81,16 @@ public class Conta {
 		this.codigoConta = this.gerarCodigoConta();
 		this.cliente = cliente;		
 		this.codigoGerente = command.getCodigoGerente();
-		this.codigoSituacaoConta = 10;
+		this.codigoSituacaoConta = 4;
 		this.dataAbertura = LocalDate.now();
 		this.tipoConta = 1;
 		this.valorSaldo = 0.00;
 	}
 			
 	public static Conta criarContaPoupanca(Cliente cliente, ContaPoupancaInclusaoCommand command) {
+		
+		command.validate();
+		
 		return new Conta(cliente, command);
 	}
 		
@@ -90,15 +98,18 @@ public class Conta {
 		this.codigoConta = this.gerarCodigoConta();
 		this.cliente = cliente;
 		this.codigoGerente = command.getCodigoGerente();
-		this.codigoSituacaoConta = 10;	
-	//	this.dataAbertura = (Date) DateUtil.getDateNowFormatted();
+		this.codigoSituacaoConta = 4;	
+		this.dataAbertura = LocalDate.now();
 		this.valorSaldo = 0.00;		
-		this.tipoConta = 2;
+		this.tipoConta = 3;
 		this.diaAniversarioPoupanca = command.getDiaAniversarioPoupanca();
 		
 	}	
 			
 	public static Conta criarContaSalario(Cliente cliente, ContaSalarioInclusaoCommand command) {
+		
+		command.validate();
+		
 		return new Conta(cliente, command);
 	}
 	
@@ -106,26 +117,36 @@ public class Conta {
 		this.codigoConta = this.gerarCodigoConta();
 		this.cliente = cliente;
 		this.codigoGerente = command.getCodigoGerente();
-		this.codigoSituacaoConta = 10;	
-	//	this.dataAbertura = (Date) DateUtil.getDateNow();
+		this.codigoSituacaoConta = 4;	
+		this.dataAbertura = LocalDate.now();
 		this.valorSaldo = 0.00;		
-		this.tipoConta = 3;
+		this.tipoConta = 2;
 		this.numeroCnpjContratoSalario = command.getNumeroCnpjContratoSalario();
 		
 	}
 	
 	public void editarContaSalario(ContaSalarioEdicaoCommand command) {
+		
+		command.validate();
+		
 		this.codigoGerente = command.getCodigoGerente();		
 		this.codigoSituacaoConta = command.getCodigoSituacaoConta();							
-		this.numeroCnpjContratoSalario = command.getNumeroCnpjContratoSalario();
+		this.numeroCnpjContratoSalario = command.getNumeroCnpjContratoSalario();		
+		
 	} 
 	
 	public void editarContaCorrente(ContaCorrenteEdicaoCommand command) {
+		
+		command.validate();
+		
 		this.codigoGerente = command.getCodigoGerente();		
 		this.codigoSituacaoConta = command.getCodigoSituacaoConta();						
 	}	
 
 	public void editarContaPoupanca(ContaPoupancaEdicaoCommand command) {
+		
+		command.validate();
+		
 		this.codigoGerente = command.getCodigoGerente();		
 		this.codigoSituacaoConta = command.getCodigoSituacaoConta();							
 		this.diaAniversarioPoupanca = command.getDiaAniversarioPoupanca();		

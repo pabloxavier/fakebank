@@ -3,23 +3,21 @@ package br.com.fakebank.domain.commands;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-public class ContaPoupancaInclusaoCommand {
+import org.hibernate.validator.constraints.Range;
 
-    @NotNull
-    private Integer codigoGerente;
+import br.com.fakebank.customValidators.ContaForeignKeyGerente;
+import br.com.fakebank.domain.validators.CommandValidator;
+import br.com.fakebank.exceptions.FieldName;
+
+public class ContaPoupancaInclusaoCommand extends ContaInclusaoCommand {
     
+	@NotNull
+	@Range(min = 1, max = 31)
+	@FieldName("Dia Aniversário")
     private Integer diaAniversarioPoupanca;
     
     public ContaPoupancaInclusaoCommand () {
-        
-    }
-
-    public Integer getCodigoGerente() {
-        return codigoGerente;
-    }
-
-    public void setCodigoGerente(Integer codigoGerente) {
-        this.codigoGerente = codigoGerente;
+    	super();        
     }
 
     public Integer getDiaAniversarioPoupanca() {
@@ -28,6 +26,12 @@ public class ContaPoupancaInclusaoCommand {
 
     public void setDiaAniversarioPoupanca(Integer diaAniversarioPoupanca) {
         this.diaAniversarioPoupanca = diaAniversarioPoupanca;
+    }
+    
+    public void validate() {
+    	CommandValidator<ContaPoupancaInclusaoCommand> validator =
+        		new CommandValidator<ContaPoupancaInclusaoCommand>();
+        validator.validate(this);
     }
 
 }

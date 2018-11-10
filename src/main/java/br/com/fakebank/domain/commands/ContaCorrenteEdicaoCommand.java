@@ -2,6 +2,8 @@ package br.com.fakebank.domain.commands;
 
 import javax.validation.constraints.NotNull;
 
+import br.com.fakebank.domain.validators.CommandValidator;
+
 public class ContaCorrenteEdicaoCommand {
 
     @NotNull
@@ -27,6 +29,12 @@ public class ContaCorrenteEdicaoCommand {
 
     public void setCodigoSituacaoConta(Integer codigoSituacaoConta) {
         this.codigoSituacaoConta = codigoSituacaoConta;
+    }
+    
+    public void validate() {
+    	CommandValidator<ContaCorrenteEdicaoCommand> validator =
+        		new CommandValidator<ContaCorrenteEdicaoCommand>();
+        validator.validate(this);
     }
 
 }
