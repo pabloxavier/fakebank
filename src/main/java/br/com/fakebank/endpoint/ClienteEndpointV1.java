@@ -20,8 +20,8 @@ import br.com.fakebank.domain.commands.ClienteInclusaoCommand;
 import br.com.fakebank.service.ClienteService;
 
 @RestController
-@RequestMapping("clientes")
-public class ClienteEndpoint extends FakebankEndpoint{
+@RequestMapping({"v1/clientes", "clientes"})
+public class ClienteEndpointV1 extends FakebankEndpoint{
 
     @Autowired
     ClienteService service;
