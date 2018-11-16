@@ -1,11 +1,13 @@
 package br.com.fakebank.domain.commands;
 
+import br.com.fakebank.customValidators.DominioCodigoValid;
 import br.com.fakebank.customValidators.DominioDescricaoValid;
 import br.com.fakebank.domain.validators.CommandValidator;
 
 public class DominioCriacaoCommand {
-
-    private Integer codigo;
+	
+	@DominioCodigoValid
+	private Integer codigo;
     
     @DominioDescricaoValid
     private String descricao;

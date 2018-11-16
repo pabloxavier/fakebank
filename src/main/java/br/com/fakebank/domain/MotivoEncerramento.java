@@ -21,11 +21,13 @@ public class MotivoEncerramento extends Dominio{
     }
 
     public static MotivoEncerramento criar(DominioCriacaoCommand comando) {
+    	comando.validate();
         return new MotivoEncerramento(comando);
 
     }
     
     public void editar(DominioEdicaoCommand comando) {
+    	comando.validate();
  		this.setDescricao(comando.getDescricao());
 	}
 
