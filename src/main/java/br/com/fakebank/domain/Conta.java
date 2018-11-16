@@ -39,11 +39,11 @@ public class Conta {
 	private static final Integer VALOR_DOMINIO_CONTA_CORRENTE = 2;
 	private static final Integer VALOR_DOMINIO_CONTA_POUPANCA = 3;
 	private static final Integer VALOR_DOMINIO_SITUACAO_CONTA_LIVRE = 1;
-	private static final Integer VALOR_DOMINIO_SITUACAO_CONTA_FECHADA = 2;
-	private static final Integer VALOR_DOMINIO_SITUACAO_CONTA_PREJUIZO = 3;
-	private static final Integer VALOR_DOMINIO_SITUACAO_CONTA_CARTORIO = 4;
-	
-	
+
+	//TODO Itens não utilizados
+	//private static final Integer VALOR_DOMINIO_SITUACAO_CONTA_FECHADA = 2;
+	//private static final Integer VALOR_DOMINIO_SITUACAO_CONTA_PREJUIZO = 3;
+	//private static final Integer VALOR_DOMINIO_SITUACAO_CONTA_CARTORIO = 4;
 	
 	@Id
 	@Column(name = "CD_CONTA")
