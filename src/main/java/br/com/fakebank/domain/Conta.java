@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.com.fakebank.customValidators.ContaForeignKeySituacaoConta;
 import br.com.fakebank.domain.commands.ContaCorrenteEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaCorrenteInclusaoCommand;
+import br.com.fakebank.domain.commands.ContaEncerradaCommand;
 import br.com.fakebank.domain.commands.ContaPoupancaEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaPoupancaInclusaoCommand;
 import br.com.fakebank.domain.commands.ContaSalarioEdicaoCommand;
@@ -149,6 +150,13 @@ public class Conta {
 		this.codigoSituacaoConta = command.getCodigoSituacaoConta();							
 		this.diaAniversarioPoupanca = command.getDiaAniversarioPoupanca();		
 	}	
+	
+	public ContaEncerrada encerrarConta(ContaEncerradaCommand command) {
+		
+		ContaEncerrada encerramento = ContaEncerrada.criar(command, this.codigoConta);
+		return encerramento;
+
+	}
 		
 	private String gerarCodigoConta() {
 		Random random = new Random();
