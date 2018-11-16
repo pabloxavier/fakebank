@@ -11,13 +11,13 @@ import org.springframework.data.domain.Page;
 import br.com.fakebank.domain.Gerente;
 import br.com.fakebank.util.ListaPaginada;
 
-@ApiModel(description = "Classe de Gerentes (representaÁ„o de gerentes).")
+@ApiModel(description = "Classe de Gerentes (representa√ß√£o de gerentes).")
 public class GerenteRepresentation {
 
-	@ApiModelProperty(notes = "CÛdigo gerente (autonumer·vel).")
+	@ApiModelProperty(notes = "C√≥digo gerente (autonumer√°vel).")
     private Integer codigo;
 
-	@ApiModelProperty(notes = "CÛdigo da pessoa.")
+	@ApiModelProperty(notes = "C√≥digo da pessoa.")
     private Integer codPessoa;
 	
 	@ApiModelProperty (notes = "Dados da pessoa.")
