@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,14 +31,15 @@ public class MotivoEncerramentoEndpoint extends FakebankEndpoint {
 	@GetMapping
 	public ResponseEntity<?> listaMotivoEncerramento(Pageable pageable) {
 		Page<MotivoEncerramento> motivo = service.listar(pageable);
-    	ListaPaginada<MotivoEncerramentoRepresentationV1> model = MotivoEncerramentoRepresentationV1.from(motivo);
-        return ok(model); 
+		ListaPaginada<MotivoEncerramentoRepresentationV1> model = MotivoEncerramentoRepresentationV1.from(motivo);
+		return ok(model);
 	}
 
 	@GetMapping(value = "/{codigo}")
 	public ResponseEntity<?> cosultaMotivoEncerramentoPorCodigo(@PathVariable("codigo") Integer codigo) {
 		MotivoEncerramento motivo = service.consultaPorCodigo(codigo);
-		return ok(motivo);
+		MotivoEncerramentoRepresentationV1 model = MotivoEncerramentoRepresentationV1.from(motivo);
+		return ok(model);
 	}
 
 	@PostMapping
@@ -52,4 +54,12 @@ public class MotivoEncerramentoEndpoint extends FakebankEndpoint {
 		service.editar(comando, codigo);
 		return new ResponseEntity<>("Iditado com sucesso", HttpStatus.OK);
 	}
+
+	@DeleteMapping(value = "/{codigo}")
+	public ResponseEntity<?> excluirMotivoEncerramento(@PathVariable("codigo") Integer codigo) {
+		service.excluirMotivoEncerramento(codigo);
+
+		return ok("Excluido com sucesso.");
+	}
+
 }
