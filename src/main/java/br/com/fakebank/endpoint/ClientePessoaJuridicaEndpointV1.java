@@ -16,7 +16,6 @@ import br.com.fakebank.domain.Cliente;
 import br.com.fakebank.domain.TipoPessoa;
 import br.com.fakebank.domain.commands.ClientePessoaJuridicaEdicaoCommand;
 import br.com.fakebank.domain.commands.ClientePessoaJuridicaInclusaoCommand;
-import br.com.fakebank.service.ClientePessoaFisicaService;
 import br.com.fakebank.service.ClientePessoaJuridicaService;
 import br.com.fakebank.service.ClienteService;
 

@@ -9,9 +9,8 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-import br.com.fakebank.domain.commands.AgenciaInclusaoCommand;
-import br.com.fakebank.exceptions.MessageErrorDetail;
 import br.com.fakebank.exceptions.BadRequestException;
+import br.com.fakebank.exceptions.MessageErrorDetail;
 
 public class CommandValidator<T> extends AbstractValidator {
 

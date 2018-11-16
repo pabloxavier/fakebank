@@ -1,16 +1,15 @@
 package br.com.fakebank.representations;
 
-import br.com.fakebank.domain.ClienteTelefone;
-import br.com.fakebank.domain.TipoTelefone;
-import br.com.fakebank.domain.converters.TelefoneCoverter;
-import br.com.fakebank.util.ListaPaginada;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.util.StringUtils;
+
+import br.com.fakebank.domain.ClienteTelefone;
+import br.com.fakebank.domain.converters.TelefoneCoverter;
+import br.com.fakebank.util.ListaPaginada;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
