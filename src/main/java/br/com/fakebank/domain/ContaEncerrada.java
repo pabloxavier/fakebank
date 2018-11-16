@@ -1,6 +1,7 @@
 package br.com.fakebank.domain;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -20,7 +21,7 @@ public class ContaEncerrada implements Serializable{
     private String conta;
     
     @Column(name = "dt_encerramento")
-    private Date dataEncerramento;
+    private LocalDate dataEncerramento;
     
     @ManyToOne
     @JoinColumn(name = "cd_motivo_encerramento")
@@ -45,11 +46,11 @@ public class ContaEncerrada implements Serializable{
         this.conta = conta;
     }
 
-    public Date getDataEncerramento() {
+    public LocalDate getDataEncerramento() {
         return dataEncerramento;
     }
 
-    public void setDataEncerramento(Date dataEncerramento) {
+    public void setDataEncerramento(LocalDate dataEncerramento) {
         this.dataEncerramento = dataEncerramento;
     }
 
