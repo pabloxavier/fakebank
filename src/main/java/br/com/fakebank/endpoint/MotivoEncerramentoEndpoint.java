@@ -1,6 +1,8 @@
 package br.com.fakebank.endpoint;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.fakebank.domain.MotivoEncerramento;
 import br.com.fakebank.domain.commands.DominioCriacaoCommand;
 import br.com.fakebank.domain.commands.DominioEdicaoCommand;
+import br.com.fakebank.representations.MotivoEncerramentoRepresentationV1;
 import br.com.fakebank.service.MotivoEncerramentoService;
+import br.com.fakebank.util.ListaPaginada;
 
 @RestController
 @RequestMapping("motivo-encerramento")
@@ -24,13 +28,14 @@ public class MotivoEncerramentoEndpoint extends FakebankEndpoint {
 	MotivoEncerramentoService service;
 
 	@GetMapping
-	public ResponseEntity<?> listarTipoConta() {
-
-		return ok(service.listar());
+	public ResponseEntity<?> listaMotivoEncerramento(Pageable pageable) {
+		Page<MotivoEncerramento> motivo = service.listar(pageable);
+    	ListaPaginada<MotivoEncerramentoRepresentationV1> model = MotivoEncerramentoRepresentationV1.from(motivo);
+        return ok(model); 
 	}
 
 	@GetMapping(value = "/{codigo}")
-	public ResponseEntity<?> cosultaTipoContaPorCodigo(@PathVariable("codigo") Integer codigo) {
+	public ResponseEntity<?> cosultaMotivoEncerramentoPorCodigo(@PathVariable("codigo") Integer codigo) {
 		MotivoEncerramento motivo = service.consultaPorCodigo(codigo);
 		return ok(motivo);
 	}
