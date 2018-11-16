@@ -41,7 +41,7 @@ public class Conta {
 	
 	@Column(name = "TP_CONTA")
 	private Integer tipoConta;
-	
+  
 	@ManyToOne()
 	@JoinColumn(name = "CD_GERENTE")
 	private Gerente gerente;

@@ -1,5 +1,7 @@
 package br.com.fakebank.domain.commands;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -13,10 +15,12 @@ public class AgenciaEdicaoCommand {
     @NotNull
     @Range(min = 1, max = 9999)
     @FieldName("Número")
+	@ApiModelProperty(notes = "Número de identificação da agência.")
     private Integer numero;
     
     @NotNull(message = "{agencia.nome.nao.nulo}")
     @NotBlank(message = "{agencia.nome.nao.vazio}")
+	@ApiModelProperty(notes = "Nome da agência.")
     private String nome;
     
     public AgenciaEdicaoCommand(){
