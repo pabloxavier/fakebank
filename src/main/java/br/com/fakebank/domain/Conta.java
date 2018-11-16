@@ -18,6 +18,7 @@ import org.springframework.data.jpa.domain.Specification;
 
 import br.com.fakebank.domain.commands.ContaCorrenteEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaCorrenteInclusaoCommand;
+import br.com.fakebank.domain.commands.ContaEncerradaCommand;
 import br.com.fakebank.domain.commands.ContaPoupancaEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaPoupancaInclusaoCommand;
 import br.com.fakebank.domain.commands.ContaSalarioEdicaoCommand;
@@ -171,6 +172,13 @@ public class Conta {
 		this.situacaoConta = getSituacaoContaByDominio(dominio);						
 		this.diaAniversarioPoupanca = command.getDiaAniversarioPoupanca();		
 	}	
+	
+	public ContaEncerrada encerrarConta(ContaEncerradaCommand command) {
+		
+		ContaEncerrada encerramento = ContaEncerrada.criar(command, this.codigoConta);
+		return encerramento;
+
+	}
 		
 	private String gerarCodigoConta() {
 		Random random = new Random();
