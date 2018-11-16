@@ -59,22 +59,20 @@ public class Movimentacao {
     
     protected Movimentacao(MovimentacaoTransferenciaCommand comando) {
         this.codigoConta = comando.getContaOrigem();
-        comando.getContaDestino();
         this.valorMovimentacao = comando.getValor();
+        this.dataMovimentacao = LocalDate.now();
     }
     
     protected Movimentacao(MovimentacaoDepositoCommand comando) {
         this.codigoConta = comando.getConta();
         this.valorMovimentacao = comando.getValor();
+        this.dataMovimentacao = LocalDate.now();
     }
     
     protected Movimentacao(MovimentacaoSaqueCommand comando) {
         this.codigoConta = comando.getConta();
         this.valorMovimentacao = comando.getValor();
-    }
-    
-    public static Movimentacao criar(MovimentacaoTransferenciaCommand comando) {
-        return new Movimentacao(comando);
+        this.dataMovimentacao = LocalDate.now();
     }
     
     public static Movimentacao criar(MovimentacaoDepositoCommand comando) {
