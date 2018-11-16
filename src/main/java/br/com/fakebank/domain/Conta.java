@@ -48,8 +48,6 @@ public class Conta {
 	@ContaForeignKeyTipoConta
 	private Integer tipoConta;
 	
-	@ManyToOne()
-	@JoinColumn(name = "CD_GERENTE")
 	@Column(name = "CD_GERENTE")
 	private Integer codigoGerente;
 	
