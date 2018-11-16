@@ -34,13 +34,13 @@ public class Conta {
 	public static final Double SALDO_INICIAL = 0.00;
 	private static final String TIPO_CONTA = "tipo_conta";
 	private static final String SITUACAO_CONTA = "sit_conta";
-	private static final String VALOR_DOMINIO_CONTA_SALARIO = "1";
-	private static final String VALOR_DOMINIO_CONTA_CORRENTE = "2";
-	private static final String VALOR_DOMINIO_CONTA_POUPANCA = "3";
-	private static final String VALOR_DOMINIO_SITUACAO_CONTA_LIVRE = "1";
-	private static final String VALOR_DOMINIO_SITUACAO_CONTA_FECHADA = "2";
-	private static final String VALOR_DOMINIO_SITUACAO_CONTA_PREJUIZO = "3";
-	private static final String VALOR_DOMINIO_SITUACAO_CONTA_CARTORIO = "4";
+	private static final Integer VALOR_DOMINIO_CONTA_SALARIO = 1;
+	private static final Integer VALOR_DOMINIO_CONTA_CORRENTE = 2;
+	private static final Integer VALOR_DOMINIO_CONTA_POUPANCA = 3;
+	private static final Integer VALOR_DOMINIO_SITUACAO_CONTA_LIVRE = 1;
+	private static final Integer VALOR_DOMINIO_SITUACAO_CONTA_FECHADA = 2;
+	private static final Integer VALOR_DOMINIO_SITUACAO_CONTA_PREJUIZO = 3;
+	private static final Integer VALOR_DOMINIO_SITUACAO_CONTA_CARTORIO = 4;
 	
 	
 	
@@ -217,7 +217,7 @@ public class Conta {
     	return gerenteRepository.findById(codigoGerente).orElse(null);
     }
 
-    public SituacaoConta getSituacaoContaByValorTipo(String valor, String tipo) {
+    public SituacaoConta getSituacaoContaByValorTipo(Integer valor, String tipo) {
     	Specification<Dominio> criteria = Specification.where(DominioSpecifications.dominioPorValor(valor))
 				.and(DominioSpecifications.dominioPorTipo(tipo));
     	Dominio dominio = dominioRepository.findOne(criteria).orElse(null);    	
@@ -240,7 +240,7 @@ public class Conta {
     }
     
     
-    public TipoConta getTipoContaByValorTipo(String valor, String tipo) {
+    public TipoConta getTipoContaByValorTipo(Integer valor, String tipo) {
     	Specification<Dominio> criteria = Specification.where(DominioSpecifications.dominioPorValor(valor))
     										.and(DominioSpecifications.dominioPorTipo(tipo));
     	Dominio dominio = dominioRepository.findOne(criteria).orElse(null);    	
