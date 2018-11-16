@@ -23,11 +23,13 @@ public class GerenteEndpoint extends FakebankEndpoint{
 
     @Autowired
     GerenteService service;
-    
-    @GetMapping
-    public ResponseEntity<?> listarGerentes(){
-        return ok(service.listar());
-    }
+//    
+//    @GetMapping
+//	public ResponseEntity<?> listarGerentes(Pageable pageable){
+//    	Page<Gerente> gerentes = service.listar(pageable);
+//    	ListaPaginada<GerenteRepresentation> model = GerenteRepresentation.from(gerentes);
+//    	return ok(model);
+//    }
     
     @GetMapping(value = "/{codigo}")
     public ResponseEntity<?> getGerenteById(@PathVariable("codigo") Integer codigo){

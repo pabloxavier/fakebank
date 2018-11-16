@@ -3,8 +3,12 @@ package br.com.fakebank.representations;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.data.domain.Page;
 
 import br.com.fakebank.domain.Movimentacao;
+import br.com.fakebank.util.ListaPaginada;
 
 public class MovimentacaoRepresentation {
 
@@ -39,6 +43,22 @@ public class MovimentacaoRepresentation {
             list.add(model);
         }
         return list;
+    }
+    
+    public static ListaPaginada<MovimentacaoRepresentation> from (Page<Movimentacao> movimentacoes){
+    	
+    	ListaPaginada<MovimentacaoRepresentation> lista = new ListaPaginada<MovimentacaoRepresentation>();
+    	
+    	lista.setContent(movimentacoes
+    								.stream()
+    								.map(item -> from(item))
+    								.collect(Collectors.toList()));
+    	
+    	lista.setTotalPages(movimentacoes.getTotalPages());
+    	lista.setPageNumber(movimentacoes.getPageable().getPageNumber());
+    	lista.setPageSize(movimentacoes.getPageable().getPageSize());
+    	
+    	return lista;
     }
 
     public Integer getCodigoMovimentacao() {
