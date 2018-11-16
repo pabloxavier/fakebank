@@ -1,16 +1,14 @@
 package br.com.fakebank.domain.commands;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import br.com.fakebank.customValidators.ContaForeignKeyGerente;
 import br.com.fakebank.domain.validators.CommandValidator;
 import br.com.fakebank.exceptions.FieldName;
 
 public abstract class ContaInclusaoCommand {
 
     @NotNull
-    @FieldName("Gerente")
+    @FieldName("gerente")
     private Integer codigoGerente;
     
 
@@ -22,4 +20,9 @@ public abstract class ContaInclusaoCommand {
         this.codigoGerente = codigoGerente;
     }
     
+    public void validate() {
+    	CommandValidator<ContaInclusaoCommand> validator =
+        		new CommandValidator<ContaInclusaoCommand>();
+        validator.validate(this);
+    }
 }

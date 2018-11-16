@@ -11,7 +11,7 @@ public class ContaSalarioRepresentation {
     private String nomeCliente;
     private LocalDate dataAbertura;
     private Gerente gerente;
-    private Integer codigoSituacaoConta;
+    private String situacaoConta;
     private Double valorSaldo;
     private String numeroCnpjContratoSalario;
 
@@ -19,7 +19,7 @@ public class ContaSalarioRepresentation {
         ContaSalarioRepresentation contaRepresentation = new ContaSalarioRepresentation();
         contaRepresentation.setCodigoConta(conta.getCodigoConta());
         contaRepresentation.setGerente(conta.getGerente());
-        contaRepresentation.setCodigoSituacaoConta(conta.getCodigoSituacaoConta());
+        contaRepresentation.setSituacaoConta(conta.getSituacaoConta().getDescricao());
         contaRepresentation.setDataAbertura(conta.getDataAbertura());
         contaRepresentation.setNomeCliente(conta.getCliente().getPessoa().getNome());
         contaRepresentation.setNumeroCnpjContratoSalario(conta.getNumeroCnpjContratoSalario());
@@ -59,12 +59,12 @@ public class ContaSalarioRepresentation {
         this.gerente = gerente;
     }
 
-    public Integer getCodigoSituacaoConta() {
-        return codigoSituacaoConta;
+    public String getSituacaoConta() {
+        return situacaoConta;
     }
 
-    public void setCodigoSituacaoConta(Integer codigoSituacaoConta) {
-        this.codigoSituacaoConta = codigoSituacaoConta;
+    public void setSituacaoConta(String situacaoConta) {
+        this.situacaoConta = situacaoConta;
     }
 
     public Double getValorSaldo() {

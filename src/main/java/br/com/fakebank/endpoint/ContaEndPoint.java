@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fakebank.domain.Conta;
@@ -48,7 +49,8 @@ public class ContaEndPoint extends FakebankEndpoint {
         return ok(model);
     }
     
-    @PostMapping(path = "/incluirContaCorrente/{codigoCliente}")
+    @RequestMapping(value = {"/clientes-pessoa-fisica/{codigoCliente}/contas-correntes",
+    "/clientes-pessoa-juridica/{codigoCliente}/contas-correntes"}, method = RequestMethod.POST)
     public ResponseEntity<?> incluirContaCorrente(
             @PathVariable(value="codigoCliente", required=true) Integer cdCliente,
             @RequestBody ContaCorrenteInclusaoCommand comando) {

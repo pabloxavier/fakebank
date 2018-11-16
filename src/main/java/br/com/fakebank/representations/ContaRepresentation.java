@@ -10,9 +10,9 @@ public class ContaRepresentation {
     private String codigoConta;
     private String nomeCliente;
     private LocalDate dataAbertura;
-    private Integer tipoConta;
+    private String tipoConta;
     private Gerente gerente;
-    private Integer codigoSituacaoConta;
+    private String situacaoConta;
     private Double valorSaldo;
     private String numeroCnpjContratoSalario;
     private Integer diaAniversarioPoupanca;
@@ -22,12 +22,12 @@ public class ContaRepresentation {
         ContaRepresentation contaRepresentation = new ContaRepresentation();
         contaRepresentation.setCodigoConta(conta.getCodigoConta());
         contaRepresentation.setGerente(conta.getGerente());
-        contaRepresentation.setCodigoSituacaoConta(conta.getCodigoSituacaoConta());
+        contaRepresentation.setSituacaoConta(conta.getSituacaoConta().getDescricao());
         contaRepresentation.setDataAbertura(conta.getDataAbertura());
         contaRepresentation.setDiaAniversarioPoupanca(conta.getDiaAniversarioPoupanca());
         contaRepresentation.setNomeCliente(conta.getCliente().getPessoa().getNome());
         contaRepresentation.setNumeroCnpjContratoSalario(conta.getNumeroCnpjContratoSalario());
-        contaRepresentation.setTipoConta(conta.getTipoConta());
+        contaRepresentation.setTipoConta(conta.getTipoConta().getDescricao());
         contaRepresentation.setValorSaldo(conta.getValorSaldo());
         return contaRepresentation;
     }
@@ -56,11 +56,11 @@ public class ContaRepresentation {
         this.dataAbertura = dataAbertura;
     }
 
-    public Integer getTipoConta() {
+    public String getTipoConta() {
         return tipoConta;
     }
 
-    public void setTipoConta(Integer tipoConta) {
+    public void setTipoConta(String tipoConta) {
         this.tipoConta = tipoConta;
     }
 
@@ -72,12 +72,12 @@ public class ContaRepresentation {
         this.gerente = gerente;
     }
 
-    public Integer getCodigoSituacaoConta() {
-        return codigoSituacaoConta;
+    public String getSituacaoConta() {
+        return situacaoConta;
     }
 
-    public void setCodigoSituacaoConta(Integer codigoSituacaoConta) {
-        this.codigoSituacaoConta = codigoSituacaoConta;
+    public void setSituacaoConta(String situacaoConta) {
+        this.situacaoConta = situacaoConta;
     }
 
     public Double getValorSaldo() {

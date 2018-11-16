@@ -14,20 +14,36 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 
-import br.com.fakebank.customValidators.ContaForeignKeySituacaoConta;
 import br.com.fakebank.domain.commands.ContaCorrenteEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaCorrenteInclusaoCommand;
 import br.com.fakebank.domain.commands.ContaPoupancaEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaPoupancaInclusaoCommand;
 import br.com.fakebank.domain.commands.ContaSalarioEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaSalarioInclusaoCommand;
-import br.com.fakebank.service.GerenteService;
+import br.com.fakebank.domain.specifications.DominioSpecifications;
+import br.com.fakebank.exceptions.NotFoundException;
+import br.com.fakebank.repository.DominioRepository;
+import br.com.fakebank.repository.GerenteRepository;
 
 @Entity
 @Table(name = "CONTA", schema = "dbo")
 public class Conta {
 
+	public static final Double SALDO_INICIAL = 0.00;
+	private static final String TIPO_CONTA = "tipo_conta";
+	private static final String SITUACAO_CONTA = "sit_conta";
+	private static final String VALOR_DOMINIO_CONTA_SALARIO = "1";
+	private static final String VALOR_DOMINIO_CONTA_CORRENTE = "2";
+	private static final String VALOR_DOMINIO_CONTA_POUPANCA = "3";
+	private static final String VALOR_DOMINIO_SITUACAO_CONTA_LIVRE = "1";
+	private static final String VALOR_DOMINIO_SITUACAO_CONTA_FECHADA = "2";
+	private static final String VALOR_DOMINIO_SITUACAO_CONTA_PREJUIZO = "3";
+	private static final String VALOR_DOMINIO_SITUACAO_CONTA_CARTORIO = "4";
+	
+	
+	
 	@Id
 	@Column(name = "CD_CONTA")
 	private String codigoConta;
@@ -39,16 +55,17 @@ public class Conta {
 	@Column(name = "DT_ABERTURA")
 	private LocalDate dataAbertura;
 	
-	@Column(name = "TP_CONTA")
-	private Integer tipoConta;
+	@ManyToOne()
+	@JoinColumn(name = "TP_CONTA")
+	private TipoConta tipoConta;
   
 	@ManyToOne()
 	@JoinColumn(name = "CD_GERENTE")
 	private Gerente gerente;
 	
-	@Column(name = "CD_SITUACAO_CONTA")
-	@ContaForeignKeySituacaoConta
-	private Integer codigoSituacaoConta;
+	@ManyToOne()
+	@JoinColumn(name = "CD_SITUACAO_CONTA")
+	private SituacaoConta situacaoConta;
 	
 	@Column(name = "VL_SALDO")
 	private Double valorSaldo;
@@ -59,11 +76,13 @@ public class Conta {
 	@Column(name ="DD_ANIVERSARIO_POUPANCA")
 	private Integer diaAniversarioPoupanca;
 	
-	
-	@Autowired
 	@Transient
-	private GerenteService gerenteService;
+	@Autowired
+	private GerenteRepository gerenteRepository;
 	
+	@Transient
+	@Autowired
+	private DominioRepository dominioRepository;
 	
 	protected Conta() {
 		
@@ -71,7 +90,7 @@ public class Conta {
 	
 	public static Conta criarContaCorrente(Cliente cliente, ContaCorrenteInclusaoCommand command) {
 		
-		command.validate();
+		//command.validate();
 		
 		return new Conta(cliente, command);
 	}
@@ -80,10 +99,10 @@ public class Conta {
 		this.codigoConta = this.gerarCodigoConta();
 		this.cliente = cliente;		
 		this.gerente = getGerenteById(command.getCodigoGerente());	
-		this.codigoSituacaoConta = 4;
+		this.situacaoConta = getSituacaoContaByValorTipo(VALOR_DOMINIO_SITUACAO_CONTA_LIVRE, SITUACAO_CONTA);
 		this.dataAbertura = LocalDate.now();
-		this.tipoConta = 1;
-		this.valorSaldo = 0.00;
+		this.tipoConta = getTipoContaByValorTipo(VALOR_DOMINIO_CONTA_CORRENTE, TIPO_CONTA);
+		this.valorSaldo = SALDO_INICIAL;
 	}
 			
 	public static Conta criarContaPoupanca(Cliente cliente, ContaPoupancaInclusaoCommand command) {
@@ -97,10 +116,10 @@ public class Conta {
 		this.codigoConta = this.gerarCodigoConta();
 		this.cliente = cliente;
 		this.gerente = getGerenteById(command.getCodigoGerente());	
-		this.codigoSituacaoConta = 4;	
+		this.situacaoConta = getSituacaoContaByValorTipo(VALOR_DOMINIO_SITUACAO_CONTA_LIVRE, SITUACAO_CONTA);
 		this.dataAbertura = LocalDate.now();
-		this.valorSaldo = 0.00;		
-		this.tipoConta = 3;
+		this.valorSaldo = SALDO_INICIAL;		
+		this.tipoConta = getTipoContaByValorTipo(VALOR_DOMINIO_CONTA_POUPANCA, TIPO_CONTA);
 		this.diaAniversarioPoupanca = command.getDiaAniversarioPoupanca();
 		
 	}	
@@ -116,10 +135,10 @@ public class Conta {
 		this.codigoConta = this.gerarCodigoConta();
 		this.cliente = cliente;
 		this.gerente = getGerenteById(command.getCodigoGerente());	
-		this.codigoSituacaoConta = 4;	
+		this.situacaoConta = getSituacaoContaByValorTipo(VALOR_DOMINIO_SITUACAO_CONTA_LIVRE, SITUACAO_CONTA);	
 		this.dataAbertura = LocalDate.now();
-		this.valorSaldo = 0.00;		
-		this.tipoConta = 2;
+		this.valorSaldo = SALDO_INICIAL;		
+		this.tipoConta = getTipoContaByValorTipo(VALOR_DOMINIO_CONTA_SALARIO, TIPO_CONTA);
 		this.numeroCnpjContratoSalario = command.getNumeroCnpjContratoSalario();
 		
 	}
@@ -129,7 +148,8 @@ public class Conta {
 		command.validate();
 		
 		this.gerente = getGerenteById(command.getCodigoGerente());			
-		this.codigoSituacaoConta = command.getCodigoSituacaoConta();							
+		Dominio dominio = getDominioByCodigo(command.getCodigoSituacaoConta());
+		this.situacaoConta = getSituacaoContaByDominio(dominio);							
 		this.numeroCnpjContratoSalario = command.getNumeroCnpjContratoSalario();		
 		
 	} 
@@ -138,7 +158,8 @@ public class Conta {
 		
 		command.validate();
 		this.gerente = getGerenteById(command.getCodigoGerente());		
-		this.codigoSituacaoConta = command.getCodigoSituacaoConta();						
+		Dominio dominio = getDominioByCodigo(command.getCodigoSituacaoConta());
+		this.situacaoConta = getSituacaoContaByDominio(dominio);						
 	}	
 
 	public void editarContaPoupanca(ContaPoupancaEdicaoCommand command) {
@@ -146,7 +167,8 @@ public class Conta {
 		command.validate();
 		
 		this.gerente = getGerenteById(command.getCodigoGerente());		
-		this.codigoSituacaoConta = command.getCodigoSituacaoConta();							
+		Dominio dominio = getDominioByCodigo(command.getCodigoSituacaoConta());
+		this.situacaoConta = getSituacaoContaByDominio(dominio);						
 		this.diaAniversarioPoupanca = command.getDiaAniversarioPoupanca();		
 	}	
 		
@@ -167,7 +189,7 @@ public class Conta {
         return dataAbertura;
     }
 
-    public Integer getTipoConta() {
+    public TipoConta getTipoConta() {
         return tipoConta;
     }
 
@@ -175,8 +197,8 @@ public class Conta {
         return gerente;
     }
 
-    public Integer getCodigoSituacaoConta() {
-        return codigoSituacaoConta;
+    public SituacaoConta getSituacaoConta() {
+        return situacaoConta;
     }
 
     public Double getValorSaldo() {
@@ -192,16 +214,76 @@ public class Conta {
     }
     
     public Gerente getGerenteById(Integer codigoGerente) {
-    	return gerenteService.getGerenteById(codigoGerente);
+    	return gerenteRepository.findById(codigoGerente).orElse(null);
+    }
+
+    public SituacaoConta getSituacaoContaByValorTipo(String valor, String tipo) {
+    	Specification<Dominio> criteria = Specification.where(DominioSpecifications.dominioPorValor(valor))
+				.and(DominioSpecifications.dominioPorTipo(tipo));
+    	Dominio dominio = dominioRepository.findOne(criteria).orElse(null);    	
+
+    	if (dominio != null) {
+    		return buildSituacaoContaAPartirDominio(dominio);
+    	}
+    	throw new NotFoundException("Situação de Conta não encontrada.");
+    	
     }
     
+    public SituacaoConta getSituacaoContaByDominio(Dominio dominioParam) {
+    	Dominio dominio = dominioRepository.findById(dominioParam.getCodigo()).orElse(null);    	
 
-	@Override
-	public String toString() {
-		return "Conta [codigoConta=" + codigoConta + ", cliente=" + cliente + ", dataAbertura=" + dataAbertura
-				+ ", tipoConta=" + tipoConta + ", gerente=" + gerente + ", codigoSituacaoConta=" + codigoSituacaoConta
-				+ ", valorSaldo=" + valorSaldo + ", numeroCnpjContratoSalario=" + numeroCnpjContratoSalario
-				+ ", diaAniversarioPoupanca=" + diaAniversarioPoupanca + "]";
-	}
-
+    	if (dominio != null) {
+    		return buildSituacaoContaAPartirDominio(dominio);
+    	}
+    	throw new NotFoundException("Situação de Conta não encontrada.");
+    	
+    }
+    
+    
+    public TipoConta getTipoContaByValorTipo(String valor, String tipo) {
+    	Specification<Dominio> criteria = Specification.where(DominioSpecifications.dominioPorValor(valor))
+    										.and(DominioSpecifications.dominioPorTipo(tipo));
+    	Dominio dominio = dominioRepository.findOne(criteria).orElse(null);    	
+    	
+    	if (dominio != null) {
+    		return buildTipoContaAPartirDominio(dominio);
+    	}
+    	throw new NotFoundException("Tipo de Conta não encontrada.");
+    }
+    
+    public TipoConta getTipoContaByDominio(Dominio dominioParam) {
+   
+    	Dominio dominio = dominioRepository.findById(dominioParam.getCodigo()).orElse(null);    	
+    	
+    	if (dominio != null) {
+    		return buildTipoContaAPartirDominio(dominio);
+    	}
+    	throw new NotFoundException("Tipo de Conta não encontrada.");
+    }
+    
+    public TipoConta buildTipoContaAPartirDominio(Dominio dominio) {
+    	TipoConta  tipoConta = new TipoConta();
+    	tipoConta.setCodigo(dominio.getCodigo());
+    	tipoConta.setDescricao(dominio.getDescricao());
+    	tipoConta.setTipo(dominio.getTipo());
+    	tipoConta.setValor(dominio.getValor());
+    	
+    	return tipoConta;
+    } 	 
+ 
+    public SituacaoConta buildSituacaoContaAPartirDominio(Dominio dominio) {
+    	SituacaoConta  situacaoConta = new SituacaoConta();
+    	situacaoConta.setCodigo(dominio.getCodigo());
+    	situacaoConta.setDescricao(dominio.getDescricao());
+    	situacaoConta.setTipo(dominio.getTipo());
+    	situacaoConta.setValor(dominio.getValor());
+    	
+    	return situacaoConta;
+    }
+    
+    public Dominio getDominioByCodigo(Integer codigo) {
+    	return dominioRepository.getOne(codigo);
+    }
+    
+    
 }
