@@ -20,13 +20,12 @@ public class DominioService {
         
     }
    
-    public boolean dominioExiste(String valor, String tipo){
+    public boolean dominioExiste(Integer valor, String tipo){
 		Specification<Dominio> criterio = Specification
 				.where(DominioSpecifications.dominioPorValor(valor)
 				.and(DominioSpecifications.dominioPorTipo(tipo)));
 		Optional<Dominio> dominio = repository.findOne(criterio);
         return dominio.isPresent() ? true : false;    
     }
-
 
 }

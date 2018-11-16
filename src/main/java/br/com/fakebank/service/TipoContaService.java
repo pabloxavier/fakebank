@@ -1,6 +1,5 @@
 package br.com.fakebank.service;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -42,7 +41,7 @@ public class TipoContaService extends DominioService{
     
     public TipoConta salvar(DominioCriacaoCommand comando){
     	
-        if (dominioExiste(comando.getValor())) {
+        if (dominioExiste(comando.getCodigo())) {
 			throw new DominioUniqueException();
 		}
     	
@@ -63,7 +62,7 @@ public class TipoContaService extends DominioService{
         
     }
     
-    private boolean dominioExiste(String valor){
+    private boolean dominioExiste(Integer valor){
     	return dominioExiste(valor, DominioEnum.TIPO_CONTA.toString());
     }
     
