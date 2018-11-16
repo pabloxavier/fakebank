@@ -3,9 +3,10 @@ package br.com.fakebank.representations;
 import java.time.LocalDate;
 import java.util.stream.Collectors;
 
+import br.com.fakebank.common.util.ListaPaginada;
 import br.com.fakebank.domain.Conta;
 import br.com.fakebank.domain.Gerente;
-import br.com.fakebank.util.ListaPaginada;
+
 import org.springframework.data.domain.Page;
 
 public class ContaRepresentationClientePJ {

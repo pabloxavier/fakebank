@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 
+import br.com.fakebank.common.util.ListaPaginada;
 import br.com.fakebank.domain.MotivoEncerramento;
-import br.com.fakebank.util.ListaPaginada;
 import io.swagger.annotations.ApiModel;
 
 @ApiModel(description = "Classe de modelo (representação de motivo encerramento).")

@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 
+import br.com.fakebank.common.util.ListaPaginada;
 import br.com.fakebank.domain.Movimentacao;
-import br.com.fakebank.util.ListaPaginada;
 
 public class MovimentacaoRepresentation {
 

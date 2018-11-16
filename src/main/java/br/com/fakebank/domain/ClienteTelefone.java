@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 import br.com.fakebank.domain.commands.ClienteTelefoneEdicaoCommand;
 import br.com.fakebank.domain.commands.ClienteTelefoneInclusaoCommand;
-import br.com.fakebank.infrastructure.converters.TipoTelefoneConverter;
+import br.com.fakebank.domain.converters.TipoTelefoneConverter;
 
 @Entity
 @Table(name= "cliente_telefone", schema= "dbo")

@@ -2,7 +2,7 @@ package br.com.fakebank.domain.commands;
 
 import javax.validation.constraints.NotNull;
 
-import br.com.fakebank.domain.validators.CommandValidator;
+import br.com.fakebank.common.validations.CommandValidator;
 
 public class ContaSalarioEdicaoCommand {
     

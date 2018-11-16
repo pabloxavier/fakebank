@@ -16,6 +16,7 @@ import javax.persistence.Transient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 
+import br.com.fakebank.common.exceptions.NotFoundException;
 import br.com.fakebank.domain.commands.ContaCorrenteEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaCorrenteInclusaoCommand;
 import br.com.fakebank.domain.commands.ContaEncerradaCommand;
@@ -24,7 +25,6 @@ import br.com.fakebank.domain.commands.ContaPoupancaInclusaoCommand;
 import br.com.fakebank.domain.commands.ContaSalarioEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaSalarioInclusaoCommand;
 import br.com.fakebank.domain.specifications.DominioSpecifications;
-import br.com.fakebank.exceptions.NotFoundException;
 import br.com.fakebank.repository.DominioRepository;
 import br.com.fakebank.repository.GerenteRepository;
 

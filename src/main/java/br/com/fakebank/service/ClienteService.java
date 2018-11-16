@@ -4,17 +4,16 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import br.com.fakebank.common.exceptions.NotFoundException;
 import br.com.fakebank.domain.Cliente;
 import br.com.fakebank.domain.ClienteTelefone;
 import br.com.fakebank.domain.ClienteTelefoneId;
@@ -23,7 +22,6 @@ import br.com.fakebank.domain.commands.ClienteTelefoneEdicaoCommand;
 import br.com.fakebank.domain.commands.ClienteTelefoneInclusaoCommand;
 import br.com.fakebank.domain.specifications.ClienteSpecifications;
 import br.com.fakebank.domain.specifications.ClienteTelefoneSpecifications;
-import br.com.fakebank.exceptions.NotFoundException;
 import br.com.fakebank.repository.ClienteRepository;
 import br.com.fakebank.repository.ClienteTelefoneRepository;
 

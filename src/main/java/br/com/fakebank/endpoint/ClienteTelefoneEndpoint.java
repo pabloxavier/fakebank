@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.fakebank.common.exceptions.NotFoundException;
 import br.com.fakebank.domain.Cliente;
 import br.com.fakebank.domain.ClienteTelefone;
 import br.com.fakebank.domain.TipoPessoa;
 import br.com.fakebank.domain.commands.ClienteTelefoneEdicaoCommand;
 import br.com.fakebank.domain.commands.ClienteTelefoneInclusaoCommand;
 import br.com.fakebank.domain.converters.TipoPessoaConverter;
-import br.com.fakebank.exceptions.NotFoundException;
 import br.com.fakebank.representations.ClienteTelefoneRepresentation;
 import br.com.fakebank.service.ClienteService;
 

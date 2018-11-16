@@ -3,7 +3,7 @@ package br.com.fakebank.domain.commands;
 
 import java.util.Date;
 
-import br.com.fakebank.domain.validators.CommandValidator;
+import br.com.fakebank.common.validations.CommandValidator;
 
 public class ClientePessoaFisicaInclusaoCommand {
 

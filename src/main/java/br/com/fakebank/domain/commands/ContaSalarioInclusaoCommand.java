@@ -2,9 +2,9 @@ package br.com.fakebank.domain.commands;
 
 import javax.validation.constraints.NotNull;
 
-import br.com.fakebank.customValidators.CnpjValid;
-import br.com.fakebank.domain.validators.CommandValidator;
-import br.com.fakebank.exceptions.FieldName;
+import br.com.fakebank.common.validations.CommandValidator;
+import br.com.fakebank.common.validations.FieldName;
+import br.com.fakebank.domain.validators.CnpjValid;
 
 public class ContaSalarioInclusaoCommand extends ContaInclusaoCommand{
 	
