@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,6 @@ import br.com.fakebank.domain.SituacaoConta;
 import br.com.fakebank.domain.TipoConta;
 import br.com.fakebank.domain.commands.ContaCorrenteEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaCorrenteInclusaoCommand;
-import br.com.fakebank.domain.commands.ContaInclusaoCommand;
 import br.com.fakebank.domain.commands.ContaPoupancaEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaPoupancaInclusaoCommand;
 import br.com.fakebank.domain.commands.ContaSalarioEdicaoCommand;
@@ -49,6 +50,19 @@ public class ContaService {
 	public Conta consultarPorCodigo(String codigo) {
 		return repository.findById(codigo).orElseThrow(() -> new NotFoundException());
 	}
+	
+	
+	public Page<Conta> consultarContasPorCodigoClientePessoaFisica(Integer codigo, Pageable pageable){
+		if(!isClientePrincipalPresent(codigo)) {
+			throw new NotFoundException("Cliente não encontrado.");
+		}
+		
+		Specification<Conta> criteria = Specification.where(ContaSpecifications.porCodigoClientePrincipal(codigo));
+		return repository.findAll(criteria, pageable);
+		
+	}
+	
+	
 	
 	public List<Conta> filtrarPorTipo(Integer tipoConta){
 		Specification<Conta> criteria = Specification.where(ContaSpecifications.porTipoConta(tipoConta));
