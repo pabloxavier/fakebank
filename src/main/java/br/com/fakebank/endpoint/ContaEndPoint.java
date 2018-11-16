@@ -1,15 +1,32 @@
 package br.com.fakebank.endpoint;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import br.com.fakebank.domain.Conta;
-import br.com.fakebank.domain.commands.*;
+import br.com.fakebank.domain.commands.ContaCorrenteEdicaoCommand;
+import br.com.fakebank.domain.commands.ContaCorrenteInclusaoCommand;
+import br.com.fakebank.domain.commands.ContaPoupancaEdicaoCommand;
+import br.com.fakebank.domain.commands.ContaPoupancaInclusaoCommand;
+import br.com.fakebank.domain.commands.ContaSalarioEdicaoCommand;
+import br.com.fakebank.domain.commands.ContaSalarioInclusaoCommand;
 import br.com.fakebank.representations.ContaCorrenteRepresentation;
 import br.com.fakebank.representations.ContaPoupancaRepresentation;
 import br.com.fakebank.representations.ContaRepresentation;
+import br.com.fakebank.representations.ContaRepresentationClientePF;
+import br.com.fakebank.representations.ContaRepresentationClientePJ;
 import br.com.fakebank.representations.ContaSalarioRepresentation;
 import br.com.fakebank.service.ContaService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import br.com.fakebank.util.ListaPaginada;
 
 
 
@@ -25,6 +42,20 @@ public class ContaEndPoint extends FakebankEndpoint {
         return ok(ContaRepresentation.from(conta));
     }
 
+    @GetMapping(value = "/clientes-pessoa-fisica/{codigoCliente}/contas")
+    public ResponseEntity<?>  getContasByIdClientePessoaFisica(@PathVariable("codigoCliente") final Integer codigo, Pageable pageable){
+        Page<Conta> contas = contaService.consultarContasPorCodigoClientePessoaFisica(codigo, pageable);
+        ListaPaginada<ContaRepresentationClientePF> model = ContaRepresentationClientePF.from(contas);
+        return ok(model);
+    }
+    
+    @GetMapping(value = "/clientes-pessoa-juridica/{codigoCliente}/contas")
+    public ResponseEntity<?>  getContasByIdClientePessoaJuridica(@PathVariable("codigoCliente") final Integer codigo, Pageable pageable){
+        Page<Conta> contas = contaService.consultarContasPorCodigoClientePessoaJuridica(codigo, pageable);
+        ListaPaginada<ContaRepresentationClientePJ> model = ContaRepresentationClientePJ.from(contas);
+        return ok(model);
+    }    
+    
     @PostMapping(path = "/incluirContaCorrente/{codigoCliente}")
     public ResponseEntity<?> incluirContaCorrente(
             @PathVariable(value="codigoCliente", required=true) Integer cdCliente,
@@ -33,6 +64,7 @@ public class ContaEndPoint extends FakebankEndpoint {
         ContaCorrenteRepresentation model = ContaCorrenteRepresentation.from(conta);
         return created(model, conta.getCodigoConta());
     }
+    
     @PostMapping(path = "/incluirContaSalario/{codigoCliente}")
     public ResponseEntity<?> incluirContaSalario(
             @PathVariable(value="codigoCliente", required=true) Integer cdCliente,
@@ -72,4 +104,5 @@ public class ContaEndPoint extends FakebankEndpoint {
 
         return contaService.alterarContaSalario(cdConta, comando) != null ? ok("editado com sucesso") : notFound("conta nao encontrada");
     }
+    
 }

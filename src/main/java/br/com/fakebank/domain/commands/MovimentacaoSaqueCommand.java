@@ -7,6 +7,7 @@ public class MovimentacaoSaqueCommand {
     private String conta;
 
     public MovimentacaoSaqueCommand() {
+
     }
 
     public double getValor() {

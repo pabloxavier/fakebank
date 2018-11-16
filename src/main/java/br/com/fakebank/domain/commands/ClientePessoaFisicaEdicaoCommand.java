@@ -2,14 +2,14 @@ package br.com.fakebank.domain.commands;
 
 import br.com.fakebank.domain.validators.CommandValidator;
 
-public class ClientePessoaJuridicaEdicaoCommand {
+public class ClientePessoaFisicaEdicaoCommand {
 
     private boolean isAtivo;
     private String endereco;
     
     //TODO, quando tiver comando de Pessoa, usar aqui
 
-    public ClientePessoaJuridicaEdicaoCommand() {
+    public ClientePessoaFisicaEdicaoCommand() {
         
     }
     
@@ -31,8 +31,8 @@ public class ClientePessoaJuridicaEdicaoCommand {
     
     public void validate() {
         
-    	CommandValidator<ClientePessoaJuridicaEdicaoCommand> validator =
-        		new CommandValidator<ClientePessoaJuridicaEdicaoCommand>();
+    	CommandValidator<ClientePessoaFisicaEdicaoCommand> validator =
+        		new CommandValidator<ClientePessoaFisicaEdicaoCommand>();
         
         validator.validate(this);
     }

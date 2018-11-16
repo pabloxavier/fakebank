@@ -2,25 +2,40 @@ package br.com.fakebank.representations;
 
 import br.com.fakebank.domain.ClienteTelefone;
 import br.com.fakebank.domain.TipoTelefone;
+import br.com.fakebank.domain.converters.TelefoneCoverter;
+import br.com.fakebank.util.ListaPaginada;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.util.StringUtils;
+
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+
+@JsonPropertyOrder({"sequencia","prefixo", "numero", "numeroCompleto", "tipo" })
 public class ClienteTelefoneRepresentation {
 
-    private Integer codigoCliente;
-    private Short codigoTelefone;
+	private Short sequencia;
     private Short prefixo;
-    private Integer numero;
-    private TipoTelefone tipoTelefone;
+    private String numero; 
+    private String numeroCompleto;
+    private String tipo;
 
     public static ClienteTelefoneRepresentation from(ClienteTelefone clienteTelefone) {
+    	
+    	TelefoneCoverter telefoneConverter = new TelefoneCoverter();
+    	String numeroFormatado = telefoneConverter.convertToNumeroFormatado(clienteTelefone.getNumero());
+    	String numeroFormatadoCompleto = telefoneConverter.convertToNumeroCompletoFormatado(clienteTelefone.getPrefixo(), clienteTelefone.getNumero());
+    	
         ClienteTelefoneRepresentation model = new ClienteTelefoneRepresentation();
-        model.setCodigoCliente(clienteTelefone.getClienteTelefoneId().getCodigoCliente());
-        model.setCodigoTelefone(clienteTelefone.getClienteTelefoneId().getCodigoTelefone());
+        model.setSequencia(clienteTelefone.getClienteTelefoneId().getCodigoTelefone());
         model.setPrefixo(clienteTelefone.getPrefixo());
-        model.setNumero(clienteTelefone.getNumero());
-        model.setTipoTelefone(clienteTelefone.getTipoTelefone());
+        model.setNumero(numeroFormatado);
+        model.setNumeroCompleto(numeroFormatadoCompleto);
+        model.setTipo(StringUtils.capitalize(clienteTelefone.getTipoTelefone().toString().toLowerCase()));
         return model;
     }
 
@@ -32,43 +47,61 @@ public class ClienteTelefoneRepresentation {
         return telefones;
     }
 
-    public Integer getCodigoCliente() {
-        return codigoCliente;
-    }
+	public static ListaPaginada<ClienteTelefoneRepresentation> from(Page<ClienteTelefone> clienteTelefones){
 
-    public void setCodigoCliente(Integer codigoCliente) {
-        this.codigoCliente = codigoCliente;
-    }
+		ListaPaginada<ClienteTelefoneRepresentation> lista =
+				new ListaPaginada<ClienteTelefoneRepresentation>();
+		lista.setContent(clienteTelefones
+				.stream()
+				.map(item -> from(item))
+				.collect(Collectors.toList()));
 
-    public Short getCodigoTelefone() {
-        return codigoTelefone;
-    }
+		lista.setTotalPages(clienteTelefones.getTotalPages());
+		lista.setPageNumber(clienteTelefones.getPageable().getPageNumber());
+		lista.setPageSize(clienteTelefones.getPageable().getPageSize());
 
-    public void setCodigoTelefone(Short codigoTelefone) {
-        this.codigoTelefone = codigoTelefone;
-    }
+		return lista;
+	}
 
-    public Short getPrefixo() {
-        return prefixo;
-    }
+	public Short getSequencia() {
+		return sequencia;
+	}
 
-    public void setPrefixo(Short prefixo) {
-        this.prefixo = prefixo;
-    }
+	public void setSequencia(Short sequencia) {
+		this.sequencia = sequencia;
+	}
 
-    public Integer getNumero() {
-        return numero;
-    }
+	public Short getPrefixo() {
+		return prefixo;
+	}
 
-    public void setNumero(Integer numero) {
-        this.numero = numero;
-    }
+	public void setPrefixo(Short prefixo) {
+		this.prefixo = prefixo;
+	}
 
-    public TipoTelefone getTipoTelefone() {
-        return tipoTelefone;
-    }
+	public String getNumero() {
+		return numero;
+	}
 
-    public void setTipoTelefone(TipoTelefone tipoTelefone) {
-        this.tipoTelefone = tipoTelefone;
-    }
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getNumeroCompleto() {
+		return numeroCompleto;
+	}
+
+	public void setNumeroCompleto(String numeroCompleto) {
+		this.numeroCompleto = numeroCompleto;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+    
+    
 }
