@@ -59,7 +59,6 @@ public class MovimentacaoRepresentation {
     	lista.setPageSize(movimentacoes.getPageable().getPageSize());
     	
     	return lista;
-    	
     }
 
     public Integer getCodigoMovimentacao() {

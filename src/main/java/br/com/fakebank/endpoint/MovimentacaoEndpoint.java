@@ -1,7 +1,6 @@
 package br.com.fakebank.endpoint;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,12 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fakebank.domain.Agencia;
 import br.com.fakebank.domain.Movimentacao;
 import br.com.fakebank.domain.commands.MovimentacaoDepositoCommand;
 import br.com.fakebank.domain.commands.MovimentacaoSaqueCommand;
 import br.com.fakebank.domain.commands.MovimentacaoTransferenciaCommand;
-import br.com.fakebank.representations.AgenciaRepresentationV1;
 import br.com.fakebank.representations.MovimentacaoRepresentation;
 import br.com.fakebank.service.MovimentacaoService;
 import br.com.fakebank.util.ListaPaginada;
@@ -80,6 +77,5 @@ public class MovimentacaoEndpoint extends FakebankEndpoint {
     	ListaPaginada<MovimentacaoRepresentation> model = MovimentacaoRepresentation.from(movimentacoes);
         return ok(model); 
     }
-    
-
+   
 }

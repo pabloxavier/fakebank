@@ -31,7 +31,6 @@ public class MovimentacaoService {
         Specification<Movimentacao> criterio = Specification
                                               .where(MovimentacaoSpecifications.movimentacaoPorCodigoConta(conta)); 
         
-        
         return repository.findAll(criterio, pageable);
     }
 
