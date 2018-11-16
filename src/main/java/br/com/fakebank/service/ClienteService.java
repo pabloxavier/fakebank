@@ -8,6 +8,8 @@ import br.com.fakebank.domain.commands.ClienteTelefoneInclusaoCommand;
 import br.com.fakebank.domain.specifications.ClienteTelefoneSpecifications;
 import br.com.fakebank.repository.ClienteTelefoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -83,11 +85,11 @@ public class ClienteService {
         return telefoneRepository.save(telefone);
     }
 
-    public List<ClienteTelefone> listarTelefonesFromCliente(Integer codigo) {
+    public Page<ClienteTelefone> listarTelefonesFromCliente(Integer codigo, Pageable pageable) {
         Specification<ClienteTelefone> criterio =
                 Specification.where(ClienteTelefoneSpecifications.porCodigoCliente(codigo));
 
-        return telefoneRepository.findAll(criterio);
+        return telefoneRepository.findAll(criterio, pageable);
     }
 
     private ClienteTelefone getTelefoneById(ClienteTelefoneId clienteTelefoneId) {

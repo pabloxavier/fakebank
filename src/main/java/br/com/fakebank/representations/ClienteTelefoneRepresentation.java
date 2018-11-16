@@ -3,10 +3,13 @@ package br.com.fakebank.representations;
 import br.com.fakebank.domain.ClienteTelefone;
 import br.com.fakebank.domain.TipoTelefone;
 import br.com.fakebank.domain.converters.TelefoneCoverter;
+import br.com.fakebank.util.ListaPaginada;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
 import org.springframework.util.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -43,6 +46,22 @@ public class ClienteTelefoneRepresentation {
         }
         return telefones;
     }
+
+	public static ListaPaginada<ClienteTelefoneRepresentation> from(Page<ClienteTelefone> clienteTelefones){
+
+		ListaPaginada<ClienteTelefoneRepresentation> lista =
+				new ListaPaginada<ClienteTelefoneRepresentation>();
+		lista.setContent(clienteTelefones
+				.stream()
+				.map(item -> from(item))
+				.collect(Collectors.toList()));
+
+		lista.setTotalPages(clienteTelefones.getTotalPages());
+		lista.setPageNumber(clienteTelefones.getPageable().getPageNumber());
+		lista.setPageSize(clienteTelefones.getPageable().getPageSize());
+
+		return lista;
+	}
 
 	public Short getSequencia() {
 		return sequencia;

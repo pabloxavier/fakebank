@@ -10,6 +10,8 @@ import br.com.fakebank.exceptions.NotFoundException;
 import br.com.fakebank.representations.ClienteTelefoneRepresentation;
 import br.com.fakebank.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,11 +28,12 @@ public class ClienteTelefoneEndpoint extends FakebankEndpoint {
     @GetMapping(value = "/{codigoCliente}/telefones")
     public ResponseEntity<?> getTelefonesByClienteId(
             @PathVariable("codigoCliente") Integer codigoCliente,
+            Pageable pageable,
             HttpServletRequest request) {
 
         verificaExistenciaClienteByUri(request.getRequestURI(), codigoCliente);
 
-        List<ClienteTelefone> clienteTelefones = service.listarTelefonesFromCliente(codigoCliente);
+        Page<ClienteTelefone> clienteTelefones = service.listarTelefonesFromCliente(codigoCliente, pageable);
         return ok(ClienteTelefoneRepresentation.from(clienteTelefones));
     }
 
