@@ -14,6 +14,7 @@ import br.com.fakebank.domain.Conta;
 import br.com.fakebank.domain.Gerente;
 import br.com.fakebank.domain.SituacaoConta;
 import br.com.fakebank.domain.TipoConta;
+import br.com.fakebank.domain.TipoPessoa;
 import br.com.fakebank.domain.commands.ContaCorrenteEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaCorrenteInclusaoCommand;
 import br.com.fakebank.domain.commands.ContaPoupancaEdicaoCommand;
@@ -62,7 +63,20 @@ public class ContaService {
 		
 	}
 	
-	
+	public Page<Conta> consultarContasPorCodigoClientePessoaJuridica(Integer codigo, Pageable pageable){
+		Optional<Cliente> cliente = clienteRepository.findById(codigo);
+		
+		if(!cliente.isPresent()) {
+			throw new NotFoundException("Cliente nÃ£o encontrado.");
+		}		
+		
+		if(!cliente.get().getPessoa().getTipoPessoa().equals(TipoPessoa.JURIDICA)) {
+			throw new NotFoundException("Cliente precisar ser pessoa jurídica.");
+		}
+		
+		Specification<Conta> criteria = Specification.where(ContaSpecifications.porCodigoClientePrincipal(codigo));
+		return repository.findAll(criteria, pageable);		
+	}	
 	
 	public List<Conta> filtrarPorTipo(Integer tipoConta){
 		Specification<Conta> criteria = Specification.where(ContaSpecifications.porTipoConta(tipoConta));
