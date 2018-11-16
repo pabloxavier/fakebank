@@ -65,4 +65,5 @@ public class SituacaoContaEndpoint extends FakebankEndpoint{
     	service.excluir(codigo);
         return ok("excluido com sucesso");
     }
+
 }

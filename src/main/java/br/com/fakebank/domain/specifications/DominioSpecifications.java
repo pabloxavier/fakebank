@@ -15,5 +15,4 @@ public class DominioSpecifications {
         return (root, criteriaQuery, criteriaBuilder) -> 
         criteriaBuilder.equal(root.get("tipo"), tipo);
     }
-
 }

@@ -3,7 +3,6 @@ package br.com.fakebank.endpoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +17,6 @@ import br.com.fakebank.domain.MotivoEncerramento;
 import br.com.fakebank.domain.commands.DominioCriacaoCommand;
 import br.com.fakebank.domain.commands.DominioEdicaoCommand;
 import br.com.fakebank.representations.MotivoEncerramentoRepresentationV1;
-import br.com.fakebank.representations.SituacaoContaRepresentation;
 import br.com.fakebank.service.MotivoEncerramentoService;
 import br.com.fakebank.util.ListaPaginada;
 

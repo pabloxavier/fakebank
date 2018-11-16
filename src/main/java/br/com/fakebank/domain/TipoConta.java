@@ -16,17 +16,14 @@ public class TipoConta extends Dominio{
     }
     
     private TipoConta(DominioCriacaoCommand comando) {
-
         this.setTipo(DominioEnum.TIPO_CONTA.toString());
         this.setValor(comando.getCodigo().toString());
         this.setDescricao(comando.getDescricao());
-
     }
 
     public static TipoConta criar(DominioCriacaoCommand comando) {
     	comando.validate();
         return new TipoConta(comando);
-
     }
 
     public void editar(DominioEdicaoCommand comando) {

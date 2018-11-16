@@ -71,4 +71,5 @@ public class MotivoEncerramentoService extends DominioService {
 		}
 
 	}
+
 }

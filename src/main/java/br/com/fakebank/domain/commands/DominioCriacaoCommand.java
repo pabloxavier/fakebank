@@ -27,8 +27,7 @@ public class DominioCriacaoCommand {
     }
     
     public void validate() {
-    	CommandValidator<DominioCriacaoCommand> validator = new CommandValidator<DominioCriacaoCommand>();
+    	CommandValidator<DominioCriacaoCommand> validator  = new CommandValidator<DominioCriacaoCommand>();
         validator.validate(this);
     }
-
 }

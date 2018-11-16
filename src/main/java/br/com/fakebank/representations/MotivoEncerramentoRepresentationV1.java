@@ -1,17 +1,13 @@
 package br.com.fakebank.representations;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 
-import br.com.fakebank.domain.Agencia;
-import br.com.fakebank.domain.Dominio;
 import br.com.fakebank.domain.MotivoEncerramento;
 import br.com.fakebank.util.ListaPaginada;
+import io.swagger.annotations.ApiModel;
 
 @ApiModel(description = "Classe de modelo (representação de motivo encerramento).")
 public class MotivoEncerramentoRepresentationV1 {

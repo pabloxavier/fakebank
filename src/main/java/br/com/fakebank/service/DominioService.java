@@ -28,5 +28,4 @@ public class DominioService {
         return dominio.isPresent() ? true : false;    
     }
 
-
 }
