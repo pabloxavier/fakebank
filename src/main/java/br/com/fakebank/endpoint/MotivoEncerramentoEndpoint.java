@@ -21,7 +21,7 @@ import br.com.fakebank.service.MotivoEncerramentoService;
 import br.com.fakebank.util.ListaPaginada;
 
 @RestController
-@RequestMapping("motivo-encerramento")
+@RequestMapping("motivos-encerramento")
 public class MotivoEncerramentoEndpoint extends FakebankEndpoint {
 
 	@Autowired
