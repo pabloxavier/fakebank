@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fakebank.domain.TipoConta;
-import br.com.fakebank.domain.commands.ClienteEdicaoCommand;
 import br.com.fakebank.domain.commands.DominioCriacaoCommand;
 import br.com.fakebank.domain.commands.DominioEdicaoCommand;
 import br.com.fakebank.service.TipoContaService;

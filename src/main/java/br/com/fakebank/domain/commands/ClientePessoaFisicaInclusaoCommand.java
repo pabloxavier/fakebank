@@ -3,6 +3,8 @@ package br.com.fakebank.domain.commands;
 
 import java.util.Date;
 
+import br.com.fakebank.domain.validators.CommandValidator;
+
 public class ClientePessoaFisicaInclusaoCommand {
 
     private String cpf;
@@ -46,4 +48,12 @@ public class ClientePessoaFisicaInclusaoCommand {
         this.enderecoCompleto = enderecoCompleto;
     }
 
+    public void validate() {
+        
+    	CommandValidator<ClientePessoaFisicaInclusaoCommand> validator =
+        		new CommandValidator<ClientePessoaFisicaInclusaoCommand>();
+        
+        validator.validate(this);
+    }
+    
 }
