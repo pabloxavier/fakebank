@@ -1,23 +1,23 @@
 package br.com.fakebank.representations;
 
-import br.com.fakebank.domain.Conta;
-
 import java.time.LocalDate;
-import java.util.Date;
+
+import br.com.fakebank.domain.Conta;
+import br.com.fakebank.domain.Gerente;
 
 public class ContaCorrenteRepresentation {
 
     private String codigoConta;
     private String nomeCliente;
     private LocalDate dataAbertura;
-    private Integer codigoGerente;
+    private Gerente gerente;
     private Integer codigoSituacaoConta;
     private Double valorSaldo;
 
     public static ContaCorrenteRepresentation  from(Conta conta) {
         ContaCorrenteRepresentation contaRepresentation = new ContaCorrenteRepresentation();
         contaRepresentation.setCodigoConta(conta.getCodigoConta());
-        contaRepresentation.setCodigoGerente(conta.getCodigoGerente());
+        contaRepresentation.setCodigoGerente(conta.getGerente());
         contaRepresentation.setCodigoSituacaoConta(conta.getCodigoSituacaoConta());
         contaRepresentation.setDataAbertura(conta.getDataAbertura());
         contaRepresentation.setNomeCliente(conta.getCliente().getPessoa().getNome());
@@ -49,12 +49,12 @@ public class ContaCorrenteRepresentation {
         this.dataAbertura = dataAbertura;
     }
 
-    public Integer getCodigoGerente() {
-        return codigoGerente;
+    public Gerente getCodigoGerente() {
+        return gerente;
     }
 
-    public void setCodigoGerente(Integer codigoGerente) {
-        this.codigoGerente = codigoGerente;
+    public void setCodigoGerente(Gerente gerente) {
+        this.gerente = gerente;
     }
 
     public Integer getCodigoSituacaoConta() {

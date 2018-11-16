@@ -2,31 +2,27 @@ package br.com.fakebank.domain;
 
 
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Random;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import br.com.fakebank.customValidators.ContaForeignKeyClientePrincipal;
-import br.com.fakebank.customValidators.ContaForeignKeyGerente;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import br.com.fakebank.customValidators.ContaForeignKeySituacaoConta;
-import br.com.fakebank.customValidators.ContaForeignKeyTipoConta;
 import br.com.fakebank.domain.commands.ContaCorrenteEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaCorrenteInclusaoCommand;
-import br.com.fakebank.domain.commands.ContaInclusaoCommand;
 import br.com.fakebank.domain.commands.ContaPoupancaEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaPoupancaInclusaoCommand;
 import br.com.fakebank.domain.commands.ContaSalarioEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaSalarioInclusaoCommand;
-import br.com.fakebank.util.DateUtil;
+import br.com.fakebank.service.GerenteService;
 
 @Entity
 @Table(name = "CONTA", schema = "dbo")
@@ -38,18 +34,17 @@ public class Conta {
 	
 	@ManyToOne()
 	@JoinColumn(name = "CD_CLIENTE_PRINCIPAL")
-	@ContaForeignKeyClientePrincipal
 	private Cliente cliente;	
 	
 	@Column(name = "DT_ABERTURA")
 	private LocalDate dataAbertura;
 	
 	@Column(name = "TP_CONTA")
-	@ContaForeignKeyTipoConta
 	private Integer tipoConta;
-	
-	@Column(name = "CD_GERENTE")
-	private Integer codigoGerente;
+  
+	@ManyToOne()
+	@JoinColumn(name = "CD_GERENTE")
+	private Gerente gerente;
 	
 	@Column(name = "CD_SITUACAO_CONTA")
 	@ContaForeignKeySituacaoConta
@@ -63,6 +58,12 @@ public class Conta {
 	
 	@Column(name ="DD_ANIVERSARIO_POUPANCA")
 	private Integer diaAniversarioPoupanca;
+	
+	
+	@Autowired
+	@Transient
+	private GerenteService gerenteService;
+	
 	
 	protected Conta() {
 		
@@ -78,7 +79,7 @@ public class Conta {
 	private Conta (Cliente cliente, ContaCorrenteInclusaoCommand command) {
 		this.codigoConta = this.gerarCodigoConta();
 		this.cliente = cliente;		
-		this.codigoGerente = command.getCodigoGerente();
+		this.gerente = getGerenteById(command.getCodigoGerente());	
 		this.codigoSituacaoConta = 4;
 		this.dataAbertura = LocalDate.now();
 		this.tipoConta = 1;
@@ -95,7 +96,7 @@ public class Conta {
 	private Conta (Cliente cliente, ContaPoupancaInclusaoCommand command) {
 		this.codigoConta = this.gerarCodigoConta();
 		this.cliente = cliente;
-		this.codigoGerente = command.getCodigoGerente();
+		this.gerente = getGerenteById(command.getCodigoGerente());	
 		this.codigoSituacaoConta = 4;	
 		this.dataAbertura = LocalDate.now();
 		this.valorSaldo = 0.00;		
@@ -114,7 +115,7 @@ public class Conta {
 	private Conta (Cliente cliente, ContaSalarioInclusaoCommand command) {
 		this.codigoConta = this.gerarCodigoConta();
 		this.cliente = cliente;
-		this.codigoGerente = command.getCodigoGerente();
+		this.gerente = getGerenteById(command.getCodigoGerente());	
 		this.codigoSituacaoConta = 4;	
 		this.dataAbertura = LocalDate.now();
 		this.valorSaldo = 0.00;		
@@ -127,7 +128,7 @@ public class Conta {
 		
 		command.validate();
 		
-		this.codigoGerente = command.getCodigoGerente();		
+		this.gerente = getGerenteById(command.getCodigoGerente());			
 		this.codigoSituacaoConta = command.getCodigoSituacaoConta();							
 		this.numeroCnpjContratoSalario = command.getNumeroCnpjContratoSalario();		
 		
@@ -136,8 +137,7 @@ public class Conta {
 	public void editarContaCorrente(ContaCorrenteEdicaoCommand command) {
 		
 		command.validate();
-		
-		this.codigoGerente = command.getCodigoGerente();		
+		this.gerente = getGerenteById(command.getCodigoGerente());		
 		this.codigoSituacaoConta = command.getCodigoSituacaoConta();						
 	}	
 
@@ -145,7 +145,7 @@ public class Conta {
 		
 		command.validate();
 		
-		this.codigoGerente = command.getCodigoGerente();		
+		this.gerente = getGerenteById(command.getCodigoGerente());		
 		this.codigoSituacaoConta = command.getCodigoSituacaoConta();							
 		this.diaAniversarioPoupanca = command.getDiaAniversarioPoupanca();		
 	}	
@@ -171,8 +171,8 @@ public class Conta {
         return tipoConta;
     }
 
-    public Integer getCodigoGerente() {
-        return codigoGerente;
+    public Gerente getGerente() {
+        return gerente;
     }
 
     public Integer getCodigoSituacaoConta() {
@@ -190,14 +190,18 @@ public class Conta {
     public Integer getDiaAniversarioPoupanca() {
         return diaAniversarioPoupanca;
     }
+    
+    public Gerente getGerenteById(Integer codigoGerente) {
+    	return gerenteService.getGerenteById(codigoGerente);
+    }
+    
 
 	@Override
 	public String toString() {
 		return "Conta [codigoConta=" + codigoConta + ", cliente=" + cliente + ", dataAbertura=" + dataAbertura
-				+ ", tipoConta=" + tipoConta + ", codigoGerente=" + codigoGerente + ", codigoSituacaoConta="
-				+ codigoSituacaoConta + ", valorSaldo=" + valorSaldo + ", numeroCnpjContratoSalario="
-				+ numeroCnpjContratoSalario + ", diaAniversarioPoupanca=" + diaAniversarioPoupanca + "]";
+				+ ", tipoConta=" + tipoConta + ", gerente=" + gerente + ", codigoSituacaoConta=" + codigoSituacaoConta
+				+ ", valorSaldo=" + valorSaldo + ", numeroCnpjContratoSalario=" + numeroCnpjContratoSalario
+				+ ", diaAniversarioPoupanca=" + diaAniversarioPoupanca + "]";
 	}
-    
 
 }
