@@ -20,6 +20,9 @@ import br.com.fakebank.domain.commands.GerenteInclusaoCommand;
 import br.com.fakebank.representations.GerenteRepresentation;
 import br.com.fakebank.service.GerenteService;
 import br.com.fakebank.util.ListaPaginada;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("gerentes")
@@ -28,6 +31,15 @@ public class GerenteEndpoint extends FakebankEndpoint{
     @Autowired
     GerenteService service;
     
+    @ApiOperation(
+    		value = "Listar todos os gerentes cadastrados.",
+    		response = GerenteRepresentation.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Gerente retornado com sucesso."),
+            @ApiResponse(code = 401, message = "Recurso sem autorização de acesso"),
+            @ApiResponse(code = 403, message = "Acesso negado ao recurso"),
+            @ApiResponse(code = 404, message = "Nenhuma gerente encontrado")
+    })
     @GetMapping
 	public ResponseEntity<?> listarGerentes(Pageable pageable){
     	Page<Gerente> gerentes = service.listar(pageable);
@@ -35,11 +47,29 @@ public class GerenteEndpoint extends FakebankEndpoint{
     	return ok(model);
     }
     
+    @ApiOperation(
+    		value = "Listar todos os gerentes cadastrados.",
+    		response = GerenteRepresentation.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Gerente retornado com sucesso."),
+            @ApiResponse(code = 401, message = "Recurso sem autorização de acesso"),
+            @ApiResponse(code = 403, message = "Acesso negado ao recurso"),
+            @ApiResponse(code = 404, message = "Nenhuma gerente encontrado")
+    })
     @GetMapping(value = "/{codigo}")
     public ResponseEntity<?> getGerenteById(@PathVariable("codigo") Integer codigo){
         return ok(service.getGerenteById(codigo));
     }
     
+    @ApiOperation(
+    		value = "Listar todos os gerentes cadastrados.",
+    		response = GerenteRepresentation.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Gerente retornado com sucesso."),
+            @ApiResponse(code = 401, message = "Recurso sem autorização de acesso"),
+            @ApiResponse(code = 403, message = "Acesso negado ao recurso"),
+            @ApiResponse(code = 404, message = "Nenhuma gerente encontrado")
+    })
     @GetMapping(path = "/pesquisa")
     public ResponseEntity<?> filtrar(
     		@RequestParam(name = "isAtivo") boolean isAtivo){
@@ -47,7 +77,7 @@ public class GerenteEndpoint extends FakebankEndpoint{
     }
     
     @PostMapping
-    public ResponseEntity<?> criar(@RequestBody GerenteInclusaoCommand comando){
+    public ResponseEntity<?> criar(@RequestBody GerenteInclusaoCommand comando) {
         Gerente gerente = service.salvar(comando);
         if (gerente != null)
             return created("Gerente criado com sucesso");

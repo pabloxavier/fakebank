@@ -30,7 +30,7 @@ public class GerenteService {
     }
     
     public Gerente getGerenteById(Integer codigo) {
-        return repository.findById(codigo).orElse(null);
+        return repository.findById(codigo).orElseThrow(() -> new NotFoundException());
     }
     
     public List<Gerente> filtrar(boolean isAtivo){
