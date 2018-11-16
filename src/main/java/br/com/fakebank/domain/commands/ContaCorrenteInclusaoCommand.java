@@ -8,26 +8,14 @@ import br.com.fakebank.exceptions.FieldName;
 
 public class ContaCorrenteInclusaoCommand extends ContaInclusaoCommand{
 
-	    @NotNull
-	    @ContaForeignKeyGerente
-	    @FieldName("Gerente")
-	    private Integer codigoGerente;
 	    
 	    public ContaCorrenteInclusaoCommand () {
 	    		        
 	    }
-
-	    public Integer getCodigoGerente() {
-	        return codigoGerente;
-	    }
-
-	    public void setCodigoGerente(Integer codigoGerente) {
-	        this.codigoGerente = codigoGerente;
-	    }
 	    
 	    public void validate() {
-	    	CommandValidator<ContaInclusaoCommand> validator =
-	        		new CommandValidator<ContaInclusaoCommand>();
+	    	CommandValidator<ContaCorrenteInclusaoCommand> validator =
+	        		new CommandValidator<ContaCorrenteInclusaoCommand>();
 	        validator.validate(this);
 	    }
 	    

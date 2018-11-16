@@ -15,8 +15,8 @@ import br.com.fakebank.util.ListaPaginada;
 public class ContaRepresentationClientePF {
 
 	 private String codigoConta;
-	   private Integer codigoSituacaoConta;
-	   private Integer tipoConta;
+	   private String situacaoConta;
+	   private String tipoConta;
 	   private Double valorSaldo;
 	   private LocalDate dataAbertura;
 	   private Gerente gerente;
@@ -24,8 +24,8 @@ public class ContaRepresentationClientePF {
 	   public static ContaRepresentationClientePF from(Conta conta) {
 	       ContaRepresentationClientePF contaRepresentationClientePf = new ContaRepresentationClientePF();
 	       contaRepresentationClientePf.setCodigoConta(conta.getCodigoConta());
-	       contaRepresentationClientePf.setCodigoSituacaoConta(conta.getCodigoSituacaoConta());
-	       contaRepresentationClientePf.setTipoConta(conta.getTipoConta());
+	       contaRepresentationClientePf.setSituacaoConta(conta.getSituacaoConta().getDescricao());
+	       contaRepresentationClientePf.setTipoConta(conta.getTipoConta().getDescricao());
 	       contaRepresentationClientePf.setValorSaldo(conta.getValorSaldo());
 	       contaRepresentationClientePf.setDataAbertura(conta.getDataAbertura());
 	       contaRepresentationClientePf.setGerente(conta.getGerente());
@@ -56,19 +56,19 @@ public class ContaRepresentationClientePF {
 	        this.codigoConta = codigoConta;
 	    }
 
-	    public Integer getCodigoSituacaoConta() {
-	        return codigoSituacaoConta;
+	    public String getSituacaoConta() {
+	        return situacaoConta;
 	    }
 
-	    public void setCodigoSituacaoConta(Integer codigoSituacaoConta) {
-	        this.codigoSituacaoConta = codigoSituacaoConta;
+	    public void setSituacaoConta(String situacaoConta) {
+	        this.situacaoConta = situacaoConta;
 	    }
 
-	    public Integer getTipoConta() {
+	    public String getTipoConta() {
 	        return tipoConta;
 	    }
 
-	    public void setTipoConta(Integer tipoConta) {
+	    public void setTipoConta(String tipoConta) {
 	        this.tipoConta = tipoConta;
 	    }
 

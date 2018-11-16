@@ -11,7 +11,7 @@ public class ContaPoupancaRepresentation {
     private String nomeCliente;
     private LocalDate dataAbertura;
     private Gerente gerente;
-    private Integer codigoSituacaoConta;
+    private String situacaoConta;
     private Double valorSaldo;
     private Integer diaAniversarioPoupanca;
 
@@ -19,7 +19,7 @@ public class ContaPoupancaRepresentation {
         ContaPoupancaRepresentation contaRepresentation = new ContaPoupancaRepresentation();
         contaRepresentation.setCodigoConta(conta.getCodigoConta());
         contaRepresentation.setGerente(conta.getGerente());
-        contaRepresentation.setCodigoSituacaoConta(conta.getCodigoSituacaoConta());
+        contaRepresentation.setSituacaoConta(conta.getSituacaoConta().getDescricao());
         contaRepresentation.setDataAbertura(conta.getDataAbertura());
         contaRepresentation.setDiaAniversarioPoupanca(conta.getDiaAniversarioPoupanca());
         contaRepresentation.setNomeCliente(conta.getCliente().getPessoa().getNome());
@@ -60,12 +60,12 @@ public class ContaPoupancaRepresentation {
         this.gerente = gerente;
     }
 
-    public Integer getCodigoSituacaoConta() {
-        return codigoSituacaoConta;
+    public String getCodigoSituacaoConta() {
+        return situacaoConta;
     }
 
-    public void setCodigoSituacaoConta(Integer codigoSituacaoConta) {
-        this.codigoSituacaoConta = codigoSituacaoConta;
+    public void setSituacaoConta(String situacaoConta) {
+        this.situacaoConta = situacaoConta;
     }
 
     public Double getValorSaldo() {
