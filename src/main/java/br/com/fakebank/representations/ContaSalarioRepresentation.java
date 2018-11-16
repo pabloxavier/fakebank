@@ -1,16 +1,16 @@
 package br.com.fakebank.representations;
 
-import br.com.fakebank.domain.Conta;
-
 import java.time.LocalDate;
-import java.util.Date;
+
+import br.com.fakebank.domain.Conta;
+import br.com.fakebank.domain.Gerente;
 
 public class ContaSalarioRepresentation {
 
     private String codigoConta;
     private String nomeCliente;
     private LocalDate dataAbertura;
-    private Integer codigoGerente;
+    private Gerente gerente;
     private Integer codigoSituacaoConta;
     private Double valorSaldo;
     private String numeroCnpjContratoSalario;
@@ -18,7 +18,7 @@ public class ContaSalarioRepresentation {
     public static ContaSalarioRepresentation from(Conta conta) {
         ContaSalarioRepresentation contaRepresentation = new ContaSalarioRepresentation();
         contaRepresentation.setCodigoConta(conta.getCodigoConta());
-        contaRepresentation.setCodigoGerente(conta.getCodigoGerente());
+        contaRepresentation.setGerente(conta.getGerente());
         contaRepresentation.setCodigoSituacaoConta(conta.getCodigoSituacaoConta());
         contaRepresentation.setDataAbertura(conta.getDataAbertura());
         contaRepresentation.setNomeCliente(conta.getCliente().getPessoa().getNome());
@@ -51,12 +51,12 @@ public class ContaSalarioRepresentation {
         this.dataAbertura = dataAbertura;
     }
 
-    public Integer getCodigoGerente() {
-        return codigoGerente;
+    public Gerente getGerente() {
+        return gerente;
     }
 
-    public void setCodigoGerente(Integer codigoGerente) {
-        this.codigoGerente = codigoGerente;
+    public void setGerente(Gerente gerente) {
+        this.gerente = gerente;
     }
 
     public Integer getCodigoSituacaoConta() {

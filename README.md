@@ -1,3 +1,7 @@
+```
+gradle clean cleaneclipse build eclipse --refresh-dependencies
+```
+
 ## Documentação
 
 Documentação de apoio ao estudo e construção da API do FakeBank.

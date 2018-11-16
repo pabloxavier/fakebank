@@ -77,7 +77,10 @@ public class Cliente {
     }
     
     public static Cliente criarClientePessoaJuridicaInclusaoCommand(ClientePessoaJuridicaInclusaoCommand command) {
-        return new Cliente(command);
+        
+    	command.validate();
+    	
+    	return new Cliente(command);
     }
     
     public Integer getCodigo() {

@@ -1,6 +1,8 @@
 package br.com.fakebank.endpoint;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,22 +13,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fakebank.domain.TipoConta;
-import br.com.fakebank.domain.commands.ClienteEdicaoCommand;
 import br.com.fakebank.domain.commands.DominioCriacaoCommand;
 import br.com.fakebank.domain.commands.DominioEdicaoCommand;
+import br.com.fakebank.representations.TipoContaRepresentation;
 import br.com.fakebank.service.TipoContaService;
+import br.com.fakebank.util.ListaPaginada;
 
 @RestController
-@RequestMapping("tipo-conta")
+@RequestMapping("tipos-conta")
 public class TipoContaEndpoint extends FakebankEndpoint{
 
     @Autowired
     TipoContaService service;
     
     @GetMapping
-    public ResponseEntity<?> listarTipoConta(){
-        
-        return ok(service.listar());
+    public ResponseEntity<?> listarTipoConta(Pageable pageable){
+    	Page<TipoConta> tiposConta = service.listar(pageable);
+    	ListaPaginada<TipoContaRepresentation> model = TipoContaRepresentation.from(tiposConta);
+        return ok(model); 
     }
     
     @GetMapping(value="/{codigo}")

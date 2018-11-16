@@ -1,8 +1,8 @@
 package br.com.fakebank.endpoint;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,23 +13,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fakebank.domain.SituacaoConta;
-import br.com.fakebank.domain.TipoConta;
 import br.com.fakebank.domain.commands.DominioCriacaoCommand;
 import br.com.fakebank.domain.commands.DominioEdicaoCommand;
+import br.com.fakebank.representations.SituacaoContaRepresentation;
 import br.com.fakebank.service.SituacaoContaService;
-import br.com.fakebank.service.TipoContaService;
+import br.com.fakebank.util.ListaPaginada;
 
 @RestController
-@RequestMapping("situacao-conta")
+@RequestMapping("situacoes-conta")
 public class SituacaoContaEndpoint extends FakebankEndpoint{
 
     @Autowired
     SituacaoContaService service;
     
     @GetMapping
-    public ResponseEntity<?> listarTipoConta(){
-        
-        return ok(service.listar());
+    public ResponseEntity<?> listarTipoConta(Pageable pageable){
+    	Page<SituacaoConta> situacoesConta = service.listar(pageable);
+    	ListaPaginada<SituacaoContaRepresentation> model = SituacaoContaRepresentation.from(situacoesConta);
+        return ok(model); 
     }
     
     @GetMapping(value="/{codigo}")
