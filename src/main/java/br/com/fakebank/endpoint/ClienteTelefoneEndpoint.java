@@ -60,6 +60,22 @@ public class ClienteTelefoneEndpoint extends FakebankEndpoint {
         return service.excluirTelefone(codigoCliente, codigoTelefone) ? ok("excluido com sucesso") : notFound("telefone n�o encontrado");
     }
 
+    @GetMapping(value = "/{codigoCliente}/telefones/{codigoTelefone}")
+    public ResponseEntity<?> editarTelefone(
+            @PathVariable("codigoCliente") Integer codigoCliente,
+            @PathVariable("codigoTelefone") Short codigoTelefone,
+            HttpServletRequest request) {
+
+        verificaExistenciaClienteByUri(request.getRequestURI(), codigoCliente);
+
+        ClienteTelefone telefone = service.getTelefoneById(codigoCliente, codigoTelefone);
+
+        if (telefone == null)
+            return notFound("Telefone não encontrado");
+
+        return ok(ClienteTelefoneRepresentation.from(telefone));
+    }
+
 
     @PutMapping(value = "/{codigoCliente}/telefones/{codigoTelefone}")
     public ResponseEntity<?> editarTelefone(
