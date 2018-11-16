@@ -6,16 +6,20 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import br.com.fakebank.customValidators.CnpjValid;
+import br.com.fakebank.domain.validators.CommandValidator;
+import br.com.fakebank.exceptions.FieldName;
 
 public class ClientePessoaJuridicaInclusaoCommand {
 
     @NotNull
     @NotBlank
     @CnpjValid
+    @FieldName("CNPJ")
     private String cnpj;
     
     @NotNull(message = "{clientepj.nome.nao.nulo}")
     @NotBlank(message = "{clientepj.nome.nao.vazio}")
+    @FieldName("Nome do Cliente")
     private String nome;
     
     private Date dataAbertura;
@@ -55,6 +59,14 @@ public class ClientePessoaJuridicaInclusaoCommand {
 
     public void setEnderecoCompleto(String enderecoCompleto) {
         this.enderecoCompleto = enderecoCompleto;
+    }
+    
+    public void validate() {
+        
+    	CommandValidator<ClientePessoaJuridicaInclusaoCommand> validator =
+        		new CommandValidator<ClientePessoaJuridicaInclusaoCommand>();
+        
+        validator.validate(this);
     }
 
 }
