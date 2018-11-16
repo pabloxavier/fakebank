@@ -10,9 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import br.com.fakebank.domain.commands.ClienteEdicaoCommand;
-import br.com.fakebank.domain.commands.ClienteInclusaoCommand;
+import br.com.fakebank.domain.commands.ClientePessoaFisicaEdicaoCommand;
 import br.com.fakebank.domain.commands.ClientePessoaFisicaInclusaoCommand;
+import br.com.fakebank.domain.commands.ClientePessoaJuridicaEdicaoCommand;
 import br.com.fakebank.domain.commands.ClientePessoaJuridicaInclusaoCommand;
 
 @Entity
@@ -37,52 +37,60 @@ public class Cliente {
         
     }
     
-    private Cliente(ClienteInclusaoCommand comando){
-        this.isAtivo = comando.isAtivo();
-        this.endereco = comando.getEndereco();
-        this.pessoa = comando.getPessoa();
-    }
-    
-    public static Cliente criar(ClienteInclusaoCommand comando){
-        return new Cliente(comando);
-    }
-    
-    public void editar(ClienteEdicaoCommand comando){
-        this.endereco = comando.getEndereco();
-        this.isAtivo = comando.isAtivo();
-    }
-    
-    private Cliente(ClientePessoaFisicaInclusaoCommand command) {
+    //Criar e Editar PF
+    private Cliente(ClientePessoaFisicaInclusaoCommand comando) {
         this.pessoa = new Pessoa();
-        this.pessoa.setNumeroDocumento(command.getCpf());
-        this.pessoa.setNome(command.getNome());
-        this.pessoa.setDataNascimento(command.getDataNascimento());
+        this.pessoa.setNumeroDocumento(comando.getCpf());
+        this.pessoa.setNome(comando.getNome());
+        this.pessoa.setDataNascimento(comando.getDataNascimento());
         this.pessoa.setTipoPessoa(TipoPessoa.FISICA);
-        this.endereco = command.getEnderecoCompleto();
+        this.endereco = comando.getEnderecoCompleto();
         this.isAtivo = Boolean.TRUE;
     }
     
-    public static Cliente criarClientePessoaFisica(ClientePessoaFisicaInclusaoCommand command) {
-        return new Cliente(command);
-    }
-
-    private Cliente(ClientePessoaJuridicaInclusaoCommand command) {
-        this.pessoa = new Pessoa();
-        this.pessoa.setNumeroDocumento(command.getCnpj());
-        this.pessoa.setNome(command.getNome());
-        this.pessoa.setDataAbertura(command.getDataAbertura());
-        this.pessoa.setTipoPessoa(TipoPessoa.JURIDICA);
-        this.endereco = command.getEnderecoCompleto();
-        this.isAtivo = Boolean.TRUE;
-    }
-    
-    public static Cliente criarClientePessoaJuridicaInclusaoCommand(ClientePessoaJuridicaInclusaoCommand command) {
-        
-    	command.validate();
+    public static Cliente criarClientePessoaFisica(ClientePessoaFisicaInclusaoCommand comando) {
+       
+    	comando.validate();
     	
-    	return new Cliente(command);
+    	return new Cliente(comando);
     }
     
+    public void editar(ClientePessoaFisicaEdicaoCommand comando){
+    	
+    	comando.validate();
+    	
+    	this.endereco = comando.getEndereco();
+    	this.isAtivo = comando.isAtivo();
+	}
+
+    //Criar e Editar PJ
+    private Cliente(ClientePessoaJuridicaInclusaoCommand comando) {
+        this.pessoa = new Pessoa();
+        this.pessoa.setNumeroDocumento(comando.getCnpj());
+        this.pessoa.setNome(comando.getNome());
+        this.pessoa.setDataAbertura(comando.getDataAbertura());
+        this.pessoa.setTipoPessoa(TipoPessoa.JURIDICA);
+        this.endereco = comando.getEnderecoCompleto();
+        this.isAtivo = Boolean.TRUE;
+    }
+    
+    public static Cliente criarClientePessoaJuridica(ClientePessoaJuridicaInclusaoCommand comando) {
+        
+    	comando.validate();
+    	
+    	return new Cliente(comando);
+    }
+    
+    public void editar(ClientePessoaJuridicaEdicaoCommand comando){
+    	
+    	comando.validate();
+    	
+    	this.endereco = comando.getEndereco();
+    	this.isAtivo = comando.isAtivo();
+	}
+    
+        
+    // gets
     public Integer getCodigo() {
         return codigo;
     }
