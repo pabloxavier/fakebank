@@ -24,6 +24,7 @@ import br.com.fakebank.representations.ContaCorrenteRepresentation;
 import br.com.fakebank.representations.ContaPoupancaRepresentation;
 import br.com.fakebank.representations.ContaRepresentation;
 import br.com.fakebank.representations.ContaRepresentationClientePF;
+import br.com.fakebank.representations.ContaRepresentationClientePJ;
 import br.com.fakebank.representations.ContaSalarioRepresentation;
 import br.com.fakebank.service.ContaService;
 import br.com.fakebank.util.ListaPaginada;
@@ -48,6 +49,14 @@ public class ContaEndPoint extends FakebankEndpoint {
         ListaPaginada<ContaRepresentationClientePF> model = ContaRepresentationClientePF.from(contas);
         return ok(model);
     }
+    
+
+    @GetMapping(value = "/clientes-pessoa-juridica/{codigoCliente}/contas")
+    public ResponseEntity<?>  getContasByIdClientePessoaJuridica(@PathVariable("codigoCliente") final Integer codigo, Pageable pageable){
+        Page<Conta> contas = contaService.consultarContasPorCodigoClientePessoaJuridica(codigo, pageable);
+        ListaPaginada<ContaRepresentationClientePJ> model = ContaRepresentationClientePJ.from(contas);
+        return ok(model);
+    }    
     
     @RequestMapping(value = {"/clientes-pessoa-fisica/{codigoCliente}/contas-correntes",
     "/clientes-pessoa-juridica/{codigoCliente}/contas-correntes"}, method = RequestMethod.POST)
@@ -98,4 +107,5 @@ public class ContaEndPoint extends FakebankEndpoint {
 
         return contaService.alterarContaSalario(cdConta, comando) != null ? ok("editado com sucesso") : notFound("conta nao encontrada");
     }
+    
 }

@@ -46,8 +46,8 @@ public class ClienteTelefone {
 
     
     public void editar(ClienteTelefoneEdicaoCommand comando){
-        
-        //validacao()
+        	
+    	comando.validate();
     	
     	this.prefixo = comando.getPrefixo();
     	this.numero = comando.getTelefone();

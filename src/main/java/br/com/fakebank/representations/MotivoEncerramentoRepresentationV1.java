@@ -1,32 +1,26 @@
 package br.com.fakebank.representations;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 
-import br.com.fakebank.domain.Agencia;
-import br.com.fakebank.domain.Dominio;
 import br.com.fakebank.domain.MotivoEncerramento;
 import br.com.fakebank.util.ListaPaginada;
+import io.swagger.annotations.ApiModel;
 
 @ApiModel(description = "Classe de modelo (representação de motivo encerramento).")
 public class MotivoEncerramentoRepresentationV1 {
 
+	private Integer identificador;
 	private Integer codigo;
-	private String tipo;
-	private String valor;
 	private String descricao;
     
     public static MotivoEncerramentoRepresentationV1 from(MotivoEncerramento motivo){
         MotivoEncerramentoRepresentationV1 model = new MotivoEncerramentoRepresentationV1();
-        model.codigo = motivo.getCodigo();
-        model.tipo = motivo.getTipo();
-        model.valor = motivo.getValor();
-        model.descricao = motivo.getDescricao();
+        model.setIdentificador(motivo.getCodigo());
+        model.setCodigo(Integer.valueOf(motivo.getValor()));
+        model.setDescricao(motivo.getDescricao());
         return model;
     }
     
@@ -55,28 +49,20 @@ public class MotivoEncerramentoRepresentationV1 {
         return lista;
     }
 
+	public Integer getIdentificador() {
+		return identificador;
+	}
+
+	public void setIdentificador(Integer identificador) {
+		this.identificador = identificador;
+	}
+
 	public Integer getCodigo() {
 		return codigo;
 	}
 
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
-	public String getValor() {
-		return valor;
-	}
-
-	public void setValor(String valor) {
-		this.valor = valor;
 	}
 
 	public String getDescricao() {
@@ -86,6 +72,5 @@ public class MotivoEncerramentoRepresentationV1 {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-    
-    
+
 }

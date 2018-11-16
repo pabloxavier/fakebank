@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,20 +44,26 @@ public class SituacaoContaEndpoint extends FakebankEndpoint{
     @PostMapping
     public ResponseEntity<?> criar(@RequestBody DominioCriacaoCommand comando){
         SituacaoConta situacaoConta= service.salvar(comando);
-        if (situacaoConta != null)
-            return created("situacao conta criada com sucesso");
-        else
-            return notFound("situacao conta nao encontrada");
+        SituacaoContaRepresentation model = SituacaoContaRepresentation.from(situacaoConta);
+       	return ok(model);
     }
     
     @PutMapping(value = "/{codigo}")
     public ResponseEntity<?> editar(@PathVariable("codigo") Integer codigo, @RequestBody DominioEdicaoCommand comando){
         SituacaoConta situacaoConta = service.salvar(codigo, comando);
         
-        if (situacaoConta != null)
-            return created("situacao conta editada com sucesso");
-        else
-            return notFound("situacao conta nao encontrada");
-            
+        if (situacaoConta == null)
+        	 return notFound("situacao conta nao encontrada");
+        
+       	SituacaoContaRepresentation model = SituacaoContaRepresentation.from(situacaoConta);
+        return created(model);
+           
     }
+    
+    @DeleteMapping(value = "/{codigo}")
+    public ResponseEntity<?> excluir(@PathVariable("codigo") Integer codigo){
+    	service.excluir(codigo);
+        return ok("excluido com sucesso");
+    }
+
 }
