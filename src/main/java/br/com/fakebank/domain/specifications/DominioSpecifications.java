@@ -6,7 +6,7 @@ import br.com.fakebank.domain.Dominio;
 
 public class DominioSpecifications {
 
-    public static Specification<Dominio> dominioPorValor(String valor){
+    public static Specification<Dominio> dominioPorValor(Integer valor){
         return (root, criteriaQuery, criteriaBuilder) -> 
         criteriaBuilder.equal(root.get("valor"), valor);
     }

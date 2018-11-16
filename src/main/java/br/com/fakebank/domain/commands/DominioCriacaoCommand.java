@@ -5,17 +5,17 @@ import br.com.fakebank.domain.validators.CommandValidator;
 
 public class DominioCriacaoCommand {
 
-    private String valor;
+    private Integer codigo;
     
     @DominioDescricaoValid
     private String descricao;
 
-    public String getValor() {
-        return valor;
+    public Integer getCodigo() {
+        return codigo;
     }
 
-    public void setValor(String valor) {
-        this.valor = valor;
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
     public String getDescricao() {

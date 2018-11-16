@@ -41,7 +41,7 @@ public class MotivoEncerramentoService extends DominioService {
 
 	public MotivoEncerramento incluir(DominioCriacaoCommand comando) {
 
-		if (dominioExiste(comando.getValor())) {
+		if (dominioExiste(comando.getCodigo())) {
 			throw new DominioUniqueException();
 		}
 
@@ -57,7 +57,7 @@ public class MotivoEncerramentoService extends DominioService {
 		return repository.save(motivo);
 	}
 
-	private boolean dominioExiste(String valor) {
+	private boolean dominioExiste(Integer valor) {
 		return dominioExiste(valor, DominioEnum.MOTIVO.toString());
 	}
 

@@ -18,6 +18,7 @@ import br.com.fakebank.domain.MotivoEncerramento;
 import br.com.fakebank.domain.commands.DominioCriacaoCommand;
 import br.com.fakebank.domain.commands.DominioEdicaoCommand;
 import br.com.fakebank.representations.MotivoEncerramentoRepresentationV1;
+import br.com.fakebank.representations.SituacaoContaRepresentation;
 import br.com.fakebank.service.MotivoEncerramentoService;
 import br.com.fakebank.util.ListaPaginada;
 
@@ -44,15 +45,21 @@ public class MotivoEncerramentoEndpoint extends FakebankEndpoint {
 
 	@PostMapping
 	public ResponseEntity<?> incluirMotivoEncerramento(@RequestBody DominioCriacaoCommand comando) {
-		service.incluir(comando);
-		return new ResponseEntity<>("incluido com sucesso", HttpStatus.CREATED);
+		MotivoEncerramento motivoEncerramento = service.incluir(comando);
+		MotivoEncerramentoRepresentationV1 model = MotivoEncerramentoRepresentationV1.from(motivoEncerramento);
+       	return ok(model);
 	}
 
 	@PutMapping(path = "/{codigo}")
 	public ResponseEntity<?> editarMotivoEncerramento(@PathVariable("codigo") Integer codigo,
 			@RequestBody DominioEdicaoCommand comando) {
-		service.editar(comando, codigo);
-		return new ResponseEntity<>("Iditado com sucesso", HttpStatus.OK);
+		MotivoEncerramento motivoEncerramento = service.editar(comando, codigo);
+		
+		if(motivoEncerramento == null)
+			return notFound("Motivo Encerramento não encontrado");
+        
+		MotivoEncerramentoRepresentationV1 model = MotivoEncerramentoRepresentationV1.from(motivoEncerramento);
+        return created(model);
 	}
 
 	@DeleteMapping(value = "/{codigo}")

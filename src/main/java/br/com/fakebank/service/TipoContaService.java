@@ -42,7 +42,7 @@ public class TipoContaService extends DominioService{
     
     public TipoConta salvar(DominioCriacaoCommand comando){
     	
-        if (dominioExiste(comando.getValor())) {
+        if (dominioExiste(comando.getCodigo())) {
 			throw new DominioUniqueException();
 		}
     	
@@ -63,7 +63,7 @@ public class TipoContaService extends DominioService{
         
     }
     
-    private boolean dominioExiste(String valor){
+    private boolean dominioExiste(Integer valor){
     	return dominioExiste(valor, DominioEnum.TIPO_CONTA.toString());
     }
     

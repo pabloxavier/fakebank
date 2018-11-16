@@ -43,7 +43,7 @@ public class SituacaoContaService extends DominioService{
     }
 
     public SituacaoConta salvar(DominioCriacaoCommand comando){
-        if (dominioExiste(comando.getValor())) {
+        if (dominioExiste(comando.getCodigo())) {
 			throw new DominioUniqueException();
 		}
         SituacaoConta situacaoConta = SituacaoConta.criar(comando);
@@ -63,7 +63,7 @@ public class SituacaoContaService extends DominioService{
         
     }
     
-    private boolean dominioExiste(String valor){
+    private boolean dominioExiste(Integer valor){
     	return dominioExiste(valor, DominioEnum.SIT_CONTA.toString());
     }
     

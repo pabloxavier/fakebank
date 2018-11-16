@@ -18,7 +18,7 @@ public class TipoConta extends Dominio{
     private TipoConta(DominioCriacaoCommand comando) {
 
         this.setTipo(DominioEnum.TIPO_CONTA.toString());
-        this.setValor(comando.getValor());
+        this.setValor(comando.getCodigo().toString());
         this.setDescricao(comando.getDescricao());
 
     }
