@@ -141,8 +141,12 @@ public class ClienteService {
 		return telefoneRepository.findAll(criterio, pageable);
 	}
 
-	private ClienteTelefone getTelefoneById(ClienteTelefoneId clienteTelefoneId) {
+	public ClienteTelefone getTelefoneById(ClienteTelefoneId clienteTelefoneId) {
 		return telefoneRepository.findById(clienteTelefoneId).orElse(null);
+	}
+
+	public ClienteTelefone getTelefoneById(Integer codigoCliente, Short codigoTelefone) {
+		return getTelefoneById(new ClienteTelefoneId(codigoCliente, codigoTelefone));
 	}
 
 	public boolean excluirTelefone(Integer codigoCliente, Short codigoTelefone) {
@@ -165,6 +169,5 @@ public class ClienteService {
 		telefone.editar(comando);
 		return telefoneRepository.save(telefone);
 	}
-    
 
 }
