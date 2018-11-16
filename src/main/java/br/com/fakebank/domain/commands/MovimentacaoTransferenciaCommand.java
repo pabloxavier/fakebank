@@ -6,7 +6,7 @@ public class MovimentacaoTransferenciaCommand {
 
     private String contaOrigem;
 
-    private Integer contaDestino;
+    private String contaDestino;
 
     public MovimentacaoTransferenciaCommand() {
     }
@@ -27,11 +27,11 @@ public class MovimentacaoTransferenciaCommand {
         this.contaOrigem = contaOrigem;
     }
 
-    public Integer getContaDestino() {
+    public String getContaDestino() {
         return contaDestino;
     }
 
-    public void setContaDestino(Integer contaDestino) {
+    public void setContaDestino(String contaDestino) {
         this.contaDestino = contaDestino;
     }
 
