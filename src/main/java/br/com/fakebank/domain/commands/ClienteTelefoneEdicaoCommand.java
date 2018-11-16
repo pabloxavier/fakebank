@@ -1,11 +1,23 @@
 package br.com.fakebank.domain.commands;
 
+import javax.validation.constraints.NotNull;
+
 import br.com.fakebank.domain.TipoTelefone;
+import br.com.fakebank.domain.validators.CommandValidator;
+import br.com.fakebank.exceptions.FieldName;
 
 public class ClienteTelefoneEdicaoCommand {
 	
+	@FieldName("prefixo")
+	@NotNull
 	private Short prefixo;
+	
+	@FieldName("telefone")
+	@NotNull
 	private Integer telefone; 
+	
+	@FieldName("tipoTelefone")
+	@NotNull
 	private TipoTelefone tipoTelefone;
 	
 	protected ClienteTelefoneEdicaoCommand() {
@@ -36,4 +48,10 @@ public class ClienteTelefoneEdicaoCommand {
 		this.tipoTelefone = tipoTelefone;
 	}
 
+	public void validate() {
+		CommandValidator<ClienteTelefoneEdicaoCommand> validator = 
+				new CommandValidator<>();
+		validator.validate(this);
+	}
+	
 }
