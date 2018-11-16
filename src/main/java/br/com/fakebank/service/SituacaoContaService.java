@@ -2,7 +2,9 @@ package br.com.fakebank.service;
 
 import java.util.List;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import br.com.fakebank.domain.SituacaoConta;
 import br.com.fakebank.domain.TipoConta;
 import br.com.fakebank.domain.commands.DominioCriacaoCommand;
 import br.com.fakebank.domain.commands.DominioEdicaoCommand;
+import br.com.fakebank.exceptions.DominioExclusaoException;
 import br.com.fakebank.exceptions.DominioUniqueException;
 import br.com.fakebank.exceptions.NotFoundException;
 import br.com.fakebank.repository.SituacaoContaRepository;
@@ -62,5 +65,15 @@ public class SituacaoContaService extends DominioService{
     
     private boolean dominioExiste(String valor){
     	return dominioExiste(valor, DominioEnum.SIT_CONTA.toString());
+    }
+    
+    public void excluir(Integer codigo){
+    	SituacaoConta tipoConta = consultaPorCodigo(codigo);
+    	
+        try {
+        	repository.deleteById(tipoConta.getCodigo());
+		} catch (DataIntegrityViolationException e) {
+			throw new DominioExclusaoException();
+		}
     }
 }
