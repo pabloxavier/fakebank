@@ -3,8 +3,11 @@ package br.com.fakebank.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.com.fakebank.domain.Agencia;
 import br.com.fakebank.domain.DominioEnum;
 import br.com.fakebank.domain.MotivoEncerramento;
 import br.com.fakebank.domain.commands.DominioCriacaoCommand;
@@ -23,9 +26,12 @@ public class MotivoEncerramentoService extends DominioService{
         
     }
     
-    public List<MotivoEncerramento> listar() {
-        
-        return repository.findAll();
+    public Page<MotivoEncerramento> listar(Pageable pageable){
+    	Page<MotivoEncerramento> motivo = repository.findAll(pageable);
+    	
+    	if (motivo.getSize() == 0) throw new NotFoundException();
+    	
+        return motivo;
     }
     
     public MotivoEncerramento consultaPorCodigo(Integer codigo) {
