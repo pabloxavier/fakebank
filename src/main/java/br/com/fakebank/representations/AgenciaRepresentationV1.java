@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.data.domain.Page;
 
 import br.com.fakebank.domain.Agencia;
+import br.com.fakebank.util.ListaPaginada;
 
 @ApiModel(description = "Classe de modelo (representação de agência).")
 public class AgenciaRepresentationV1 {
@@ -39,12 +40,21 @@ public class AgenciaRepresentationV1 {
     			.collect(Collectors.toList());
     }
     
-    public static List<AgenciaRepresentationV1> from(Page<Agencia> agencias){
-    	return
-    		agencias
-    			.stream()
-    			.map(item -> from(item))
-    			.collect(Collectors.toList());
+    public static ListaPaginada<AgenciaRepresentationV1> from(Page<Agencia> agencias){
+        
+        ListaPaginada<AgenciaRepresentationV1> lista =
+                new ListaPaginada<AgenciaRepresentationV1>();
+
+        lista.setContent(agencias
+                			.stream()
+                			.map(item -> from(item))
+                			.collect(Collectors.toList()));
+        
+        lista.setTotalPages(agencias.getTotalPages());
+        lista.setPageNumber(agencias.getPageable().getPageNumber());
+        lista.setPageSize(agencias.getPageable().getPageSize());
+        
+        return lista;
     }
     
     public Integer getCodigo() {
