@@ -96,7 +96,7 @@ public class ClienteTelefoneEndpoint extends FakebankEndpoint {
             throw new NotFoundException("Cliente não encontrado");
         }
 
-        return null;
+        return cliente;
     }
 
 }
