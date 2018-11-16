@@ -2,14 +2,15 @@ package br.com.fakebank.representations;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import br.com.fakebank.common.util.ListaPaginada;
 import br.com.fakebank.domain.Pessoa;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 
 import br.com.fakebank.domain.Gerente;
-import br.com.fakebank.util.ListaPaginada;
 
 @ApiModel(description = "Classe de Gerentes (representação de gerentes).")
 public class GerenteRepresentation {

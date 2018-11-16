@@ -1,8 +1,8 @@
 package br.com.fakebank.domain.commands;
 
-import br.com.fakebank.customValidators.DominioCodigoValid;
-import br.com.fakebank.customValidators.DominioDescricaoValid;
-import br.com.fakebank.domain.validators.CommandValidator;
+import br.com.fakebank.common.validations.CommandValidator;
+import br.com.fakebank.domain.validators.DominioCodigoValid;
+import br.com.fakebank.domain.validators.DominioDescricaoValid;
 
 public class DominioCriacaoCommand {
 	

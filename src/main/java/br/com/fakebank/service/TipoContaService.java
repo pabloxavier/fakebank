@@ -6,13 +6,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.com.fakebank.common.exceptions.DominioExclusaoException;
+import br.com.fakebank.common.exceptions.DominioUniqueException;
+import br.com.fakebank.common.exceptions.NotFoundException;
 import br.com.fakebank.domain.DominioEnum;
 import br.com.fakebank.domain.TipoConta;
 import br.com.fakebank.domain.commands.DominioCriacaoCommand;
 import br.com.fakebank.domain.commands.DominioEdicaoCommand;
-import br.com.fakebank.exceptions.DominioExclusaoException;
-import br.com.fakebank.exceptions.DominioUniqueException;
-import br.com.fakebank.exceptions.NotFoundException;
 import br.com.fakebank.repository.TipoContaRepository;
 
 @Service

@@ -13,12 +13,12 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import br.com.fakebank.common.exceptions.NotFoundException;
 import br.com.fakebank.domain.Movimentacao;
 import br.com.fakebank.domain.commands.MovimentacaoDepositoCommand;
 import br.com.fakebank.domain.commands.MovimentacaoSaqueCommand;
 import br.com.fakebank.domain.commands.MovimentacaoTransferenciaCommand;
 import br.com.fakebank.domain.specifications.MovimentacaoSpecifications;
-import br.com.fakebank.exceptions.NotFoundException;
 import br.com.fakebank.repository.MovimentacaoRepository;
 
 @Service

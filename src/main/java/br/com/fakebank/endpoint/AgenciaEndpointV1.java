@@ -21,12 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.fakebank.common.util.ListaPaginada;
 import br.com.fakebank.domain.Agencia;
 import br.com.fakebank.domain.commands.AgenciaEdicaoCommand;
 import br.com.fakebank.domain.commands.AgenciaInclusaoCommand;
 import br.com.fakebank.representations.AgenciaRepresentationV1;
 import br.com.fakebank.service.AgenciaService;
-import br.com.fakebank.util.ListaPaginada;
 
 @RestController
 @RequestMapping({"v1/agencias", "agencias"})

@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.fakebank.common.util.ListaPaginada;
 import br.com.fakebank.domain.Movimentacao;
 import br.com.fakebank.domain.commands.MovimentacaoDepositoCommand;
 import br.com.fakebank.domain.commands.MovimentacaoSaqueCommand;
 import br.com.fakebank.domain.commands.MovimentacaoTransferenciaCommand;
 import br.com.fakebank.representations.MovimentacaoRepresentation;
 import br.com.fakebank.service.MovimentacaoService;
-import br.com.fakebank.util.ListaPaginada;
 
 @RestController
 @RequestMapping("movimentacoes")

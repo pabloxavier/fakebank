@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import br.com.fakebank.common.util.ListaPaginada;
 import br.com.fakebank.domain.Gerente;
 import br.com.fakebank.domain.commands.GerenteEdicaoCommand;
 import br.com.fakebank.domain.commands.GerenteInclusaoCommand;
 import br.com.fakebank.representations.GerenteRepresentation;
 import br.com.fakebank.service.GerenteService;
-import br.com.fakebank.util.ListaPaginada;
 
 @RestController
 @RequestMapping("gerentes")

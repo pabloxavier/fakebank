@@ -1,6 +1,6 @@
 package br.com.fakebank.domain.commands;
 
-import br.com.fakebank.domain.validators.CommandValidator;
+import br.com.fakebank.common.validations.CommandValidator;
 
 public class ContaCorrenteInclusaoCommand extends ContaInclusaoCommand{
 	    
