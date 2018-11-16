@@ -1,8 +1,8 @@
 package br.com.fakebank.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.fakebank.domain.DominioEnum;
@@ -23,10 +23,14 @@ public class TipoContaService extends DominioService{
         
     }
     
-    public List<TipoConta> listar() {
-        
-        return repository.findAll();
+    public Page<TipoConta> listar(Pageable pageable){
+    	Page<TipoConta> tiposConta = repository.findAll(pageable);
+    	
+    	if (tiposConta.getSize() == 0) throw new NotFoundException();
+    	
+        return tiposConta;
     }
+    
     
     public TipoConta consultaPorCodigo(Integer codigo) {
         
