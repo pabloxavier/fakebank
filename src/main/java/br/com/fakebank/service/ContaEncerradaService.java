@@ -1,28 +1,19 @@
 package br.com.fakebank.service;
 
-import br.com.fakebank.domain.Agencia;
-import br.com.fakebank.domain.Conta;
-import br.com.fakebank.domain.commands.AgenciaInclusaoCommand;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import br.com.fakebank.domain.ContaEncerrada;
 import br.com.fakebank.exceptions.NotFoundException;
+import br.com.fakebank.repository.ContaEncerradaRepository;
 
-public class EncerramentoService {
+public class ContaEncerradaService {
     
-//    @Autowired
-//    private EncerramentoRepository repository;
+    @Autowired
+    private ContaEncerradaRepository repository;
     
-//    public List<Conta> listar(){
-//        return repository.findAll();
-//    }    
-// TESTE 123
-//    public Conta consultarPorCodigo(Integer codigo){
-//        return repository.findById(codigo)
-//                       //.orElse(null);
-//                         .orElseThrow(() -> new NaoEncontradoException());
-//    }
-//    
-//    public Conta salvar(AgenciaInclusaoCommand comando){
-//        Agencia agencia = Agencia.criar(comando);
-//        return repository.save(agencia);
-//    }    
-
+	public ContaEncerrada ContaPorCodigo(String codigo) {
+		return repository.findById(codigo).orElseThrow(() -> new NotFoundException());
+	}
+  
+    
 }
