@@ -1,8 +1,6 @@
 package br.com.fakebank.endpoint;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.fakebank.domain.Gerente;
 import br.com.fakebank.domain.commands.GerenteEdicaoCommand;
 import br.com.fakebank.domain.commands.GerenteInclusaoCommand;
-import br.com.fakebank.representations.GerenteRepresentation;
 import br.com.fakebank.service.GerenteService;
 import br.com.fakebank.util.ListaPaginada;
 import io.swagger.annotations.ApiOperation;
@@ -30,13 +27,20 @@ public class GerenteEndpoint extends FakebankEndpoint{
 
     @Autowired
     GerenteService service;
+//    
+//    @GetMapping
+//	public ResponseEntity<?> listarGerentes(Pageable pageable){
+//    	Page<Gerente> gerentes = service.listar(pageable);
+//    	ListaPaginada<GerenteRepresentation> model = GerenteRepresentation.from(gerentes);
+//    	return ok(model);
+//    }
     
     @ApiOperation(
     		value = "Listar todos os gerentes cadastrados.",
     		response = GerenteRepresentation.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Gerente retornado com sucesso."),
-            @ApiResponse(code = 401, message = "Recurso sem autorização de acesso"),
+            @ApiResponse(code = 401, message = "Recurso sem autorizaï¿½ï¿½o de acesso"),
             @ApiResponse(code = 403, message = "Acesso negado ao recurso"),
             @ApiResponse(code = 404, message = "Nenhuma gerente encontrado")
     })
@@ -52,7 +56,7 @@ public class GerenteEndpoint extends FakebankEndpoint{
     		response = GerenteRepresentation.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Gerente retornado com sucesso."),
-            @ApiResponse(code = 401, message = "Recurso sem autorização de acesso"),
+            @ApiResponse(code = 401, message = "Recurso sem autorizaï¿½ï¿½o de acesso"),
             @ApiResponse(code = 403, message = "Acesso negado ao recurso"),
             @ApiResponse(code = 404, message = "Nenhuma gerente encontrado")
     })
@@ -66,7 +70,7 @@ public class GerenteEndpoint extends FakebankEndpoint{
     		response = GerenteRepresentation.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Gerente retornado com sucesso."),
-            @ApiResponse(code = 401, message = "Recurso sem autorização de acesso"),
+            @ApiResponse(code = 401, message = "Recurso sem autorizaï¿½ï¿½o de acesso"),
             @ApiResponse(code = 403, message = "Acesso negado ao recurso"),
             @ApiResponse(code = 404, message = "Nenhuma gerente encontrado")
     })

@@ -15,17 +15,14 @@ public class SituacaoConta extends Dominio{
     }
 
     private SituacaoConta(DominioCriacaoCommand comando) {
-
         this.setTipo(DominioEnum.SIT_CONTA.toString());
-        this.setValor(comando.getValor());
+        this.setValor(comando.getCodigo().toString());
         this.setDescricao(comando.getDescricao());
-
     }
 
     public static SituacaoConta criar(DominioCriacaoCommand comando) {
     	comando.validate();
         return new SituacaoConta(comando);
-
     }
     
     public void editar(DominioEdicaoCommand comando) {

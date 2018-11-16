@@ -43,22 +43,20 @@ public class TipoContaEndpoint extends FakebankEndpoint{
     
     @PostMapping
     public ResponseEntity<?> criar(@RequestBody DominioCriacaoCommand comando){
-        TipoConta tipoConta= service.salvar(comando);
-        if (tipoConta != null)
-            return created("tipo conta criado com sucesso");
-        else
-            return notFound("tipo conta nao encontrado");
+        TipoConta tipoConta = service.salvar(comando);
+       	TipoContaRepresentation model = TipoContaRepresentation.from(tipoConta);
+       	return ok(model);
     }
     
     @PutMapping(value = "/{codigo}")
     public ResponseEntity<?> editar(@PathVariable("codigo") Integer codigo, @RequestBody DominioEdicaoCommand comando){
         TipoConta tipoConta = service.salvar(codigo, comando);
         
-        if (tipoConta != null)
-            return created("tipo conta editado com sucesso");
-        else
-            return notFound("tipo conta nao encontrado");
-            
+        if (tipoConta == null)
+        	return notFound("tipo conta nao encontrado");
+        
+        TipoContaRepresentation model = TipoContaRepresentation.from(tipoConta);
+        return created(model);
     }
     
     @DeleteMapping(value = "/{codigo}")
@@ -66,4 +64,5 @@ public class TipoContaEndpoint extends FakebankEndpoint{
     	service.excluir(codigo);
         return ok("excluido com sucesso");
     }
+
 }
