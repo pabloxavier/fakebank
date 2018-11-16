@@ -36,7 +36,8 @@ public class SituacaoContaEndpoint extends FakebankEndpoint{
     @GetMapping(value="/{codigo}")
     public ResponseEntity<?> cosultaTipoContaPorCodigo(@PathVariable("codigo") Integer codigo ){
         SituacaoConta situacao = service.consultaPorCodigo(codigo);
-        return ok(situacao);
+        SituacaoContaRepresentation model = SituacaoContaRepresentation.from(situacao);
+        return ok(model);
     }
     
     @PostMapping
