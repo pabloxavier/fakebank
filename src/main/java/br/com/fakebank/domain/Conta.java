@@ -171,9 +171,9 @@ public class Conta {
 		this.diaAniversarioPoupanca = command.getDiaAniversarioPoupanca();		
 	}	
 	
-	public ContaEncerrada encerrarConta(ContaEncerradaCommand command) {
+	public ContaEncerrada encerrarConta(ContaEncerradaCommand command, Cliente cliente) {
 		
-		ContaEncerrada encerramento = ContaEncerrada.criar(command, this.codigoConta);
+		ContaEncerrada encerramento = ContaEncerrada.criar(command, this.codigoConta, cliente);
 		return encerramento;
 
 	}
