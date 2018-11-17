@@ -6,7 +6,6 @@ import br.com.fakebank.domain.Conta;
 public class ContaCorrenteRepresentation {
 
     private String codigo;
-    private String nomeCliente;
     private String dataAbertura;
     private String gerente;
     private String situacao;
@@ -17,11 +16,10 @@ public class ContaCorrenteRepresentation {
         ContaCorrenteRepresentation contaRepresentation = new ContaCorrenteRepresentation();
         contaRepresentation.setCodigo(conta.getCodigoConta());
         contaRepresentation.setSituacao(conta.getSituacaoConta().getDescricao());
-        contaRepresentation.setTipo(conta.getTipoConta().getDescricao());
-        contaRepresentation.setGerente(conta.getGerente().getPessoa().getNome());
+        contaRepresentation.setTipo(conta.getTipoConta().getDescricao());       
         contaRepresentation.setSaldo(conta.getValorSaldo());
         contaRepresentation.setDataAbertura(DateUtil.getDateFromString(conta.getDataAbertura()));
-        contaRepresentation.setNomeCliente(conta.getCliente().getPessoa().getNome());
+        contaRepresentation.setGerente(conta.getGerente().getPessoa().getNome());
         return contaRepresentation;
     }
 
@@ -31,14 +29,6 @@ public class ContaCorrenteRepresentation {
 
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
-	}
-
-	public String getNomeCliente() {
-		return nomeCliente;
-	}
-
-	public void setNomeCliente(String nomeCliente) {
-		this.nomeCliente = nomeCliente;
 	}
 
 	public String getDataAbertura() {
@@ -80,7 +70,5 @@ public class ContaCorrenteRepresentation {
 	public void setSaldo(Double saldo) {
 		this.saldo = saldo;
 	}
-
-
     
 }
