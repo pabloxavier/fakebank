@@ -3,6 +3,8 @@ package br.com.fakebank.common.util;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -30,5 +32,12 @@ public class DateUtil {
             e.printStackTrace();
         }
         return date;
+    }
+    
+    public static String getDateFromString(LocalDate dateParameter) {
+    	
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    	String date = 	dateParameter.format(formatter);
+    	return date;
     }
 }

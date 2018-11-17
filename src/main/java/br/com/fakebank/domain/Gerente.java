@@ -24,7 +24,7 @@ public class Gerente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CD_GERENTE")
-    private Integer CodGerente;
+    private Integer codGerente;
     
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "CD_PESSOA")
@@ -42,7 +42,7 @@ public class Gerente {
     private List<Agencia> agenciasGerenciadas;
     
     public Integer getCodGerente() {
-        return CodGerente;
+        return codGerente;
     }
     public Pessoa getPessoa() {
         return pessoa;
