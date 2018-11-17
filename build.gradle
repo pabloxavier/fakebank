@@ -31,6 +31,8 @@ targetCompatibility = 1.8
 dependencies{
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.boot:spring-boot-starter-security")
+    compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'
     compile("com.microsoft.sqlserver:mssql-jdbc:7.0.0.jre8")
     compile("junit:junit:4.12")
     compile("org.postgresql:postgresql:9.4.1212")
