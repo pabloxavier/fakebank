@@ -14,15 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.fakebank.common.util.ListaPaginada;
 import br.com.fakebank.domain.Cliente;
 import br.com.fakebank.domain.TipoPessoa;
 import br.com.fakebank.domain.commands.ClientePessoaJuridicaEdicaoCommand;
 import br.com.fakebank.domain.commands.ClientePessoaJuridicaInclusaoCommand;
 import br.com.fakebank.representations.ClienteRepresentationV1;
-import br.com.fakebank.service.ClientePessoaFisicaService;
 import br.com.fakebank.service.ClientePessoaJuridicaService;
 import br.com.fakebank.service.ClienteService;
-import br.com.fakebank.util.ListaPaginada;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

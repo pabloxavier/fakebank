@@ -23,7 +23,7 @@ public class Cliente {
     @Column(name = "cd_cliente")
     private Integer codigo;
     
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cd_pessoa")
     private Pessoa pessoa;
     
