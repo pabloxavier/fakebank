@@ -21,7 +21,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 
-@Configuration
+//@Configuration
 @EnableSwagger2
 @Import(BeanValidatorPluginsConfiguration.class)
 public class SwaggerConfiguration {
