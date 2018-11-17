@@ -89,6 +89,7 @@ public class Conta {
 	public static Conta criarContaCorrente(Cliente cliente, ContaCorrenteInclusaoCommand command) {
 		
 		command.validate();
+		
 		return new Conta(cliente, command);
 	}
 	
