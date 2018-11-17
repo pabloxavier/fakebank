@@ -39,7 +39,7 @@ public class ClienteTelefone {
         comando.validate();
 
         ClienteTelefone telefone = new ClienteTelefone();
-        telefone.tipoTelefone = comando.getTipoTelefone();
+        telefone.tipoTelefone = comando.getTipo();
         telefone.prefixo = comando.getPrefixo();
         telefone.numero = comando.getTelefone();
         telefone.clienteTelefoneId = new ClienteTelefoneId(cliente.getCodigo(), codigoTelefone);
@@ -54,7 +54,7 @@ public class ClienteTelefone {
     	
     	this.prefixo = comando.getPrefixo();
     	this.numero = comando.getTelefone();
-    	this.tipoTelefone = comando.getTipoTelefone();
+    	this.tipoTelefone = comando.getTipo();
   }
     
     
