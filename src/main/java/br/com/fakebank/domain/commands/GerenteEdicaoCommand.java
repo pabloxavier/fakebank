@@ -4,18 +4,18 @@ import br.com.fakebank.domain.Pessoa;
 
 public class GerenteEdicaoCommand {
 
-    private boolean isAtivo;
+    private boolean ativo;
     private Pessoa pessoa;
 
     protected GerenteEdicaoCommand() {
     }
 
     public boolean isAtivo() {
-        return isAtivo;
+        return ativo;
     }
 
     public void setAtivo(boolean isAtivo) {
-        this.isAtivo = isAtivo;
+        this.ativo = isAtivo;
     }
 
     public Pessoa getPessoa() {
