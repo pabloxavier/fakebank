@@ -11,7 +11,6 @@ public class ContaSalarioRepresentation {
     private String situacao;
     private String tipo;
     private Double saldo;
-    private Integer diaAniversario;
     private String cnpjEmpresa;
 
 
@@ -86,17 +85,6 @@ public class ContaSalarioRepresentation {
 	public void setSaldo(Double saldo) {
 		this.saldo = saldo;
 	}
-
-
-	public Integer getDiaAniversario() {
-		return diaAniversario;
-	}
-
-
-	public void setDiaAniversario(Integer diaAniversario) {
-		this.diaAniversario = diaAniversario;
-	}
-
 
 	public String getCnpjEmpresa() {
 		return cnpjEmpresa;

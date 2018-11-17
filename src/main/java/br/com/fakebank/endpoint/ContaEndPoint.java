@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -88,13 +87,17 @@ public class ContaEndPoint extends FakebankEndpoint {
         return created(model, conta.getCodigoConta());
     }
 
-    @PutMapping(value = "/alterarContaCorrente/{codigoConta}")
+    @RequestMapping(value = {"/clientes-pessoa-fisica/{codigoCliente}/contas-correntes/{codigoConta}",
+    "/clientes-pessoa-juridica/{codigoCliente}/contas-correntes/{codigoConta}"}, method = RequestMethod.PUT)       
     public ResponseEntity<?> alterarContaCorrente(
             @PathVariable(value="codigoConta", required=true) String cdConta,
             @RequestBody ContaCorrenteEdicaoCommand comando){
 
         return contaService.alterarContaCorrente(cdConta, comando) != null ? ok("editado com sucesso") : notFound("conta nao encontrada");
-    }
+    }    
+    
+    @RequestMapping(value = {"/clientes-pessoa-fisica/{codigoCliente}/contas-poupanca/{codigoConta}",
+    "/clientes-pessoa-juridica/{codigoCliente}/contas-poupanca/{codigoConta}"}, method = RequestMethod.PUT)  
     @PutMapping(value = "/alterarContaPoupanca/{codigoConta}")
     public ResponseEntity<?> alterarContaPoupanca(
             @PathVariable(value="codigoConta", required=true) String cdConta,
@@ -102,7 +105,9 @@ public class ContaEndPoint extends FakebankEndpoint {
 
         return contaService.alterarContaPoupanca(cdConta, comando) != null ? ok("editado com sucesso") : notFound("conta nao encontrada");
     }
-    @PutMapping(value = "/alterarContaSalario/{codigoConta}")
+    
+    @RequestMapping(value = {"/clientes-pessoa-fisica/{codigoCliente}/contas-salario/{codigoConta}",
+    "/clientes-pessoa-juridica/{codigoCliente}/contas-salario/{codigoConta}"}, method = RequestMethod.PUT)  
     public ResponseEntity<?> alterarContaSalario(
             @PathVariable(value="codigoConta", required=true) String cdConta,
             @RequestBody ContaSalarioEdicaoCommand comando){
