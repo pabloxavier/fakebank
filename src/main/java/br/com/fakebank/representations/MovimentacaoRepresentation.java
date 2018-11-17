@@ -22,7 +22,7 @@ public class MovimentacaoRepresentation {
     public static MovimentacaoRepresentation from(Movimentacao movimentacao) {
         MovimentacaoRepresentation model = new MovimentacaoRepresentation();
         model.setCodigoMovimentacao(movimentacao.getCodigoMovimentacao());
-        model.setCodigoConta(movimentacao.getCodigoConta());
+        model.setCodigoConta(movimentacao.getCodigoConta().getCodigoConta());
         model.setDataMovimentacao(movimentacao.getDataMovimentacao());
         model.setValorMovimentacao(movimentacao.getValorMovimentacao());
         model.setCodigoTipoMovimentacao(movimentacao.getCodigoTipoMovimentacao());
@@ -35,7 +35,7 @@ public class MovimentacaoRepresentation {
         for(Movimentacao e : movimentacao) {
             MovimentacaoRepresentation model = new MovimentacaoRepresentation();
             model.setCodigoMovimentacao(e.getCodigoMovimentacao());
-            model.setCodigoConta(e.getCodigoConta());
+            model.setCodigoConta(e.getCodigoConta().getCodigoConta());
             model.setDataMovimentacao(e.getDataMovimentacao());
             model.setValorMovimentacao(e.getValorMovimentacao());
             model.setCodigoTipoMovimentacao(e.getCodigoTipoMovimentacao());

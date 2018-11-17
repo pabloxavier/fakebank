@@ -1,15 +1,16 @@
 package br.com.fakebank.domain;
 
-
-
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Random;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -76,6 +77,9 @@ public class Conta {
 	
 	@Column(name ="DD_ANIVERSARIO_POUPANCA")
 	private Integer diaAniversarioPoupanca;
+	
+	@OneToMany(mappedBy = "codigoConta", cascade = CascadeType.PERSIST)
+	private List<Movimentacao> movimentacao;
 	
 	@Transient
 	@Autowired
@@ -293,5 +297,11 @@ public class Conta {
     	return dominioRepository.getOne(codigo);
     }
     
-    
+    public List<Movimentacao> getMovimentacao() {
+        return movimentacao;
+    }
+
+    public void setMovimentacao(List<Movimentacao> movimentacao) {
+        this.movimentacao = movimentacao;
+    }
 }

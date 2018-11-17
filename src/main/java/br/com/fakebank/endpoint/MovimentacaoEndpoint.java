@@ -21,8 +21,12 @@ import br.com.fakebank.domain.Movimentacao;
 import br.com.fakebank.domain.commands.MovimentacaoDepositoCommand;
 import br.com.fakebank.domain.commands.MovimentacaoSaqueCommand;
 import br.com.fakebank.domain.commands.MovimentacaoTransferenciaCommand;
+import br.com.fakebank.representations.AgenciaRepresentationV1;
 import br.com.fakebank.representations.MovimentacaoRepresentation;
 import br.com.fakebank.service.MovimentacaoService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("movimentacoes")
@@ -31,6 +35,15 @@ public class MovimentacaoEndpoint extends FakebankEndpoint {
     @Autowired
     private MovimentacaoService service;
 
+    @ApiOperation(
+            value = "Listar todas as movimentacoes cadastradas.",
+            response = MovimentacaoRepresentation.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Movimentacao retornadas com sucesso."),
+            @ApiResponse(code = 401, message = "Recurso sem autorização de acesso"),
+            @ApiResponse(code = 403, message = "Acesso negado ao recurso"),
+            @ApiResponse(code = 404, message = "Nenhuma movimentacao encontrada")
+    })
     @GetMapping
     public ResponseEntity<?> listar(Pageable pageable){
         Page<Movimentacao> movimentacoes = service.listar(pageable);
@@ -38,12 +51,30 @@ public class MovimentacaoEndpoint extends FakebankEndpoint {
         return ok(model);
     }
 
+    @ApiOperation(
+            value = "Listar a movimentacao pelo codigo.",
+            response = MovimentacaoRepresentation.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Movimentacao retornadas com sucesso."),
+            @ApiResponse(code = 401, message = "Recurso sem autorização de acesso"),
+            @ApiResponse(code = 403, message = "Acesso negado ao recurso"),
+            @ApiResponse(code = 404, message = "Nenhuma movimentacao encontrada")
+    })
     @GetMapping(value = "/{codigo}")
     public ResponseEntity<?> getMovimentacaoById(@PathVariable("codigo") final Integer codigo) {
         Movimentacao movimentacao = service.consultarPorCodigo(codigo);
         return ok(MovimentacaoRepresentation.from(movimentacao));
     }
 
+    @ApiOperation(
+            value = "Pesquisa a movimentacao por pelo menos um dos campos: conta, valor da movimentacao, tipo de movimentacao, ou filtro de data.",
+            response = MovimentacaoRepresentation.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Movimentacao retornada com sucesso."),
+            @ApiResponse(code = 401, message = "Recurso sem autorização de acesso"),
+            @ApiResponse(code = 403, message = "Acesso negado ao recurso"),
+            @ApiResponse(code = 404, message = "Nenhuma movimentacao encontrada")
+    })
     @GetMapping(path = "/pesquisa")
     public ResponseEntity<?> pesquisarMovimentacao(
             Pageable pageable,
@@ -58,6 +89,15 @@ public class MovimentacaoEndpoint extends FakebankEndpoint {
         return ok(model);
     }
 
+    @ApiOperation(
+            value = "Realiza uma movimentacao de transferencia.",
+            response = MovimentacaoRepresentation.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Transferencia realizada com sucesso."),
+            @ApiResponse(code = 401, message = "Recurso sem autorização de acesso"),
+            @ApiResponse(code = 403, message = "Acesso negado ao recurso"),
+            @ApiResponse(code = 404, message = "Nao foi possivel realizar a transferencia.")
+    })
     @PostMapping(value = "/transferencia")
     public ResponseEntity<?> transferir(@RequestBody MovimentacaoTransferenciaCommand comando) {
         List<Movimentacao> movimentacao = service.transferir(comando);
@@ -67,6 +107,16 @@ public class MovimentacaoEndpoint extends FakebankEndpoint {
         return ok(MovimentacaoRepresentation.from(movimentacao));
     }
 
+    @ApiOperation(
+            value = "Realiza uma movimentacao de saque.",
+            response = MovimentacaoRepresentation.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Saque realizado com sucesso."),
+            @ApiResponse(code = 400, message = "Saldo insuficiente."),
+            @ApiResponse(code = 401, message = "Recurso sem autorização de acesso"),
+            @ApiResponse(code = 403, message = "Acesso negado ao recurso"),
+            @ApiResponse(code = 404, message = "Conta nao encontrada.")
+    })
     @PostMapping(value = "/saque")
     public ResponseEntity<?> sacar(@RequestBody MovimentacaoSaqueCommand comando) {
         Movimentacao movimentacao = service.sacar(comando);
@@ -76,6 +126,15 @@ public class MovimentacaoEndpoint extends FakebankEndpoint {
         return ok(MovimentacaoRepresentation.from(movimentacao));
     }
 
+    @ApiOperation(
+            value = "Realiza uma movimentacao de deposito.",
+            response = MovimentacaoRepresentation.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Deposito realizado com sucesso."),
+            @ApiResponse(code = 401, message = "Recurso sem autorização de acesso"),
+            @ApiResponse(code = 403, message = "Acesso negado ao recurso"),
+            @ApiResponse(code = 404, message = "Conta nao encontrada.")
+    })
     @PostMapping(value = "/deposito")
     public ResponseEntity<?> depositar(@RequestBody MovimentacaoDepositoCommand comando) {
         Movimentacao movimentacao = service.depositar(comando);
@@ -85,6 +144,15 @@ public class MovimentacaoEndpoint extends FakebankEndpoint {
         return ok(MovimentacaoRepresentation.from(movimentacao));
     }
 
+    @ApiOperation(
+            value = "Lista as movimentacoes pelo numero da conta.",
+            response = MovimentacaoRepresentation.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Movimentacao retornada com sucesso."),
+            @ApiResponse(code = 401, message = "Recurso sem autorização de acesso"),
+            @ApiResponse(code = 403, message = "Acesso negado ao recurso"),
+            @ApiResponse(code = 404, message = "Conta nao encontrada.")
+    })
     @GetMapping(path = "/conta/{codigoConta}")
     public ResponseEntity<?> listarMovimentacoes(@PathVariable("codigoConta") final String codigoConta, Pageable pageable ){
         Page<Movimentacao> movimentacoes = service.listarMovimentacoesPorConta(codigoConta, pageable);

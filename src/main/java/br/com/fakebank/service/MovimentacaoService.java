@@ -52,14 +52,14 @@ public class MovimentacaoService {
     }
 
     public List<Movimentacao> transferir(MovimentacaoTransferenciaCommand comando) {
-        
+
         Movimentacao movimentacaoSaque = sacar(convertToSaque(comando));
-        
-        if(movimentacaoSaque == null) {
+
+        if (movimentacaoSaque == null) {
             return null;
         }
         Movimentacao movimentacaoDeposito = depositar(convertToDeposito(comando));
-        
+
         List<Movimentacao> listaMovimentacao = new ArrayList<>();
         listaMovimentacao.add(movimentacaoSaque);
         listaMovimentacao.add(movimentacaoDeposito);
@@ -67,34 +67,44 @@ public class MovimentacaoService {
     }
 
     public Movimentacao sacar(MovimentacaoSaqueCommand comando) {
-        Movimentacao ultimaMovimentacao = ultimaMovimentacao(comando.getConta());
+        Movimentacao ultimaMovimentacao = ultimaMovimentacao(comando.getConta(), comando.getValor());
 
-        if (!isSaldoSuficiente(ultimaMovimentacao.getValorSaldoAtual(), comando.getValor())) {  
+        if (!isSaldoSuficiente(ultimaMovimentacao.getValorSaldoAtual(), comando.getValor())) {
             return null;
         }
-            ultimaMovimentacao.setValorSaldoAnterior(ultimaMovimentacao.getValorSaldoAtual());
-            ultimaMovimentacao.setValorSaldoAtual(ultimaMovimentacao.getValorSaldoAtual() - comando.getValor());
-
-            Movimentacao movimentacao = Movimentacao.criar(comando);
-            return repository.save(movimentacao);
-    }
-
-    public Movimentacao depositar(MovimentacaoDepositoCommand comando) {
-        Movimentacao ultimaMovimentacao = ultimaMovimentacao(comando.getConta());
-        ultimaMovimentacao.setValorSaldoAnterior(ultimaMovimentacao.getValorSaldoAtual());
-        ultimaMovimentacao.setValorSaldoAtual(ultimaMovimentacao.getValorSaldoAtual() + comando.getValor());
+        double saldoAtual = ultimaMovimentacao.getValorSaldoAtual() == null ? 0.0 : ultimaMovimentacao.getValorSaldoAtual();
+        ultimaMovimentacao.setValorSaldoAnterior(saldoAtual);
+        ultimaMovimentacao.setValorSaldoAtual(saldoAtual + comando.getValor());
         
-        Movimentacao movimentacao = Movimentacao.criar(comando);
+        Movimentacao movimentacao = Movimentacao.criar(comando, ultimaMovimentacao.getValorSaldoAnterior(), 
+                ultimaMovimentacao.getValorSaldoAtual());
+
         return repository.save(movimentacao);
     }
 
-    public Movimentacao ultimaMovimentacao(String codigoConta) {
+    public Movimentacao depositar(MovimentacaoDepositoCommand comando) {
+        Movimentacao ultimaMovimentacao = ultimaMovimentacao(comando.getConta(), comando.getValor());
+        double saldoAtual = ultimaMovimentacao.getValorSaldoAtual() == null ? 0.0 : ultimaMovimentacao.getValorSaldoAtual();
+        ultimaMovimentacao.setValorSaldoAnterior(saldoAtual);
+        ultimaMovimentacao.setValorSaldoAtual(saldoAtual + comando.getValor());
+        
+        Movimentacao movimentacao = Movimentacao.criar(comando, ultimaMovimentacao.getValorSaldoAnterior(), 
+                ultimaMovimentacao.getValorSaldoAtual());
+
+        return repository.save(movimentacao);
+    }
+
+    public Movimentacao ultimaMovimentacao(String codigoConta, Double valor) {
         Specification<Movimentacao> criterio = Specification
                 .where(MovimentacaoSpecifications.movimentacaoPorCodigoConta(codigoConta));
 
         Pageable pageable = PageRequest.of(0, 1, new Sort(Direction.DESC, "dataMovimentacao"));
 
-        return (Movimentacao) repository.findAll(criterio, pageable);
+        if (repository.findAll(criterio, pageable).getTotalElements() > 0) {
+            return repository.findAll(criterio, pageable).getContent().get(0);
+        }
+        Movimentacao movimentacao = Movimentacao.criar(codigoConta, valor);
+        return movimentacao;
     }
 
     private boolean isSaldoSuficiente(Double saldoAtual, Double valorSaque) {
@@ -105,14 +115,14 @@ public class MovimentacaoService {
 
         return false;
     }
-    
+
     private MovimentacaoSaqueCommand convertToSaque(MovimentacaoTransferenciaCommand comando) {
         MovimentacaoSaqueCommand saqueCommand = new MovimentacaoSaqueCommand();
         saqueCommand.setConta(comando.getContaOrigem());
         saqueCommand.setValor(comando.getValor());
         return saqueCommand;
     }
-    
+
     private MovimentacaoDepositoCommand convertToDeposito(MovimentacaoTransferenciaCommand comando) {
         MovimentacaoDepositoCommand depositoCommand = new MovimentacaoDepositoCommand();
         depositoCommand.setConta(comando.getContaDestino());

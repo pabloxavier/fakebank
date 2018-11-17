@@ -2,87 +2,82 @@ package br.com.fakebank.domain;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Transient;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.fakebank.domain.commands.MovimentacaoDepositoCommand;
 import br.com.fakebank.domain.commands.MovimentacaoSaqueCommand;
-import br.com.fakebank.domain.commands.MovimentacaoTransferenciaCommand;
+import br.com.fakebank.repository.ContaRepository;
 
 @Entity
 @Table(name = "movimentacao", schema = "dbo")
 public class Movimentacao {
 
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cd_movimentacao")
     private Integer codigoMovimentacao;
     
-    @NotNull
-    @NotBlank
-    @Column(name = "cd_conta")
-    private String codigoConta;
+    @ManyToOne
+    @JoinColumn(name = "cd_conta")
+    private Conta codigoConta;
 
-    @NotNull
-    @NotBlank
     @Column(name = "dt_movimentacao")
     private LocalDate dataMovimentacao;
     
-    @NotNull
-    @NotBlank
     @Column(name = "vl_movimentacao")
-    private double valorMovimentacao;
+    private Double valorMovimentacao;
 
-    @NotNull
-    @NotBlank
     @Column(name = "cd_tipo_movimentacao")
     private Integer codigoTipoMovimentacao;
     
-    @NotNull
-    @NotBlank
     @Column(name = "vl_saldo_anterior")
-    private double valorSaldoAnterior;
+    private Double valorSaldoAnterior;
     
-    @NotNull
-    @NotBlank
     @Column(name = "vl_saldo_atual")
-    private double valorSaldoAtual;
+    private Double valorSaldoAtual;
     
-    protected Movimentacao() {
-        
+    @Transient
+    @Autowired
+    private ContaRepository contaRepository;
+    
+    protected Movimentacao(String conta, LocalDate data, Integer tipoMovimentacao, 
+            Double saldoAnterior, Double saldoAtual, Double valorMovimentacao) {
+        this.codigoConta = getContaByNumero(conta);
+        this.dataMovimentacao = data;
+        this.codigoTipoMovimentacao = tipoMovimentacao;
+        this.valorSaldoAnterior = saldoAnterior;
+        this.valorSaldoAtual = saldoAtual;
+        this.valorMovimentacao = valorMovimentacao;
     }
     
-    protected Movimentacao(MovimentacaoTransferenciaCommand comando) {
-        this.codigoConta = comando.getContaOrigem();
-        this.valorMovimentacao = comando.getValor();
-        this.dataMovimentacao = LocalDate.now();
+    protected Movimentacao() {}
+    
+    public static Movimentacao criar(MovimentacaoDepositoCommand comando, Double saldoAnterior, Double saldoAtual) {
+        return new Movimentacao(comando.getConta(), LocalDate.now(), 1, saldoAnterior, saldoAtual, comando.getValor());
     }
     
-    protected Movimentacao(MovimentacaoDepositoCommand comando) {
-        this.codigoConta = comando.getConta();
-        this.valorMovimentacao = comando.getValor();
-        this.dataMovimentacao = LocalDate.now();
+    public static Movimentacao criar(MovimentacaoSaqueCommand comando, Double saldoAnterior, Double saldoAtual) {
+        return new Movimentacao(comando.getConta(), LocalDate.now(), 1, saldoAnterior, saldoAtual, comando.getValor());
     }
     
-    protected Movimentacao(MovimentacaoSaqueCommand comando) {
-        this.codigoConta = comando.getConta();
-        this.valorMovimentacao = comando.getValor();
-        this.dataMovimentacao = LocalDate.now();
+    protected Movimentacao(String conta, Double valor) {
+        this.codigoConta = getContaByNumero(conta);
+        this.valorMovimentacao = valor;
     }
     
-    public static Movimentacao criar(MovimentacaoDepositoCommand comando) {
-        return new Movimentacao(comando);
-    }
-    
-    public static Movimentacao criar(MovimentacaoSaqueCommand comando) {
-        return new Movimentacao(comando);
+    public static Movimentacao criar(String conta, Double valor) {
+        return new Movimentacao(conta, valor);
     }
     
     public Integer getCodigoMovimentacao() {
@@ -93,11 +88,11 @@ public class Movimentacao {
         this.codigoMovimentacao = codigoMovimentacao;
     }
 
-    public String getCodigoConta() {
+    public Conta getCodigoConta() {
         return codigoConta;
     }
 
-    public void setCodigoConta(String codigoConta) {
+    public void setCodigoConta(Conta codigoConta) {
         this.codigoConta = codigoConta;
     }
 
@@ -109,11 +104,11 @@ public class Movimentacao {
         this.dataMovimentacao = dataMovimentacao;
     }
 
-    public double getValorMovimentacao() {
+    public Double getValorMovimentacao() {
         return valorMovimentacao;
     }
 
-    public void setValorMovimentacao(double valorMovimentacao) {
+    public void setValorMovimentacao(Double valorMovimentacao) {
         this.valorMovimentacao = valorMovimentacao;
     }
 
@@ -125,19 +120,23 @@ public class Movimentacao {
         this.codigoTipoMovimentacao = codigoTipoMovimentacao;
     }
 
-    public double getValorSaldoAnterior() {
+    public Double getValorSaldoAnterior() {
         return valorSaldoAnterior;
     }
 
-    public void setValorSaldoAnterior(double valorSaldoAnterior) {
+    public void setValorSaldoAnterior(Double valorSaldoAnterior) {
         this.valorSaldoAnterior = valorSaldoAnterior;
     }
 
-    public double getValorSaldoAtual() {
+    public Double getValorSaldoAtual() {
         return valorSaldoAtual;
     }
 
-    public void setValorSaldoAtual(double valorSaldoAtual) {
+    public void setValorSaldoAtual(Double valorSaldoAtual) {
         this.valorSaldoAtual = valorSaldoAtual;
+    }
+    
+    private Conta getContaByNumero(String codigoConta) {
+        return contaRepository.findById(codigoConta).orElse(null);
     }
 }
