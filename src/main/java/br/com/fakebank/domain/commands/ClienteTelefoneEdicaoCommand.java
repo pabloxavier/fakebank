@@ -16,9 +16,9 @@ public class ClienteTelefoneEdicaoCommand {
 	@NotNull
 	private Integer telefone; 
 	
-	@FieldName("tipoTelefone")
+	@FieldName("tipo")
 	@NotNull
-	private TipoTelefone tipoTelefone;
+	private TipoTelefone tipo;
 	
 	protected ClienteTelefoneEdicaoCommand() {
 		
@@ -40,12 +40,12 @@ public class ClienteTelefoneEdicaoCommand {
 		this.telefone = telefone;
 	}
 
-	public TipoTelefone getTipoTelefone() {
-		return tipoTelefone;
+	public TipoTelefone getTipo() {
+		return tipo;
 	}
 
-	public void setTipoTelefone(TipoTelefone tipoTelefone) {
-		this.tipoTelefone = tipoTelefone;
+	public void setTipo(TipoTelefone tipo) {
+		this.tipo = tipo;
 	}
 
 	public void validate() {

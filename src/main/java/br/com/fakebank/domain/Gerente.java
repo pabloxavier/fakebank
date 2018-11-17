@@ -3,6 +3,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,7 @@ import javax.persistence.Table;
 
 import br.com.fakebank.domain.commands.GerenteEdicaoCommand;
 import br.com.fakebank.domain.commands.GerenteInclusaoCommand;
+import br.com.fakebank.domain.converters.StatusBooleanConverter;
 
 @Entity
 @Table(name = "GERENTE", schema = "dbo")
@@ -22,13 +24,14 @@ public class Gerente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CD_GERENTE")
-    private Integer CodGerente;
+    private Integer codGerente;
     
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "CD_PESSOA")
     private Pessoa pessoa;
     
     @Column(name = "IS_ATIVO")
+    @Convert(converter=StatusBooleanConverter.class)
     private boolean isAtivo;
     
     @ManyToMany
@@ -39,7 +42,7 @@ public class Gerente {
     private List<Agencia> agenciasGerenciadas;
     
     public Integer getCodGerente() {
-        return CodGerente;
+        return codGerente;
     }
     public Pessoa getPessoa() {
         return pessoa;

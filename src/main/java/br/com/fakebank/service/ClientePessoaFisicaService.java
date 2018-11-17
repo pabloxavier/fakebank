@@ -37,10 +37,5 @@ public class ClientePessoaFisicaService {
         cliente.editar(comando);
         return repository.save(cliente);
     }
-    
-    public List<Cliente> listar(TipoPessoa tipo){
-        Specification<Cliente> criterio = Specification.where(ClienteSpecifications.clientePorTipo(tipo));
-        return repository.findAll(criterio);    
-    }
    
 }
