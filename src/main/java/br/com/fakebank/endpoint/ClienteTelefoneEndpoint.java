@@ -95,7 +95,7 @@ public class ClienteTelefoneEndpoint extends FakebankEndpoint {
 
         ClienteTelefone telefone = service.salvarTelefone(codigoCliente, codigoTelefone, comando);
 
-        return ok(telefone);
+        return ok(ClienteTelefoneRepresentation.from(telefone));
     }
 
     private boolean verificaExistenciaClienteByUri(String uri, Integer codigoCliente) {
