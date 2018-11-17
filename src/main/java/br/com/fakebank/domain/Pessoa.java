@@ -1,6 +1,8 @@
 package br.com.fakebank.domain;
 
+import java.time.LocalDate;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -8,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 import br.com.fakebank.domain.converters.TipoPessoaConverter;
 
 
@@ -31,10 +34,10 @@ public class Pessoa {
     private String numeroDocumento;
     
     @Column(name = "DT_NASCIMENTO")
-    private Date dataNascimento;
+    private LocalDate dataNascimento;
     
     @Column(name = "DT_ABERTURA")
-    private Date dataAbertura;
+    private LocalDate dataAbertura;
     
     public Pessoa() {
         
@@ -64,19 +67,19 @@ public class Pessoa {
         this.numeroDocumento = numeroDocumento;
     }
 
-    public Date getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
-    public Date getDataAbertura() {
+    public LocalDate getDataAbertura() {
         return dataAbertura;
     }
 
-    public void setDataAbertura(Date dataAbertura) {
+    public void setDataAbertura(LocalDate dataAbertura) {
         this.dataAbertura = dataAbertura;
     }
 }

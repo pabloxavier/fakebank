@@ -15,13 +15,13 @@ import io.swagger.annotations.ApiModelProperty;
 public class ClienteRepresentationV1 {
 
     @ApiModelProperty(notes = "Código do cliente (autonumerável).")
-   private Integer codigo;
+    private Integer codigo;
     @ApiModelProperty(notes = "Código da pessoa.")
     private Pessoa pessoa;    
     @ApiModelProperty(notes = "Indicacao de Ativo.")
     private boolean isAtivo;
     @ApiModelProperty(notes = "Endereco do cliente.")
-   private String endereco;
+    private String endereco;
     
 
    public static ClienteRepresentationV1 from(Cliente cliente){

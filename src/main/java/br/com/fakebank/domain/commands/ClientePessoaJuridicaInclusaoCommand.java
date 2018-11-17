@@ -1,6 +1,6 @@
 package br.com.fakebank.domain.commands;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -22,7 +22,7 @@ public class ClientePessoaJuridicaInclusaoCommand {
     @FieldName("Nome do Cliente")
     private String nome;
     
-    private Date dataAbertura;
+    private LocalDate dataAbertura;
     private String enderecoCompleto;
     
     public ClientePessoaJuridicaInclusaoCommand() {
@@ -45,11 +45,11 @@ public class ClientePessoaJuridicaInclusaoCommand {
         this.nome = nome;
     }
 
-    public Date getDataAbertura() {
+    public LocalDate getDataAbertura() {
         return dataAbertura;
     }
 
-    public void setDataAbertura(Date dataAbertura) {
+    public void setDataAbertura(LocalDate dataAbertura) {
         this.dataAbertura = dataAbertura;
     }
 

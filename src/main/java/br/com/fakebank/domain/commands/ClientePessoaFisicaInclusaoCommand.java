@@ -1,7 +1,7 @@
 package br.com.fakebank.domain.commands;
 
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import br.com.fakebank.common.validations.CommandValidator;
 
@@ -9,7 +9,7 @@ public class ClientePessoaFisicaInclusaoCommand {
 
     private String cpf;
     private String nome;
-    private Date dataNascimento;
+    private LocalDate dataNascimento;
     private String enderecoCompleto;
 
     public ClientePessoaFisicaInclusaoCommand() {
@@ -32,11 +32,11 @@ public class ClientePessoaFisicaInclusaoCommand {
         this.nome = nome;
     }
 
-    public Date getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

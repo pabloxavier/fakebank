@@ -19,6 +19,9 @@ import br.com.fakebank.domain.Cliente;
 import br.com.fakebank.domain.TipoPessoa;
 import br.com.fakebank.domain.commands.ClientePessoaFisicaEdicaoCommand;
 import br.com.fakebank.domain.commands.ClientePessoaFisicaInclusaoCommand;
+import br.com.fakebank.domain.commands.ClientePessoaJuridicaEdicaoCommand;
+import br.com.fakebank.domain.commands.ClientePessoaJuridicaInclusaoCommand;
+import br.com.fakebank.representations.AgenciaRepresentationV1;
 import br.com.fakebank.representations.ClienteRepresentationV1;
 import br.com.fakebank.service.ClientePessoaFisicaService;
 import br.com.fakebank.service.ClienteService;
@@ -36,7 +39,7 @@ public class ClientePessoaFisicaEndpointV1 extends FakebankEndpoint{
    private ClienteService service;
    
    @Autowired
-   ClientePessoaFisicaService servicePF;
+   private ClientePessoaFisicaService servicePF;
 
    @ApiOperation(
            value = "Listar todos os clientes PF cadastrados.",
@@ -54,9 +57,21 @@ public class ClientePessoaFisicaEndpointV1 extends FakebankEndpoint{
        return ok(model);
    }
 
+   @ApiOperation(
+   		value = "Consultar um único cliente PF por código.",
+   		response = ClienteRepresentationV1.class)
+   @ApiResponses(value = {
+           @ApiResponse(code = 200, message = "Cliente PF retornado com sucesso."),
+           @ApiResponse(code = 401, message = "Recurso sem autorização de acesso"),
+           @ApiResponse(code = 403, message = "Acesso negado ao recurso"),
+           @ApiResponse(code = 404, message = "Nenhuma cliente PF encontrado")
+   })
    @GetMapping(value = "/{codigo}")
    public ResponseEntity<?> getClienteById(@PathVariable("codigo") Integer codigo){
-       return ok(service.getClienteById(codigo));
+       Cliente cliente = service.getClienteById(codigo);
+       
+       ClienteRepresentationV1 model = ClienteRepresentationV1.from(cliente);
+       return ok(model);     
    }
 
    @GetMapping(path = "/pesquisa")
@@ -65,27 +80,49 @@ public class ClientePessoaFisicaEndpointV1 extends FakebankEndpoint{
        return ok(service.filtrar(endereco, isAtivo));
    }
 
+   @ApiOperation(
+   		value = "Incluir um novo cliente PF.",
+   		response = ClientePessoaFisicaInclusaoCommand.class)
+   @ApiResponses(value = {
+           @ApiResponse(code = 201, message = "Cliente PF criado com sucesso."),
+           @ApiResponse(code = 400, message = "Inclusão não permitida por validações.")
+   })
    @PostMapping
    public ResponseEntity<?> criar(@RequestBody ClientePessoaFisicaInclusaoCommand comando){
        Cliente cliente = servicePF.salvar(comando);
-       if (cliente != null)
-           return created("cliente PF incluido com sucesso");
-       else
-           return notFound("erro ao incluir cliente PF");
+
+       ClienteRepresentationV1 model = ClienteRepresentationV1.from(cliente);
+       return created(model, cliente.getCodigo());
    }
 
+   @ApiOperation(
+   		value = "Alterar informações de um cliente PF.",
+   		response = ClientePessoaFisicaEdicaoCommand.class)
+   @ApiResponses(value = {
+           @ApiResponse(code = 200, message = "Cliente PF alterado com sucesso."),
+           @ApiResponse(code = 400, message = "Alteração não permitida por validações."),
+           @ApiResponse(code = 404, message = "Cliente PF não encontrado")
+   })
    @PutMapping(value = "/{codigo}")
    public ResponseEntity<?> editar(@PathVariable("codigo") Integer codigo, @RequestBody ClientePessoaFisicaEdicaoCommand comando){
        Cliente cliente = servicePF.salvar(codigo, comando);
-       if (cliente != null)
-           return created("Cliente PF editado com sucesso");
-       else
-           return notFound("Cliente PF nao encontrado");
+       
+       ClienteRepresentationV1 model = ClienteRepresentationV1.from(cliente);
+       return ok(model);
    }
 
+   @ApiOperation(
+   		value = "Excluir um cliente PF por código.",
+   		response = ClienteRepresentationV1.class)
+   @ApiResponses(value = {
+           @ApiResponse(code = 200, message = "Cliente PF removido com sucesso."),
+           @ApiResponse(code = 400, message = "Exclusão não permitida por validações."),
+           @ApiResponse(code = 404, message = "Cliente PF não encontrado")
+   })
    @DeleteMapping(value = "/{codigo}")
    public ResponseEntity<?> excluirCliente(@PathVariable("codigo") Integer codigo){
-       return service.excluir(codigo) ? ok("Cliente PF excluido com sucesso") : notFound("Cliente PF nao encontrado");
+       service.excluir(codigo);
+       return ok();
    }
    
 }
