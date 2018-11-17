@@ -34,7 +34,7 @@ public class ClienteTelefoneRepresentation {
         model.setPrefixo(clienteTelefone.getPrefixo());
         model.setNumero(numeroFormatado);
         model.setNumeroCompleto(numeroFormatadoCompleto);
-        model.setTipo(StringUtils.capitalize(clienteTelefone.getTipoTelefone().toString().toLowerCase()));
+        model.setTipo(clienteTelefone.getTipoTelefone().toString());
         return model;
     }
 
