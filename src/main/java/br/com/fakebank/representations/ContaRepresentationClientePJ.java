@@ -3,16 +3,17 @@ package br.com.fakebank.representations;
 import java.time.LocalDate;
 import java.util.stream.Collectors;
 
+import br.com.fakebank.common.util.ListaPaginada;
 import br.com.fakebank.domain.Conta;
 import br.com.fakebank.domain.Gerente;
-import br.com.fakebank.util.ListaPaginada;
+
 import org.springframework.data.domain.Page;
 
 public class ContaRepresentationClientePJ {
 	
 	private String codigoConta;
-	private Integer codigoSituacaoConta;
-	private Integer tipoConta;
+	private String situacaoConta;
+	private String tipoConta;
 	private Double valorSaldo;
 	private LocalDate dataAbertura;
 	private Gerente gerente;
@@ -20,8 +21,8 @@ public class ContaRepresentationClientePJ {
 	public static ContaRepresentationClientePJ from (Conta conta) {
 		ContaRepresentationClientePJ contaRepresentationClientePJ = new ContaRepresentationClientePJ();
 		contaRepresentationClientePJ.setCodigoConta(conta.getCodigoConta());
-		contaRepresentationClientePJ.setCodigoSituacaoConta(conta.getCodigoSituacaoConta());
-		contaRepresentationClientePJ.setTipoConta(conta.getTipoConta());
+		contaRepresentationClientePJ.setSituacaoConta(conta.getSituacaoConta().getDescricao());
+		contaRepresentationClientePJ.setTipoConta(conta.getTipoConta().getDescricao());
 		contaRepresentationClientePJ.setValorSaldo(conta.getValorSaldo());
 		contaRepresentationClientePJ.setDataAbertura(conta.getDataAbertura());
 		contaRepresentationClientePJ.setGerente(conta.getGerente());
@@ -49,16 +50,16 @@ public class ContaRepresentationClientePJ {
 	public void setCodigoConta(String codigoConta) {
 		this.codigoConta = codigoConta;
 	}
-	public Integer getCodigoSituacaoConta() {
-		return codigoSituacaoConta;
+	public String getCodigoSituacaoConta() {
+		return situacaoConta;
 	}
-	public void setCodigoSituacaoConta(Integer codigoSituacaoConta) {
-		this.codigoSituacaoConta = codigoSituacaoConta;
+	public void setSituacaoConta(String situacaoConta) {
+		this.situacaoConta = situacaoConta;
 	}
-	public Integer getTipoConta() {
+	public String getTipoConta() {
 		return tipoConta;
 	}
-	public void setTipoConta(Integer tipoConta) {
+	public void setTipoConta(String tipoConta) {
 		this.tipoConta = tipoConta;
 	}
 	public Double getValorSaldo() {

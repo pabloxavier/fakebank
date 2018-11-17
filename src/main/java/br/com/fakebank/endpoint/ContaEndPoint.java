@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.fakebank.common.util.ListaPaginada;
 import br.com.fakebank.domain.Conta;
 import br.com.fakebank.domain.commands.ContaCorrenteEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaCorrenteInclusaoCommand;
@@ -26,7 +28,6 @@ import br.com.fakebank.representations.ContaRepresentationClientePF;
 import br.com.fakebank.representations.ContaRepresentationClientePJ;
 import br.com.fakebank.representations.ContaSalarioRepresentation;
 import br.com.fakebank.service.ContaService;
-import br.com.fakebank.util.ListaPaginada;
 
 
 
@@ -49,6 +50,7 @@ public class ContaEndPoint extends FakebankEndpoint {
         return ok(model);
     }
     
+
     @GetMapping(value = "/clientes-pessoa-juridica/{codigoCliente}/contas")
     public ResponseEntity<?>  getContasByIdClientePessoaJuridica(@PathVariable("codigoCliente") final Integer codigo, Pageable pageable){
         Page<Conta> contas = contaService.consultarContasPorCodigoClientePessoaJuridica(codigo, pageable);
@@ -56,7 +58,8 @@ public class ContaEndPoint extends FakebankEndpoint {
         return ok(model);
     }    
     
-    @PostMapping(path = "/incluirContaCorrente/{codigoCliente}")
+    @RequestMapping(value = {"/clientes-pessoa-fisica/{codigoCliente}/contas-correntes",
+    "/clientes-pessoa-juridica/{codigoCliente}/contas-correntes"}, method = RequestMethod.POST)
     public ResponseEntity<?> incluirContaCorrente(
             @PathVariable(value="codigoCliente", required=true) Integer cdCliente,
             @RequestBody ContaCorrenteInclusaoCommand comando) {

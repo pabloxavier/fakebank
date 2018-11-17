@@ -1,8 +1,11 @@
 package br.com.fakebank;
 
-import br.com.fakebank.domain.Pessoa;
+import static org.junit.Assert.assertNotNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.util.StringUtils.isEmpty;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -18,12 +21,9 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.List;
+import br.com.fakebank.domain.Pessoa;
 
-import static org.junit.Assert.assertNotNull;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.util.StringUtils.isEmpty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ApplicationStart.class, properties = { "spring.profiles.active=it" })
@@ -39,8 +39,10 @@ public class PessoaEndpointIT {
     private MockMvc mvc;
 
     private static final String PESSOA_ENDPOINT = "/pessoas";
-    private static final String GET_BY_ID_ENDPOINT = PESSOA_ENDPOINT + "/{codigo}";
     private static final String PESQUISAR_ENDPOINT = PESSOA_ENDPOINT + "/pesquisa";
+    
+    //TODO constante não utilizada
+    //private static final String GET_BY_ID_ENDPOINT = PESSOA_ENDPOINT + "/{codigo}";
 
     @Before
     public void setup() {
@@ -67,7 +69,7 @@ public class PessoaEndpointIT {
     @Ignore
     public void deveRetornarPessoaQuandoPesquisar() throws Exception {
         //given
-        String[] filtros = { };
+        Object[] filtros = { };
 
         //when
         MvcResult result = performGet(PESQUISAR_ENDPOINT, filtros);
@@ -83,13 +85,14 @@ public class PessoaEndpointIT {
                 .andReturn();
     }
 
-    private Pessoa mapToPessoa(String json) throws Exception {
-        if (isEmpty(json)) {
-            return null;
-        }
-
-        return objectMapper.readValue(json, Pessoa.class);
-    }
+    //TODO método não utilizado
+//    private Pessoa mapToPessoa(String json) throws Exception {
+//        if (isEmpty(json)) {
+//            return null;
+//        }
+//
+//        return objectMapper.readValue(json, Pessoa.class);
+//    }
 
     private List<Pessoa> mapToPessoas(String json) throws Exception {
         if (isEmpty(json)) {

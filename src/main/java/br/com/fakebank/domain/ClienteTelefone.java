@@ -1,11 +1,14 @@
 package br.com.fakebank.domain;
 
-import br.com.fakebank.domain.commands.AgenciaEdicaoCommand;
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import br.com.fakebank.domain.commands.ClienteTelefoneEdicaoCommand;
 import br.com.fakebank.domain.commands.ClienteTelefoneInclusaoCommand;
-import br.com.fakebank.infrastructure.converters.TipoTelefoneConverter;
-
-import javax.persistence.*;
+import br.com.fakebank.domain.converters.TipoTelefoneConverter;
 
 @Entity
 @Table(name= "cliente_telefone", schema= "dbo")

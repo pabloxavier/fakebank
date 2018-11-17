@@ -11,14 +11,14 @@ public class ContaCorrenteRepresentation {
     private String nomeCliente;
     private LocalDate dataAbertura;
     private Gerente gerente;
-    private Integer codigoSituacaoConta;
+    private String situacaoConta;
     private Double valorSaldo;
 
     public static ContaCorrenteRepresentation  from(Conta conta) {
         ContaCorrenteRepresentation contaRepresentation = new ContaCorrenteRepresentation();
         contaRepresentation.setCodigoConta(conta.getCodigoConta());
         contaRepresentation.setCodigoGerente(conta.getGerente());
-        contaRepresentation.setCodigoSituacaoConta(conta.getCodigoSituacaoConta());
+        contaRepresentation.setCodigoSituacaoConta(conta.getSituacaoConta().getDescricao());
         contaRepresentation.setDataAbertura(conta.getDataAbertura());
         contaRepresentation.setNomeCliente(conta.getCliente().getPessoa().getNome());
         contaRepresentation.setValorSaldo(conta.getValorSaldo());
@@ -57,12 +57,12 @@ public class ContaCorrenteRepresentation {
         this.gerente = gerente;
     }
 
-    public Integer getCodigoSituacaoConta() {
-        return codigoSituacaoConta;
+    public String getCodigoSituacaoConta() {
+        return situacaoConta;
     }
 
-    public void setCodigoSituacaoConta(Integer codigoSituacaoConta) {
-        this.codigoSituacaoConta = codigoSituacaoConta;
+    public void setCodigoSituacaoConta(String situacaoConta) {
+        this.situacaoConta = situacaoConta;
     }
 
     public Double getValorSaldo() {

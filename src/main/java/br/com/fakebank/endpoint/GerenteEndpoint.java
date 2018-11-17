@@ -11,10 +11,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
+import br.com.fakebank.common.util.ListaPaginada;
 import br.com.fakebank.domain.Gerente;
 import br.com.fakebank.domain.commands.GerenteEdicaoCommand;
 import br.com.fakebank.domain.commands.GerenteInclusaoCommand;
+import br.com.fakebank.representations.GerenteRepresentation;
 import br.com.fakebank.service.GerenteService;
 
 @RestController
@@ -23,13 +27,13 @@ public class GerenteEndpoint extends FakebankEndpoint{
 
     @Autowired
     GerenteService service;
-//    
-//    @GetMapping
-//	public ResponseEntity<?> listarGerentes(Pageable pageable){
-//    	Page<Gerente> gerentes = service.listar(pageable);
-//    	ListaPaginada<GerenteRepresentation> model = GerenteRepresentation.from(gerentes);
-//    	return ok(model);
-//    }
+    
+    @GetMapping
+	public ResponseEntity<?> listarGerentes(Pageable pageable){
+    	Page<Gerente> gerentes = service.listar(pageable);
+    	ListaPaginada<GerenteRepresentation> model = GerenteRepresentation.from(gerentes);
+    	return ok(model);
+    }
     
     @GetMapping(value = "/{codigo}")
     public ResponseEntity<?> getGerenteById(@PathVariable("codigo") Integer codigo){

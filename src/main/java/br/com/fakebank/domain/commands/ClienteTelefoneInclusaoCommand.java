@@ -1,8 +1,8 @@
 package br.com.fakebank.domain.commands;
 
+import br.com.fakebank.common.validations.CommandValidator;
+import br.com.fakebank.common.validations.FieldName;
 import br.com.fakebank.domain.TipoTelefone;
-import br.com.fakebank.domain.validators.CommandValidator;
-import br.com.fakebank.exceptions.FieldName;
 
 import javax.validation.constraints.NotNull;
 
