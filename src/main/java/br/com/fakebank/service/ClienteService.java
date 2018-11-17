@@ -38,9 +38,9 @@ public class ClienteService {
 	@Autowired
 	private ClienteTelefoneRepository telefoneRepository;
 
-	public Page<Cliente> listar(Pageable pageable) {
+	public Page<Cliente> listar(Pageable pageable, TipoPessoa tipopessoa) {
 
-		Specification<Cliente> criterio = Specification.where(ClienteSpecifications.clientePorTipo(TipoPessoa.FISICA));
+		Specification<Cliente> criterio = Specification.where(ClienteSpecifications.clientePorTipo(tipopessoa));
 
 		Page<Cliente> clientes = repository.findAll(criterio, pageable);
 
@@ -55,11 +55,11 @@ public class ClienteService {
 		return repository.findById(codigo).orElseThrow(() -> new NotFoundException());
 	}
 
-	public List<Cliente> filtrar(String endereco, boolean ativo, Integer codigo) {
+	public List<Cliente> filtrar(String endereco, boolean ativo, Integer codigo, TipoPessoa tipopessoa) {
 		Specification<Cliente> criterio = Specification.where(ClienteSpecifications.clientePorParteEndereco(endereco)
 				.and(ClienteSpecifications.clientePorSituacao(ativo))
 				.and(ClienteSpecifications.clientePorCodigo(codigo))
-				.and(ClienteSpecifications.clientePorTipo(TipoPessoa.FISICA)));
+				.and(ClienteSpecifications.clientePorTipo(tipopessoa)));
 
 		List<Cliente> clientes = repository.findAll(criterio);
 
@@ -104,6 +104,16 @@ public class ClienteService {
 	}
 
 	public Cliente getClienteById(Integer codigo) {
+		
+		//Specification<Cliente> criterio = Specification.where(ClienteSpecifications.clientePorCodigo(codigo))
+		//		.and(ClienteSpecifications.clientePorTipo(tipopessoa));
+		//List<Cliente> clientes = repository.findAll(criterio);
+
+		//if (clientes.isEmpty())
+		//	throw new NotFoundException();
+
+		//return clientes;
+		//implementar criterio aqui
 		return repository.findById(codigo).orElse(null);
 	}
 
