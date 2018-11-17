@@ -4,72 +4,86 @@ import java.time.LocalDate;
 
 import br.com.fakebank.domain.Conta;
 import br.com.fakebank.domain.Gerente;
+import br.com.fakebank.util.DateUtil;
 
 public class ContaCorrenteRepresentation {
 
-    private String codigoConta;
+    private String codigo;
     private String nomeCliente;
-    private LocalDate dataAbertura;
-    private Gerente gerente;
-    private String situacaoConta;
-    private Double valorSaldo;
+    private String dataAbertura;
+    private String gerente;
+    private String situacao;
+    private String tipo;
+    private Double saldo;
 
     public static ContaCorrenteRepresentation  from(Conta conta) {
         ContaCorrenteRepresentation contaRepresentation = new ContaCorrenteRepresentation();
-        contaRepresentation.setCodigoConta(conta.getCodigoConta());
-        contaRepresentation.setCodigoGerente(conta.getGerente());
-        contaRepresentation.setCodigoSituacaoConta(conta.getSituacaoConta().getDescricao());
-        contaRepresentation.setDataAbertura(conta.getDataAbertura());
+        contaRepresentation.setCodigo(conta.getCodigoConta());
+        contaRepresentation.setSituacao(conta.getSituacaoConta().getDescricao());
+        contaRepresentation.setTipo(conta.getTipoConta().getDescricao());
+        contaRepresentation.setGerente(conta.getGerente().getPessoa().getNome());
+        contaRepresentation.setSaldo(conta.getValorSaldo());
+        contaRepresentation.setDataAbertura(DateUtil.getDateFromString(conta.getDataAbertura()));
         contaRepresentation.setNomeCliente(conta.getCliente().getPessoa().getNome());
-        contaRepresentation.setValorSaldo(conta.getValorSaldo());
         return contaRepresentation;
     }
 
-    public String getCodigoConta() {
-        return codigoConta;
-    }
+	public String getCodigo() {
+		return codigo;
+	}
 
-    public void setCodigoConta(String codigoConta) {
-        this.codigoConta = codigoConta;
-    }
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
 
-    public String getNomeCliente() {
-        return nomeCliente;
-    }
+	public String getNomeCliente() {
+		return nomeCliente;
+	}
 
-    public void setNomeCliente(String nomeCliente) {
-        this.nomeCliente = nomeCliente;
-    }
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
+	}
 
-    public LocalDate getDataAbertura() {
-        return dataAbertura;
-    }
+	public String getDataAbertura() {
+		return dataAbertura;
+	}
 
-    public void setDataAbertura(LocalDate dataAbertura) {
-        this.dataAbertura = dataAbertura;
-    }
+	public void setDataAbertura(String dataAbertura) {
+		this.dataAbertura = dataAbertura;
+	}
 
-    public Gerente getCodigoGerente() {
-        return gerente;
-    }
+	public String getGerente() {
+		return gerente;
+	}
 
-    public void setCodigoGerente(Gerente gerente) {
-        this.gerente = gerente;
-    }
+	public void setGerente(String gerente) {
+		this.gerente = gerente;
+	}
 
-    public String getCodigoSituacaoConta() {
-        return situacaoConta;
-    }
+	public String getSituacao() {
+		return situacao;
+	}
 
-    public void setCodigoSituacaoConta(String situacaoConta) {
-        this.situacaoConta = situacaoConta;
-    }
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
+	}
 
-    public Double getValorSaldo() {
-        return valorSaldo;
-    }
+	public String getTipo() {
+		return tipo;
+	}
 
-    public void setValorSaldo(Double valorSaldo) {
-        this.valorSaldo = valorSaldo;
-    }
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public Double getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(Double saldo) {
+		this.saldo = saldo;
+	}
+
+
+    
 }

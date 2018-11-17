@@ -68,7 +68,8 @@ public class ContaEndPoint extends FakebankEndpoint {
         return created(model, conta.getCodigoConta());
     }
     
-    @PostMapping(path = "/incluirContaSalario/{codigoCliente}")
+    @RequestMapping(value = {"/clientes-pessoa-fisica/{codigoCliente}/contas-salario",
+    "/clientes-pessoa-juridica/{codigoCliente}/contas-salario"}, method = RequestMethod.POST)
     public ResponseEntity<?> incluirContaSalario(
             @PathVariable(value="codigoCliente", required=true) Integer cdCliente,
             @RequestBody ContaSalarioInclusaoCommand comando) {
@@ -77,7 +78,8 @@ public class ContaEndPoint extends FakebankEndpoint {
         return created(model, conta.getCodigoConta());
     }
 
-    @PostMapping(path = "/incluirContaPoupanca/{codigoCliente}")
+    @RequestMapping(value = {"/clientes-pessoa-fisica/{codigoCliente}/contas-poupanca",
+    "/clientes-pessoa-juridica/{codigoCliente}/contas-poupanca"}, method = RequestMethod.POST)
     public ResponseEntity<?> incluirContaPoupanca(
             @PathVariable(value="codigoCliente", required=true) Integer cdCliente,
             @RequestBody ContaPoupancaInclusaoCommand comando) {

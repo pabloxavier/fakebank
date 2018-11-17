@@ -16,6 +16,7 @@ import javax.persistence.Transient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 
+import br.com.fakebank.ApplicationContextProvider;
 import br.com.fakebank.domain.commands.ContaCorrenteEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaCorrenteInclusaoCommand;
 import br.com.fakebank.domain.commands.ContaPoupancaEdicaoCommand;
@@ -78,11 +79,8 @@ public class Conta {
 	
 	@Transient
 	@Autowired
-	private GerenteRepository gerenteRepository;
+	private ApplicationContextProvider contextProvider;
 	
-	@Transient
-	@Autowired
-	private DominioRepository dominioRepository;
 	
 	protected Conta() {
 		
@@ -90,8 +88,7 @@ public class Conta {
 	
 	public static Conta criarContaCorrente(Cliente cliente, ContaCorrenteInclusaoCommand command) {
 		
-		//command.validate();
-		
+		command.validate();
 		return new Conta(cliente, command);
 	}
 	
@@ -214,12 +211,14 @@ public class Conta {
     }
     
     public Gerente getGerenteById(Integer codigoGerente) {
+    	GerenteRepository gerenteRepository = ApplicationContextProvider.getBean(GerenteRepository.class);
     	return gerenteRepository.findById(codigoGerente).orElse(null);
     }
 
     public SituacaoConta getSituacaoContaByValorTipo(Integer valor, String tipo) {
     	Specification<Dominio> criteria = Specification.where(DominioSpecifications.dominioPorValor(valor))
 				.and(DominioSpecifications.dominioPorTipo(tipo));
+    	DominioRepository dominioRepository = ApplicationContextProvider.getBean(DominioRepository.class);
     	Dominio dominio = dominioRepository.findOne(criteria).orElse(null);    	
 
     	if (dominio != null) {
@@ -230,6 +229,7 @@ public class Conta {
     }
     
     public SituacaoConta getSituacaoContaByDominio(Dominio dominioParam) {
+    	DominioRepository dominioRepository = ApplicationContextProvider.getBean(DominioRepository.class);
     	Dominio dominio = dominioRepository.findById(dominioParam.getCodigo()).orElse(null);    	
 
     	if (dominio != null) {
@@ -243,6 +243,7 @@ public class Conta {
     public TipoConta getTipoContaByValorTipo(Integer valor, String tipo) {
     	Specification<Dominio> criteria = Specification.where(DominioSpecifications.dominioPorValor(valor))
     										.and(DominioSpecifications.dominioPorTipo(tipo));
+    	DominioRepository dominioRepository = ApplicationContextProvider.getBean(DominioRepository.class);
     	Dominio dominio = dominioRepository.findOne(criteria).orElse(null);    	
     	
     	if (dominio != null) {
@@ -253,6 +254,7 @@ public class Conta {
     
     public TipoConta getTipoContaByDominio(Dominio dominioParam) {
    
+    	DominioRepository dominioRepository = ApplicationContextProvider.getBean(DominioRepository.class);
     	Dominio dominio = dominioRepository.findById(dominioParam.getCodigo()).orElse(null);    	
     	
     	if (dominio != null) {
@@ -282,6 +284,7 @@ public class Conta {
     }
     
     public Dominio getDominioByCodigo(Integer codigo) {
+    	DominioRepository dominioRepository = ApplicationContextProvider.getBean(DominioRepository.class);
     	return dominioRepository.getOne(codigo);
     }
     
