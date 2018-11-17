@@ -32,7 +32,7 @@ import br.com.fakebank.service.ContaService;
 
 
 @RestController
-@RequestMapping("conta")
+@RequestMapping("contas")
 public class ContaEndPoint extends FakebankEndpoint {
     @Autowired
     private ContaService contaService;

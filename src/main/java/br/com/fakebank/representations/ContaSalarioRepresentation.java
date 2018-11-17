@@ -1,85 +1,110 @@
 package br.com.fakebank.representations;
 
-import java.time.LocalDate;
-
+import br.com.fakebank.common.util.DateUtil;
 import br.com.fakebank.domain.Conta;
-import br.com.fakebank.domain.Gerente;
 
 public class ContaSalarioRepresentation {
 
-    private String codigoConta;
-    private String nomeCliente;
-    private LocalDate dataAbertura;
-    private Gerente gerente;
-    private String situacaoConta;
-    private Double valorSaldo;
-    private String numeroCnpjContratoSalario;
+    private String codigo;
+    private String dataAbertura;
+    private String gerente;
+    private String situacao;
+    private String tipo;
+    private Double saldo;
+    private Integer diaAniversario;
+    private String cnpjEmpresa;
+
 
     public static ContaSalarioRepresentation from(Conta conta) {
-        ContaSalarioRepresentation contaRepresentation = new ContaSalarioRepresentation();
-        contaRepresentation.setCodigoConta(conta.getCodigoConta());
-        contaRepresentation.setGerente(conta.getGerente());
-        contaRepresentation.setSituacaoConta(conta.getSituacaoConta().getDescricao());
-        contaRepresentation.setDataAbertura(conta.getDataAbertura());
-        contaRepresentation.setNomeCliente(conta.getCliente().getPessoa().getNome());
-        contaRepresentation.setNumeroCnpjContratoSalario(conta.getNumeroCnpjContratoSalario());
-        contaRepresentation.setValorSaldo(conta.getValorSaldo());
+        ContaSalarioRepresentation contaRepresentation = new ContaSalarioRepresentation();    
+        contaRepresentation.setCodigo(conta.getCodigoConta());
+        contaRepresentation.setSituacao(conta.getSituacaoConta().getDescricao());
+        contaRepresentation.setTipo(conta.getTipoConta().getDescricao());        
+        contaRepresentation.setSaldo(conta.getValorSaldo());
+        contaRepresentation.setCnpjEmpresa(conta.getNumeroCnpjContratoSalario());
+        contaRepresentation.setDataAbertura(DateUtil.getDateFromString(conta.getDataAbertura()));
+        contaRepresentation.setGerente(conta.getGerente().getPessoa().getNome());
         return contaRepresentation;
     }
 
-    public String getCodigoConta() {
-        return codigoConta;
-    }
 
-    public void setCodigoConta(String codigoConta) {
-        this.codigoConta = codigoConta;
-    }
+	public String getCodigo() {
+		return codigo;
+	}
 
-    public String getNomeCliente() {
-        return nomeCliente;
-    }
 
-    public void setNomeCliente(String nomeCliente) {
-        this.nomeCliente = nomeCliente;
-    }
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
 
-    public LocalDate getDataAbertura() {
-        return dataAbertura;
-    }
 
-    public void setDataAbertura(LocalDate dataAbertura) {
-        this.dataAbertura = dataAbertura;
-    }
+	public String getDataAbertura() {
+		return dataAbertura;
+	}
 
-    public Gerente getGerente() {
-        return gerente;
-    }
 
-    public void setGerente(Gerente gerente) {
-        this.gerente = gerente;
-    }
+	public void setDataAbertura(String dataAbertura) {
+		this.dataAbertura = dataAbertura;
+	}
 
-    public String getSituacaoConta() {
-        return situacaoConta;
-    }
 
-    public void setSituacaoConta(String situacaoConta) {
-        this.situacaoConta = situacaoConta;
-    }
+	public String getGerente() {
+		return gerente;
+	}
 
-    public Double getValorSaldo() {
-        return valorSaldo;
-    }
 
-    public void setValorSaldo(Double valorSaldo) {
-        this.valorSaldo = valorSaldo;
-    }
+	public void setGerente(String gerente) {
+		this.gerente = gerente;
+	}
 
-    public String getNumeroCnpjContratoSalario() {
-        return numeroCnpjContratoSalario;
-    }
 
-    public void setNumeroCnpjContratoSalario(String numeroCnpjContratoSalario) {
-        this.numeroCnpjContratoSalario = numeroCnpjContratoSalario;
-    }
+	public String getSituacao() {
+		return situacao;
+	}
+
+
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
+	}
+
+
+	public String getTipo() {
+		return tipo;
+	}
+
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+
+	public Double getSaldo() {
+		return saldo;
+	}
+
+
+	public void setSaldo(Double saldo) {
+		this.saldo = saldo;
+	}
+
+
+	public Integer getDiaAniversario() {
+		return diaAniversario;
+	}
+
+
+	public void setDiaAniversario(Integer diaAniversario) {
+		this.diaAniversario = diaAniversario;
+	}
+
+
+	public String getCnpjEmpresa() {
+		return cnpjEmpresa;
+	}
+
+
+	public void setCnpjEmpresa(String cnpjEmpresa) {
+		this.cnpjEmpresa = cnpjEmpresa;
+	}
+   
 }
