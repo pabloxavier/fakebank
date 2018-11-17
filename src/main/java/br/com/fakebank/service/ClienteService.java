@@ -4,17 +4,16 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import br.com.fakebank.common.exceptions.NotFoundException;
 import br.com.fakebank.domain.Cliente;
 import br.com.fakebank.domain.ClienteTelefone;
 import br.com.fakebank.domain.ClienteTelefoneId;
@@ -23,7 +22,6 @@ import br.com.fakebank.domain.commands.ClienteTelefoneEdicaoCommand;
 import br.com.fakebank.domain.commands.ClienteTelefoneInclusaoCommand;
 import br.com.fakebank.domain.specifications.ClienteSpecifications;
 import br.com.fakebank.domain.specifications.ClienteTelefoneSpecifications;
-import br.com.fakebank.exceptions.NotFoundException;
 import br.com.fakebank.repository.ClienteRepository;
 import br.com.fakebank.repository.ClienteTelefoneRepository;
 
@@ -38,9 +36,9 @@ public class ClienteService {
 	@Autowired
 	private ClienteTelefoneRepository telefoneRepository;
 
-	public Page<Cliente> listar(Pageable pageable) {
+	public Page<Cliente> listar(Pageable pageable, TipoPessoa tipopessoa) {
 
-		Specification<Cliente> criterio = Specification.where(ClienteSpecifications.clientePorTipo(TipoPessoa.FISICA));
+		Specification<Cliente> criterio = Specification.where(ClienteSpecifications.clientePorTipo(tipopessoa));
 
 		Page<Cliente> clientes = repository.findAll(criterio, pageable);
 
@@ -55,11 +53,11 @@ public class ClienteService {
 		return repository.findById(codigo).orElseThrow(() -> new NotFoundException());
 	}
 
-	public List<Cliente> filtrar(String endereco, boolean ativo, Integer codigo) {
+	public List<Cliente> filtrar(String endereco, boolean ativo, Integer codigo, TipoPessoa tipopessoa) {
 		Specification<Cliente> criterio = Specification.where(ClienteSpecifications.clientePorParteEndereco(endereco)
 				.and(ClienteSpecifications.clientePorSituacao(ativo))
 				.and(ClienteSpecifications.clientePorCodigo(codigo))
-				.and(ClienteSpecifications.clientePorTipo(TipoPessoa.FISICA)));
+				.and(ClienteSpecifications.clientePorTipo(tipopessoa)));
 
 		List<Cliente> clientes = repository.findAll(criterio);
 
@@ -104,6 +102,16 @@ public class ClienteService {
 	}
 
 	public Cliente getClienteById(Integer codigo) {
+		
+		//Specification<Cliente> criterio = Specification.where(ClienteSpecifications.clientePorCodigo(codigo))
+		//		.and(ClienteSpecifications.clientePorTipo(tipopessoa));
+		//List<Cliente> clientes = repository.findAll(criterio);
+
+		//if (clientes.isEmpty())
+		//	throw new NotFoundException();
+
+		//return clientes;
+		//implementar criterio aqui
 		return repository.findById(codigo).orElse(null);
 	}
 

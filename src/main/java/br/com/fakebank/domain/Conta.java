@@ -17,14 +17,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 
 import br.com.fakebank.ApplicationContextProvider;
+import br.com.fakebank.common.exceptions.NotFoundException;
 import br.com.fakebank.domain.commands.ContaCorrenteEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaCorrenteInclusaoCommand;
+import br.com.fakebank.domain.commands.ContaEncerradaCommand;
 import br.com.fakebank.domain.commands.ContaPoupancaEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaPoupancaInclusaoCommand;
 import br.com.fakebank.domain.commands.ContaSalarioEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaSalarioInclusaoCommand;
 import br.com.fakebank.domain.specifications.DominioSpecifications;
-import br.com.fakebank.exceptions.NotFoundException;
 import br.com.fakebank.repository.DominioRepository;
 import br.com.fakebank.repository.GerenteRepository;
 
@@ -39,11 +40,11 @@ public class Conta {
 	private static final Integer VALOR_DOMINIO_CONTA_CORRENTE = 2;
 	private static final Integer VALOR_DOMINIO_CONTA_POUPANCA = 3;
 	private static final Integer VALOR_DOMINIO_SITUACAO_CONTA_LIVRE = 1;
-	private static final Integer VALOR_DOMINIO_SITUACAO_CONTA_FECHADA = 2;
-	private static final Integer VALOR_DOMINIO_SITUACAO_CONTA_PREJUIZO = 3;
-	private static final Integer VALOR_DOMINIO_SITUACAO_CONTA_CARTORIO = 4;
-	
-	
+
+	//TODO Itens não utilizados
+	//private static final Integer VALOR_DOMINIO_SITUACAO_CONTA_FECHADA = 2;
+	//private static final Integer VALOR_DOMINIO_SITUACAO_CONTA_PREJUIZO = 3;
+	//private static final Integer VALOR_DOMINIO_SITUACAO_CONTA_CARTORIO = 4;
 	
 	@Id
 	@Column(name = "CD_CONTA")
@@ -169,6 +170,13 @@ public class Conta {
 		this.situacaoConta = getSituacaoContaByDominio(dominio);						
 		this.diaAniversarioPoupanca = command.getDiaAniversarioPoupanca();		
 	}	
+	
+	public ContaEncerrada encerrarConta(ContaEncerradaCommand command) {
+		
+		ContaEncerrada encerramento = ContaEncerrada.criar(command, this.codigoConta);
+		return encerramento;
+
+	}
 		
 	private String gerarCodigoConta() {
 		Random random = new Random();

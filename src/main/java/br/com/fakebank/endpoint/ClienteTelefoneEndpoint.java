@@ -1,22 +1,29 @@
 package br.com.fakebank.endpoint;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.com.fakebank.common.exceptions.NotFoundException;
 import br.com.fakebank.domain.Cliente;
 import br.com.fakebank.domain.ClienteTelefone;
 import br.com.fakebank.domain.TipoPessoa;
 import br.com.fakebank.domain.commands.ClienteTelefoneEdicaoCommand;
 import br.com.fakebank.domain.commands.ClienteTelefoneInclusaoCommand;
 import br.com.fakebank.domain.converters.TipoPessoaConverter;
-import br.com.fakebank.exceptions.NotFoundException;
 import br.com.fakebank.representations.ClienteTelefoneRepresentation;
 import br.com.fakebank.service.ClienteService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @RestController
 @RequestMapping({"clientes-pessoa-fisica", "clientes-pessoa-juridica"})
@@ -88,7 +95,7 @@ public class ClienteTelefoneEndpoint extends FakebankEndpoint {
 
         ClienteTelefone telefone = service.salvarTelefone(codigoCliente, codigoTelefone, comando);
 
-        return created("editado com sucesso");
+        return ok(telefone);
     }
 
     private boolean verificaExistenciaClienteByUri(String uri, Integer codigoCliente) {

@@ -1,13 +1,18 @@
 package br.com.fakebank.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
 @Embeddable
 public class ClienteTelefoneId implements Serializable {
+
+    /**
+     * Identificador de serialização da versão da classe
+     */
+    private static final long serialVersionUID = 1L;
 
     @Column(name = "cd_cliente")
     private Integer codigoCliente;

@@ -2,14 +2,13 @@ package br.com.fakebank.representations;
 
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 
+import br.com.fakebank.common.util.ListaPaginada;
 import br.com.fakebank.domain.Conta;
 import br.com.fakebank.domain.Gerente;
-import br.com.fakebank.util.ListaPaginada;
 
 
 public class ContaRepresentationClientePF {

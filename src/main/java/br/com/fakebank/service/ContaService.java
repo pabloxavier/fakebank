@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import br.com.fakebank.common.exceptions.NotFoundException;
 import br.com.fakebank.domain.Cliente;
 import br.com.fakebank.domain.Conta;
 import br.com.fakebank.domain.Gerente;
@@ -22,7 +23,6 @@ import br.com.fakebank.domain.commands.ContaPoupancaInclusaoCommand;
 import br.com.fakebank.domain.commands.ContaSalarioEdicaoCommand;
 import br.com.fakebank.domain.commands.ContaSalarioInclusaoCommand;
 import br.com.fakebank.domain.specifications.ContaSpecifications;
-import br.com.fakebank.exceptions.NotFoundException;
 import br.com.fakebank.repository.ClienteRepository;
 import br.com.fakebank.repository.ContaRepository;
 import br.com.fakebank.repository.GerenteRepository;
@@ -71,7 +71,7 @@ public class ContaService {
 		}		
 		
 		if(!cliente.get().getPessoa().getTipoPessoa().equals(TipoPessoa.JURIDICA)) {
-			throw new NotFoundException("Cliente precisar ser pessoa jurídica.");
+			throw new NotFoundException("Cliente precisar ser pessoa jurï¿½dica.");
 		}
 		
 		Specification<Conta> criteria = Specification.where(ContaSpecifications.porCodigoClientePrincipal(codigo));

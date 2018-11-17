@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.fakebank.common.util.ListaPaginada;
 import br.com.fakebank.domain.MotivoEncerramento;
 import br.com.fakebank.domain.commands.DominioCriacaoCommand;
 import br.com.fakebank.domain.commands.DominioEdicaoCommand;
 import br.com.fakebank.representations.MotivoEncerramentoRepresentationV1;
 import br.com.fakebank.service.MotivoEncerramentoService;
-import br.com.fakebank.util.ListaPaginada;
 
 @RestController
 @RequestMapping("motivos-encerramento")

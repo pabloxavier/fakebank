@@ -1,10 +1,7 @@
 package br.com.fakebank.representations;
 
-import java.time.LocalDate;
-
+import br.com.fakebank.common.util.DateUtil;
 import br.com.fakebank.domain.Conta;
-import br.com.fakebank.domain.Gerente;
-import br.com.fakebank.util.DateUtil;
 
 public class ContaCorrenteRepresentation {
 

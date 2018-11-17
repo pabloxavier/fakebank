@@ -4,8 +4,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 
+import br.com.fakebank.common.util.ListaPaginada;
 import br.com.fakebank.domain.TipoConta;
-import br.com.fakebank.util.ListaPaginada;
 
 public class TipoContaRepresentation {
 

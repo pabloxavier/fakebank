@@ -1,13 +1,11 @@
 package br.com.fakebank.domain.commands;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Range;
 
-import br.com.fakebank.customValidators.ContaForeignKeyGerente;
-import br.com.fakebank.domain.validators.CommandValidator;
-import br.com.fakebank.exceptions.FieldName;
+import br.com.fakebank.common.validations.CommandValidator;
+import br.com.fakebank.common.validations.FieldName;
 
 public class ContaPoupancaInclusaoCommand extends ContaInclusaoCommand {
     

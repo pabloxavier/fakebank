@@ -55,7 +55,9 @@ public class Movimentacao {
     @Column(name = "vl_saldo_atual")
     private double valorSaldoAtual;
     
-    private Movimentacao() {}
+    protected Movimentacao() {
+        
+    }
     
     protected Movimentacao(MovimentacaoTransferenciaCommand comando) {
         this.codigoConta = comando.getContaOrigem();
