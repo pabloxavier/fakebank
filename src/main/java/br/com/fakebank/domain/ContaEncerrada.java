@@ -6,9 +6,12 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.fakebank.domain.commands.ContaEncerradaCommand;
+import br.com.fakebank.repository.ClienteRepository;
 
 @Entity
 @Table(name = "conta_encerrada", schema = "dbo")
@@ -29,8 +32,9 @@ public class ContaEncerrada implements Serializable{
     @Column(name = "cd_motivo_encerramento")
     private Integer motivo;
     
-    @Column(name = "cd_cliente_solicitante")
-    private Integer clienteSolicitante;
+    @ManyToOne
+    @JoinColumn(name = "cd_cliente_solicitante")
+    private Cliente clienteSolicitante;
     
     @Column(name = "ds_observacoes")
     private String observacoes;
@@ -39,16 +43,16 @@ public class ContaEncerrada implements Serializable{
     	
     }
 
-    private ContaEncerrada(ContaEncerradaCommand comando, String conta){
+    private ContaEncerrada(ContaEncerradaCommand comando, String conta, Cliente cliente){
         this.motivo = comando.getMotivo();
         this.observacoes = comando.getObservacoes();
-        this.clienteSolicitante = comando.getClienteSolicitante();
+        this.clienteSolicitante = cliente;
         this.conta = conta;
         this.dataEncerramento = LocalDate.now();
     }
     
-    public static ContaEncerrada criar(ContaEncerradaCommand comando, String conta) {
-    	return new ContaEncerrada(comando, conta);
+    public static ContaEncerrada criar(ContaEncerradaCommand comando, String conta, Cliente cliente) {
+    	return new ContaEncerrada(comando, conta, cliente);
     }
     
     public String getConta() {
@@ -63,7 +67,7 @@ public class ContaEncerrada implements Serializable{
         return motivo;
     }
 
-    public Integer getClienteSolicitante() {
+    public Cliente getClienteSolicitante() {
         return clienteSolicitante;
     }
 
